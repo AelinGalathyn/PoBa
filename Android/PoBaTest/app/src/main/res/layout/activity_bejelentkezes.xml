@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    tools:context=".BejelentkezesActivity"
+    >
+
+    <ImageButton
+        android:id="@+id/bejelentkezes_gomb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bejelentkezes_gomb_interaktiv"
+        android:contentDescription="bejelentkezes_gomb"
+        />
+
+    <ImageView
+        android:layout_width="262dp"
+        android:layout_height="182dp"
+        android:layout_above="@+id/bejelentkezes_gomb"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/poba_logo" />
+
+</RelativeLayout>
