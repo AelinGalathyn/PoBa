@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { DbModule } from './db/db.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -13,7 +14,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     database: 'poba-project-database', // name of our database,
     entities: [], // entities go here
     synchronize: true, // if true, TypeORM will automatically create the database schema based on your models
-  })],
+  }), DbModule],
   controllers: [AppController],
   providers: [AppService],
 })
