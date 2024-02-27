@@ -1,5 +1,6 @@
 import * as mysql from 'mysql';
 import * as fs from 'fs';
+import { PasswordService } from './password.service';
 
 export class DbService {
   private connection;
@@ -54,5 +55,9 @@ export class DbService {
         console.log('Database connection closed.');
       });
     }
+  }
+
+   public async regUser(username: string, password: string): Promise<void> {
+    this.query('INSERT INTO user (username, password) VALUES (?, ?)', [username, password]);
   }
 }

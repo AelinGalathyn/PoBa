@@ -1,17 +1,27 @@
-import { Body, Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { DbService } from './db.service';
+import { PasswordService } from './password.service';
 
 @Controller('db')
 export class DbController {
-  constructor(private readonly databaseService: DbService) {}
+  constructor(private readonly databaseService: DbService, private readonly pwService: PasswordService) {}
 
   @Get('test')
   testDbConnection() {
     return this.databaseService.query('CREATE TABLE customer2 (id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, c_name VARCHAR(50) NOT NULL, email VARCHAR(50) NOT NULL, username VARCHAR(50) NOT NULL, c_mobile VARCHAR(15) NOT NULL);');
   }
 
-  @Get('reg')
-  regUser(@Body('username') username: string, @Body('password') password: string){
-    this.databaseService.regUser(username, password);
+  @Post('reg')
+  async regUser(@Body('username') username: string, @Body('password') password: string){
+    if(username.length === 0){
+        throw new Error('Please enter a username!');
+    }
+    else if(password.length === 0){
+        throw new Error('Please enter a password!');
+    }
+    else{
+        const passwordEncoded = await this.pwService.hashPassword(password);
+        this.databaseService.regUser(username, passwordEncoded);
+    }
   }
 }
