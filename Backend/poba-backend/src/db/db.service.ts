@@ -1,13 +1,11 @@
 import * as mysql from 'mysql';
 import * as fs from 'fs';
-import { PasswordService } from './password.service';
 
 export class DbService {
   private connection;
 
   constructor() {
     this.connect();
-    this.testConnection();
   }
 
   private connect() {

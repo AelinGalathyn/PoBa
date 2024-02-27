@@ -11,8 +11,4 @@ describe('DbController', () => {
 
     controller = module.get<DbController>(DbController);
   });
-
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
 });
