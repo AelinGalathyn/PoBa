@@ -1,8 +1,46 @@
-import * as mysql from 'mysql';
-import * as fs from 'fs';
+import { Basket, Customer, Invoice, Item, Order, Packages, Shipping, User } from './db.dtos';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 export class DbService {
-  private connection;
+  constructor(
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
+
+    @InjectRepository(Basket)
+    private basketRepository: Repository<Basket>,
+
+    @InjectRepository(Customer)
+    private customerRepository: Repository<Customer>,
+
+    @InjectRepository(Invoice)
+    private invoiceRepository: Repository<Invoice>,
+
+    @InjectRepository(Item)
+    private itemRepository: Repository<Item>,
+    
+    @InjectRepository(Order)
+    private orderRepository: Repository<Order>,
+
+    @InjectRepository(Packages)
+    private packageRepository: Repository<Packages>,
+
+    @InjectRepository(Shipping)
+    private shippingRepository: Repository<Shipping>,
+  ){}
+
+  async testConnection(): Promise<void> {
+    try {
+      const result = await this.userRepository.query('SELECT 1');
+      console.log('Database connection test successful.', result);
+    } catch (error) {
+      console.error('Database connection test failed:', error);
+    }
+  }
+
+  
+  
+  /*private connection;
 
   constructor() {
     this.connect();
@@ -55,7 +93,13 @@ export class DbService {
     }
   }
 
-   public async regUser(username: string, password: string): Promise<void> {
-    this.query('INSERT INTO user (username, password) VALUES (?, ?)', [username, password]);
+   public async regUser(username: string, password: string): Promise<User> {
+    await this.query('INSERT INTO user (username, password) VALUES (?, ?)', [username, password]);
+    const user = await this.query('SELECT userid, username, password FROM user WHERE username = ?;', [username]);
+    return user;
   }
+
+  public async newAPI(apiKeyEncoded: string, userid: number): Promise<void> {
+    this.query('UPDATE user SET `unas-api` = ? WHERE userid = ?);', [apiKeyEncoded, userid]);
+  }*/
 }

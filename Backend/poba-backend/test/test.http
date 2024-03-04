@@ -1,7 +1,25 @@
-POST http://localhost:3000/db/reg
+POST http://localhost:8080/user/reg
 Content-Type: application/json
 
 {
-    "username": "BénaBéla",
+    "username": "BambaLamba",
     "password": "teszt123"
+}
+###
+
+POST http://localhost:8080/user/new-api
+Content-Type: application/json
+
+{
+  "userid": "11",
+  "apiKey": "123456"
+}
+###
+
+POST http://localhost:8080/user/login
+Content-Type: application/json
+
+{
+  "username": "AranyAlma",
+  "password": "teszt123"
 }
