@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/popup_layout"
+    android:padding="20dp"
+    android:background="@drawable/custom_popup"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Biztos vagy benne?"
+        android:textSize="20sp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/text_color"
+        android:fontFamily="@font/space_mono"
+        android:textStyle="italic"
+        android:id="@+id/kerdes_helye"
+        android:layout_centerHorizontal="true"
+        android:background="@color/menu_text_transparent"
+        android:textAlignment="center"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="webShop"
+        android:textSize="25sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/text_color"
+        android:fontFamily="@font/space_mono"
+        android:id="@+id/webshop_nev_helye"
+        android:layout_below="@+id/kerdes_helye"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:textAlignment="center"
+        android:background="@color/menu_text_transparent"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="AHIDJBFhbsadhgfbkHEVBFHwf"
+        android:textSize="15sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/text_color"
+        android:fontFamily="@font/space_mono"
+        android:textStyle="italic"
+        android:id="@+id/apikey_helye"
+        android:layout_below="@+id/webshop_nev_helye"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:textAlignment="center"
+        android:background="@color/menu_text_transparent"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/popup_no_icon"
+        android:layout_below="@+id/apikey_helye"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="25dp"
+        android:id="@+id/popup_no_icon"
+        android:background="@color/menu_text_transparent"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="15dp"
+        android:src="@drawable/popup_yes_icon"
+        android:background="@color/menu_text_transparent"
+        android:layout_below="@+id/apikey_helye"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="25dp"
+        android:id="@+id/popup_yes_icon"
+        />
+
+</RelativeLayout>
+

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.example.pobatest.Webshopok.WebShopokActivity;
+
 public class ProfilBeallitasokActivity extends AppCompatActivity {
 
     private ImageView nav_vissza_gomb;
@@ -15,7 +17,7 @@ public class ProfilBeallitasokActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profil_beallitasok);
+        setContentView(R.layout.profil_beallitasok_activity);
 
         Init();
 
@@ -32,7 +34,7 @@ public class ProfilBeallitasokActivity extends AppCompatActivity {
         });
 
         webshop_szerkesztes_gomb.setOnClickListener(v -> {
-            Intent intent = new Intent(ProfilBeallitasokActivity.this, FoActivity.class);
+            Intent intent = new Intent(ProfilBeallitasokActivity.this, WebShopokActivity.class);
             startActivity(intent);
             finish();
         });

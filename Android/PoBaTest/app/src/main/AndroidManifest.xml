@@ -2,18 +2,33 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/poba_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/poba_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.PoBaTest"
         tools:targetApi="31">
         <activity
-            android:name=".WebShopokActivity"
+            android:name=".EngedelyekActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Beallitasok.BeallitasokErtesitesekActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ApikulcsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Webshopok.WebShopokActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Webshopok.WebshopAdapter"
             android:exported="false" />
         <activity
             android:name=".JelszoValtoztatasActivity"
@@ -25,22 +40,23 @@
             android:name=".BeallitasokActivity"
             android:exported="false" />
         <activity
-            android:name=".ErtesitesekActivity"
+            android:name=".Ertesites.ErtesitesekActivity"
             android:exported="false" />
         <activity
-            android:name=".EgyikTermekActivity"
+            android:name=".Termek.EgyikTermekActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".Termek.TermekekActivity"
             android:exported="false" />
         <activity
-            android:name=".TermekekActivity"
-            android:exported="false" />
-        <activity
-            android:name=".EgyikRendelesActivity"
+            android:name=".Rendeles.EgyikRendelesActivity"
             android:exported="false" />
         <activity
             android:name=".EgyszeriBelepesActivity"
             android:exported="false" />
         <activity
-            android:name=".RendelesActivity"
+            android:name=".Rendeles.RendelesActivity"
             android:exported="false" />
         <activity
             android:name=".FoActivity"
