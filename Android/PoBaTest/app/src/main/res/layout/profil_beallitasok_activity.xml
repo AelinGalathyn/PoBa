@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfilBeallitasokActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/nav_vissza_gomb"
+        android:contentDescription="nav_vissza_gomb"
+        android:id="@+id/nav_vissza_gomb"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/profilkep_icon"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/nav_vissza_gomb"
+        android:id="@+id/profilkep_icon"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Felhasználónév"
+        android:textSize="25sp"
+        android:textColor="@color/text_color"
+        android:fontFamily="@font/inter_light"
+        android:textStyle="italic"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/profilkep_icon"
+        android:shadowColor="@color/shadow"
+        android:shadowDx="0"
+        android:shadowDy="4"
+        android:shadowRadius="4"
+        android:id="@+id/profil_felhasznalonev"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Webshop"
+        android:textSize="15sp"
+        android:textColor="@color/text_color"
+        android:fontFamily="@font/inter_light"
+        android:textStyle="italic"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/profil_felhasznalonev"
+        android:shadowColor="@color/shadow"
+        android:shadowDx="0"
+        android:shadowDy="4"
+        android:shadowRadius="4"
+        android:id="@+id/profil_webshop"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        />
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/jelszo_valtoztatas_interaktiv"
+        android:layout_below="@+id/profil_webshop"
+        android:layout_marginTop="40dp"
+        android:id="@+id/jelszo_valtoztatas_gomb"
+        />
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/webshop_szerkesztes_interaktiv"
+        android:layout_below="@+id/jelszo_valtoztatas_gomb"
+        android:layout_marginTop="10dp"
+        android:id="@+id/webshop_szerkesztes_gomb"
+        />
+
+</RelativeLayout>

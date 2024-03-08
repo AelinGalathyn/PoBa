@@ -1,9 +1,13 @@
 package com.example.pobatest;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.ActivityNavigator;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.Transition;
+import android.transition.TransitionValues;
+import android.view.Window;
 import android.widget.ImageButton;
 
 public class BejelentkezesActivity extends AppCompatActivity {
@@ -13,12 +17,12 @@ public class BejelentkezesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bejelentkezes);
+        setContentView(R.layout.bejelentkezes_activity);
 
         Init();
 
         bejelentkezes_gomb.setOnClickListener(view -> {
-            Intent intent = new Intent(BejelentkezesActivity.this, FoActivity.class);
+            Intent intent = new Intent(BejelentkezesActivity.this, EgyszeriBelepesActivity.class);
             startActivity(intent);
             finish();
         });

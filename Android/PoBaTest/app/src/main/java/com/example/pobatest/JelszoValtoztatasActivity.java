@@ -13,7 +13,7 @@ public class JelszoValtoztatasActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_jelszo_valtoztatas);
+        setContentView(R.layout.jelszo_valtoztatas_activity);
 
         Init();
 

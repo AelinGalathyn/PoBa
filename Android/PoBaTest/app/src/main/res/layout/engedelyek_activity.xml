@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Beallitasok.BeallitasokErtesitesekActivity">
+
+    <ImageView
+        android:layout_width="262dp"
+        android:layout_height="182dp"
+        android:layout_above="@+id/beallitasok_termekek_textview"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/poba_logo" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/menu_text_transparent"
+        android:text="Engedélyek"
+        android:textSize="25sp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="30dp"
+        android:id="@+id/beallitasok_termekek_textview"
+        android:textColor="@color/text_color"
+        android:fontFamily="@font/space_mono"
+        android:layout_centerInParent="true"
+        android:textAlignment="center"
+        />
+
+    <TextView
+        android:layout_width="275dp"
+        android:layout_height="50dp"
+        android:background="@drawable/beallitasok_hatter"
+        android:layout_below="@+id/beallitasok_termekek_textview"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/kifogyoban_ertesites"
+        android:text="Kifogyóban van"
+        android:textSize="20sp"
+        android:fontFamily="@font/inter_light"
+        android:textStyle="italic"
+        android:gravity="center_vertical"
+        android:textAlignment="gravity"
+        android:paddingStart="15dp"
+        android:layout_marginTop="5dp"
+        />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/kifogyoban_toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/kifogyoban_ertesites"
+        android:layout_alignEnd="@+id/kifogyoban_ertesites"
+        android:layout_marginEnd="15dp"
+        app:trackTint="@color/text_color"
+        app:thumbTint="@color/cardview_light_background"
+        android:thumb="@drawable/beallitasok_thumb"
+        app:track="@drawable/beallitasok_track" />
+
+    <TextView
+        android:layout_width="275dp"
+        android:layout_height="50dp"
+        android:background="@drawable/beallitasok_hatter"
+        android:layout_below="@+id/kifogyoban_ertesites"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/kifogyott_ertesites"
+        android:text="Kifogyott"
+        android:textSize="20sp"
+        android:fontFamily="@font/inter_light"
+        android:textStyle="italic"
+        android:gravity="center_vertical"
+        android:textAlignment="gravity"
+        android:paddingStart="15dp"
+        android:layout_marginTop="5dp"
+        />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/kifogyott_toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/kifogyott_ertesites"
+        android:layout_alignEnd="@+id/kifogyott_ertesites"
+        android:layout_marginEnd="15dp"
+        app:trackTint="@color/text_color"
+        app:thumbTint="@color/cardview_light_background"
+        android:thumb="@drawable/beallitasok_thumb"
+        app:track="@drawable/beallitasok_track" />
+
+</RelativeLayout>
