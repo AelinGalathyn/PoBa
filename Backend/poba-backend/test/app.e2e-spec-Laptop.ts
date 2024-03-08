@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule } from '../users/users.module';
-import { UsersService } from '../users/users.service';
-import { User } from '../users/user.entity';
+import { UsersService } from '../src/users/users.service';
+import { Users } from '../db.dtos';
+import { UsersModule } from '../src/users/users.module';
 
 describe('UsersService (e2e)', () => {
   let service: UsersService;
@@ -17,7 +17,7 @@ describe('UsersService (e2e)', () => {
           username: process.env.TEST_DB_USERNAME,
           password: process.env.TEST_DB_PASSWORD,
           database: process.env.TEST_DB_NAME,
-          entities: [User],
+          entities: [Users],
           synchronize: true, // use migrations in production
         }),
         UsersModule,
@@ -32,15 +32,15 @@ describe('UsersService (e2e)', () => {
   });
 
   it('should create a new user', async () => {
-    const createUserDto = { name: 'John Doe', email: 'john@example.com' };
+    const createUserDto = { username: 'John Doe', password: 'teszt123' };
     const user = await service.create(createUserDto);
 
     expect(user).toBeDefined();
-    expect(user.id).toBeDefined();
-    expect(user.name).toEqual(createUserDto.name);
+    expect(user.userid).toBeDefined();
+    expect(user.username).toEqual(createUserDto.username);
 
     // Clean up
-    await service.remove(user.id);
+    await service.remove(user.userid);
   });
 
   // Add more tests for read, update, delete operations
