@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ApikulcsActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/nav_vissza_gomb"
+        android:contentDescription="nav_vissza_gomb"
+        android:id="@+id/nav_vissza_gomb"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/apikulcs_textview"
+        android:text="Api kulcs"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:layout_marginTop="230dp"
+        android:fontFamily="monospace"
+        android:textStyle="italic"
+        android:textColor="@color/text_color"
+        android:layout_marginBottom="5dp"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        app:cardCornerRadius="10dp"
+        android:backgroundTint="@color/card_back"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/apikulcs_input_card"
+        android:layout_below="@+id/apikulcs_textview"
+        >
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="220dp"
+            android:layout_height="40dp"
+            app:cardCornerRadius="10dp"
+            android:layout_gravity="center"
+            >
+
+            <EditText
+                android:layout_width="220dp"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:id="@+id/apikulcs_input"
+                android:inputType="text"
+                />
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ok_gomb"
+        android:layout_below="@+id/apikulcs_input_card"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:id="@+id/apikulcs_ok_button"
+        />
+
+</RelativeLayout>
