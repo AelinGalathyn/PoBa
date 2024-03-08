@@ -17,6 +17,9 @@ export class Users {
   @Column({ length: 45, nullable: true })
   gls_api: string;
 
-  @Column({ length: 10, nullable: false })
+  @Column({ length: 255, nullable: false })
   password?: string;
+
+  @Column({ length: 255, unique: true })
+  shopname: string;
 }

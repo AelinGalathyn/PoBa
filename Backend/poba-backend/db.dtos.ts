@@ -1,8 +1,14 @@
 import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn, } from "typeorm";
-import { PasswordService } from "./src/auth/password.service";
 
 @Entity()
 export class Users {
+  @OneToMany(() => Orders, order => order.userid)
+  @OneToMany(() => Customer, customer => customer.userid)
+  @OneToMany(() => Item, item => item.userid)
+  @OneToMany(() => Invoice, invoice => invoice.userid)
+  @OneToMany(() => Basket, basket => basket.userid)
+  @OneToMany(() => Packages, packages => packages.userid)
+  @OneToMany(() => Shipping, shipping => shipping.userid)
   @PrimaryGeneratedColumn()
   userid: number;
 
@@ -20,6 +26,9 @@ export class Users {
 
   @Column({ length: 255 })
   password: string;
+
+  @Column({ length: 255, unique: true })
+  shopname: string;
 }
 
 @Entity()
@@ -56,6 +65,9 @@ export class Orders {
 
   @Column({ type: 'float' })
   weight: number;
+
+  @ManyToOne(() => Users, user => user.userid)
+  userid: number;
 }
 
 @Entity()
@@ -75,6 +87,9 @@ export class Customer {
 
   @Column({ length: 15 })
   c_mobile: string;
+
+  @ManyToOne(() => Users, user => user.userid)
+  userid: number;
 }
 
 @Entity()
@@ -105,6 +120,9 @@ export class Item {
 
   @Column({ length: 100 })
   url: string;
+
+  @ManyToOne(() => Users, user => user.userid)
+  userid: number;
 }
 
 @Entity()
@@ -148,6 +166,9 @@ export class Invoice {
 
   @Column({ length: 50 })
   i_ctype: string;
+
+  @ManyToOne(() => Users, user => user.userid)
+  userid: number;
 }
 
 @Entity()
@@ -177,6 +198,9 @@ export class Basket {
 
   @Column({ length: 50 })
   status: string;
+
+  @ManyToOne(() => Users, user => user.userid)
+  userid: number;
 }
 
 @Entity()
@@ -191,6 +215,9 @@ export class Packages {
 
   @Column({ type: 'float' })
   qty: number;
+
+  @ManyToOne(() => Users, user => user.userid)
+  userid: number;
 }
 
 @Entity()
@@ -239,4 +266,7 @@ export class Shipping {
 
   @Column({ length: 50 })
   dp_recip: string;
+
+  @ManyToOne(() => Users, user => user.userid)
+  userid: number;
 }
