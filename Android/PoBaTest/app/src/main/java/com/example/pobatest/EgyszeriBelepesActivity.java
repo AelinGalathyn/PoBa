@@ -11,6 +11,12 @@ import com.example.pobatest.Users.IUsers;
 import com.example.pobatest.Users.ResponseMessage;
 import com.example.pobatest.Users.UsersInputDto;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -21,6 +27,8 @@ public class EgyszeriBelepesActivity extends AppCompatActivity {
     private EditText felhasznalonev_input;
     private EditText jelszo_input;
     private Retrofit retrofit;
+    private OkHttpClient.Builder okBuild;
+    private List<String> cookies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +52,26 @@ public class EgyszeriBelepesActivity extends AppCompatActivity {
         egyszeri_belepes_gomb = findViewById(R.id.egyszeri_belepes_gomb);
         felhasznalonev_input = findViewById(R.id.felhasznalonev_input);
         jelszo_input = findViewById(R.id.jelszo_input);
+
+        okBuild = new OkHttpClient.Builder();
     }
 
     public void login(UsersInputDto user) {
+
+        okBuild.addInterceptor(chain -> {
+            Request request = chain.request();
+            Response response = chain.proceed(request);
+
+            cookies = response.headers("Set-Cookie");
+
+            return response;
+        });
+
+        OkHttpClient client = okBuild.build();
+
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.169.67:3000/")
+                .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
