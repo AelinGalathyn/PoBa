@@ -8,20 +8,15 @@
         android:id="@+id/loginActivity"
         android:name="com.example.pobatest.BejelentkezesActivity"
         android:label="activity_login"
-        tools:layout="@layout/activity_bejelentkezes" />
+        tools:layout="@layout/bejelentkezes_activity" />
     <activity
         android:id="@+id/mainActivity"
         android:name="com.example.pobatest.FoActivity"
         android:label="activity_main"
-        tools:layout="@layout/activity_fo" />
+        tools:layout="@layout/fo_activity" />
     <activity
         android:id="@+id/onceLoginActivity"
         android:name="com.example.pobatest.EgyszeriBelepesActivity"
         android:label="activity_once_login"
-        tools:layout="@layout/activity_egyszeri_belepes" />
-    <action
-        android:id="@+id/loginToOnceLogin"
-        app:destination="@id/onceLoginActivity"
-        app:enterAnim="@animator/nav_default_pop_enter_anim"
-        app:exitAnim="@animator/nav_default_pop_exit_anim"/>
+        tools:layout="@layout/belepes_egyszeri_activity" />
 </navigation>
