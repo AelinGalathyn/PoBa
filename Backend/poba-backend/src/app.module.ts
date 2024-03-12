@@ -7,6 +7,8 @@ import { ConfigModule } from '@nestjs/config';
 import { DataSource } from 'typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { ExternalModule } from './external/external.module';
+import { DbModule } from './db/db.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -23,9 +25,9 @@ import { AuthModule } from './auth/auth.module';
     ConfigModule.forRoot({
       isGlobal: true
     }),
-    UsersModule, AuthModule],
+    UsersModule, AuthModule, ExternalModule, DbModule],
   controllers: [AppController],
-  providers: [AppService, PasswordService],
+  providers: [AppService, PasswordService, ExternalModule],
 })
 
 export class AppModule {

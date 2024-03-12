@@ -6,12 +6,14 @@ import { AuthGuard } from '@nestjs/passport';
 import { CreateUserDto } from './users/dto/create-user.dto';
 import { LoginDto } from './auth/login.dto';
 import { JwtAuthGuard } from './auth/auth.guard';
+import { ExternalService } from './external/external.service';
 
 
 @Controller ()
 export class AppController{
     constructor (private appService: AppService,
-                 private authService: AuthService) {}
+                 private authService: AuthService,
+                 private externalService: ExternalService) {}
 
     @Get()
     getHello(){
@@ -40,5 +42,10 @@ export class AppController{
     @Post('auth/reg')
     async reg(@Body() user: CreateUserDto){
         return this.authService.register(user);
+    }
+
+    @Get('/db/loaditems')
+    async loadItems(@Body('token')token: string, @Body('userid')userid: string){
+        this.externalService.getItems(token, +userid);
     }
 }
