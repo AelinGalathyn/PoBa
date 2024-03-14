@@ -5,6 +5,7 @@ import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UsersService } from '../users/users.service';
 import { LoginDto } from './login.dto';
 import { Users } from '../users/entities/users.entity';
+import { WebshopService } from '../webshop/webshop.service';
 
 @Injectable()
 export class AuthService {
@@ -12,13 +13,20 @@ export class AuthService {
         private usersService: UsersService,
         private jwtService: JwtService,
         private pwService: PasswordService,
+        private webshopService: WebshopService
     ){}
 
-    async validateUser(loginUser: LoginDto): Promise<Partial<Users>>{
-        const user = await this.usersService.findOne(loginUser.username);
+    async validateUser(loginUser: LoginDto){
+        const user = await this.usersService.findOne(loginUser.userid);
         if(user&&await this.pwService.verifyPassword(user.password, loginUser.password)){
             const {password, ...result} = user;
-            return result;
+            const shops = await this.webshopService.getShopsByUser(user.userid);
+            const webshopid = shops[0].webshopid;
+            const finalresult = {
+                ...result,
+                webshopid,
+            }
+            return finalresult;
         }
         throw new UnauthorizedException();
     }
@@ -26,8 +34,7 @@ export class AuthService {
     async login(loginUser: LoginDto): Promise<{ access_token: string }> {
         const user = await this.validateUser(loginUser);
 
-        const payload = { username: user.username, sub: user.userid }; // Adjust 'userId' as necessary based on your
-        // User model
+        const payload = { username: user.username, sub: user.userid, webshopid: user.webshopid };
 
         return {
             access_token: this.jwtService.sign(payload),
@@ -43,5 +50,13 @@ export class AuthService {
         });
         const { password, ...result } = newUser;
         return result;
+    }
+
+    async changeJwt(webshopid: number){
+        const user = await this.webshopService.getUser(webshopid);
+        const payload = {username: user.username, sub: user.userid, webshopid: webshopid};
+        return{
+            access_token: this.jwtService.sign(payload),
+        };
     }
 }

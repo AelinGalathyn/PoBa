@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColum
 import { Users } from '../../users/entities/users.entity';
 import { Basket } from './basket.entity';
 import { Packages } from './packages.entity';
+import { Webshop } from '../../webshop/entities/webshop.entity';
 
 @Entity()
 export class Item {
@@ -29,9 +30,9 @@ export class Item {
   @Column({ length: 100 })
   url: string;
 
-  @ManyToOne(() => Users)
-  @JoinColumn({ name: "userid" })
-  user: Users;
+  @ManyToOne(() => Webshop)
+  @JoinColumn({ name: "id" })
+  webshop: Webshop;
 
   @OneToMany(() => Basket, basket => basket.item)
   baskets: Basket[];

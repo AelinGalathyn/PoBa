@@ -9,6 +9,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ExternalModule } from './external/external.module';
 import { DbModule } from './db/db.module';
+import { WebshopModule } from './webshop/webshop.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -25,9 +26,9 @@ import { DbModule } from './db/db.module';
     ConfigModule.forRoot({
       isGlobal: true
     }),
-    UsersModule, AuthModule, ExternalModule, DbModule],
+    UsersModule, AuthModule, ExternalModule, DbModule, WebshopModule],
   controllers: [AppController],
-  providers: [AppService, PasswordService, ExternalModule],
+  providers: [AppService, PasswordService],
 })
 
 export class AppModule {

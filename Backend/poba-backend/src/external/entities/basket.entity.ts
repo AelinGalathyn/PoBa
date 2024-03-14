@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column } from 't
 import { Orders } from './orders.entity';
 import { Item } from './item.entity';
 import { Users } from '../../users/entities/users.entity';
+import { Webshop } from '../../webshop/entities/webshop.entity';
 
 @Entity()
 export class Basket {
@@ -34,7 +35,7 @@ export class Basket {
   @Column({ length: 50 })
   status: string;
 
-  @ManyToOne(() => Users)
-  @JoinColumn({ name: "userid" })
-  user: Users;
+  @ManyToOne(() => Webshop)
+  @JoinColumn({ name: "id" })
+  webshop: Webshop;
 }

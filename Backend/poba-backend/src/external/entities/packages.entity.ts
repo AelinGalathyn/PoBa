@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column } from 'typeorm';
 import { Item } from './item.entity';
 import { Users } from '../../users/entities/users.entity';
+import { Webshop } from '../../webshop/entities/webshop.entity';
 
 @Entity()
 export class Packages {
@@ -14,7 +15,7 @@ export class Packages {
   @Column({ type: 'float' })
   qty: number;
 
-  @ManyToOne(() => Users)
-  @JoinColumn({ name: "userid" })
-  user: Users;
+  @ManyToOne(() => Webshop)
+  @JoinColumn({ name: "id" })
+  webshop: Webshop;
 }

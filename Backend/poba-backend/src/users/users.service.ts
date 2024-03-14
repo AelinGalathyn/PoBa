@@ -21,8 +21,13 @@ export class UsersService {
     return `This action returns all users`;
   }
 
-  async findOne(username: string): Promise<Users | undefined> {
-    return this.usersRepository.findOne({ where: { username } });
+  async findOne(userid: number): Promise<Users | undefined> {
+    return this.usersRepository.findOne({ where: { userid } });
+}
+
+  async returnOne(userid: number): Promise<Users | undefined> {
+    const {password, ...result} = await this.usersRepository.findOne({ where: { userid } });
+    return result;
 }
 
 
@@ -32,5 +37,9 @@ export class UsersService {
 
   remove(id: number) {
     return `This action removes a #${id} user`;
+  }
+
+  newWebshop(userid: number, webshopid: number){
+
   }
 }

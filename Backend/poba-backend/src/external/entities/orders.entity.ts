@@ -3,6 +3,7 @@ import { Customer } from './customer.entity';
 import { Users } from '../../users/entities/users.entity';
 import { Invoice } from './invoice.entity';
 import { Basket } from './basket.entity';
+import { Webshop } from '../../webshop/entities/webshop.entity';
 
 @Entity()
 export class Orders {
@@ -34,9 +35,9 @@ export class Orders {
   @JoinColumn({ name: "customerId" })
   customer: Customer;
 
-  @ManyToOne(() => Users)
-  @JoinColumn({ name: "userid" })
-  user: Users;
+  @ManyToOne(() => Webshop)
+  @JoinColumn({ name: "id" })
+  webshop: Webshop;
 
   @OneToOne(() => Invoice, invoice => invoice.order)
   invoice: Invoice;
