@@ -1,12 +1,14 @@
-import { Module } from '@nestjs/common';
-import { WebshopService } from './webshop.service';
-import { UsersService } from '../users/users.service';
+import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Webshop } from './entities/webshop.entity';
-import { Users } from '../users/entities/users.entity';
+import { WebshopService } from './webshop.service';
+import { UsersModule } from '../users/users.module';
+import { ExternalModule } from '../external/external.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Webshop, Users])],
-  providers: [WebshopService, UsersService]
+  imports: [TypeOrmModule.forFeature([Webshop]), UsersModule, forwardRef(() => ExternalModule)],
+  providers: [WebshopService],
+  exports: [WebshopService] // Make sure to export WebshopService
 })
 export class WebshopModule {}

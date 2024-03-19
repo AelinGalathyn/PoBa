@@ -1,40 +1,27 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { DbService} from '../db/db.service';
 import * as xml2js from 'xml2js';
-import { UsersService } from '../users/users.service';
-import { WebshopService } from '../webshop/webshop.service';
+import { Webshop } from '../webshop/entities/webshop.entity';
 
 const ApiUrl = 'https://api.unas.eu/shop/';
 
 @Injectable()
 export class ExternalService {
   constructor(
-    private httpService: HttpService,
-    private dbService: DbService,
-    private usersService: UsersService,
-    private webshopService: WebshopService) {
-  }
+    private httpService: HttpService,) {}
 
-  async getItems(webshopid: number) {
-    const token = this.loginCheck(webshopid);
-
+  async getItems(webshop: Webshop) {
     const headers = {
-      "Authorization": `Bearer ${token}`,
+      "Authorization": `Bearer ${webshop.unas_token}`,
       "Content-Type": "application/json",
     }
-    try {
       const body = {
         "ContentType": "full"
       }
       const response = await this.httpService.post(`${ApiUrl}getProduct`, body, { headers }).toPromise();
       const xmlData = response.data;
       const result = await this.parseXML(xmlData);
-      const data = result.Products.Product;
-      this.dbService.setOrUpdateItems(data, webshopid);
-    } catch (error) {
-      console.log(error.message);
-    }
+      return result.Products.Product;
   }
 
   async parseXML(xml: string): Promise<any>{
@@ -46,33 +33,22 @@ export class ExternalService {
     })
   }
 
-  async loginCheck(webshopid: number){
-    let token = this.usersService;//TOKEN
-    if(token === null){
-      const headers = {
-        "Content-Type": "application/json",
-      }
-      const userid = await this.webshopService.getUserid(webshopid);
-      try {
-        const body = {
-          "ApiKey": this.webshopService.getApiKey(userid, webshopid).toString(),
-          "WebshopInfo": "true",
-        }
-        const response = await this.httpService.post(`${ApiUrl}/login`, body, { headers }).toPromise();
-        const xmlData = response.data;
-        const result = await this.parseXML(xmlData);
-        const data = result.Login.Token;
-        sessionStorage.setItem('token', data);
-      } catch (error) {
-        console.log(error.message);
-      }
-    }
-    else {
-      return token;
-    }
+  async unasLogin(webshop: Webshop){
+  const headers = {
+    "Content-Type": "application/json",
   }
-
-  unasLogin(){
-
+  try {
+    const body = {
+      "ApiKey": webshop.unas_api,
+      "WebshopInfo": "true",
+    }
+    const response = await this.httpService.post(`${ApiUrl}login`, body, { headers }).toPromise();
+    const xmlData = response.data;
+    const result = await this.parseXML(xmlData);
+    const data = result.Login.Token;
+    return data;
+  } catch (err){
+    console.log(err.message);
+  }
   }
 }

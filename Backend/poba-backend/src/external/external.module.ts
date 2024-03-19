@@ -1,17 +1,16 @@
 import { Module } from '@nestjs/common';
-import { ExternalService } from './external.service';
-import { HttpModule } from '@nestjs/axios';
-import { DbModule } from '../db/db.module';
-import { UsersService } from '../users/users.service';
-import { WebshopService } from '../webshop/webshop.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Users } from '../users/entities/users.entity';
+import { WebshopModule } from '../webshop/webshop.module';
 import { UsersModule } from '../users/users.module';
-import { Webshop } from '../webshop/entities/webshop.entity';
+import { HttpModule } from '@nestjs/axios';
+import { ExternalService } from './external.service';
 
 @Module({
-  imports: [HttpModule, DbModule, TypeOrmModule.forFeature([Users, Webshop]), UsersModule],
-  providers: [ExternalService, UsersService, WebshopService],
-  exports: [ExternalService]
+  imports: [
+    WebshopModule,
+    UsersModule,
+    HttpModule,
+  ],
+  providers: [ExternalService],
+  exports: [ExternalService],
 })
 export class ExternalModule {}

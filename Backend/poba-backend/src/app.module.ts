@@ -8,8 +8,8 @@ import { DataSource } from 'typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ExternalModule } from './external/external.module';
-import { DbModule } from './db/db.module';
 import { WebshopModule } from './webshop/webshop.module';
+import { ItemModule } from './item/item.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -26,7 +26,7 @@ import { WebshopModule } from './webshop/webshop.module';
     ConfigModule.forRoot({
       isGlobal: true
     }),
-    UsersModule, AuthModule, ExternalModule, DbModule, WebshopModule],
+    UsersModule, AuthModule, ExternalModule, WebshopModule, ItemModule],
   controllers: [AppController],
   providers: [AppService, PasswordService],
 })

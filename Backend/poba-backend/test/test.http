@@ -1,9 +1,10 @@
-POST http://localhost:8080/user/reg
+POST http://localhost:3000/auth/reg
 Content-Type: application/json
 
 {
-    "username": "BambaLamba",
-    "password": "teszt123"
+  "username": "FandomFlame",
+  "password": "teszt123",
+  "unas_api": "883249f951f44413734f39b6fa75ae1671475115"
 }
 ###
 

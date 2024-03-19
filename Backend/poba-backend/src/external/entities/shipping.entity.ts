@@ -1,23 +1,34 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { Orders } from './orders.entity';
-import { Users } from '../../users/entities/users.entity';
 
-
-@Entity()
 export class Shipping {
-  @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 50 })
+  orderid: number;
+
+  packageid: number;
+
   sh_name: string;
 
-  // Other shipping details...
+  sh_zip: number;
 
-  @ManyToOne(() => Orders)
-  @JoinColumn({ name: "orderId" })
-  order: Orders;
+  sh_city: string;
 
-  @ManyToOne(() => Users)
-  @JoinColumn({ name: "userid" })
-  user: Users;
+  sh_street: string;
+
+  sh_sname: string;
+
+  sh_stype: string;
+
+  sh_snumber: string;
+
+  sh_country: string;
+
+  sh_county: string;
+
+  sh_ccode: string;
+
+  dp_id: string;
+
+  dp_group: string;
+
+  dp_recip: string;
 }

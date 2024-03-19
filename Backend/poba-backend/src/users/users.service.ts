@@ -21,14 +21,20 @@ export class UsersService {
     return `This action returns all users`;
   }
 
-  async findOne(userid: number): Promise<Users | undefined> {
-    return this.usersRepository.findOne({ where: { userid } });
-}
+  async findByUName(username: string): Promise<Users | undefined> {
+    const user = await this.usersRepository.findOne({ where: { username } });
+    return user;
+  }
 
-  async returnOne(userid: number): Promise<Users | undefined> {
-    const {password, ...result} = await this.usersRepository.findOne({ where: { userid } });
-    return result;
-}
+  async getPassword(username: string){
+    const user = await this.usersRepository.findOne({where: {username}});
+    return user.password;
+  }
+
+  async findById(userid: number): Promise<Users | undefined> {
+    const user = await this.usersRepository.findOne({ where: { userid } });
+    return user;
+  }
 
 
   update(id: number, updateUserDto: UpdateUserDto) {
