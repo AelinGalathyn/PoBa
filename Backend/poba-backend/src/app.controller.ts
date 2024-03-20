@@ -52,6 +52,7 @@ export class AppController{
             sameSite: 'strict',
         });
 
+        const newUser = await this.usersService.findById(userid);
         const webshop = await this.webshopService.getShopsByUser(userid);
         const webshopid = webshop[0].webshopid;
         await this.webshopService.newToken(webshopid);

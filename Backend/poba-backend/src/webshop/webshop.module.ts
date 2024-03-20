@@ -5,12 +5,10 @@ import { WebshopService } from './webshop.service';
 import { UsersModule } from '../users/users.module';
 import { ExternalModule } from '../external/external.module';
 import { AuthModule } from '../auth/auth.module';
-import { WebshopController } from './webshop.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Webshop]), UsersModule, forwardRef(() => ExternalModule)],
   providers: [WebshopService],
-  exports: [WebshopService],
-  controllers: [WebshopController] // Make sure to export WebshopService
+  exports: [WebshopService] // Make sure to export WebshopService
 })
 export class WebshopModule {}

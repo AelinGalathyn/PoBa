@@ -18,7 +18,9 @@ export class ExternalService {
       const body = {
         "ContentType": "full"
       }
-      const result = await this.unasRequest('getProduct', body, headers);
+      const response = await this.httpService.post(`${ApiUrl}getProduct`, body, { headers }).toPromise();
+      const xmlData = response.data;
+      const result = await this.parseXML(xmlData);
       return result.Products.Product;
   }
 
@@ -40,18 +42,13 @@ export class ExternalService {
       "ApiKey": webshop.unas_api,
       "WebshopInfo": "true",
     }
-    const result = await this.unasRequest('login', body, headers);
+    const response = await this.httpService.post(`${ApiUrl}login`, body, { headers }).toPromise();
+    const xmlData = response.data;
+    const result = await this.parseXML(xmlData);
     const data = result.Login.Token;
     return data;
   } catch (err){
     console.log(err.message);
   }
-  }
-
-  async unasRequest(url: string, body: {}, headers: {}){
-    const response = await this.httpService.post(`${ApiUrl}${url}`, body, {headers}).toPromise();
-    const xmlData = response.data;
-    const result = await this.parseXML(xmlData);
-    return result;
   }
 }

@@ -14,7 +14,6 @@ console.log('DB_PORT', process.env['DB_PORT']);
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cookieParser());
-  app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(3000);
 }
