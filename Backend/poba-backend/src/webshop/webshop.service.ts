@@ -69,8 +69,6 @@ export class WebshopService {
     const shop = this.webshopRepository.create({
       user: users,
       unas_api: api_key,
-      foxpost_api: '',
-      gls_api: '',
       unas_token: 'asd'
     });
     const token = await this.externalService.unasLogin(shop);
