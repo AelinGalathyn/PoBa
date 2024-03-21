@@ -4,10 +4,10 @@ import React, {Fragment, useState} from "react";
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import Image from "next/image";
 import User from "@/Users/User";
-import Rendelesek from "@/app/rendelesek_page";
-import KifogyoTermekek from "@/app/jelenleg_kifogyo_page";
-import Statisztika from "@/app/statisztika_page";
-import Termekek from "@/app/termekek_page";
+import Rendelesek from "@/app/custom_pages/rendelesek_page";
+import KifogyoTermekek from "@/app/custom_pages/jelenleg_kifogyo_page";
+import Statisztika from "@/app/custom_pages/statisztika_page";
+import Termekek from "@/app/custom_pages/termekek_page";
 
 export default function HomePage() {
     const [isTermekek, setIsTermekek] = useState<boolean>(false);

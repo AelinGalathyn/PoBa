@@ -1,8 +1,8 @@
 import {Switch} from "@nextui-org/switch";
 import {useState} from "react";
 import {Spacer} from "@nextui-org/react";
-import CircleChartWeek from "@/app/circle_chart";
-import LinearChartWeek from "@/app/linear_chart";
+import CircleChartWeek from "@/app/charts/circle_chart";
+import LinearChartWeek from "@/app/charts/linear_chart";
 
 export default function Statisztika() {
     const [isLinear, setIsLinear] = useState<boolean>(false);

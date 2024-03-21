@@ -5,18 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd3325d1-a539-485a-a318-acd0cad07e55" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/base/1/pg_internal.init" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/base/5/pg_internal.init" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/global/pg_control" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/global/pg_control" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/global/pg_internal.init" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/pg_stat/pgstat.stat" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/pg_stat/pgstat.stat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/pg_wal/000000010000000000000001" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/pg_wal/000000010000000000000001" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/app.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/app.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/users/users.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/users/users.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/login_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login_page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/termekek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/termekek_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/circle_chart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/charts/circle_chart.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/home_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/home_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/jelenleg_kifogyo_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/jelenleg_kifogyo_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/linear_chart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/charts/linear_chart.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/login_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/login_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/reg_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/reg_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/rendelesek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/rendelesek_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/statisztika_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/statisztika_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/termekek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/termekek_page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,13 +53,17 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.general",
-    "ts.external.directory.path": "C:\\Users\\szand\\OneDrive - BMSZC Petrik Lajos Két Tanítási Nyelvű Technikum\\Vizsgaremek\\PoBa\\Web\\poba-web\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "E:\\STUDY\\Webvalto\\PoBa\\Web\\poba-web\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\public" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\src\app\charts" />
+      <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\src\app\custom_pages" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -92,6 +95,7 @@
       <workItem from="1711005896997" duration="3801000" />
       <workItem from="1711011078613" duration="3086000" />
       <workItem from="1711016924420" duration="1327000" />
+      <workItem from="1711041786357" duration="518000" />
     </task>
     <servers />
   </component>
