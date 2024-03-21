@@ -34,7 +34,7 @@ export class AppController{
                  private itemService: ItemService) {}
 
     @Get()
-    getHello(){
+    checkCookie(){
         return "HELLLLLLLOO";
     }
 
@@ -49,7 +49,7 @@ export class AppController{
         res.cookie('Authentication', jwt.access_token, {
             httpOnly: true,
             path: '/',
-            sameSite: 'strict',
+            sameSite: 'lax',
         });
 
         const webshop = await this.webshopService.getShopsByUser(userid);
