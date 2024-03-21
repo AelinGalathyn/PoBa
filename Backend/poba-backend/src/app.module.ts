@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { ExternalModule } from './external/external.module';
 import { WebshopModule } from './webshop/webshop.module';
 import { ItemModule } from './item/item.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -26,7 +27,7 @@ import { ItemModule } from './item/item.module';
     ConfigModule.forRoot({
       isGlobal: true
     }),
-    UsersModule, AuthModule, ExternalModule, WebshopModule, ItemModule],
+    UsersModule, AuthModule, ExternalModule, WebshopModule, ItemModule, OrdersModule],
   controllers: [AppController],
   providers: [AppService, PasswordService],
 })
