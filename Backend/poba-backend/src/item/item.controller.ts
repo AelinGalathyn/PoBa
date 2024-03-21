@@ -20,19 +20,11 @@ export class ItemController {
     let ws: Webshop;
     let data: any[];
     try{
-      ws = await this.webshopService.getWebshopById(webshopid);
-    }catch{
-      return 'No webshop by this id.'
+      ws = await this.webshopService.findAndValidate(userid, webshopid);
+    }catch(err){
+      return err.message;
     }
-    try {
-      data = await this.externalService.getItems(ws);
-      console.log(data);
-    }
-    catch{
-      ws = await this.webshopService.newToken(ws.webshopid);
-      data = await this.externalService.getItems(ws);
-      console.log('2....'+data);
-    }
+    data = await this.externalService.getItems(ws);
     return this.itemService.makeItems(data);
   }
 }

@@ -23,6 +23,9 @@ export class Webshop{
   @Column({nullable: true})
   unas_token: string;
 
+  @Column({type: 'timestamptz'})
+  token_date: Date;
+
   @OneToMany(() => ApiCalls, apicalls => apicalls.webshop)
   apicalls: ApiCalls[];
 }
