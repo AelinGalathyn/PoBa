@@ -5,10 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd3325d1-a539-485a-a318-acd0cad07e55" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/base/1/pg_internal.init" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/base/5/pg_internal.init" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/global/pg_control" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/global/pg_control" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/global/pg_internal.init" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/pg_stat/pgstat.stat" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/pg_stat/pgstat.stat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/pg_wal/000000010000000000000001" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/pg_wal/000000010000000000000001" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/app.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/app.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/users/users.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/users/users.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/home_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home_page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/jelenleg_kifogyo_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/jelenleg_kifogyo_page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/rendelesek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/rendelesek_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/login_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/termekek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/termekek_page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,24 +40,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;web&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/STUDY/Webvalto/PoBa/Backend/poba-backend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;E:\\STUDY\\Webvalto\\PoBa\\Web\\poba-web\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "web",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/STUDY/Webvalto/PoBa/Backend/poba-backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.general",
+    "ts.external.directory.path": "C:\\Users\\szand\\OneDrive - BMSZC Petrik Lajos Két Tanítási Nyelvű Technikum\\Vizsgaremek\\PoBa\\Web\\poba-web\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\public" />
@@ -89,5 +97,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

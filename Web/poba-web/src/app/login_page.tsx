@@ -19,6 +19,7 @@ export default function Login() {
         try {
             const response = await axios.post("http://localhost:3000/auth/login", loginUser,
                 {
+                    withCredentials: true,
                 headers : {
                     'Content-Type': 'application/json'
                 },
