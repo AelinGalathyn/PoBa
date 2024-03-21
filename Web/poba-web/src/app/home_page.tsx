@@ -126,7 +126,7 @@ export default function HomePage() {
                 <div className="mt-10 text-[15px]">
                     <ul>
                         {menu_items.map((item) => (
-                            <li className="cursor-pointer button-style py-1 px-2 my-2" onClick={item.onclick}>{item.label}</li>
+                            <li key={Math.random() * 0.1} className="cursor-pointer button-style py-1 px-2 my-2" onClick={item.onclick}>{item.label}</li>
                         ))}
                     </ul>
                 </div>

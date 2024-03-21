@@ -6,47 +6,47 @@ export default function KifogyoTermekek() {
 
     const [termekek, setTermekek] = useState([
         {
-            id : 12354,
+            id : Math.random() * 0.1,
             nev : "Alma",
             darab : 0
         },
         {
-            id : 12354,
+            id : Math.random() * 0.1,
             nev : "Körte",
             darab : 0
         },
         {
-            id : 12354,
+            id : Math.random() * 0.1,
             nev : "Almás pite",
             darab : 5
         },
         {
-            id : 12354,
+            id : Math.random() * 0.1,
             nev : "Alma",
             darab : 4
         },
         {
-            id : 12354,
+            id : Math.random() * 0.1,
             nev : "Alma",
             darab : 8
         },
         {
-            id : 12354,
+            id : Math.random() * 0.1,
             nev : "Alma",
             darab : 0
         },
         {
-            id : 12354,
+            id : Math.random() * 0.1,
             nev : "Alma",
             darab : 15
         },
         {
-            id : 12354,
+            id : Math.random() * 0.1,
             nev : "Alma",
             darab : 0
         },
         {
-            id : 12354,
+            id : Math.random() * 0.1,
             nev : "Alma",
             darab : 0
         },

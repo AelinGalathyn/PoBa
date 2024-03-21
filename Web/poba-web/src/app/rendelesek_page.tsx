@@ -6,61 +6,61 @@ export default function Rendelesek() {
 
     const [rendelesek, setRendelesek] = useState([
         {
-            id : 287364,
+            id : Math.random() * 0.1,
             nev : "Eret Nek",
             datum : "2024.01.01",
             futar : "/foxpost_logo.png"
         },
         {
-            id : 872634,
+            id : Math.random() * 0.1,
             nev : "Gipsz Elek",
             datum : "2024.02.01",
             futar : "/gls_logo.png"
         },
         {
-            id : 794652,
+            id : Math.random() * 0.1,
             nev : "Dézsa Bálint",
             datum : "2024.03.01",
             futar : ""
         },
         {
-            id : 187412,
+            id : Math.random() * 0.1,
             nev : "Kulacs Pista",
             datum : "2024.04.01",
             futar : "/foxpost_logo.png"
         },
         {
-            id : 794652,
+            id : Math.random() * 0.1,
             nev : "Dézsa Bálint",
             datum : "2024.03.01",
             futar : ""
         },
         {
-            id : 794652,
+            id : Math.random() * 0.1,
             nev : "Dézsa Bálint",
             datum : "2024.03.01",
             futar : ""
         },
         {
-            id : 794652,
+            id : Math.random() * 0.1,
             nev : "Dézsa Bálint",
             datum : "2024.03.01",
             futar : "/gls_logo.png"
         },
         {
-            id : 794652,
+            id : Math.random() * 0.1,
             nev : "Dézsa Bálint",
             datum : "2024.03.01",
             futar : ""
         },
         {
-            id : 794652,
+            id : Math.random() * 0.1,
             nev : "Dézsa Bálint",
             datum : "2024.03.01",
             futar : ""
         },
         {
-            id : 794652,
+            id : Math.random() * 0.1,
             nev : "Dézsa Bálint",
             datum : "2024.03.01",
             futar : "/gls_logo.png"
