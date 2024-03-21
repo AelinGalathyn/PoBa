@@ -18,7 +18,7 @@ export class ExternalService {
       const body = {
         "ContentType": "full"
       }
-      const result = await this.unasRequest('getItem', headers, body);
+      const result = await this.unasRequest('getProduct', headers, body);
       return result.Products.Product;
   }
 

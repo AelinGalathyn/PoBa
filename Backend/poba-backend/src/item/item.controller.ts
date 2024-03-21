@@ -26,10 +26,12 @@ export class ItemController {
     }
     try {
       data = await this.externalService.getItems(ws);
+      console.log(data);
     }
     catch{
       ws = await this.webshopService.newToken(ws.webshopid);
       data = await this.externalService.getItems(ws);
+      console.log('2....'+data);
     }
     return this.itemService.makeItems(data);
   }
