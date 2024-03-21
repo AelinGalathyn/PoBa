@@ -1,5 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Users } from '../../users/entities/users.entity';
+import { ApiCalls } from '../../external/entities/apicalls.entity';
 
 @Entity()
 export class Webshop{
@@ -21,4 +22,7 @@ export class Webshop{
 
   @Column({nullable: true})
   unas_token: string;
+
+  @OneToMany(() => ApiCalls, apicalls => apicalls.webshop)
+  apicalls: ApiCalls[];
 }

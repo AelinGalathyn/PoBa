@@ -18,10 +18,19 @@ export class ExternalService {
       const body = {
         "ContentType": "full"
       }
-      const response = await this.httpService.post(`${ApiUrl}getProduct`, body, { headers }).toPromise();
-      const xmlData = response.data;
-      const result = await this.parseXML(xmlData);
+      const result = await this.unasRequest('getProduct', headers, body);
       return result.Products.Product;
+  }
+
+  async getOrders(webshop: Webshop){
+    const headers = {
+      "Authorization": `Bearer ${webshop.unas_token}`,
+      "Content-Type": "application/json",
+    }
+    const body = {
+      "ContentType": "full"
+    }
+    const response = await this.unasRequest('getOrder', headers, body);
   }
 
   async parseXML(xml: string): Promise<any>{
@@ -42,13 +51,17 @@ export class ExternalService {
       "ApiKey": webshop.unas_api,
       "WebshopInfo": "true",
     }
-    const response = await this.httpService.post(`${ApiUrl}login`, body, { headers }).toPromise();
-    const xmlData = response.data;
-    const result = await this.parseXML(xmlData);
-    const data = result.Login.Token;
+    const data = this.unasRequest('login', headers, body);
     return data;
   } catch (err){
     console.log(err.message);
   }
+  }
+
+  async unasRequest(url: string, headers: {}, body: {}){
+    const response = await this.httpService.post(`${ApiUrl}${url}`, body, {headers}).toPromise();
+    const xmlData = response.data;
+    const result = await this.parseXML(xmlData);
+    return result;
   }
 }

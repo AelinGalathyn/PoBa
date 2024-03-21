@@ -72,14 +72,15 @@ export class WebshopService {
       unas_token: 'asd'
     });
     const token = await this.externalService.unasLogin(shop);
-    shop.unas_token = token;
+    shop.unas_token = token.Login.Token;
     return await this.webshopRepository.save(shop);
   }
 
   async getToken(webshopid: number){
     const webshop = await this.webshopRepository.findOne({where: {webshopid}});
     if(webshop){
-      const token = await this.externalService.unasLogin(webshop);
+      const res = await this.externalService.unasLogin(webshop);
+      const token = res.Login.Token;
       webshop.unas_token = token;
       await this.webshopRepository.update(webshopid, webshop);
     }
@@ -92,5 +93,19 @@ export class WebshopService {
     webshop.unas_token = token;
     const ws = await this.webshopRepository.save(webshop);
     return ws;
+  }
+
+  async validateMatch(userid: number, webshopid: number){
+    try {
+      const ws = await this.getWebshopById(webshopid);
+      if(ws.user.userid === userid){
+        return true;
+      }
+      else {
+        return false;
+      }
+    }catch (err){
+      console.log(err.message);
+    }
   }
 }
