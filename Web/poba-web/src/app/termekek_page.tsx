@@ -3,35 +3,35 @@ import {useEffect, useState} from "react";
 import Termek from "@/app/Termekek/Termek";
 import {Card, CardHeader} from "@nextui-org/card";
 import Image from "next/image";
+import {useGlobal} from "@/app/webshop/webshopId";
+import axios from "axios";
 
 export default function Termekek() {
     const [termekek, setTermekek] = useState<Termek[]>([]);
+    const { webshopId } = useGlobal();
 
     useEffect(() => {
-        const fetchTermekek = () => {
-            fetch("http://localhost:3000/item/all")
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Network response was not ok");
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    setTermekek(data);
-                })
-                .catch(error => {
-                    console.error("Error fetching data:", error);
+        const fetchTermekek = async () => {
+            try {
+                const response = await axios.get(`http://localhost:3000/item/all/`, {
+                    params: { webshopid: webshopId }
                 });
+
+                setTermekek(response.data);
+                console.log(webshopId);
+            } catch (error) {
+                console.log(error);
+            }
         };
 
         fetchTermekek();
-    }, []);
+    }, [webshopId]);
 
     return (
-        <div>
+        <div className="bg-emerald-600">
             <ul>
                 {termekek.map((termek) => (
-                    <li key={termek.id}>
+                    <li key={termek.Id}>
                         <Card className="bg-white m-2 rounded-md p-1 shadow-lg shadow-gray-400 ">
                             <CardHeader className="grid grid-cols-3 text-xl card-class">
                                 <p className="col-span-1 ps-3">{termek.name}</p>

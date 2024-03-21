@@ -40,6 +40,7 @@ export class AppController{
 
     @Post('auth/login')
     async login(@Body() userdto: LoginDto, @Res() res: Response) {
+        console.log(userdto);
         const { userid,...jwt} = await this.authService.login(userdto); // Ensure this returns a token
 
         if (!jwt || !jwt.access_token) {

@@ -4,37 +4,33 @@ import Image from "next/image";
 import {useEffect, useState} from "react";
 import User from "@/Users/User";
 import {useGlobal} from "@/app/webshop/webshopId";
+import axios from 'axios';
 
 export default function Login() {
 
     const [felNev, setFelNev] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const { webshopId, updateWebshopId } = useGlobal();
-    const { loggedIn, updateLoggedIn } = useGlobal();
+    const { updateLoggedIn } = useGlobal();
 
     const loginUser : User = new User(felNev, password)
 
-    const login = () => {
-        fetch("http://localhost:3000/auth/login", {
-            method : 'POST',
-            headers : {
-                'Content-Type': 'application/json'
-            },
-            body : JSON.stringify(loginUser)
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                updateLoggedIn(true);
-                return response.json();
+    const login = async () => {
+        try {
+            const response = await axios.post("http://localhost:3000/auth/login", loginUser,
+                {
+                headers : {
+                    'Content-Type': 'application/json'
+                },
             })
-            .then(data => {
-                updateWebshopId(data);
-            })
-            .catch(error => {
-                console.error("Error logging in:", error);
-            });
+
+            updateWebshopId(response.data.webshopid);
+            updateLoggedIn(true);
+            console.log(webshopId);
+
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     return (

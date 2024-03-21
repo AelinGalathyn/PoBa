@@ -5,8 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd3325d1-a539-485a-a318-acd0cad07e55" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/base/5/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/base/5/pg_internal.init" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/global/1262" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/global/6100" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/global/pg_control" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/global/pg_control" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/global/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/global/pg_internal.init" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/pg_stat/pgstat.stat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/pg_wal/000000010000000000000001" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/postmaster.opts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/pgdata/postmaster.opts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/app.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/app.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/item/item.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/item/item.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/webshop/webshop.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/webshop/webshop.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Users/User.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Users/User.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Termekek/Termek.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Termekek/Termek.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/login_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/termekek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/termekek_page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,24 +47,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;web&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/STUDY/Webvalto/PoBa/Backend/poba-backend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;E:\\STUDY\\Webvalto\\PoBa\\Web\\poba-web\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "web",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/STUDY/Webvalto/PoBa/Web/poba-web",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.general",
+    "ts.external.directory.path": "E:\\STUDY\\Webvalto\\PoBa\\Web\\poba-web\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\public" />
@@ -76,6 +93,11 @@
       <workItem from="1710834429563" duration="18973000" />
       <workItem from="1710919208739" duration="671000" />
       <workItem from="1710920189188" duration="7456000" />
+      <workItem from="1710935094796" duration="656000" />
+      <workItem from="1710946905875" duration="7000" />
+      <workItem from="1710947762278" duration="595000" />
+      <workItem from="1711005896997" duration="3801000" />
+      <workItem from="1711011078613" duration="1559000" />
     </task>
     <servers />
   </component>

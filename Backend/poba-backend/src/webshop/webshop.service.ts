@@ -93,16 +93,4 @@ export class WebshopService {
     const ws = await this.webshopRepository.save(webshop);
     return ws;
   }
-
-  /*async getProducts(webshopid: number, productId: number){
-
-    const product = .findOne({
-      where: {
-        webshop: { id: webshopid },
-        productId: productId
-      },
-      relations: ['webshop']
-    });
-    return this.externalService.getProduct(product.webshop, productId);
-  }*/
 }

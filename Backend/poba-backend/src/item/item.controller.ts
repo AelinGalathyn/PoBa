@@ -1,4 +1,4 @@
-import { Body, Controller, Get, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { ItemService } from './item.service';
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { UserId } from '../users/decorators/UserId.param';
@@ -15,8 +15,8 @@ export class ItemController {
   ) {}
 
   @UseGuards(JwtAuthGuard)
-  @Get('all')
-  async getAll(@UserId() userid: number, @Body('webshopid')webshopid: number){
+  @Get('all/:webshopid')
+  async getAll(@UserId() userid: number, @Param('webshopid')webshopid: number){
     let ws: Webshop;
     let data: any[];
     try{
