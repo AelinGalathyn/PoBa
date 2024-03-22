@@ -33,8 +33,8 @@ export class AppController{
                  private itemService: ItemService) {}
 
     @Get()
-    checkCookie(){
-        return "HELLLLLLLOO";
+    checkCookie(@Req() req: Request, @Res()res: Response){
+        return this.validateToken(req, res);
     }
 
     @Post('auth/login')
@@ -79,7 +79,7 @@ export class AppController{
         }
         else{
             const webshop = await this.webshopService.getShopsByUser(isValid);
-
+            return res.json({webshopid: webshop[0].webshopid});
         }
     }
 }
