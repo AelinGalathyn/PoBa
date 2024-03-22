@@ -33,13 +33,12 @@ export class AppController{
                  private itemService: ItemService) {}
 
     @Get()
-    checkCookie(@Req() req: Request, @Res()res: Response){
+    checkCookie(@Req()req: Request, @Res()res: Response){
         return this.validateToken(req, res);
     }
 
     @Post('auth/login')
     async login(@Body() userdto: LoginDto, @Res() res: Response) {
-        console.log(userdto);
         const { userid,...jwt} = await this.authService.login(userdto); // Ensure this returns a token
 
         if (!jwt || !jwt.access_token) {
@@ -73,14 +72,15 @@ export class AppController{
 
     async validateToken(@Req() req: Request, @Res() res: Response){
         const token = req.cookies['Authentication'];
-        const isValid = token ? await this.authService.validateToken(token) : false;
-        if(!isValid){
-            return res.json({isValid});
+        if(token !==undefined){
+            const valid = await this.authService.validateToken(token);
+            if(valid !== false){
+                const webshop = await this.webshopService.getShopsByUser(valid);
+                const wsid = webshop[0].webshopid;
+                return res.json({webshopid: wsid});
+            }
         }
-        else{
-            const webshop = await this.webshopService.getShopsByUser(isValid);
-            return res.json({webshopid: webshop[0].webshopid});
-        }
+        return res.json({isValid: false});
     }
 }
 

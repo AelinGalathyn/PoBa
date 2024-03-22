@@ -14,4 +14,6 @@ export class Item {
   cat_name: string;
 
   url: string;
+
+  pic_url: string;
 }
