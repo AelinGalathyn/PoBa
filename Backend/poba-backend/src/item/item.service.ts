@@ -14,6 +14,12 @@ export class ItemService {
       } else {
         qty = parseFloat(item.Stocks.Stock.Qty);
       }
+      let img: string;
+      try{
+        img = item.Images.Image.Filename;
+      } catch{
+        img = '';
+      }
 
       items.push({
         id: item.Id,
@@ -24,8 +30,9 @@ export class ItemService {
         status: item.Statuses.Status.Value,
         cat_name: item.Categories.Category.Name,
         url: item.Url,
-        pic_url: item.Images.Image.Filename});
+        pic_url: img});
     });
+
     return items;
   }
 }
