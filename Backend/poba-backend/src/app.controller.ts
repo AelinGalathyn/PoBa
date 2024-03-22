@@ -2,15 +2,13 @@ import {
     Controller,
     Get,
     UseGuards,
-    Request,
     Post,
     Body,
     Res,
     createParamDecorator,
-    ExecutionContext, UnauthorizedException, Param,
+    ExecutionContext, UnauthorizedException, Param, Req,
 } from '@nestjs/common';
 import { AppService } from './app.service';
-import { Response} from 'express';
 import { AuthService } from './auth/auth.service';
 import { CreateUserDto } from './users/dto/create-user.dto';
 import { LoginDto } from './auth/login.dto';
@@ -22,6 +20,7 @@ import { WebshopService } from './webshop/webshop.service';
 import { WebshopId } from './users/decorators/webshopid.param';
 import { RegDto } from './auth/dto/reg.dto';
 import { ItemService } from './item/item.service';
+import { Request, Response } from 'express';
 
 
 @Controller ()
@@ -34,7 +33,7 @@ export class AppController{
                  private itemService: ItemService) {}
 
     @Get()
-    getHello(){
+    checkCookie(){
         return "HELLLLLLLOO";
     }
 
@@ -50,7 +49,7 @@ export class AppController{
         res.cookie('Authentication', jwt.access_token, {
             httpOnly: true,
             path: '/',
-            sameSite: 'strict',
+            sameSite: 'lax',
         });
 
         const webshop = await this.webshopService.getShopsByUser(userid);
@@ -69,6 +68,18 @@ export class AppController{
         }
         else {
             return 'User already exists';
+        }
+    }
+
+    async validateToken(@Req() req: Request, @Res() res: Response){
+        const token = req.cookies['Authentication'];
+        const isValid = token ? await this.authService.validateToken(token) : false;
+        if(!isValid){
+            return res.json({isValid});
+        }
+        else{
+            const webshop = await this.webshopService.getShopsByUser(isValid);
+
         }
     }
 }

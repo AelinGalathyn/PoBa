@@ -11,6 +11,7 @@ export class ExternalService {
     private httpService: HttpService,) {}
 
   async getItems(webshop: Webshop) {
+    webshop = await this.unasLogin(webshop);
     const headers = {
       "Authorization": `Bearer ${webshop.unas_token}`,
       "Content-Type": "application/json",
@@ -23,6 +24,7 @@ export class ExternalService {
   }
 
   async getOrders(webshop: Webshop){
+    webshop = await this.unasLogin(webshop);
     const headers = {
       "Authorization": `Bearer ${webshop.unas_token}`,
       "Content-Type": "application/json",
@@ -43,19 +45,26 @@ export class ExternalService {
   }
 
   async unasLogin(webshop: Webshop){
-  const headers = {
-    "Content-Type": "application/json",
-  }
-  try {
-    const body = {
-      "ApiKey": webshop.unas_api,
-      "WebshopInfo": "true",
+    if(webshop.token_date===null || new Date().getTime() - webshop.token_date.getTime() / (1000 * 60 * 60) > 3){
+      const headers = {
+        "Content-Type": "application/json",
+      }
+      try {
+        const body = {
+          "ApiKey": webshop.unas_api,
+          "WebshopInfo": "true",
+        }
+        const data = await this.unasRequest('login', headers, body);
+        webshop.unas_token = data.Login.Token;
+        webshop.token_date = new Date();
+        return webshop;
+      } catch (err){
+        return err;
+      }
     }
-    const data = this.unasRequest('login', headers, body);
-    return data;
-  } catch (err){
-    console.log(err.message);
-  }
+    else {
+      return webshop;
+    }
   }
 
   async unasRequest(url: string, headers: {}, body: {}){

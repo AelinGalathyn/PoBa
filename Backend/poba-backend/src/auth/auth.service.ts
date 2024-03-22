@@ -25,6 +25,19 @@ export class AuthService {
         throw new UnauthorizedException();
     }
 
+    async validateToken(token: string){
+        try {
+            const payload = this.jwtService.verify(token);
+            return payload.userid;
+        } catch (error){
+            return false;
+        }
+    }
+
+    async getUserid(token: string){
+        const payload = this.jwtService
+    }
+
     async login(loginUser: LoginDto) {
         const user = await this.validateUser(loginUser);
 
