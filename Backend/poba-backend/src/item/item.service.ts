@@ -23,7 +23,8 @@ export class ItemService {
         unit: item.Unit,
         status: item.Statuses.Status.Value,
         cat_name: item.Categories.Category.Name,
-        url: item.Url});
+        url: item.Url,
+        pic_url: item.Images.Image.Filename});
     });
     return items;
   }
