@@ -16,4 +16,6 @@ export class WebshopController {
     const user = await this.usersService.findById(userid);
     await this.webshopService.newApiKey(user, apikey);
   }
+
+  //TODO: végpont, hogy vissza tudd nekem adni az összes webshopját a usernek
 }
