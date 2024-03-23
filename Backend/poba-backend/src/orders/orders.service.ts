@@ -5,6 +5,6 @@ export class OrdersService {
   constructor() {}
 
   async getAll(webshopid: number){
-
+    //TODO: self explanatory
   }
 }

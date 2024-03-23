@@ -53,9 +53,10 @@ export class AppController{
 
         const webshop = await this.webshopService.getShopsByUser(userid);
         const webshopid = webshop[0].webshopid;
+        //TODO: kiszedni a felhasználónevet, és response-ban továbbküldeni a message és webshopid mellett frontendre
         await this.webshopService.newToken(webshopid);
 
-        return res.send({ message: 'Login successful', webshopid: webshopid });
+        return res.send({ message: 'Login successful', webshopid: webshopid, username: "" }); //TODO: ide jön
     }
 
     @Post('auth/reg')

@@ -33,6 +33,7 @@ export class ExternalService {
       "ContentType": "full"
     }
     const response = await this.unasRequest('getOrder', headers, body);
+    //TODO: orderst befejezni
   }
 
   async parseXML(xml: string): Promise<any>{

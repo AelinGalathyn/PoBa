@@ -4,8 +4,8 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 interface GlobalContextType {
     webshopId: number;
     updateWebshopId: (newValue: number) => void;
-    loggedIn: boolean;
-    updateLoggedIn: (newValue: boolean) => void;
+    userName: string;
+    updateUserName: (newValue: string) => void;
 }
 
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
@@ -24,17 +24,18 @@ interface GlobalProviderProps {
 
 export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
     const [webshopId, updateWebshopId] = useState<number>(0);
-    const [loggedIn, updateLoggedIn] = useState<boolean>(false);
+    const [userName, updateUserName] = useState<string>("");
 
-    const updateGlobalVarWebshop = (newValue: number) => {
+    const updateGlobalVar = (newValue: number) => {
         updateWebshopId(newValue);
     };
-    const updateGlobalVarLogin = (newValue: boolean) => {
-        updateLoggedIn(newValue);
+
+    const updateGlobalVarUName = (newValue: string) => {
+        updateUserName(newValue);
     };
 
     return (
-        <GlobalContext.Provider value={{ webshopId, updateWebshopId, loggedIn, updateLoggedIn}}>
+        <GlobalContext.Provider value={{ webshopId, updateWebshopId, userName, updateUserName}}>
             {children}
         </GlobalContext.Provider>
     );

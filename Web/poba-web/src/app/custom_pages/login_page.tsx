@@ -11,28 +11,35 @@ export default function Login() {
     const [felNev, setFelNev] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const { webshopId, updateWebshopId } = useGlobal();
-    const { updateLoggedIn } = useGlobal();
+    const { updateUserName } = useGlobal();
 
     const loginUser : User = new User(felNev, password)
 
-    const login = async () => {
-        try {
-            const response = await axios.post("http://localhost:3000/auth/login", loginUser,
-                {
-                    withCredentials: true,
-                headers : {
-                    'Content-Type': 'application/json'
-                },
-            })
+    const login = () => {
+        useEffect(() => {
+            const asyncLogin = async () => {
+                try {
+                    const response = await axios.post("http://localhost:3000/auth/login", loginUser,
+                        {
+                            withCredentials: true,
+                            headers : {
+                                'Content-Type': 'application/json'
+                            },
+                        })
 
-            updateWebshopId(response.data.webshopid);
-            updateLoggedIn(true);
-            console.log(webshopId);
+                    updateUserName(response.data.username);
+                    updateWebshopId(response.data.webshopid);
+                    console.log(webshopId);
 
-        } catch (e) {
-            console.log(e);
-        }
-    };
+                } catch (e) {
+                    console.log(e);
+                }
+            };
+
+            asyncLogin();
+
+        }, []);
+    }
 
     return (
         <main className="flex mainContainer bg-amber-50 min-h-screen flex-col items-center pt-[10vh]">

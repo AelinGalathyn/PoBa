@@ -18,7 +18,7 @@ export class ItemController {
   @Get('all')
   async getAll(@UserId() userid: number, @Param('webshopid')webshopid: number){
     let ws: Webshop;
-    let data: any[];
+    let data: any[]; //TODO: any típust kicserélni megfelelő class-re vagy típusra
     try{
       ws = await this.webshopService.findAndValidate(userid, webshopid);
     }catch(err){
