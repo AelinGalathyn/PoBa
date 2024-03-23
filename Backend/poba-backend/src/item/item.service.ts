@@ -38,4 +38,6 @@ export class ItemService {
 
   //TODO: beaktiválni a gyertyáidat vagy valami dummy adatot raktározásra, hogy a termék mennyiség módosításon
   // tudjak dolgozni
+
+  //TODO: valahogy return-ölni a frontendnek azt, hogy mikor történt változtatás az itemek mennyiségében
 }
