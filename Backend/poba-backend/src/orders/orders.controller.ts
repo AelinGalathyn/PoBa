@@ -30,5 +30,6 @@ export class OrdersController {
       data = await this.externalService.getItems(ws);
     }
     //return this.ordersService.makeItems(data);
+    //TODO: ezt befejezni, különben nem tudok tovább haladni
   }
 }

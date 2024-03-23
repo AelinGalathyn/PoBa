@@ -53,9 +53,10 @@ export class AppController{
 
         const webshop = await this.webshopService.getShopsByUser(userid);
         const webshopid = webshop[0].webshopid;
+        const username = await this.usersService.findById(userid);
         await this.webshopService.newToken(webshopid);
 
-        return res.send({ message: 'Login successful', webshopid: webshopid });
+        return res.send({ message: 'Login successful', webshopid: webshopid, username: username });
     }
 
     @Post('auth/reg')
