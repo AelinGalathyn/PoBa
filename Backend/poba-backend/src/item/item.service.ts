@@ -35,4 +35,7 @@ export class ItemService {
 
     return items;
   }
+
+  //TODO: beaktiválni a gyertyáidat vagy valami dummy adatot raktározásra, hogy a termék mennyiség módosításon
+  // tudjak dolgozni
 }
