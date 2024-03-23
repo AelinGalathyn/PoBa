@@ -89,7 +89,7 @@ export default function HomePage() {
                     </div>
                     <div>
                         <Listbox value={selectedWebshop} onChange={setSelectedWebshop}>
-                            <div className="flex justify-center mt-1">
+                            <div className="flex flex-col px-2 justify-center mt-1">
                                 <Listbox.Button className="relative text-left text-[15px] rounded-md bg-white py-1 pe-10 ps-2 text-[#60624d]"
                                     style={{boxShadow: "rgba(0, 0, 0, 0.27) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 2px"}}>
                                     <span>{selectedWebshop.label}</span>
@@ -103,14 +103,13 @@ export default function HomePage() {
                                     leaveFrom="opacity-100"
                                     leaveTo="opacity-0"
                                 >
-                                    <Listbox.Options
-                                        className="mt-1 max-h-60 w-full overflow-auto text-xs button-style">
+                                    <Listbox.Options className="z-50 mt-2 max-h-60 w-full text-xs button-style">
                                         {webshop_list.map((webshop) => (
                                             <Listbox.Option
                                                 key={webshop.key}
                                                 className={({active}) =>
                                                     `relative cursor-pointer select-none py-2 pl-10 pr-2 text-[#60624d] ${
-                                                        active ? 'bg-white' : ''
+                                                        active ? 'bg-white rounded-lg' : ''
                                                     }`
                                                 }
                                                 value={webshop}
@@ -138,17 +137,19 @@ export default function HomePage() {
                             </div>
                         </Listbox>
                     </div>
-                    <hr className="border-dotted border-t-8 w-full border-yellow-50 mt-2.5"/>
                 </div>
-                <div className="flex items-center justify-center row-span-7 text-[15px] bg-yellow-50">
-                    <ul>
-                        {menu_items.map((item) => (
-                            <li key={Math.random() * 0.1} className="cursor-pointer button-style py-1 px-2 my-2"
-                                onClick={item.onclick}>{item.label}</li>
-                        ))}
-                    </ul>
+                <div className="row-span-7 text-[15px] bg-yellow-50">
+                    <div className="relative w-full h-full flex flex-col items-center justify-center">
+                        <hr className="border-dotted border-t-8 w-full border-yellow-50 absolute top-[-4.5px]"/>
+                        <ul>
+                            {menu_items.map((item) => (
+                                <li key={Math.random() * 0.1} className="cursor-pointer button-style py-1 px-2 my-2"
+                                    onClick={item.onclick}>{item.label}</li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
-                <div className="relative row-span-2 bg-[#C6D8A7]" style={{borderBottomRightRadius : 10}}>
+                <div className="relative row-span-2 bg-[#C6D8A7]" style={{borderBottomRightRadius: 10}}>
                     <hr className="absolute top-[-2.5px] border-dotted border-t-8 w-full border-yellow-50"/>
                     <div className="flex justify-center items-center h-full">
                         <button

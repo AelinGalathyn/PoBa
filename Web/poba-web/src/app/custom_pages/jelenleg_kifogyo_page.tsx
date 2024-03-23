@@ -23,7 +23,7 @@ export default function KifogyoTermekek() {
                     //return new Date(a.quantityChangeDate) - new Date(b.quantityChangeDate); //TODO: dátum szerinti frissítés és rendezés
                     return 0;
                 }}
-        ));
+        ).splice(0, 15));
     }, [termekek]);
 
     useEffect(() => {
