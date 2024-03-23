@@ -50,10 +50,6 @@ export default function HomePage() {
         },
         {
             onclick : () => {},
-            label: "Futár nyugták"
-        },
-        {
-            onclick : () => {},
             label: "Pénzügyek"
         },
         {
@@ -141,7 +137,7 @@ export default function HomePage() {
                 <div className="row-span-7 text-[15px] bg-yellow-50">
                     <div className="relative w-full h-full flex flex-col items-center justify-center">
                         <hr className="border-dotted border-t-8 w-full border-yellow-50 absolute top-[-4.5px]"/>
-                        <ul>
+                        <ul className="w-3/4">
                             {menu_items.map((item) => (
                                 <li key={Math.random() * 0.1} className="cursor-pointer button-style py-1 px-2 my-2"
                                     onClick={item.onclick}>{item.label}</li>

@@ -7,7 +7,6 @@
     <list default="true" id="617ab209-8ebb-4b6b-8b22-4fcede7f7007" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/custom_pages/home_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/home_page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/custom_pages/jelenleg_kifogyo_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/jelenleg_kifogyo_page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +60,7 @@
       <option name="presentableId" value="Default" />
       <updated>1711206241956</updated>
       <workItem from="1711206242995" duration="2245000" />
-      <workItem from="1711209170222" duration="1531000" />
+      <workItem from="1711209170222" duration="1691000" />
     </task>
     <servers />
   </component>
