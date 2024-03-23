@@ -1,56 +1,49 @@
-import {Card, CardBody, CardFooter, CardHeader} from "@nextui-org/card";
+import {Card, CardHeader} from "@nextui-org/card";
 import Image from "next/image";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useGlobal} from "@/app/webshop/webshopId";
+import axios from "axios";
+import Item from "@/app/Termekek/Termek";
 
 export default function KifogyoTermekek() {
+    const { webshopId } = useGlobal();
+    const { termekek, updateTermekek } = useGlobal();
 
-    const [termekek, setTermekek] = useState([
-        {
-            id : Math.random() * 0.1,
-            nev : "Alma",
-            darab : 0
-        },
-        {
-            id : Math.random() * 0.1,
-            nev : "Körte",
-            darab : 0
-        },
-        {
-            id : Math.random() * 0.1,
-            nev : "Almás pite",
-            darab : 5
-        },
-        {
-            id : Math.random() * 0.1,
-            nev : "Alma",
-            darab : 4
-        },
-        {
-            id : Math.random() * 0.1,
-            nev : "Alma",
-            darab : 8
-        },
-        {
-            id : Math.random() * 0.1,
-            nev : "Alma",
-            darab : 0
-        },
-        {
-            id : Math.random() * 0.1,
-            nev : "Alma",
-            darab : 15
-        },
-        {
-            id : Math.random() * 0.1,
-            nev : "Alma",
-            darab : 0
-        },
-        {
-            id : Math.random() * 0.1,
-            nev : "Alma",
-            darab : 0
-        },
-    ])
+    const [fogyoTermekek, setFogyoTermekek] = useState<Item[]>([]);
+
+    useEffect(() => {
+        setFogyoTermekek(termekek.filter(item => item.qty <= 10).sort(
+            (a, b) => {
+                if (a.qty === 0 && b.qty !== 0) {
+                    return -1; // a comes before b
+                } else if (a.qty !== 0 && b.qty === 0) {
+                    return 1; // b comes before a
+                } else {
+                    // If quantities are the same, sort by quantity change date
+                    //return new Date(a.quantityChangeDate) - new Date(b.quantityChangeDate); //TODO: dátum szerinti frissítés és rendezés
+                    return 0;
+                }}
+        ));
+    }, [termekek]);
+
+    useEffect(() => {
+        const fetchTermekek = async () => {
+            try {
+                const response = await axios.get(`http://localhost:3000/item/all/`, {
+                    withCredentials: true,
+                    params: { webshopid: webshopId }
+                });
+
+                updateTermekek(response.data);
+                console.log(webshopId);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        fetchTermekek();
+
+    }, [webshopId]);
 
     return (
         <div className="fixed h-2/6 w-2/5 mt-[5vh]">
@@ -59,16 +52,16 @@ export default function KifogyoTermekek() {
             </div>
             <div className="h-full w-full mt-5 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto scroll-smooth">
                 <ul>
-                    {termekek.map((termek) => (
+                    {fogyoTermekek.map((termek) => (
                         <li key={termek.id}>
                             <Card className="bg-white m-2 rounded-md p-1 shadow-lg shadow-gray-400 ">
                                 <CardHeader className="grid grid-cols-3 text-xl card-class">
-                                    <p className="col-span-1 ps-3">{termek.nev}</p>
-                                    <p className="col-span-1 text-center">{termek.darab}</p>
+                                    <p className="col-span-1 ps-3">{termek.name}</p>
+                                    <p className="col-span-1 text-center">{termek.qty}</p>
                                     <div className="col-span-1 justify-self-end">
-                                        {termek.darab === 0 ? (
+                                        {termek.qty === 0 ? (
                                             <Image src="/elfogyott_icon.png" width={30} height={30} alt="szallito_ceg_icon" />
-                                        ) : termek.darab > 0 && termek.darab <= 10 ? (
+                                        ) : termek.qty > 0 ? (
                                             <Image src="/kifogyoban_icon.png" width={30} height={30} alt="szallito_ceg_icon" />
                                         ) : ("")}
                                     </div>

@@ -8,27 +8,7 @@ import {useGlobal} from "@/app/webshop/webshopId";
 import axios from "axios";
 
 export default function Termekek() {
-    const [termekek, setTermekek] = useState<Termek[]>([]);
-    const { webshopId } = useGlobal();
-
-    useEffect(() => {
-        const fetchTermekek = async () => {
-            try {
-                const response = await axios.get(`http://localhost:3000/item/all/`, {
-                    withCredentials: true,
-                    params: { webshopid: webshopId }
-                });
-
-                setTermekek(response.data);
-                console.log(webshopId);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
-        fetchTermekek();
-
-    }, [webshopId]);
+    const { termekek } = useGlobal();
 
     return (
         <div className="fixed w-[75vw] h-3/4 mt-16">

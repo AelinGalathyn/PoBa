@@ -1,5 +1,3 @@
-import {id} from "postcss-selector-parser";
-
 export default class Item {
     id: number;
 
