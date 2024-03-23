@@ -1,6 +1,7 @@
 package com.example.pobatest;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.ActivityNavigator;
 
 import android.content.Intent;
@@ -17,14 +18,14 @@ public class BejelentkezesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.bejelentkezes_activity);
+        setContentView(R.layout.bejelentkezes_fragment);
 
         Init();
 
         bejelentkezes_gomb.setOnClickListener(view -> {
-            Intent intent = new Intent(BejelentkezesActivity.this, EgyszeriBelepesActivity.class);
-            startActivity(intent);
-            finish();
+            getSupportFragmentManager().beginTransaction().replace(R.id.bejelentkezes_framelayout, new EgyszeriBelepesFragment())
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .commit();
         });
     }
 

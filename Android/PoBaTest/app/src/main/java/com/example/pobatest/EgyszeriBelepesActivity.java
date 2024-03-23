@@ -1,6 +1,9 @@
 package com.example.pobatest;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.fragment.app.FragmentTransaction;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -33,7 +36,7 @@ public class EgyszeriBelepesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.belepes_egyszeri_activity);
+        setContentView(R.layout.egyszeri_belepes_fragment);
 
         Init();
 
@@ -70,7 +73,7 @@ public class EgyszeriBelepesActivity extends AppCompatActivity {
         OkHttpClient client = okBuild.build();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.169.67:3000/")
+                .baseUrl("http://100.124.106.8:3000/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -84,10 +87,9 @@ public class EgyszeriBelepesActivity extends AppCompatActivity {
                     ResponseMessage loginResponse = response.body();
                     String responseSzoveg = loginResponse.getMessage();
                     Toast.makeText(EgyszeriBelepesActivity.this, "Sikeres bejelentkezés" , Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(EgyszeriBelepesActivity.this, FoActivity.class);
-                    startActivity(intent);
-                    finish();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.egyszeri_belepes_framelayout, new FoFragment())
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                            .commit();
                 } else {
                     Toast.makeText(EgyszeriBelepesActivity.this, "Ilyen profil nem létezik", Toast.LENGTH_SHORT).show();
                 }
@@ -95,7 +97,7 @@ public class EgyszeriBelepesActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseMessage> call, Throwable t) {
-                Toast.makeText(EgyszeriBelepesActivity.this, "Internet error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EgyszeriBelepesActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

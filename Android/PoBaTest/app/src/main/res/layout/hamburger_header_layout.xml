@@ -29,6 +29,7 @@
         android:spinnerMode="dropdown"
         android:background="@drawable/hamburger_webshopokhely"
         android:dropDownWidth="wrap_content"
+        android:dropDownSelector="@drawable/drop_down_selector"
         android:paddingEnd="10dp"
         android:paddingStart="10dp"
         />

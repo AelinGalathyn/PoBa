@@ -3,20 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navhost"
-    app:startDestination="@id/loginActivity">
-    <activity
-        android:id="@+id/loginActivity"
-        android:name="com.example.pobatest.BejelentkezesActivity"
-        android:label="activity_login"
-        tools:layout="@layout/bejelentkezes_activity" />
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.example.pobatest.FoActivity"
-        android:label="activity_main"
-        tools:layout="@layout/fo_activity" />
-    <activity
-        android:id="@+id/onceLoginActivity"
-        android:name="com.example.pobatest.EgyszeriBelepesActivity"
-        android:label="activity_once_login"
-        tools:layout="@layout/belepes_egyszeri_activity" />
+    app:startDestination="@id/bejelentkezesFragment">
+    <fragment
+        android:id="@+id/bejelentkezesFragment"
+        android:name="com.example.pobatest.BejelentkezesFragment"
+        android:label="bejelentkezes_fragment"
+        tools:layout="@layout/bejelentkezes_fragment" >
+        <action
+            android:id="@+id/action_bejelentkezesFragment_to_egyszeriBelepesFragment"
+            app:destination="@id/egyszeriBelepesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/egyszeriBelepesFragment"
+        android:name="com.example.pobatest.EgyszeriBelepesFragment"
+        android:label="egyszeri_belepes_fragment"
+        tools:layout="@layout/egyszeri_belepes_fragment" >
+        <action
+            android:id="@+id/action_egyszeriBelepesFragment_to_foFragment"
+            app:destination="@id/foFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/foFragment"
+        android:name="com.example.pobatest.FoFragment"
+        android:label="fo_fragment"
+        tools:layout="@layout/fo_fragment" />
 </navigation>
