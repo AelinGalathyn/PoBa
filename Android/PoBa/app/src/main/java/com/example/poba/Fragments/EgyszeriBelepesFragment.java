@@ -2,6 +2,7 @@ package com.example.poba.Fragments;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
@@ -30,7 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class EgyszeriBelepesFragment extends Fragment {
 
-    private ImageButton egyszeri_belepes_gomb;
+    private AppCompatButton egyszeri_belepes_gomb;
     private EditText felhasznalonev_input;
     private EditText jelszo_input;
     private Retrofit retrofit;
@@ -71,7 +72,7 @@ public class EgyszeriBelepesFragment extends Fragment {
             Request request = chain.request();
             Response response = chain.proceed(request);
 
-            cookies = response.headers("Set-Cookie");
+            cookies = response.headers("Authentication");
 
             return response;
         });
@@ -91,10 +92,9 @@ public class EgyszeriBelepesFragment extends Fragment {
             public void onResponse(Call<ResponseMessage> call, retrofit2.Response<ResponseMessage> response) {
                 if (response.isSuccessful()) {
                     ResponseMessage loginResponse = response.body();
-                    String responseSzoveg = loginResponse.getMessage();
                     Toast.makeText(getActivity(), "Sikeres bejelentkezés", Toast.LENGTH_SHORT).show();
 
-                    Navigation.findNavController(view).navigate(R.id.action_egyszeriBelepesFragment2_to_bejelentkezesFragment);
+                    Navigation.findNavController(view).navigate(R.id.action_egyszeriBejelentkezesFragment_to_mainFragment);
                 } else {
                     Toast.makeText(getActivity(), "Ilyen profil nem létezik", Toast.LENGTH_SHORT).show();
                 }

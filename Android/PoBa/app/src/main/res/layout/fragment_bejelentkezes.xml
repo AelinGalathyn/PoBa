@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.BejelentkezesFragment">
 
     <androidx.appcompat.widget.AppCompatButton
@@ -11,13 +10,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Bejelentkezés"
+        android:text="@string/begombfelirat"
         android:textAllCaps="false"
         android:textSize="20sp"
-        android:fontFamily="@font/courier_prime"
         android:textColor="@color/text_color"
-        android:background="@drawable/interactive_buttons"
-        android:contentDescription="bejelentkezes_gomb" />
+        android:background="@drawable/interactive_buttons" />
 
     <ImageView
         android:layout_width="262dp"

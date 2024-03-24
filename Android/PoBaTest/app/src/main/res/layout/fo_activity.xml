@@ -24,7 +24,6 @@
             android:layout_height="wrap_content"
             android:contentDescription="nav_profil_gomb"
             android:src="@drawable/nav_profil_gomb"
-            android:visibility="gone"
             />
 
         <FrameLayout

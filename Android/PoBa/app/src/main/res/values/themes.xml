@@ -4,6 +4,8 @@
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/navigation_green</item>
         <item name="android:background">@color/background_yellow</item>
+        <item name="fontFamily">monospace</item>
+        <item name="cardCornerRadius">10dp</item>
     </style>
 
     <style name="Theme.PoBa" parent="Base.Theme.PoBa" />
