@@ -1,0 +1,14 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.PoBa" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/navigation_green</item>
+        <item name="android:background">@color/background_yellow</item>
+    </style>
+
+    <style name="Theme.PoBa" parent="Base.Theme.PoBa" />
+
+    <style name="HamburgerMenuColor" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:textSize">20sp</item>
+    </style>
+</resources>

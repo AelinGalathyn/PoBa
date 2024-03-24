@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.BejelentkezesFragment">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bejelentkezes_gomb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Bejelentkezés"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:fontFamily="@font/courier_prime"
+        android:textColor="@color/text_color"
+        android:background="@drawable/interactive_buttons"
+        android:contentDescription="bejelentkezes_gomb" />
+
+    <ImageView
+        android:layout_width="262dp"
+        android:layout_height="182dp"
+        android:layout_above="@+id/bejelentkezes_gomb"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/poba_logo" />
+
+</RelativeLayout>
