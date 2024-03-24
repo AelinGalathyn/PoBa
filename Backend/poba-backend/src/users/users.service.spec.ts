@@ -1,8 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from './users.service';
-import { Repository } from 'typeorm';
-import { Users } from './entities/user.entity';
-import { getRepositoryToken } from '@nestjs/typeorm';
 
 // Create a mock repository
 const mockRepository = {
@@ -54,7 +51,7 @@ describe('UsersService', () => {
       const testUser = { username: 'testUser', password: 'testPass' };
       mockRepository.findOne.mockResolvedValue(testUser); // Mock findOne method
 
-      const result = await service.findOne('testUser');
+      const result = await service.findByUName('testUser');
 
       expect(mockRepository.findOne).toHaveBeenCalledWith({ where: { username: 'testUser' } });
       expect(result).toEqual(testUser);

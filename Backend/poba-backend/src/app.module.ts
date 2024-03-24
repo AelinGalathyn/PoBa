@@ -7,6 +7,10 @@ import { ConfigModule } from '@nestjs/config';
 import { DataSource } from 'typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { ExternalModule } from './external/external.module';
+import { WebshopModule } from './webshop/webshop.module';
+import { ItemModule } from './item/item.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -23,7 +27,7 @@ import { AuthModule } from './auth/auth.module';
     ConfigModule.forRoot({
       isGlobal: true
     }),
-    UsersModule, AuthModule],
+    UsersModule, AuthModule, ExternalModule, WebshopModule, ItemModule, OrdersModule],
   controllers: [AppController],
   providers: [AppService, PasswordService],
 })

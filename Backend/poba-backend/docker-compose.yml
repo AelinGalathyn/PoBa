@@ -7,8 +7,6 @@ services:
     environment:
       - POSTGRES_PASSWORD=nojminoj01
     container_name: postgres
-    volumes:
-      - ./pgdata:/var/lib/postgresql/data
     ports:
       - '5432:5432'
   

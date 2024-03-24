@@ -1,41 +1,87 @@
-import { Controller, Get, UseGuards, Request, Post, Body, Res } from '@nestjs/common';
-import { Response} from 'express';
+import {
+    Controller,
+    Get,
+    UseGuards,
+    Post,
+    Body,
+    Res,
+    createParamDecorator,
+    ExecutionContext, UnauthorizedException, Param, Req,
+} from '@nestjs/common';
+import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
-import { AuthGuard } from '@nestjs/passport';
 import { CreateUserDto } from './users/dto/create-user.dto';
 import { LoginDto } from './auth/login.dto';
+import { JwtAuthGuard } from './auth/auth.guard';
+import { ExternalService } from './external/external.service';
+import { UsersService } from './users/users.service';
+import { UserId } from './users/decorators/UserId.param';
+import { WebshopService } from './webshop/webshop.service';
+import { WebshopId } from './users/decorators/webshopid.param';
+import { RegDto } from './auth/dto/reg.dto';
+import { ItemService } from './item/item.service';
+import { Request, Response } from 'express';
 
 
 @Controller ()
 export class AppController{
-    constructor (private authService: AuthService) {}
+    constructor (private appService: AppService,
+                 private authService: AuthService,
+                 private externalService: ExternalService,
+                 private usersService: UsersService,
+                 private webshopService: WebshopService,
+                 private itemService: ItemService) {}
 
     @Get()
-    getHello(){
-        return "HELLLLLLLOO";
-    }
-
-    @UseGuards(AuthGuard('jwt'))
-    @Get('profile')
-    getProfile(@Request() req){
-        return req.user;
+    checkCookie(@Req()req: Request, @Res()res: Response){
+        return this.validateToken(req, res);
     }
 
     @Post('auth/login')
-    async login(@Body() user: LoginDto, @Res() res: Response){
-        const jwt = this.authService.login(user);
+    async login(@Body() userdto: LoginDto, @Res() res: Response) {
+        const { userid,...jwt} = await this.authService.login(userdto); // Ensure this returns a token
 
-        res.cookie('Authentication', jwt,{
+        if (!jwt || !jwt.access_token) {
+            throw new UnauthorizedException('Failed to generate token');
+        }
+
+        res.cookie('Authentication', jwt.access_token, {
             httpOnly: true,
             path: '/',
-            sameSite: 'strict',
+            sameSite: 'lax',
         });
 
-        return res.send({message: 'Login successful'});
+        const webshop = await this.webshopService.getShopsByUser(userid);
+        const webshopid = webshop[0].webshopid;
+        const username = await this.usersService.findById(userid);
+        await this.webshopService.newToken(webshopid);
+
+        return res.send({ message: 'Login successful', webshopid: webshopid, username: username });
     }
 
     @Post('auth/reg')
-    async reg(@Body() user: CreateUserDto){
-        return this.authService.register(user);
+    async reg(@Body() regdto: RegDto, ){
+        const {api_key, ...newUser} = regdto;
+        if(await this.usersService.findByUName(regdto.username) === null) {
+            const user = await this.authService.register(newUser);
+            await this.webshopService.newApiKey(user, api_key);
+        }
+        else {
+            return 'User already exists';
+        }
+    }
+
+    async validateToken(@Req() req: Request, @Res() res: Response){
+        const token = req.cookies['Authentication'];
+        if(token !==undefined){
+            const valid = await this.authService.validateToken(token);
+            if(valid !== false){
+                const webshop = await this.webshopService.getShopsByUser(valid);
+                const wsid = webshop[0].webshopid;
+                return res.json({webshopid: wsid});
+            }
+        }
+        return res.json({isValid: false});
     }
 }
+

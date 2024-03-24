@@ -3,9 +3,8 @@ import { JwtService } from '@nestjs/jwt';
 import { PasswordService } from './password.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UsersService } from '../users/users.service';
-import { getRepositoryToken } from "@nestjs/typeorm";
 import { LoginDto } from './login.dto';
-import { Users } from '../users/entities/user.entity';
+import { WebshopService } from '../webshop/webshop.service';
 
 @Injectable()
 export class AuthService {
@@ -13,25 +12,40 @@ export class AuthService {
         private usersService: UsersService,
         private jwtService: JwtService,
         private pwService: PasswordService,
+        private webshopService: WebshopService
     ){}
 
-    async validateUser(loginUser: LoginDto): Promise<Partial<Users>>{
-        const user = await this.usersService.findOne(loginUser.username);
-        if(user&&await this.pwService.verifyPassword(user.password, loginUser.password)){
-            const {password, ...result} = user;
-            return result;
-        }
+    async validateUser(loginUser: LoginDto){
+        const user = await this.usersService.findByUName(loginUser.username);
+        if(user){
+        const uPassword = await this.usersService.getPassword(loginUser.username);
+        if(user&&await this.pwService.verifyPassword(uPassword, loginUser.password)){
+            return user;
+        }}
         throw new UnauthorizedException();
     }
 
-    async login(loginUser: LoginDto): Promise<{ access_token: string }> {
+    async validateToken(token: string){
+        try {
+            const payload = this.jwtService.verify(token);
+            return payload.userid;
+        } catch (error){
+            return false;
+        }
+    }
+
+    async getUserid(token: string){
+        const payload = this.jwtService
+    }
+
+    async login(loginUser: LoginDto) {
         const user = await this.validateUser(loginUser);
 
-        const payload = { username: user.username, sub: user.userid }; // Adjust 'userId' as necessary based on your
-        // User model
+        const payload = { username: user.username, sub: user.userid, };
 
         return {
             access_token: this.jwtService.sign(payload),
+            userid: user.userid,
         };
     }
 
@@ -44,5 +58,14 @@ export class AuthService {
         });
         const { password, ...result } = newUser;
         return result;
-      }
+    }
+
+    async changeJwt(webshopid: number){
+        const user = await this.webshopService.getUser(webshopid);
+        const payload = {username: user.username, sub: user.userid};
+
+        return{
+            access_token: this.jwtService.sign(payload),
+        };
+    }
 }

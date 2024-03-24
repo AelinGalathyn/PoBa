@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersService } from "../src/users/users.service";
 import { UsersModule } from "../src/users/users.module";
-import { Users } from '../src/users/entities/user.entity';
 import * as process from 'process';
 import * as dotenv from 'dotenv';
+import { Users } from '../src/users/entities/users.entity';
 
 describe('UsersService (e2e)', () => {
   let service: UsersService;
