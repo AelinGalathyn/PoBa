@@ -4,7 +4,6 @@ import {useEffect, useState} from "react";
 import {useGlobal} from "@/app/Globals/global_values";
 import axios from "axios";
 import Item from "@/DTOs/Termekek/Termek";
-import FetchTermekek from "@/app/Fetching/fetch_termekek";
 
 export default function KifogyoTermekek() {
     const { webshopId } = useGlobal();
@@ -13,7 +12,21 @@ export default function KifogyoTermekek() {
     const [fogyoTermekek, setFogyoTermekek] = useState<Item[]>([]);
 
     useEffect(() => {
-        FetchTermekek();
+        const fetchTermekek = async () => {
+            try {
+                const response = await axios.get(`http://localhost:3000/item/all/`, {
+                    withCredentials: true,
+                    params: { webshopid: webshopId }
+                });
+
+                updateTermekek(response.data);
+                console.log(webshopId);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        fetchTermekek();
     }, [webshopId]);
 
     useEffect(() => {

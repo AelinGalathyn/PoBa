@@ -5,23 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74dcd9a8-8566-496b-95e2-36b79367fb4c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/DTOs/Webshopok/FetchWebshop.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Fetching/fetch_rendelesek.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Fetching/fetch_termekek.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Fetching/fetch_webshopok.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/app.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/app.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/webshop/webshop.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/webshop/webshop.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Users/BDUser.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Users/BDUser.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Users/RegisterUser.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Users/RegisterUser.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Users/User.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Users/User.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Termekek/Termek.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Termekek/Termek.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DTOs/Webshopok/FetchWebshop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Webshopok/FetchWebshop.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Fetching/fetch_termekek.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Fetching/fetch_termekek.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Fetching/fetch_webshopok.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Fetching/fetch_webshopok.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Globals/global_values.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Globals/global_values.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/custom_pages/home_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/home_page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/custom_pages/jelenleg_kifogyo_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/jelenleg_kifogyo_page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/custom_pages/login_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/login_page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/custom_pages/reg_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/reg_page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/custom_pages/termekek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/termekek_page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/webshop/webshopId.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Globals/global_values.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +45,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "web",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "E:/STUDY/Webvalto/PoBa/Web/poba-web",
     "node.js.detected.package.eslint": "true",
@@ -80,6 +73,7 @@
       <workItem from="1711233715186" duration="1186000" />
       <workItem from="1711350934274" duration="52000" />
       <workItem from="1711358233235" duration="13642000" />
+      <workItem from="1711383880652" duration="5180000" />
     </task>
     <servers />
   </component>

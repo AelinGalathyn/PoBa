@@ -34,20 +34,6 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
     const [termekek, updateTermekek] = useState<Item[]>([]);
     const [webshopok, updateWebshopok] = useState<FWebshop[]>([]);
 
-    const updateGlobalVar = (newValue: number) => {
-        updateWebshopId(newValue);
-    };
-
-    const updateGlobalVarUName = (newValue: string) => {
-        updateUserName(newValue);
-    };
-    const updateGlobalVarTermekek = (newValue: Item[]) => {
-        updateTermekek(newValue);
-    };
-    const updateGlobalVarWebshopok = (newValue: FWebshop[]) => {
-        updateWebshopok(newValue);
-    };
-
     return (
         <GlobalContext.Provider value={{ webshopId, updateWebshopId, userName, updateUserName, termekek, updateTermekek, webshopok, updateWebshopok}}>
             {children}

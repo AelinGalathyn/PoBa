@@ -3,7 +3,6 @@ import {Listbox, Transition} from '@headlessui/react'
 import React, {Fragment, useEffect, useState} from "react";
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import Image from "next/image";
-import User from "@/DTOs/Users/User";
 import Rendelesek from "@/app/custom_pages/rendelesek_page";
 import KifogyoTermekek from "@/app/custom_pages/jelenleg_kifogyo_page";
 import Statisztika from "@/app/custom_pages/statisztika_page";
@@ -11,22 +10,17 @@ import Termekek from "@/app/custom_pages/termekek_page";
 import Home from "@/app/page";
 import {useGlobal} from "@/app/Globals/global_values";
 import FWebshop from "@/DTOs/Webshopok/FetchWebshop";
+import axios from "axios";
 import FetchWebshopok from "@/app/Fetching/fetch_webshopok";
 
 export default function HomePage() {
-    const [isTermekek, setIsTermekek] = useState<boolean>(false);
-    const [isHome, setIsHome] = useState<boolean>(true);
     const { userName } = useGlobal();
-    const { webshopok } = useGlobal();
+    const { webshopok, updateWebshopok } = useGlobal();
     const { webshopId, updateWebshopId } = useGlobal();
 
-    useEffect(() => {
-        FetchWebshopok();
-    }, [webshopId]);
-
-    console.log(webshopok);
-
-    const [webshop_list, setWebshop_list] = useState<FWebshop[]>(webshopok);
+    const [isTermekek, setIsTermekek] = useState<boolean>(false);
+    const [isHome, setIsHome] = useState<boolean>(true);
+    const [selectedWebshop, setSelectedWebshop] = useState<FWebshop>(webshopok[0]);
 
     const [menu_items, setMenu_items] = useState([
         {
@@ -51,7 +45,10 @@ export default function HomePage() {
         }
     ]);
 
-    const [selectedWebshop, setSelectedWebshop] = useState(webshop_list[0]);
+    useEffect(() => {
+        FetchWebshopok(updateWebshopok);
+        setSelectedWebshop(webshopok[0]);
+    }, [webshopId]);
 
     return (
         <main className="grid grid-cols-12">
@@ -77,11 +74,12 @@ export default function HomePage() {
                         <p className="text-white font-bold ps-1 drop-shadow-lg">{userName}</p>
                     </div>
                     <div>
-                        <Listbox value={selectedWebshop} onChange={(value) => {setSelectedWebshop(value); updateWebshopId(selectedWebshop.webshopid);}}>
+                        <Listbox value={selectedWebshop} onChange={(value) => {setSelectedWebshop(value);}}>
                             <div className="flex flex-col px-2 justify-center mt-1">
-                                <Listbox.Button className="relative text-left text-[15px] rounded-md bg-white py-1 pe-10 ps-2 text-[#60624d]"
+                                <Listbox.Button
+                                    className="relative text-left text-[15px] rounded-md bg-white py-1 pe-10 ps-2 text-[#60624d]"
                                     style={{boxShadow: "rgba(0, 0, 0, 0.27) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 2px"}}>
-                                    <span>{selectedWebshop.name}</span>
+                                    <span>{selectedWebshop?.name}</span>
                                     <span className="absolute inset-y-0 right-0 flex items-center pr-2">
                                     <ChevronUpDownIcon className="h-5 w-5"/>
                                 </span>
@@ -93,7 +91,7 @@ export default function HomePage() {
                                     leaveTo="opacity-0"
                                 >
                                     <Listbox.Options className="z-50 mt-2 max-h-60 w-full text-xs button-style">
-                                        {webshop_list.map((webshop) => (
+                                        {webshopok.map((webshop) => (
                                             <Listbox.Option
                                                 key={webshop.webshopid}
                                                 className={({active}) =>
