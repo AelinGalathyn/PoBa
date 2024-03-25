@@ -40,7 +40,8 @@ export class AppController{
             if(valid !== false){
                 const webshop = await this.webshopService.getShopsByUser(valid);
                 const wsid = webshop[0].webshopid;
-                return res.json({webshopid: wsid});
+                const user = await this.usersService.findById(valid);
+                return res.json({webshopid: wsid, username: user.username});
             }
         }
         return res.json({isValid: false});

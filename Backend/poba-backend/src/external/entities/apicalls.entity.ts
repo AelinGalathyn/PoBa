@@ -1,7 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Webshop } from '../../webshop/entities/webshop.entity';
 
-@Entity()
+@Entity('apicalls')
 export class ApiCalls{
   @PrimaryGeneratedColumn()
   id: number;

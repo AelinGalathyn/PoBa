@@ -1,6 +1,9 @@
+import { Item } from '../../item/entities/item.entity';
+import { OrderItemEntity } from '../../item/entities/orderitem.entity';
+import { Customer } from '../../item/entities/customer.entity';
 
 export class Orders {
-  orderId: number;
+  orderid: number;
 
   date: Date;
 
@@ -8,13 +11,13 @@ export class Orders {
 
   status_id: number;
 
-  p_status: string;
-
   p_id: number;
 
   payment: number;
 
   weight: number;
 
-  customerid: number
+  customer: Customer;
+
+  items: OrderItemEntity[];
 }

@@ -18,7 +18,9 @@ export class ItemController {
   async getAll(@UserId() userid: number, @Param('webshopid')webshopid: number){
     try{
       const ws = await this.webshopService.findAndValidate(userid, webshopid);
+      console.log(ws);
       const data = await this.externalService.getItems(ws);
+      console.log(data);
       return this.itemService.makeItems(data);
     }catch(err){
       return err;
