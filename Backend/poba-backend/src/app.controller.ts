@@ -33,13 +33,22 @@ export class AppController{
                  private itemService: ItemService) {}
 
     @Get()
-    checkCookie(@Req()req: Request, @Res()res: Response){
-        return this.validateToken(req, res);
+    async checkCookie(@Req()req: Request, @Res()res: Response){
+        const token = req.cookies['Authentication'];
+        if(token !==undefined){
+            const valid = await this.authService.validateToken(token);
+            if(valid !== false){
+                const webshop = await this.webshopService.getShopsByUser(valid);
+                const wsid = webshop[0].webshopid;
+                return res.json({webshopid: wsid});
+            }
+        }
+        return res.json({isValid: false});
     }
 
     @Post('auth/login')
     async login(@Body() userdto: LoginDto, @Res() res: Response) {
-        const { userid,...jwt} = await this.authService.login(userdto); // Ensure this returns a token
+        const { userid,...jwt} = await this.authService.login(userdto);
 
         if (!jwt || !jwt.access_token) {
             throw new UnauthorizedException('Failed to generate token');
@@ -53,10 +62,10 @@ export class AppController{
 
         const webshop = await this.webshopService.getShopsByUser(userid);
         const webshopid = webshop[0].webshopid;
-        const username = await this.usersService.findById(userid);
+        const user = await this.usersService.findById(userid);
         await this.webshopService.newToken(webshopid);
 
-        return res.send({ message: 'Login successful', webshopid: webshopid, username: username });
+        return res.send({ message: 'Login successful', webshopid: webshopid, username: user.username });
     }
 
     @Post('auth/reg')
@@ -69,19 +78,6 @@ export class AppController{
         else {
             return 'User already exists';
         }
-    }
-
-    async validateToken(@Req() req: Request, @Res() res: Response){
-        const token = req.cookies['Authentication'];
-        if(token !==undefined){
-            const valid = await this.authService.validateToken(token);
-            if(valid !== false){
-                const webshop = await this.webshopService.getShopsByUser(valid);
-                const wsid = webshop[0].webshopid;
-                return res.json({webshopid: wsid});
-            }
-        }
-        return res.json({isValid: false});
     }
 }
 
