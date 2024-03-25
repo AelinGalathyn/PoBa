@@ -21,6 +21,7 @@ import { WebshopId } from './users/decorators/webshopid.param';
 import { RegDto } from './auth/dto/reg.dto';
 import { ItemService } from './item/item.service';
 import { Request, Response } from 'express';
+import { combineAll } from 'rxjs';
 
 
 @Controller ()

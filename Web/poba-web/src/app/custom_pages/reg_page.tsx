@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import {useState} from "react";
-import RegisterUser from "@/Users/RegisterUser";
+import RegisterUser from "@/DTOs/Users/RegisterUser";
 
 export default function Reg() {
 

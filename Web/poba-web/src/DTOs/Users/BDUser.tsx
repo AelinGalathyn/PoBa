@@ -1,4 +1,4 @@
-import User from "@/Users/User";
+import User from "@/DTOs/Users/User";
 
 export default class BDUser extends User {
 

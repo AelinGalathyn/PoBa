@@ -1,39 +1,32 @@
 "use client";
 import {Listbox, Transition} from '@headlessui/react'
-import React, {Fragment, useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import Image from "next/image";
-import User from "@/Users/User";
+import User from "@/DTOs/Users/User";
 import Rendelesek from "@/app/custom_pages/rendelesek_page";
 import KifogyoTermekek from "@/app/custom_pages/jelenleg_kifogyo_page";
 import Statisztika from "@/app/custom_pages/statisztika_page";
 import Termekek from "@/app/custom_pages/termekek_page";
 import Home from "@/app/page";
-import {useGlobal} from "@/app/webshop/webshopId";
+import {useGlobal} from "@/app/Globals/global_values";
+import FWebshop from "@/DTOs/Webshopok/FetchWebshop";
+import FetchWebshopok from "@/app/Fetching/fetch_webshopok";
 
 export default function HomePage() {
     const [isTermekek, setIsTermekek] = useState<boolean>(false);
     const [isHome, setIsHome] = useState<boolean>(true);
     const { userName } = useGlobal();
+    const { webshopok } = useGlobal();
+    const { webshopId, updateWebshopId } = useGlobal();
 
-    const [webshop_list, setWebshop_list] = useState([
-        {
-            key: "webshop1",
-            label: "Webshop 1"
-        },
-        {
-            key: "webshop2",
-            label: "Webshop 2"
-        },
-        {
-            key: "webshop3",
-            label: "Webshop 3"
-        },
-        {
-            key: "webshop4",
-            label: "Webshop 4"
-        }
-    ]);
+    useEffect(() => {
+        FetchWebshopok();
+    }, [webshopId]);
+
+    console.log(webshopok);
+
+    const [webshop_list, setWebshop_list] = useState<FWebshop[]>(webshopok);
 
     const [menu_items, setMenu_items] = useState([
         {
@@ -84,11 +77,11 @@ export default function HomePage() {
                         <p className="text-white font-bold ps-1 drop-shadow-lg">{userName}</p>
                     </div>
                     <div>
-                        <Listbox value={selectedWebshop} onChange={setSelectedWebshop}>
+                        <Listbox value={selectedWebshop} onChange={(value) => {setSelectedWebshop(value); updateWebshopId(selectedWebshop.webshopid);}}>
                             <div className="flex flex-col px-2 justify-center mt-1">
                                 <Listbox.Button className="relative text-left text-[15px] rounded-md bg-white py-1 pe-10 ps-2 text-[#60624d]"
                                     style={{boxShadow: "rgba(0, 0, 0, 0.27) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 2px"}}>
-                                    <span>{selectedWebshop.label}</span>
+                                    <span>{selectedWebshop.name}</span>
                                     <span className="absolute inset-y-0 right-0 flex items-center pr-2">
                                     <ChevronUpDownIcon className="h-5 w-5"/>
                                 </span>
@@ -102,7 +95,7 @@ export default function HomePage() {
                                     <Listbox.Options className="z-50 mt-2 max-h-60 w-full text-xs button-style">
                                         {webshop_list.map((webshop) => (
                                             <Listbox.Option
-                                                key={webshop.key}
+                                                key={webshop.webshopid}
                                                 className={({active}) =>
                                                     `relative cursor-pointer select-none py-2 pl-10 pr-2 text-[#60624d] ${
                                                         active ? 'bg-white rounded-lg' : ''
@@ -116,7 +109,7 @@ export default function HomePage() {
                                                         className={`block truncate ${
                                                             selected ? 'font-medium' : 'font-normal'
                                                         }`}>
-                                                        {webshop.label}
+                                                        {webshop.name}
                                                     </span>
                                                         {selected ? (
                                                             <span

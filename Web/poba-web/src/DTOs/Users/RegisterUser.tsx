@@ -1,4 +1,4 @@
-import User from "@/Users/User";
+import User from "@/DTOs/Users/User";
 
 export default class RegisterUser extends User{
     private readonly _apikey : string;

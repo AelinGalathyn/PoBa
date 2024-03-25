@@ -1,14 +1,20 @@
 "use client";
 
 import {useEffect, useState} from "react";
-import Termek from "@/app/Termekek/Termek";
+import Termek from "@/DTOs/Termekek/Termek";
 import {Card, CardHeader} from "@nextui-org/card";
 import Image from "next/image";
-import {useGlobal} from "@/app/webshop/webshopId";
+import {useGlobal} from "@/app/Globals/global_values";
 import axios from "axios";
+import FetchTermekek from "@/app/Fetching/fetch_termekek";
 
 export default function Termekek() {
     const { termekek } = useGlobal();
+    const { webshopId } = useGlobal();
+
+    useEffect(() => {
+        FetchTermekek();
+    }, [webshopId]);
 
     return (
         <div className="fixed w-[75vw] h-3/4 mt-16">

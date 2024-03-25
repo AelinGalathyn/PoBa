@@ -5,9 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74dcd9a8-8566-496b-95e2-36b79367fb4c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/DTOs/Webshopok/FetchWebshop.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/Fetching/fetch_rendelesek.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/Fetching/fetch_termekek.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/Fetching/fetch_webshopok.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/app.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/app.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/item/item.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/item/item.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Users/BDUser.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Users/BDUser.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Users/RegisterUser.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Users/RegisterUser.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Users/User.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Users/User.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Termekek/Termek.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Termekek/Termek.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/custom_pages/home_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/home_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/custom_pages/jelenleg_kifogyo_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/jelenleg_kifogyo_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/custom_pages/login_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/login_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/custom_pages/reg_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/reg_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/custom_pages/termekek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/termekek_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/webshop/webshopId.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Globals/global_values.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,38 +52,22 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "backend",
+    "git-widget-placeholder": "web",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/STUDY/Webvalto/PoBa/Web/poba-web",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.3.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "ts.external.directory.path": "E:\\STUDY\\Webvalto\\PoBa\\Web\\poba-web\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="poba-web" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="poba-web" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-11.0.22-corretto-11.0.22-4caba194b151-868cef46" />
-      </set>
-    </attachedChunks>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\src\DTOs" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -81,6 +79,7 @@
       <updated>1711233713990</updated>
       <workItem from="1711233715186" duration="1186000" />
       <workItem from="1711350934274" duration="52000" />
+      <workItem from="1711358233235" duration="13642000" />
     </task>
     <servers />
   </component>

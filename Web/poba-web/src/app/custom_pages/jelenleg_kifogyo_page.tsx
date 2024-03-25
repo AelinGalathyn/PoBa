@@ -1,15 +1,20 @@
 import {Card, CardHeader} from "@nextui-org/card";
 import Image from "next/image";
 import {useEffect, useState} from "react";
-import {useGlobal} from "@/app/webshop/webshopId";
+import {useGlobal} from "@/app/Globals/global_values";
 import axios from "axios";
-import Item from "@/app/Termekek/Termek";
+import Item from "@/DTOs/Termekek/Termek";
+import FetchTermekek from "@/app/Fetching/fetch_termekek";
 
 export default function KifogyoTermekek() {
     const { webshopId } = useGlobal();
     const { termekek, updateTermekek } = useGlobal();
 
     const [fogyoTermekek, setFogyoTermekek] = useState<Item[]>([]);
+
+    useEffect(() => {
+        FetchTermekek();
+    }, [webshopId]);
 
     useEffect(() => {
         setFogyoTermekek(termekek.filter(item => item.qty <= 10).sort(
@@ -25,25 +30,6 @@ export default function KifogyoTermekek() {
                 }}
         ).splice(0, 15));
     }, [termekek]);
-
-    useEffect(() => {
-        const fetchTermekek = async () => {
-            try {
-                const response = await axios.get(`http://localhost:3000/item/all/`, {
-                    withCredentials: true,
-                    params: { webshopid: webshopId }
-                });
-
-                updateTermekek(response.data);
-                console.log(webshopId);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
-        fetchTermekek();
-
-    }, [webshopId]);
 
     return (
         <div className="fixed h-2/6 w-2/5 mt-[5vh]">
