@@ -51,7 +51,7 @@ public class EgyszeriBelepesFragment extends Fragment {
 
             if (!username.isEmpty() || !password.isEmpty()) {
                 UsersInputDto user = new UsersInputDto(username, password);
-                login(user, view);
+                login(user, view2);
             }
         });
 
@@ -67,20 +67,10 @@ public class EgyszeriBelepesFragment extends Fragment {
     }
 
     public void login(UsersInputDto user, View view) {
-
-        okBuild.addInterceptor(chain -> {
-            Request request = chain.request();
-            Response response = chain.proceed(request);
-
-            cookies = response.headers("Authentication");
-
-            return response;
-        });
-
         OkHttpClient client = okBuild.build();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.201.67:3000/")
+                .baseUrl("http://192.168.11.116:3000/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

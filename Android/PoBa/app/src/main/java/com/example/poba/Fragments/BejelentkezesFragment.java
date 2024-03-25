@@ -21,8 +21,9 @@ public class BejelentkezesFragment extends Fragment {
 
         Init(view);
 
-        bejelentkezes_gomb.setOnClickListener(view2 ->
-                Navigation.findNavController(view).navigate(R.id.action_belepesFragment_to_egyszeriBejelentkezesFragment));
+        bejelentkezes_gomb.setOnClickListener(view2 -> {
+            Navigation.findNavController(view2).navigate(R.id.action_belepesFragment_to_egyszeriBejelentkezesFragment);
+        });
 
         return view;
     }

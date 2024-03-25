@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd3325d1-a539-485a-a318-acd0cad07e55" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/app.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/app.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/item/item.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/item/item.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/orders/orders.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/orders/orders.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/orders/orders.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/orders/orders.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Android/PoBa/app/src/main/java/com/example/poba/Fragments/BejelentkezesFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Android/PoBa/app/src/main/java/com/example/poba/Fragments/BejelentkezesFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Android/PoBa/app/src/main/java/com/example/poba/Fragments/EgyszeriBelepesFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Android/PoBa/app/src/main/java/com/example/poba/Fragments/EgyszeriBelepesFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Android/PoBa/app/src/main/res/drawable/interactive_buttons.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Android/PoBa/app/src/main/res/drawable/interactive_buttons.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Android/PoBa/app/src/main/res/navigation/navhost.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Android/PoBa/app/src/main/res/navigation/navhost.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +36,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "backend",
+    "git-widget-placeholder": "android",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "E:/STUDY/Webvalto/PoBa/Web/poba-web",
@@ -93,6 +92,7 @@
       <workItem from="1711094243350" duration="14544000" />
       <workItem from="1711114435793" duration="468000" />
       <workItem from="1711200619379" duration="4528000" />
+      <workItem from="1711357762964" duration="124000" />
     </task>
     <servers />
   </component>

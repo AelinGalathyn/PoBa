@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:bottom="5dp" android:top="5dp" android:state_pressed="true" android:state_focused="true">
-        <shape>
-            <solid android:color="@color/navigation_focused_green"/>
-            <corners android:radius="10dp" />
-            <padding android:bottom="10dp" android:left="10dp"
-                android:right="10dp" android:top="10dp" />
-        </shape>
+    <item android:state_pressed="true">
+        <layer-list>
+            <item android:top="5dp">
+                <shape>
+                    <solid android:color="@color/navigation_focused_green"/>
+                    <corners android:radius="10dp" />
+                </shape>
+            </item>
+            <item android:top="5dp">
+                <shape>
+                    <corners android:radius="10dp" />
+                    <solid android:color="#00FFFFFF" />
+                </shape>
+            </item>
+        </layer-list>
     </item>
 
     <item>
