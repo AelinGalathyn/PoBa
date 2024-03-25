@@ -13,7 +13,8 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   async getProfile(@UserId() userid){
-    return await this.usersService.findById(userid);
+    const {password, ...user} = await this.usersService.findById(userid);
+    return user;
   }
   @Post()
   create(@Body() createUserDto: CreateUserDto) {

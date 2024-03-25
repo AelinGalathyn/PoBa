@@ -69,7 +69,7 @@ export class WebshopService {
     let shop = this.webshopRepository.create({
       user: users,
       unas_api: api_key,
-      unas_token: 'asd'
+      unas_token: 'asd',
     });
     shop = await this.externalService.unasLogin(shop);
     return await this.webshopRepository.save(shop);

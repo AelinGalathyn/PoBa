@@ -7,6 +7,9 @@ export class Webshop{
   @PrimaryGeneratedColumn()
   webshopid: number;
 
+  @Column()
+  name: string;
+
   @ManyToOne(() => Users)
   @JoinColumn({name: "userid"})
   user: Users;

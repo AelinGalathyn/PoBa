@@ -4,7 +4,6 @@ import { JwtAuthGuard } from '../auth/auth.guard';
 import { UserId } from '../users/decorators/UserId.param';
 import { ExternalService } from '../external/external.service';
 import { WebshopService } from '../webshop/webshop.service';
-import { Webshop } from '../webshop/entities/webshop.entity';
 
 @Controller('item')
 export class ItemController {
@@ -17,14 +16,12 @@ export class ItemController {
   @UseGuards(JwtAuthGuard)
   @Get('all')
   async getAll(@UserId() userid: number, @Param('webshopid')webshopid: number){
-    let ws: Webshop;
-    let data: any[]; //TODO: any típust kicserélni megfelelő class-re vagy típusra
     try{
-      ws = await this.webshopService.findAndValidate(userid, webshopid);
+      const ws = await this.webshopService.findAndValidate(userid, webshopid);
+      const data = await this.externalService.getItems(ws);
+      return this.itemService.makeItems(data);
     }catch(err){
-      return err.message;
+      return err;
     }
-    data = await this.externalService.getItems(ws);
-    return this.itemService.makeItems(data);
   }
 }
