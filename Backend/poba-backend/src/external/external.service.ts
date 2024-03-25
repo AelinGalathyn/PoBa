@@ -2,13 +2,15 @@ import { Inject, Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import * as xml2js from 'xml2js';
 import { Webshop } from '../webshop/entities/webshop.entity';
+import { ApicallsService } from './apicalls/apicalls.service';
 
 const ApiUrl = 'https://api.unas.eu/shop/';
 
 @Injectable()
 export class ExternalService {
   constructor(
-    private httpService: HttpService) {
+    private httpService: HttpService,
+    private apicallService: ApicallsService) {
   }
 
   async getItems(webshop: Webshop) {
@@ -20,7 +22,7 @@ export class ExternalService {
     const body = {
       'ContentType': 'full',
     };
-    const result = await this.unasRequest('getProduct', headers, body);
+    const result = await this.unasRequest('getProduct', headers, body, webshop);
     return result.Products.Product;
   }
 
@@ -33,8 +35,8 @@ export class ExternalService {
     const body = {
       'ContentType': 'full',
     };
-    const response = await this.unasRequest('getOrder', headers, body);
-    //TODO: orderst befejezni
+    const response = await this.unasRequest('getOrder', headers, body, webshop);
+    return response.Orders.Order
   }
 
   async parseXML(xml: string): Promise<any> {
@@ -50,7 +52,7 @@ export class ExternalService {
     let shouldProceedWithLogin = false;
 
     try {
-      shouldProceedWithLogin = webshop.token_date === null || new Date().getTime() - webshop.token_date.getTime() / (1000 * 60 * 60) > 3;
+      shouldProceedWithLogin = webshop.token_date === null || (new Date().getTime() - webshop.token_date.getTime()) / (1000 * 60 * 60) > 3;
     } catch (err) {
       shouldProceedWithLogin = true;
     }
@@ -64,7 +66,7 @@ export class ExternalService {
           'ApiKey': webshop.unas_api,
           'WebshopInfo': 'true',
         };
-        const data = await this.unasRequest('login', headers, body);
+        const data = await this.unasRequest('login', headers, body, webshop);
         webshop.unas_token = data.Login.Token;
         webshop.token_date = new Date();
         webshop.name = data.Login.WebshopInfo.WebshopName;
@@ -76,10 +78,11 @@ export class ExternalService {
 
   }
 
-  async unasRequest(url: string, headers: {}, body: {}) {
+  async unasRequest(url: string, headers: {}, body: {}, webshop: Webshop) {
     const response = await this.httpService.post(`${ApiUrl}${url}`, body, { headers }).toPromise();
     const xmlData = response.data;
     const result = await this.parseXML(xmlData);
+    await this.apicallService.createOrUpdate(webshop, url);
     return result;
   }
 }
