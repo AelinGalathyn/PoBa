@@ -6,6 +6,7 @@ import { GlobalProvider, useGlobal } from "@/app/Globals/global_values";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {number} from "prop-types";
+import FetchWebshopok from "@/app/Fetching/fetch_webshopok";
 
 export default function Home() {
     return (
@@ -18,7 +19,7 @@ export default function Home() {
 function HomeContent() {
     const {webshopId, updateWebshopId} = useGlobal();
     const {updateUserName} = useGlobal();
-    const [returnPage, setReturnPage] = useState<JSX.Element>();
+    const [returnPage, setReturnPage] = useState<JSX.Element>(<></>);
 
     useEffect(() => {
         const isTokenAsync = async () => {

@@ -12,15 +12,16 @@ import {useGlobal} from "@/app/Globals/global_values";
 import FWebshop from "@/DTOs/Webshopok/FetchWebshop";
 import axios from "axios";
 import FetchWebshopok from "@/app/Fetching/fetch_webshopok";
+import Beallitasok from "@/app/custom_pages/beallitasok_page";
 
 export default function HomePage() {
     const { userName } = useGlobal();
-    const { webshopok, updateWebshopok } = useGlobal();
-    const { webshopId, updateWebshopId } = useGlobal();
+    const { webshopok, updateWebshopok, webshopId, updateWebshopId} = useGlobal();
 
     const [isTermekek, setIsTermekek] = useState<boolean>(false);
+    const [isBeallitasok, setIsBeallitasok] = useState<boolean>(false);
     const [isHome, setIsHome] = useState<boolean>(true);
-    const [selectedWebshop, setSelectedWebshop] = useState<FWebshop>(webshopok[0]);
+    const [selectedWebshop, setSelectedWebshop] = useState<FWebshop>({webshopid : 0, name : ""});
 
     const [menu_items, setMenu_items] = useState([
         {
@@ -36,19 +37,18 @@ export default function HomePage() {
             label: "Statisztika"
         },
         {
-            onclick : () => {},
-            label: "Pénzügyek"
-        },
-        {
-            onclick : () => {},
+            onclick : () => {setIsBeallitasok(true); setIsHome(false);},
             label: "Beállítások"
         }
     ]);
 
     useEffect(() => {
-        FetchWebshopok(updateWebshopok);
-        setSelectedWebshop(webshopok[0]);
+        FetchWebshopok().then(data => updateWebshopok(data))
     }, [webshopId]);
+
+    useEffect(() => {
+        setSelectedWebshop(webshopok[0])
+    }, [webshopok]);
 
     return (
         <main className="grid grid-cols-12">
@@ -74,7 +74,7 @@ export default function HomePage() {
                         <p className="text-white font-bold ps-1 drop-shadow-lg">{userName}</p>
                     </div>
                     <div>
-                        <Listbox value={selectedWebshop} onChange={(value) => {setSelectedWebshop(value);}}>
+                        <Listbox value={selectedWebshop} onChange={(value) => {setSelectedWebshop(value); updateWebshopId(value.webshopid)}}>
                             <div className="flex flex-col px-2 justify-center mt-1">
                                 <Listbox.Button
                                     className="relative text-left text-[15px] rounded-md bg-white py-1 pe-10 ps-2 text-[#60624d]"
@@ -167,6 +167,10 @@ export default function HomePage() {
                     {isTermekek ? (
                         <section className="col-start-3 ps-10">
                             <Termekek/>
+                        </section>
+                    ) : isBeallitasok ? (
+                        <section className="col-start-3 col-span-9">
+                            <Beallitasok/>
                         </section>
                     ) : ("")}
                 </>

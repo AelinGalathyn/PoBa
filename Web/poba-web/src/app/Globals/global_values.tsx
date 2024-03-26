@@ -1,7 +1,8 @@
 "use client";
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import Item from "@/DTOs/Termekek/Termek";
 import FWebshop from "@/DTOs/Webshopok/FetchWebshop";
+import {Item} from "@/DTOs/Termekek/Termek";
+import {Orders} from "@/DTOs/Rendelesek/Rendeles";
 
 interface GlobalContextType {
     webshopId: number;
@@ -12,6 +13,8 @@ interface GlobalContextType {
     updateTermekek: (newValue: Item[]) => void;
     webshopok: FWebshop[];
     updateWebshopok : (newValue: FWebshop[]) => void;
+    rendelesek: Orders[];
+    updateRendelesek : (newValue: Orders[]) => void;
 }
 
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
@@ -33,9 +36,15 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
     const [userName, updateUserName] = useState<string>("");
     const [termekek, updateTermekek] = useState<Item[]>([]);
     const [webshopok, updateWebshopok] = useState<FWebshop[]>([]);
+    const [rendelesek, updateRendelesek] = useState<Orders[]>([]);
 
     return (
-        <GlobalContext.Provider value={{ webshopId, updateWebshopId, userName, updateUserName, termekek, updateTermekek, webshopok, updateWebshopok}}>
+        <GlobalContext.Provider value={{ webshopId, updateWebshopId,
+            userName, updateUserName,
+            termekek, updateTermekek,
+            webshopok, updateWebshopok,
+            rendelesek, updateRendelesek
+        }}>
             {children}
         </GlobalContext.Provider>
     );

@@ -1,7 +1,6 @@
 import axios from "axios";
-import FWebshop from "@/DTOs/Webshopok/FetchWebshop";
 
-export default function FetchWebshopok(updateWebshopok :  (newValue: FWebshop[]) => void)
+export default function FetchWebshopok()
 {
     const fetchWebshopok = async () => {
 
@@ -10,12 +9,12 @@ export default function FetchWebshopok(updateWebshopok :  (newValue: FWebshop[])
                 withCredentials: true
             });
 
-            updateWebshopok(response.data);
+            return response.data;
 
         } catch (error) {
             console.log(error);
         }
     }
 
-    fetchWebshopok();
+    return fetchWebshopok();
 }

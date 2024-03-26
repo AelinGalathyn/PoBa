@@ -2,8 +2,8 @@ import {Card, CardHeader} from "@nextui-org/card";
 import Image from "next/image";
 import {useEffect, useState} from "react";
 import {useGlobal} from "@/app/Globals/global_values";
-import axios from "axios";
-import Item from "@/DTOs/Termekek/Termek";
+import FetchTermekek from "@/app/Fetching/fetch_termekek";
+import {Item} from "@/DTOs/Termekek/Termek";
 
 export default function KifogyoTermekek() {
     const { webshopId } = useGlobal();
@@ -12,22 +12,13 @@ export default function KifogyoTermekek() {
     const [fogyoTermekek, setFogyoTermekek] = useState<Item[]>([]);
 
     useEffect(() => {
-        const fetchTermekek = async () => {
-            try {
-                const response = await axios.get(`http://localhost:3000/item/all/`, {
-                    withCredentials: true,
-                    params: { webshopid: webshopId }
-                });
-
-                updateTermekek(response.data);
-                console.log(webshopId);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
-        fetchTermekek();
+        FetchTermekek(webshopId).then(data => updateTermekek(data));
     }, [webshopId]);
+
+    useEffect(() => {
+        setFogyoTermekek(termekek);
+    }, [termekek]);
+
 
     useEffect(() => {
         setFogyoTermekek(termekek.filter(item => item.qty <= 10).sort(
@@ -59,9 +50,9 @@ export default function KifogyoTermekek() {
                                     <p className="col-span-1 text-center">{termek.qty}</p>
                                     <div className="col-span-1 justify-self-end">
                                         {termek.qty === 0 ? (
-                                            <Image src="/elfogyott_icon.png" width={30} height={30} alt="szallito_ceg_icon" />
+                                            <Image src="/elfogyott_icon.png" width={30} height={30} alt="elfogyott_icon" />
                                         ) : termek.qty > 0 ? (
-                                            <Image src="/kifogyoban_icon.png" width={30} height={30} alt="szallito_ceg_icon" />
+                                            <Image src="/kifogyoban_icon.png" width={30} height={30} alt="kifogyoban_icon" />
                                         ) : ("")}
                                     </div>
                                 </CardHeader>
