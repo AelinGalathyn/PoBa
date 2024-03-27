@@ -14,7 +14,6 @@ export class ExternalService {
   }
 
   async getItems(webshop: Webshop) {
-    webshop = await this.unasLogin(webshop);
     const headers = {
       'Authorization': `Bearer ${webshop.unas_token}`,
       'Content-Type': 'application/json',
@@ -27,7 +26,6 @@ export class ExternalService {
   }
 
   async getOrders(webshop: Webshop) {
-    webshop = await this.unasLogin(webshop);
     const headers = {
       'Authorization': `Bearer ${webshop.unas_token}`,
       'Content-Type': 'application/json',
@@ -36,7 +34,30 @@ export class ExternalService {
       'ContentType': 'full',
     };
     const response = await this.unasRequest('getOrder', headers, body, webshop);
-    return response.Orders.Order
+    return response.Orders.Order;
+  }
+
+  async setStock(webshop: Webshop, sku: string, stock: number) {
+    const headers = {
+      'Authorization': `Bearer ${webshop.unas_token}`,
+      'Content-Type': 'application/xml', // Make sure the API expects JSON
+    };
+    const body = `<?xml version="1.0" encoding="UTF-8"?>
+    <Products>
+      <Product>
+        <Action>modify</Action>
+        <Sku>${sku}</Sku>
+        <Stocks>
+          <Stock>
+            <Qty>${stock}</Qty>
+          </Stock>
+        </Stocks>
+      </Product>
+    </Products>`;
+
+    const response = await this.unasRequest('setStock', headers, body, webshop);
+    console.log(response);
+    return response.Products.Product.Status;
   }
 
   async parseXML(xml: string): Promise<any> {
@@ -49,15 +70,6 @@ export class ExternalService {
   }
 
   async unasLogin(webshop: Webshop) {
-    let shouldProceedWithLogin = false;
-
-    try {
-      shouldProceedWithLogin = webshop.token_date === null || (new Date().getTime() - webshop.token_date.getTime()) / (1000 * 60 * 60) > 3;
-    } catch (err) {
-      shouldProceedWithLogin = true;
-    }
-
-    if (shouldProceedWithLogin) {
       try {
         const headers = {
           'Content-Type': 'application/json',
@@ -71,11 +83,9 @@ export class ExternalService {
         webshop.token_date = new Date();
         webshop.name = data.Login.WebshopInfo.WebshopName;
       } catch (err) {
-        console.error("Error during unasRequest or its subsequent operations:", err);
+        console.error('Error during unasRequest or its subsequent operations:', err);
       }
-    }
     return webshop;
-
   }
 
   async unasRequest(url: string, headers: {}, body: {}, webshop: Webshop) {

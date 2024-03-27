@@ -16,7 +16,8 @@ export class OrdersController {
   @UseGuards(JwtAuthGuard)
   @Get('all')
   async getAll(@UserId() userid: number, @Body('webshopid') webshopid: number) {
-    const ws = await this.webshopService.getWebshopById(webshopid);
+    let ws = await this.webshopService.findAndValidate(userid, webshopid);
+    ws = await this.webshopService.unasLogin(ws);
     const data = await this.externalService.getOrders(ws);
     console.log(data);
     return this.ordersService.makeOrders(data);

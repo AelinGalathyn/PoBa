@@ -18,14 +18,14 @@ export class ApicallsService {
       await this.apicallsRepository.save(apicall);
     }
     catch{
-      apicall = await this.apicallsRepository.create({webshop: webshop, url: url, counter: 1});
+      apicall = this.apicallsRepository.create({webshop: webshop, url: url, counter: 1});
       await this.apicallsRepository.save(apicall);
     }
   }
 
   async findOne(webshop: Webshop, url: string){
     const apicall = this.apicallsRepository.findOne({where: {webshop: webshop, url: url}});
-    if (apicall){
+    if (apicall !== null){
       return apicall;
     }
     else {

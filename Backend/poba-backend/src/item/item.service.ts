@@ -31,10 +31,11 @@ export class ItemService {
         qty: qty,
         unit: item.Unit,
         status: item.Statuses.Status.Value,
-        cat_name: item.Categories.Category.Name,
+        cat_name: item['Categories']['Category'].map((cat) => cat.Name),
         url: item.Url,
-        pic_url: img
-      });
+        pic_url: img,
+        price: item.Prices.Price.Gross,
+      })
     });
     } catch{
       let qty: number;
@@ -57,9 +58,10 @@ export class ItemService {
         qty: qty,
         unit: data[0].Unit,
         status: data[0].Statuses.Status.Value,
-        cat_name: data[0].Categories.Category.Name,
+        cat_name: data[0]['Categories']['Category'].map((cat) => cat.Name),
         url: data[0].Url,
-        pic_url: img
+        pic_url: img,
+        price: data[0].Prices.Price.Gross,
       });
     }
 
@@ -70,12 +72,6 @@ export class ItemService {
     let items: OrderItemEntity[] = [];
     try{
       data.forEach((item) => {
-        let img: string;
-        try {
-          img = item.Images.Image.Filename;
-        } catch {
-          img = '';
-        }
 
         items.push({
           id: item.Id,
