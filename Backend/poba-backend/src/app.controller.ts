@@ -80,5 +80,17 @@ export class AppController{
             return 'User already exists';
         }
     }
+
+    @Post('auth/logout')
+    logout(@Res() res: Response) {
+        res.cookie('Authentication', '', {
+            httpOnly: true,
+            path: '/',
+            sameSite: 'lax',
+            expires: new Date(0)
+        });
+
+        return res.send({ message: 'Logout successful' });
+    }
 }
 
