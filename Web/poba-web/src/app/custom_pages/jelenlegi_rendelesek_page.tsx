@@ -12,17 +12,21 @@ export default function JelenlegiRendelesek() {
     const [frissRendelesek, setFrissRendelesek] = useState<Orders[]>([]);
 
     const sortedList = (list: Orders[]) => {
+        const currentDate = new Date().getTime(); // Get current timestamp
         return list.sort((a, b) => {
-            return new Date(b.date).getTime() - new Date(a.date).getTime();
+            const dateA = new Date(a.date).getTime();
+            const dateB = new Date(b.date).getTime();
+            return Math.abs(currentDate - dateA) - Math.abs(currentDate - dateB);
         });
     }
 
+
     useEffect(() => {
         FetchRendelesek(webshopId).then(data => updateRendelesek(data));
-        updateRendelesek(sortedList(rendelesek));
     }, [webshopId]);
 
     useEffect(() => {
+        updateRendelesek(sortedList(rendelesek));
         setFrissRendelesek(rendelesek.filter(item => item).splice(0, 15));
     }, [rendelesek]);
 
@@ -38,8 +42,10 @@ export default function JelenlegiRendelesek() {
                             <Card className="bg-white m-2 rounded-md text-xs shadow-lg shadow-gray-400">
                                 <CardHeader className="card-class text-xl font-bold flex justify-between">
                                     {rendeles.orderid}
-                                    {/*{rendeles.*/}
-                                    {/*    != "" && <Image src={rendeles.futar} width={30} height={30} alt="szallito_ceg_icon" className=""/>}*/}
+                                    {rendeles.sender.toString().toLowerCase().includes("gls") ? (<Image src="/gls_logo.png" width={30} height={30} alt="szallito_ceg_icon"/>) :
+                                        rendeles.sender.toString().toLowerCase().includes("foxpost") ? (<Image src="/foxpost_logo.png" width={30} height={30} alt="szallito_ceg_icon"/>) :
+                                            rendeles.sender.toString().toLowerCase().includes("posta") ||  rendeles.sender.toString().toLowerCase().includes("mpl")?
+                                                (<Image src="/magyar_icon.png" width={30} height={30} alt="szallito_ceg_icon"/>) : ("")}
                                 </CardHeader>
                                 <CardBody className="text-[15px] card-class">{rendeles.customer.c_name}</CardBody>
                                 <CardFooter className="card-class">{rendeles.date.toString()}</CardFooter>

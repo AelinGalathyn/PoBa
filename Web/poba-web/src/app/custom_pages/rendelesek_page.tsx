@@ -18,26 +18,28 @@ export default function Rendelesek() {
             </div>
             <div className="h-full w-full mt-5 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto scroll-smooth">
                 <Card className="bg-white m-2 rounded-md p-1 shadow-lg shadow-gray-400">
-                    <CardHeader className="grid grid-cols-12 text-xl card-class font-bold">
+                    <CardHeader className="grid grid-cols-12 text-[17px] card-class font-bold">
                         <p className="col-span-1 ps-3">Sorszám</p>
                         <p className="col-span-2 text-center">Rendelés ID</p>
                         <p className="col-span-2 text-center">Rendelő név</p>
-                        <p className="col-span-1 ps-3 text-center">Termékek DB</p>
-                        <p className="col-span-1 ps-3 text-center">Payment</p>
-                        <p className="col-start-12 col-span-1 ps-3 text-end">Státusz</p>
+                        <p className="col-span-1 text-center">Termékek DB</p>
+                        <p className="col-span-1 text-center">Fizetés típus</p>
+                        <p className="col-span-2 text-center">Összeg</p>
+                        <p className="col-start-11 col-span-2 text-center">Státusz</p>
                     </CardHeader>
                 </Card>
                 <ul>
                     {rendelesek.map((rendeles, index) => (
                         <li key={rendeles.orderid}>
-                            <Card
-                                className="bg-white m-2 rounded-md p-1 shadow-lg shadow-gray-400">
-                                <CardHeader className="grid grid-cols-12 text-xl card-class">
+                            <Card className="bg-white m-2 rounded-md p-1 shadow-lg shadow-gray-400">
+                                <CardHeader className="grid grid-cols-12 text-[15px] card-class">
                                     <p className="col-span-1 ps-3">{index + 1}</p>
                                     <p className="col-span-2 text-center">{rendeles.orderid}</p>
                                     <p className="col-span-2 text-center">{rendeles.customer.c_name}</p>
                                     <p className="col-span-1 text-center">{rendeles.items.length}</p>
-                                    <p className="col-span-2 text-center">{rendeles.payment}</p>
+                                    <p className="col-span-1 text-center">{rendeles.payment}</p>
+                                    <p className="col-span-2 text-center">{rendeles.gross + " Ft"}</p>
+                                    <p className="col-start-11 col-span-2 text-center">{rendeles.status_id}</p>
                                 </CardHeader>
                             </Card>
                         </li>

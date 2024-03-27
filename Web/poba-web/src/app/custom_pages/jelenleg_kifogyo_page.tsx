@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {useGlobal} from "@/app/Globals/global_values";
 import FetchTermekek from "@/app/Fetching/fetch_termekek";
 import FItem from "@/DTOs/Termekek/Termek";
+import ShowItem from "@/DTOs/Termekek/ShowItem";
 
 export default function KifogyoTermekek() {
     const { webshopId } = useGlobal();
@@ -21,7 +22,7 @@ export default function KifogyoTermekek() {
 
         if (IFogyoTermekek === null) {
             setFogyoTermekek(sortedList(termekek.filter(item => item.qty <= 10).map(item =>
-                new FItem(item.id, item.sku, item.name, item.qty, item.unit, item.status, item.cat_name, item.url, item.pic_url, now)
+                new FItem(item.id, item.sku, item.name, item.qty, item.unit, item.status, item.cat_name, item.url, item.pic_url, item.price, now)
             ).slice(0, 15)));
 
             localStorage.setItem("fogyotermekek", JSON.stringify(sortedList(fogyoTermekek)));
@@ -31,7 +32,7 @@ export default function KifogyoTermekek() {
 
             for (let item of termekek){
                 if (!fogyoTermekek.find(item2 => item2.id === item.id) && item.qty <= 10){
-                    fTermekek.push(new FItem(item.id, item.sku, item.name, item.qty, item.unit, item.status, item.cat_name, item.url, item.pic_url, now));
+                    fTermekek.push(new FItem(item.id, item.sku, item.name, item.qty, item.unit, item.status, item.cat_name, item.url, item.pic_url, item.price, now));
                 }
             }
 

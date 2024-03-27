@@ -34,7 +34,7 @@ export class ItemService {
         cat_name: item['Categories']['Category'].map((cat) => cat.Name),
         url: item.Url,
         pic_url: img,
-        price: item.Prices.Price.Gross,
+        price: item.Prices.Price.Net,
       })
     });
     } catch{
@@ -61,7 +61,7 @@ export class ItemService {
         cat_name: data[0]['Categories']['Category'].map((cat) => cat.Name),
         url: data[0].Url,
         pic_url: img,
-        price: data[0].Prices.Price.Gross,
+        price: data[0].Prices.Price.Net,
       });
     }
 
