@@ -11,9 +11,11 @@ export class Orders {
 
   status_id: number;
 
-  p_id: number;
+  sender: number;
 
-  payment: number;
+  payment: string;
+
+  gross: number;
 
   weight: number;
 

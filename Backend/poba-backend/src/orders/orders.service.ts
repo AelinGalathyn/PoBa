@@ -27,12 +27,13 @@ export class OrdersService {
           orderid: order.Id,
           date: order.Date,
           type: order.Type,
-          status_id: order.StatusID,
-          p_id: order.Shipping.PackageNumber,
+          status_id: order.Status,
+          sender: order['Shipping']['Name'],
           payment: order.Payment.Type,
           weight: order.Weight,
           customer: customer,
           items: items,
+          gross: order.SumPriceGross
         };
       });
       orders = await Promise.all(orderslist);
@@ -40,7 +41,7 @@ export class OrdersService {
       let items: OrderItemEntity[] = await this.itemService.makeOrderItems(data[0].Items.Item);
       const customer: Customer = {
         id: data[0].Customer.Id,
-        c_name: data[0].Customer.Contact.Name,
+        c_name: data[0]['Customer']['Contact']['Name'],
         email: data[0].Customer.Email,
         username: data[0].Customer.Username,
         c_mobile: data[0].Customer.Contact.Phone,
@@ -49,12 +50,13 @@ export class OrdersService {
         orderid: data[0].Id,
         date: data[0].Date,
         type: data[0].Type,
-        status_id: data[0].StatusID,
-        p_id: data[0].Shipping.PackageNumber,
+        status_id: data[0].Status,
+        sender: data[0]['Shipping']['Name'],
         payment: data[0].Payment.Type,
         weight: data[0].Weight,
         customer: customer,
         items: items,
+        gross: data[0].SumPriceGross
       });
     }
     return orders;
