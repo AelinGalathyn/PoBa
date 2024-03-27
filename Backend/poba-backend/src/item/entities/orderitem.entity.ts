@@ -7,7 +7,7 @@ export class OrderItemEntity{
 
   unit: string;
 
-  quantity: string;
+  quantity: number;
 
   net: number;
 

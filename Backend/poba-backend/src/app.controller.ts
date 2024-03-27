@@ -8,7 +8,6 @@ import {
     createParamDecorator,
     ExecutionContext, UnauthorizedException, Param, Req,
 } from '@nestjs/common';
-import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
 import { CreateUserDto } from './users/dto/create-user.dto';
 import { LoginDto } from './auth/login.dto';
@@ -25,8 +24,7 @@ import { Request, Response } from 'express';
 
 @Controller ()
 export class AppController{
-    constructor (private appService: AppService,
-                 private authService: AuthService,
+    constructor (private authService: AuthService,
                  private externalService: ExternalService,
                  private usersService: UsersService,
                  private webshopService: WebshopService,

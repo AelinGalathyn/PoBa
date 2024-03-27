@@ -1,6 +1,5 @@
-import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { WebshopService } from './webshop.service';
-import { AuthGuard } from '@nestjs/passport';
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { UserId } from '../users/decorators/UserId.param';
 import { UsersService } from '../users/users.service';
