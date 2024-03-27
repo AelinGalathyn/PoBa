@@ -5,22 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74dcd9a8-8566-496b-95e2-36b79367fb4c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/DTOs/Rendelesek/Rendeles.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DTOs/Rendelesek/RendelesItem.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DTOs/Rendelesek/Vevo.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/custom_pages/beallitasok_page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DTOs/Termekek/FTermek.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DTOs/Termekek/ShowItem.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/custom_pages/jelenlegi_rendelesek_page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DTOs/Rendelesek/RendelesItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Rendelesek/RendelesItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DTOs/Termekek/Termek.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Termekek/Termek.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Fetching/fetch_rendelesek.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Fetching/fetch_rendelesek.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/Fetching/fetch_termekek.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Fetching/fetch_termekek.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Fetching/fetch_webshopok.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Fetching/fetch_webshopok.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/Globals/global_values.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Globals/global_values.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/custom_pages/home_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/home_page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/custom_pages/jelenleg_kifogyo_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/jelenleg_kifogyo_page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/custom_pages/rendelesek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/rendelesek_page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/custom_pages/statisztika_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/statisztika_page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/custom_pages/termekek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/termekek_page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,23 +43,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;web&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/STUDY/Webvalto/PoBa/Web/poba-web&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;E:\\STUDY\\Webvalto\\PoBa\\Web\\poba-web\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "web",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/STUDY/Webvalto/PoBa/Web/poba-web",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "E:\\STUDY\\Webvalto\\PoBa\\Web\\poba-web\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\src\DTOs" />
@@ -82,7 +78,11 @@
       <workItem from="1711358233235" duration="13642000" />
       <workItem from="1711383880652" duration="5180000" />
       <workItem from="1711394162447" duration="1328000" />
-      <workItem from="1711437680646" duration="11708000" />
+      <workItem from="1711437680646" duration="18791000" />
+      <workItem from="1711463696552" duration="926000" />
+      <workItem from="1711523476588" duration="4547000" />
+      <workItem from="1711528675129" duration="1144000" />
+      <workItem from="1711530345348" duration="2487000" />
     </task>
     <servers />
   </component>

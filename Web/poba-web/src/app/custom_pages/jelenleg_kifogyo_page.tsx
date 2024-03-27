@@ -3,37 +3,49 @@ import Image from "next/image";
 import {useEffect, useState} from "react";
 import {useGlobal} from "@/app/Globals/global_values";
 import FetchTermekek from "@/app/Fetching/fetch_termekek";
-import {Item} from "@/DTOs/Termekek/Termek";
+import FItem from "@/DTOs/Termekek/Termek";
 
 export default function KifogyoTermekek() {
     const { webshopId } = useGlobal();
     const { termekek, updateTermekek } = useGlobal();
 
-    const [fogyoTermekek, setFogyoTermekek] = useState<Item[]>([]);
+    const [fogyoTermekek, setFogyoTermekek] = useState<FItem[]>([]);
 
     useEffect(() => {
         FetchTermekek(webshopId).then(data => updateTermekek(data));
     }, [webshopId]);
 
     useEffect(() => {
-        setFogyoTermekek(termekek);
+        let IFogyoTermekek = localStorage.getItem("fogyoTermekek");
+        let now = new Date();
+
+        if (IFogyoTermekek === null) {
+            setFogyoTermekek(sortedList(termekek.filter(item => item.qty <= 10).map(item =>
+                new FItem(item.id, item.sku, item.name, item.qty, item.unit, item.status, item.cat_name, item.url, item.pic_url, now)
+            ).slice(0, 15)));
+
+            localStorage.setItem("fogyotermekek", JSON.stringify(sortedList(fogyoTermekek)));
+        }
+        else {
+            let fTermekek : FItem[] = JSON.parse(IFogyoTermekek!);
+
+            for (let item of termekek){
+                if (!fogyoTermekek.find(item2 => item2.id === item.id) && item.qty <= 10){
+                    fTermekek.push(new FItem(item.id, item.sku, item.name, item.qty, item.unit, item.status, item.cat_name, item.url, item.pic_url, now));
+                }
+            }
+
+            setFogyoTermekek(sortedList(fTermekek));
+            localStorage.setItem("fogyotermekek", JSON.stringify(sortedList(fogyoTermekek)));
+        }
     }, [termekek]);
 
+    const sortedList = (list: FItem[]) => {
+        return list.sort((a, b) => {
+            return new Date(b.date).getTime() - new Date(a.date).getTime();
+        });
+    }
 
-    useEffect(() => {
-        setFogyoTermekek(termekek.filter(item => item.qty <= 10).sort(
-            (a, b) => {
-                if (a.qty === 0 && b.qty !== 0) {
-                    return -1; // a comes before b
-                } else if (a.qty !== 0 && b.qty === 0) {
-                    return 1; // b comes before a
-                } else {
-                    // If quantities are the same, sort by quantity change date
-                    //return new Date(a.quantityChangeDate) - new Date(b.quantityChangeDate); //TODO: dátum szerinti frissítés és rendezés
-                    return 0;
-                }}
-        ).splice(0, 15));
-    }, [termekek]);
 
     return (
         <div className="fixed h-2/6 w-2/5 mt-[5vh]">

@@ -1,8 +1,8 @@
 "use client";
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import FWebshop from "@/DTOs/Webshopok/FetchWebshop";
-import {Item} from "@/DTOs/Termekek/Termek";
 import {Orders} from "@/DTOs/Rendelesek/Rendeles";
+import {Item} from "@/DTOs/Termekek/FTermek";
 
 interface GlobalContextType {
     webshopId: number;

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default function FetchTermekek(webshopId : number) {
+export default function FetchTermekek(webshopId: number) {
     const fetchTermekek = async () => {
         try {
             const response = await axios.get(`http://localhost:3000/item/all/`, {
@@ -8,9 +8,10 @@ export default function FetchTermekek(webshopId : number) {
                 params: { webshopid: webshopId }
             });
 
-            return response.data
+            return response.data;
         } catch (error) {
             console.log(error);
+            return [];
         }
     };
 
