@@ -12,7 +12,6 @@ export class AuthService {
         private usersService: UsersService,
         private jwtService: JwtService,
         private pwService: PasswordService,
-        private webshopService: WebshopService
     ){}
 
     async validateUser(loginUser: LoginDto){
@@ -32,10 +31,6 @@ export class AuthService {
         } catch (error){
             return false;
         }
-    }
-
-    async getUserid(token: string){
-        const payload = this.jwtService
     }
 
     async login(loginUser: LoginDto) {
@@ -58,14 +53,5 @@ export class AuthService {
         });
         const { password, ...result } = newUser;
         return result;
-    }
-
-    async changeJwt(webshopid: number){
-        const user = await this.webshopService.getUser(webshopid);
-        const payload = {username: user.username, sub: user.userid};
-
-        return{
-            access_token: this.jwtService.sign(payload),
-        };
     }
 }

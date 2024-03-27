@@ -17,10 +17,6 @@ export class UsersService {
     return newUser;
   }
 
-  findAll() {
-    return `This action returns all users`;
-  }
-
   async findByUName(username: string): Promise<Users | undefined> {
     const user = await this.usersRepository.findOne({ where: { username: username } });
     return user;
@@ -34,18 +30,5 @@ export class UsersService {
   async findById(userid: number): Promise<Users | undefined> {
     const user = await this.usersRepository.findOne({ where: { userid } });
     return user;
-  }
-
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
-
-  newWebshop(userid: number, webshopid: number){
-
   }
 }

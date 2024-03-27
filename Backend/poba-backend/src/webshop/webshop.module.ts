@@ -11,6 +11,6 @@ import { WebshopController } from './webshop.controller';
   imports: [TypeOrmModule.forFeature([Webshop]), UsersModule, forwardRef(() => ExternalModule)],
   providers: [WebshopService],
   exports: [WebshopService],
-  controllers: [WebshopController] // Make sure to export WebshopService
+  controllers: [WebshopController]
 })
 export class WebshopModule {}
