@@ -119,18 +119,8 @@ export class WebshopService {
   }
 
   async unasLogin(webshop: Webshop){
-    let shouldProceedWithLogin = false;
-
-    try {
-      shouldProceedWithLogin = webshop.token_date === null || (new Date().getTime() - webshop.token_date.getTime()) / (1000 * 60 * 60) > 3;
-    } catch (err) {
-      shouldProceedWithLogin = true;
-    }
-
-    if (shouldProceedWithLogin) {
-      webshop = await this.externalService.unasLogin(webshop);
-      await this.webshopRepository.save(webshop);
-    }
+    webshop = await this.externalService.unasLogin(webshop);
+    await this.webshopRepository.save(webshop);
     return webshop;
   }
 }
