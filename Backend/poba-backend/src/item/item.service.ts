@@ -23,6 +23,13 @@ export class ItemService {
       } catch {
         img = '';
       }
+      let price;
+      try {
+        price = item.Prices.Price[0].Net;
+      }
+      catch {
+        price = item.Prices.Price.Net;
+      }
 
       items.push({
         id: item.Id,
@@ -36,8 +43,18 @@ export class ItemService {
         pic_url: img,
         price: item.Prices.Price.Net,
       })
+
+
     });
     } catch{
+
+      let price;
+      try {
+        price = data[0].Prices.Price[0].Net;
+      }
+      catch {
+        price = data[0].Prices.Price.Net;
+      }
       let qty: number;
       try{
         qty = parseFloat(data[0].Stocks.Stock.Qty);
@@ -84,6 +101,8 @@ export class ItemService {
           gross: item.PriceGross,
           vat: item.Vat,
         });
+
+        console.log(item.Price)
       });
     } catch{
       let qty: number;
@@ -92,18 +111,12 @@ export class ItemService {
       }catch{
         qty = -1;
       }
-      let img: string;
-      try {
-        img = data[0].Images.Image.Filename;
-      } catch {
-        img = '';
-      }
 
       items.push({
         id: data[0].Id,
         sku: data[0].Sku,
         name: data[0].Name,
-        quantity: data[0].Quantity,
+        quantity: qty,
         unit: data[0].Unit,
         status: data[0].Status,
         net: data[0].PriceNet,
