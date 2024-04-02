@@ -19,24 +19,7 @@ export default function Termekek() {
     const [showCorrectList, setShowCorrectList] = useState<string>("");
 
     useEffect(() => {
-        let storedShowTermekek = localStorage.getItem("showTermekek");
-
-        if (storedShowTermekek === null || storedShowTermekek === "[]") {
-            const initialShowTermekek = termekek.map(item => new ShowItem(item, false));
-            localStorage.setItem("showTermekek", JSON.stringify(initialShowTermekek));
-        } else {
-            let fTermekek : ShowItem[] = JSON.parse(storedShowTermekek!);
-
-            for (let item of termekek){
-                if (!fTermekek.find(item2 => item2.item.id === item.id)){
-                    fTermekek.push(new ShowItem(item, false));
-                }
-            }
-
-            localStorage.setItem("showTermekek", JSON.stringify(showTermekek));
-        }
-
-        setShowTermekek(JSON.parse(localStorage.getItem("showTermekek")!));
+        setShowTermekek(termekek.map(item => new ShowItem(item, false)));
         setShowTermekekFilter(showTermekek);
     }, [webshopId]);
 
@@ -90,7 +73,7 @@ export default function Termekek() {
                                     </CardBody>
 
                                     <CardFooter className="grid grid-cols-12 card-class mt-5">
-                                    {termek.item.qty === 0 ? (
+                                        {termek.item.qty === 0 ? (
                                             <>
                                                 <label className="col-span-1 ps-3 grid grid-cols-2">
                                                     <b>db:</b>
@@ -102,24 +85,24 @@ export default function Termekek() {
                                                 </div>
                                             </>
                                         ) : termek.item.qty > 0 && termek.item.qty <= 10 ? (
-                                        <>
-                                            <label className="col-span-1 ps-3 grid grid-cols-2">
-                                                <b>db:</b>
-                                                <input type="text" placeholder={termek.item.qty.toString()} onInput={() => modifyItemQty(termek)}/>
-                                            </label>
-                                            <div className="col-start-12 col-span-1 justify-self-end">
-                                                <Image src="/kifogyoban_icon.png" width={30} height={30}
-                                                       alt="szallito_ceg_icon"/>
-                                            </div>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <label className="col-span-1 ps-3 grid grid-cols-2">
-                                                <b>db:</b>
-                                                <input type="text" placeholder={termek.item.qty.toString()} onInput={() => modifyItemQty(termek)}/>
-                                            </label>
-                                        </>
-                                    )}
+                                            <>
+                                                <label className="col-span-1 ps-3 grid grid-cols-2">
+                                                    <b>db:</b>
+                                                    <input type="text" placeholder={termek.item.qty.toString()} onInput={() => modifyItemQty(termek)}/>
+                                                </label>
+                                                <div className="col-start-12 col-span-1 justify-self-end">
+                                                    <Image src="/kifogyoban_icon.png" width={30} height={30}
+                                                           alt="szallito_ceg_icon"/>
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <label className="col-span-1 ps-3 grid grid-cols-2">
+                                                    <b>db:</b>
+                                                    <input type="text" placeholder={termek.item.qty.toString()} onInput={() => modifyItemQty(termek)}/>
+                                                </label>
+                                            </>
+                                        )}
                                     </CardFooter>
                                 </Card>
                             ) : (

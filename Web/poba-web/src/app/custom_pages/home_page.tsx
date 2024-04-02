@@ -27,19 +27,12 @@ export default function HomePage() {
     const [selectedWebshop, setSelectedWebshop] = useState<FWebshop>({webshopid : 0, name : ""});
 
     useEffect(() => {
-        FetchTermekek(webshopId).then(data => localStorage.setItem("termekek", JSON.stringify(data)));
-    }, [webshopId]);
-
-    useEffect(() => {
-        FetchRendelesek(webshopId).then(data => localStorage.setItem("rendelesek", JSON.stringify(data)));
-    }, [webshopId]);
-
-    useEffect(() => {
-        FetchWebshopok().then(data => localStorage.setItem("webshopok", JSON.stringify(data)));
-    }, [webshopId]);
-
-    useEffect(() => {
-        setSelectedWebshop(webshopok[0]);
+        if (webshopId !== null) {
+            FetchTermekek(webshopId).then(data => localStorage.setItem("termekek", JSON.stringify(data)));
+            FetchRendelesek(webshopId).then(data => localStorage.setItem("rendelesek", JSON.stringify(data)));
+            FetchWebshopok().then(data => localStorage.setItem("webshopok", JSON.stringify(data)));
+            setSelectedWebshop(webshopok[0]);
+        }
     }, [webshopId]);
 
     const logOut = async () => {
@@ -47,6 +40,8 @@ export default function HomePage() {
             withCredentials: true,
             headers : {}
         });
+
+        setActiveSection("HomePage");
     };
 
     return (
@@ -99,13 +94,13 @@ export default function HomePage() {
                                             leaveTo="opacity-0"
                                         >
                                             <Listbox.Options className="z-50 mt-2 max-h-60 w-full text-xs button-style">
-                                                {webshopok.map((webshop) => (
+                                                {webshopok && webshopok.map((webshop) => (
                                                     <Listbox.Option key={webshop.webshopid} className={({active}) =>
-                                                            `relative cursor-pointer select-none py-2 pl-10 pr-2 text-[#60624d] ${
-                                                                active ? 'bg-white rounded-lg' : ''
-                                                            }`
-                                                        }
-                                                        value={webshop}
+                                                        `relative cursor-pointer select-none py-2 pl-10 pr-2 text-[#60624d] ${
+                                                            active ? 'bg-white rounded-lg' : ''
+                                                        }`
+                                                    }
+                                                                    value={webshop}
                                                     >
                                                         {({selected}) => (
                                                             <>
@@ -144,7 +139,7 @@ export default function HomePage() {
                             <div className="flex justify-center items-center h-full">
                                 <button
                                     className="text-[#FF442B] font-bold hover:bg-[#A3B389] hover:text-white p-2 rounded-md drop-shadow-md"
-                                    onClick={() => {logOut(); setActiveSection("HomePage")}}>
+                                    onClick={() => logOut()}>
                                     Kijelentkezés
                                 </button>
                             </div>

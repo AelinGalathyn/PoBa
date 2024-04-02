@@ -4,30 +4,28 @@ import {FItem} from "@/DTOs/Termekek/FTermek";
 
 export function ItemListFiltering(list : ShowItem[], kategoria : string, originalList : ShowItem[]) {
 
-    let filteredList = list;
-
     switch (kategoria) {
         case "Raktárkezelt":
-            filteredList = filteredList.filter(item => item.item.qty !== -1);
+            list = list.filter(item => item.item.qty !== -1);
             break;
         case "Termék neve szerint":
-            filteredList = filteredList.sort((a, b) => {
+            list = list.sort((a, b) => {
                 if (a.item.name < b.item.name) return -1;
                 if (a.item.name > b.item.name) return 1;
                 return 0;
             });
             break;
         case "Mennyiség szerint":
-            filteredList = filteredList.sort((a, b) => { return a.item.qty - b.item.qty });
+            list = list.sort((a, b) => { return a.item.qty - b.item.qty });
             break;
         case "Összes" :
-            filteredList = [...originalList];
+            list = [...originalList];
             break;
         default :
-            return list;
+            return originalList;
     }
 
-    return filteredList;
+    return list;
 }
 
 export const toggleShowOrder = (id: number) => {
