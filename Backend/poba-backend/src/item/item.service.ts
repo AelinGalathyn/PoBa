@@ -21,7 +21,7 @@ export class ItemService {
           }
           let img: string;
           try {
-            img = item.Images.Image.Filename;
+            img = item.Images.Image[0].SefUrl;
           } catch {
             img = '';
           }
@@ -31,7 +31,7 @@ export class ItemService {
           } catch {
             price = item.Prices.Price.Net;
           }
-
+          console.log(item.Images.Image[0].SefUrl);
 
           items.push({
             id: item.Id,
@@ -63,7 +63,7 @@ export class ItemService {
       }
       let img: string;
       try {
-        img = data[0].Images.Image.Filename;
+        img = data[0].Images.Image[0].SefUrl;
       } catch {
         img = '';
       }
