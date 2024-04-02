@@ -1,137 +1,158 @@
+import { UsersService } from '../users/users.service';
+import { JwtService } from '@nestjs/jwt';
+import { PasswordService } from './password.service';
+
+// Mocking UsersService
+const usersServiceMock: jest.Mocked<Partial<UsersService>> = {
+  findByUName: jest.fn(),
+  getPassword: jest.fn(),
+  create: jest.fn(),
+};
+
+// Mocking JwtService
+const jwtServiceMock: jest.Mocked<Partial<JwtService>> = {
+  sign: jest.fn(),
+  verify: jest.fn(),
+};
+
+// Mocking PasswordService
+const passwordServiceMock: jest.Mocked<Partial<PasswordService>> = {
+  hashPassword: jest.fn(),
+  verifyPassword: jest.fn(),
+};
+
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
-import { JwtService } from '@nestjs/jwt';
-import { UsersService } from '../users/users.service';
-import { PasswordService } from './password.service';
-import { getRepositoryToken } from '@nestjs/typeorm';
-import { Users } from '../users/entities/users.entity';
+import { InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
+import { CreateUserDto } from '../users/dto/create-user.dto';
 
 describe('AuthService', () => {
-  let service: AuthService;
+  let authService: AuthService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      // AuthService is the service we're testing
       providers: [
         AuthService,
-        // Provide mocks for dependencies
-        { provide: UsersService, useValue: mockUsersService },
-        { provide: JwtService, useValue: mockJwtService },
-        { provide: PasswordService, useValue: mockPasswordService },
+        { provide: UsersService, useValue: usersServiceMock },
+        { provide: JwtService, useValue: jwtServiceMock },
+        { provide: PasswordService, useValue: passwordServiceMock },
       ],
     }).compile();
 
-    service = module.get<AuthService>(AuthService);
+    authService = module.get<AuthService>(AuthService);
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+  // Reset mocks before each test
+  afterEach(() => {
+    jest.clearAllMocks();
   });
+
+  describe('validateUser', () => {
+    it('should validate and return the user for correct credentials', async () => {
+      const loginDto = { username: 'user', password: 'pass' };
+      const mockUser = { username: 'user', userid: 1, webshops: [] };
+      usersServiceMock.findByUName.mockResolvedValue(mockUser);
+      usersServiceMock.getPassword.mockResolvedValue('hashedPassword');
+      passwordServiceMock.verifyPassword.mockResolvedValue(true);
+
+      const result = await authService.validateUser(loginDto);
+
+      expect(result).toEqual(mockUser);
+      expect(usersServiceMock.findByUName).toHaveBeenCalledWith('user');
+      expect(passwordServiceMock.verifyPassword).toHaveBeenCalledWith('hashedPassword', 'pass');
+    });
+
+    it('should throw UnauthorizedException for an invalid password', async () => {
+      const loginDto = { username: 'user', password: 'wrongPass' };
+      usersServiceMock.findByUName.mockResolvedValue({ username: 'user', userid: 1, webshops: [] });
+      usersServiceMock.getPassword.mockResolvedValue('hashedPassword');
+      passwordServiceMock.verifyPassword.mockResolvedValue(false);
+
+      await expect(authService.validateUser(loginDto)).rejects.toThrow(UnauthorizedException);
+    });
+
+    it('should throw UnauthorizedException if user does not exist', async () => {
+      const loginDto = { username: 'nonexistentUser', password: 'pass' };
+      usersServiceMock.findByUName.mockResolvedValue(null);
+
+      await expect(authService.validateUser(loginDto)).rejects.toThrow(UnauthorizedException);
+    });
+  });
+
+
+  describe('validateToken', () => {
+    it('should return a userid if token is valid', async () => {
+      const validToken = 'valid.token.here';
+      const expectedUserId = 'user123';
+      jwtServiceMock.verify.mockReturnValue({ userid: expectedUserId });
+
+      const result = await authService.validateToken(validToken);
+
+      expect(result).toEqual(expectedUserId);
+      expect(jwtServiceMock.verify).toHaveBeenCalledWith(validToken);
+    });
+
+    it('should return false if token is invalid', async () => {
+      const invalidToken = 'invalid.token.here';
+      jwtServiceMock.verify.mockImplementation(() => {
+        throw new Error('Token verification failed');
+      });
+
+      const result = await authService.validateToken(invalidToken);
+
+      expect(result).toBeFalsy();
+    });
+  });
+
+  describe('login', () => {
+    it('should return access token and userid for correct credentials', async () => {
+      const loginUser = { username: 'validUser', password: 'validPass' };
+      const mockUser = { username: 'validUser', userid: 1, webshops: [] };
+      usersServiceMock.findByUName.mockResolvedValue(mockUser);
+      usersServiceMock.getPassword.mockResolvedValue('hashedPassword');
+      passwordServiceMock.verifyPassword.mockResolvedValue(true);
+      jwtServiceMock.sign.mockReturnValue('valid.token.here');
+
+      const result = await authService.login(loginUser);
+
+      expect(result).toBeDefined();
+      expect(result.access_token).toEqual('valid.token.here');
+      expect(result.userid).toEqual(mockUser.userid);
+    });
+
+    it('should throw UnauthorizedException for incorrect credentials', async () => {
+      const loginUser = { username: 'invalidUser', password: 'invalidPass' };
+      usersServiceMock.findByUName.mockResolvedValue(null); // Simulating user not found
+
+      await expect(authService.login(loginUser)).rejects.toThrow(UnauthorizedException);
+    });
+  });
+
+  describe('register', () => {
+    it('should successfully register a new user and return their details', async () => {
+      const createUserDto: CreateUserDto = { username: 'newUser', password: 'newPass' };
+      const mockNewUser = { ...createUserDto, userid: 2, password: 'hashed_newPass', webshops: [] };
+      passwordServiceMock.hashPassword.mockResolvedValue('hashed_newPass');
+      usersServiceMock.create.mockResolvedValue(mockNewUser);
+
+      const result = await authService.register(createUserDto);
+
+      expect(result).toBeDefined();
+      expect(result).not.toHaveProperty('password');
+      expect(result.username).toEqual(createUserDto.username);
+      expect(passwordServiceMock.hashPassword).toHaveBeenCalledWith(createUserDto.password);
+      expect(usersServiceMock.create).toHaveBeenCalledWith({
+        ...createUserDto,
+        password: 'hashed_newPass',
+      });
+    });
+
+    it('should throw InternalServerErrorException when registration fails', async () => {
+      const createUserDto = { username: 'newUser', password: 'newPass' };
+      usersServiceMock.create.mockRejectedValue(new Error('Mock DB error'));
+
+      await expect(authService.register(createUserDto)).rejects.toThrow(InternalServerErrorException);
+    });
+  });
+
 });
-
-
-describe('AuthService - Register', () => {
-  let authService: AuthService;
-  // Mock dependencies
-  beforeEach(async () => {
-    const moduleRef = await Test.createTestingModule({
-      providers: [AuthService, UsersService, JwtService, PasswordService],
-    })
-    // Assume UsersService and PasswordService are properly mocked
-    .overrideProvider(UsersService)
-    .useValue(mockUsersService)
-    .overrideProvider(PasswordService)
-    .useValue(mockPasswordService)
-    .compile();
-
-    authService = moduleRef.get<AuthService>(AuthService);
-  });
-
-  it('should successfully register a new user', async () => {
-    const newUser = { username: 'testuser', password: 'testpass' };
-    const result = await authService.register(newUser);
-    expect(result).toBeDefined();
-    expect(mockUsersService.create).toHaveBeenCalledWith({username: 'testuser', password: 'hashed_testpass'});
-  });
-
-  // Add more scenarios as needed, such as handling duplicate usernames
-});
-
-describe('AuthService - Login', () => {
-  let authService: AuthService;
-
-  beforeEach(async () => {
-    const moduleRef: TestingModule = await Test.createTestingModule({
-      providers: [
-        AuthService,
-        { provide: UsersService, useValue: mockUsersService },
-        { provide: JwtService, useValue: mockJwtService },
-        { provide: PasswordService, useValue: mockPasswordService },
-        { provide: getRepositoryToken(Users), useValue: mockUsersRepository },
-      ],
-    }).compile();
-
-    authService = moduleRef.get<AuthService>(AuthService);
-  });
-
-  it('should successfully login with correct credentials', async () => {
-    const userCredentials = { username: 'testuser', password: 'testpass' };
-    const expectedToken = "expectedToken";
-    mockUsersService.findOne.mockResolvedValue(userCredentials);
-    mockPasswordService.verifyPassword.mockResolvedValue(true);
-    mockJwtService.sign.mockReturnValue(expectedToken);
-
-    const result = await authService.login(userCredentials);
-    expect(result).toBeDefined();
-    expect(result.access_token).toEqual(expectedToken);
-  });
-
-  // Test login with incorrect credentials
-  it('should not login with incorrect credentials', async () => {
-    const userCredentials = { username: 'testuser', password: 'wrongpass' };
-    mockUsersService.findOne.mockResolvedValue(null);
-
-    await expect(authService.login(userCredentials)).rejects.toThrow();
-  });
-});
-
-
-const mockUsersService = {
-  findOne: jest.fn((username: string) => {
-    // Simulate fetching user by username
-    if (username === 'existingUser') {
-      return Promise.resolve({ username: 'existingUser', password: 'hashedPassword' }); // Example user
-    }
-    return Promise.resolve(null); // User not found
-  }),
-  create: jest.fn((userDto) => {
-    // Simulate creating a new user
-    return Promise.resolve({ id: Date.now(), ...userDto }); // Example created user
-  }),
-};
-
-
-const mockPasswordService = {
-  hashPassword: jest.fn((password: string) => {
-    // Simulate password hashing
-    return Promise.resolve(`hashed_${password}`); // Example hashed password
-  }),
-  verifyPassword: jest.fn((hash: string, inputPassword: string) => {
-    // Simulate password verification (simplified logic)
-    return Promise.resolve(hash === `hashed_${inputPassword}`);
-  }),
-};
-
-const mockJwtService = {
-  sign: jest.fn((payload) => {
-    // Simulate JWT signing
-    return `token_${payload.sub}`; // Example token generation based on user ID
-  }),
-};
-
-const mockUsersRepository = {
-  findOne: jest.fn(),
-  create: jest.fn(),
-  // Add other methods used by your UsersService
-};
-
