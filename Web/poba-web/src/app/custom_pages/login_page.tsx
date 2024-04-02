@@ -3,11 +3,8 @@
 import Image from "next/image";
 import {useEffect, useState} from "react";
 import User from "@/DTOs/Users/User";
-import {useGlobal} from "@/app/Globals/global_values";
 import axios from 'axios';
-import Home from "@/app/page";
 import HomePage from "@/app/custom_pages/home_page";
-import {Redirect} from "@nestjs/common";
 
 export default function Login() {
 

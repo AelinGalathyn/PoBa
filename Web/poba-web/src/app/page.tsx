@@ -1,15 +1,12 @@
 "use client";
 import Login from "@/app/custom_pages/login_page";
 import HomePage from "@/app/custom_pages/home_page";
-import { GlobalProvider, useGlobal } from "@/app/Globals/global_values";
 import axios from "axios";
 import {useEffect, useState} from "react";
 
 export default function Home() {
     return (
-        <GlobalProvider>
-            <HomeContent />
-        </GlobalProvider>
+        <HomeContent />
     );
 }
 

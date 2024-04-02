@@ -10,7 +10,7 @@ export default function JelenlegiRendelesek() {
     const [frissRendelesek, setFrissRendelesek] = useState<Orders[]>([]);
 
     const sortedList = (list: Orders[]) => {
-        const currentDate = new Date().getTime(); // Get current timestamp
+        const currentDate = new Date().getTime();
         return list.sort((a, b) => {
             const dateA = new Date(a.date).getTime();
             const dateB = new Date(b.date).getTime();

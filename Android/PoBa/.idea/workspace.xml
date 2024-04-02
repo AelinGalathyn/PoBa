@@ -36,7 +36,16 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="607eb8e7-3465-4e2f-9507-465c471e90f8" name="Changes" comment="" />
+    <list default="true" id="607eb8e7-3465-4e2f-9507-465c471e90f8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/poba-web/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/poba-web/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/poba-web/src/app/Functions/list_filtering.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/poba-web/src/app/Functions/list_filtering.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/poba-web/src/app/Globals/global_values.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/poba-web/src/app/custom_pages/jelenlegi_rendelesek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/poba-web/src/app/custom_pages/jelenlegi_rendelesek_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/poba-web/src/app/custom_pages/login_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/poba-web/src/app/custom_pages/login_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/poba-web/src/app/custom_pages/termekek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/poba-web/src/app/custom_pages/termekek_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/poba-web/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/poba-web/src/app/page.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -103,21 +112,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ResourceManagerPrefKey.ResourceType&quot;: &quot;FONT&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;android&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/STUDY/Webvalto/PoBa/Android/PoBa&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ResourceManagerPrefKey.ResourceType": "FONT",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "android.gradle.sync.needed": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "web",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "E:/STUDY/Webvalto/PoBa/Android/PoBa"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\STUDY\Webvalto\PoBa\Android\app\src\main\res\drawable" />

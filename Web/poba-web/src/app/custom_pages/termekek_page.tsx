@@ -2,7 +2,6 @@
 
 import {Card, CardBody, CardFooter, CardHeader} from "@nextui-org/card";
 import Image from "next/image";
-import {useGlobal} from "@/app/Globals/global_values";
 import {useEffect, useState} from "react";
 import ShowItem from "@/DTOs/Termekek/ShowItem";
 import ModifyTermekQty from "@/app/Modify/modify_termek";
@@ -16,6 +15,7 @@ export default function Termekek() {
     const webshopId : number = JSON.parse(localStorage.getItem("webshopId")!);
 
     const [showTermekek, setShowTermekek] = useState<ShowItem[]>([]);
+    const [showTermekekFilter, setShowTermekekFilter] = useState<ShowItem[]>([]);
     const [showCorrectList, setShowCorrectList] = useState<string>("");
 
     useEffect(() => {
@@ -37,6 +37,7 @@ export default function Termekek() {
         }
 
         setShowTermekek(JSON.parse(localStorage.getItem("showTermekek")!));
+        setShowTermekekFilter(showTermekek);
     }, [webshopId]);
 
     const toggleShowItem = (id: number) => {
@@ -66,7 +67,7 @@ export default function Termekek() {
                     </CardHeader>
                 </Card>
                 <ul>
-                    {ItemListFiltering(showTermekek, showCorrectList).map((termek, index) => (
+                    {ItemListFiltering(showTermekekFilter, showCorrectList, showTermekek).map((termek, index) => (
                         <li key={termek.item.id} className="cursor-pointer">
                             {termek.showItem ? (
                                 <Card className={`text-[15px] m-2 rounded-md p-1 shadow-lg shadow-gray-400 h-fit ${termek.item.qty === -1 ? "bg-gray-300" : "bg-white"}`}>
