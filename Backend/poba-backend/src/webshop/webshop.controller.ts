@@ -1,6 +1,5 @@
-import { Body, Controller, Param, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { WebshopService } from './webshop.service';
-import { AuthGuard } from '@nestjs/passport';
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { UserId } from '../users/decorators/UserId.param';
 import { UsersService } from '../users/users.service';
@@ -12,10 +11,18 @@ export class WebshopController {
 
   @UseGuards(JwtAuthGuard)
   @Post('new')
-  async newWebshop(@UserId() userid: number, @Param('api_key')apikey: string){
+  async newWebshop(@UserId() userid: number, @Query('api_key')apikey: string){
     const user = await this.usersService.findById(userid);
+    console.log(apikey);
     await this.webshopService.newApiKey(user, apikey);
   }
 
-  //TODO: végpont, hogy vissza tudd nekem adni az összes webshopját a usernek
+
+  @UseGuards(JwtAuthGuard)
+  @Get('list')
+  async getAllWebshops(@UserId()userid: number){
+    const webshops = await this.webshopService.getShopsByUser(userid);
+    const list = webshops.map(webshop => `${webshop.webshopid}:${webshop.name}`);
+    return list;
+  }
 }

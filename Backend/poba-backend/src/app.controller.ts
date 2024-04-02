@@ -8,7 +8,6 @@ import {
     createParamDecorator,
     ExecutionContext, UnauthorizedException, Param, Req,
 } from '@nestjs/common';
-import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
 import { CreateUserDto } from './users/dto/create-user.dto';
 import { LoginDto } from './auth/login.dto';
@@ -25,21 +24,30 @@ import { Request, Response } from 'express';
 
 @Controller ()
 export class AppController{
-    constructor (private appService: AppService,
-                 private authService: AuthService,
+    constructor (private authService: AuthService,
                  private externalService: ExternalService,
                  private usersService: UsersService,
                  private webshopService: WebshopService,
                  private itemService: ItemService) {}
 
     @Get()
-    checkCookie(@Req()req: Request, @Res()res: Response){
-        return this.validateToken(req, res);
+    async checkCookie(@Req()req: Request, @Res()res: Response){
+        const token = req.cookies['Authentication'];
+        if(token !==undefined){
+            const valid = await this.authService.validateToken(token);
+            if(valid !== false){
+                const webshop = await this.webshopService.getShopsByUser(valid);
+                const wsid = webshop[0].webshopid;
+                const user = await this.usersService.findById(valid);
+                return res.json({webshopid: wsid, username: user.username});
+            }
+        }
+        return res.json({isValid: false});
     }
 
     @Post('auth/login')
     async login(@Body() userdto: LoginDto, @Res() res: Response) {
-        const { userid,...jwt} = await this.authService.login(userdto); // Ensure this returns a token
+        const { userid,...jwt} = await this.authService.login(userdto);
 
         if (!jwt || !jwt.access_token) {
             throw new UnauthorizedException('Failed to generate token');
@@ -53,10 +61,10 @@ export class AppController{
 
         const webshop = await this.webshopService.getShopsByUser(userid);
         const webshopid = webshop[0].webshopid;
-        const username = await this.usersService.findById(userid);
+        const user = await this.usersService.findById(userid);
         await this.webshopService.newToken(webshopid);
 
-        return res.send({ message: 'Login successful', webshopid: webshopid, username: username });
+        return res.send({ message: 'Login successful', webshopid: webshopid, username: user.username });
     }
 
     @Post('auth/reg')
@@ -71,17 +79,16 @@ export class AppController{
         }
     }
 
-    async validateToken(@Req() req: Request, @Res() res: Response){
-        const token = req.cookies['Authentication'];
-        if(token !==undefined){
-            const valid = await this.authService.validateToken(token);
-            if(valid !== false){
-                const webshop = await this.webshopService.getShopsByUser(valid);
-                const wsid = webshop[0].webshopid;
-                return res.json({webshopid: wsid});
-            }
-        }
-        return res.json({isValid: false});
+    @Post('auth/logout')
+    logout(@Res() res: Response) {
+        res.cookie('Authentication', '', {
+            httpOnly: true,
+            path: '/',
+            sameSite: 'lax',
+            expires: new Date(0)
+        });
+
+        return res.send({ message: 'Logout successful' });
     }
 }
 

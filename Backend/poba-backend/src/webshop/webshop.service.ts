@@ -11,8 +11,6 @@ export class WebshopService {
   constructor(
     @InjectRepository(Webshop)
     private webshopRepository: Repository<Webshop>,
-
-    private usersService: UsersService,
     private externalService: ExternalService) {}
 
   async getWebshopById(webshopid: number){
@@ -69,16 +67,16 @@ export class WebshopService {
     let shop = this.webshopRepository.create({
       user: users,
       unas_api: api_key,
-      unas_token: 'asd'
+      unas_token: 'asd',
     });
-    shop = await this.externalService.unasLogin(shop);
+    shop = await this.unasLogin(shop);
     return await this.webshopRepository.save(shop);
   }
 
   async getToken(webshopid: number){
     const webshop = await this.webshopRepository.findOne({where: {webshopid}});
     if(webshop){
-      let res = await this.externalService.unasLogin(webshop);
+      let res = await this.unasLogin(webshop);
       await this.webshopRepository.update(webshopid, webshop);
     }
     return webshop.unas_token;
@@ -118,5 +116,11 @@ export class WebshopService {
     } catch (err){
       return err;
     }
+  }
+
+  async unasLogin(webshop: Webshop){
+    webshop = await this.externalService.unasLogin(webshop);
+    await this.webshopRepository.save(webshop);
+    return webshop;
   }
 }
