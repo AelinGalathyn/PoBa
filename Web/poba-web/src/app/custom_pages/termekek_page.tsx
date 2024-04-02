@@ -15,12 +15,10 @@ export default function Termekek() {
     const webshopId : number = JSON.parse(localStorage.getItem("webshopId")!);
 
     const [showTermekek, setShowTermekek] = useState<ShowItem[]>([]);
-    const [showTermekekFilter, setShowTermekekFilter] = useState<ShowItem[]>([]);
     const [showCorrectList, setShowCorrectList] = useState<string>("");
 
     useEffect(() => {
         setShowTermekek(termekek.map(item => new ShowItem(item, false)));
-        setShowTermekekFilter(showTermekek);
     }, [webshopId]);
 
     const toggleShowItem = (id: number) => {
@@ -50,7 +48,7 @@ export default function Termekek() {
                     </CardHeader>
                 </Card>
                 <ul>
-                    {ItemListFiltering(showTermekekFilter, showCorrectList, showTermekek).map((termek, index) => (
+                    {ItemListFiltering(showCorrectList, showTermekek).map((termek, index) => (
                         <li key={termek.item.id} className="cursor-pointer">
                             {termek.showItem ? (
                                 <Card className={`text-[15px] m-2 rounded-md p-1 shadow-lg shadow-gray-400 h-fit ${termek.item.qty === -1 ? "bg-gray-300" : "bg-white"}`}>
@@ -77,7 +75,7 @@ export default function Termekek() {
                                             <>
                                                 <label className="col-span-1 ps-3 grid grid-cols-2">
                                                     <b>db:</b>
-                                                    <input type="text" placeholder={termek.item.qty.toString()} onInput={() => modifyItemQty(termek)}/>
+                                                    <input type="text" placeholder={termek.item.qty.toString()} onChange={() => modifyItemQty(termek)}/>
                                                 </label>
                                                 <div className="col-start-12 col-span-1 justify-self-end">
                                                     <Image src="/elfogyott_icon.png" width={30} height={30}
@@ -88,7 +86,7 @@ export default function Termekek() {
                                             <>
                                                 <label className="col-span-1 ps-3 grid grid-cols-2">
                                                     <b>db:</b>
-                                                    <input type="text" placeholder={termek.item.qty.toString()} onInput={() => modifyItemQty(termek)}/>
+                                                    <input type="text" placeholder={termek.item.qty.toString()} onChange={() => modifyItemQty(termek)}/>
                                                 </label>
                                                 <div className="col-start-12 col-span-1 justify-self-end">
                                                     <Image src="/kifogyoban_icon.png" width={30} height={30}
@@ -99,7 +97,7 @@ export default function Termekek() {
                                             <>
                                                 <label className="col-span-1 ps-3 grid grid-cols-2">
                                                     <b>db:</b>
-                                                    <input type="text" placeholder={termek.item.qty.toString()} onInput={() => modifyItemQty(termek)}/>
+                                                    <input type="text" placeholder={termek.item.qty.toString()} onChange={() => modifyItemQty(termek)}/>
                                                 </label>
                                             </>
                                         )}

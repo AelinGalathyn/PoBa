@@ -7,7 +7,6 @@
     <list default="true" id="74dcd9a8-8566-496b-95e2-36b79367fb4c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/Functions/list_filtering.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Functions/list_filtering.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/custom_pages/home_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/home_page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/custom_pages/termekek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/termekek_page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
