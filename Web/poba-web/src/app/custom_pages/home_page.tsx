@@ -1,4 +1,5 @@
 "use client";
+
 import {Listbox, Transition} from '@headlessui/react'
 import React, {Fragment, useEffect, useState} from "react";
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
@@ -7,44 +8,39 @@ import JelenlegiRendelesek from "@/app/custom_pages/jelenlegi_rendelesek_page";
 import KifogyoTermekek from "@/app/custom_pages/jelenleg_kifogyo_page";
 import Statisztika from "@/app/custom_pages/statisztika_page";
 import Termekek from "@/app/custom_pages/termekek_page";
-import Home from "@/app/page";
-import {useGlobal} from "@/app/Globals/global_values";
 import FWebshop from "@/DTOs/Webshopok/FetchWebshop";
 import FetchWebshopok from "@/app/Fetching/fetch_webshopok";
 import Beallitasok from "@/app/custom_pages/beallitasok_page";
 import Rendelesek from "@/app/custom_pages/rendelesek_page";
 import axios from "axios";
 import Login from "@/app/custom_pages/login_page";
+import {menuItems} from "@/app/FixData/lists";
+import FetchTermekek from "@/app/Fetching/fetch_termekek";
+import FetchRendelesek from "@/app/Fetching/fetch_rendelesek";
 
 export default function HomePage() {
-    const { userName } = useGlobal();
-    const { webshopok, updateWebshopok, webshopId, updateWebshopId} = useGlobal();
+    const userName : string = localStorage.getItem("userName")!;
+    const webshopId : number = JSON.parse(localStorage.getItem("webshopId")!);
+    const webshopok : FWebshop[] = JSON.parse(localStorage.getItem("webshopok")!);
+
     const [activeSection, setActiveSection] = useState("Home");
     const [selectedWebshop, setSelectedWebshop] = useState<FWebshop>({webshopid : 0, name : ""});
 
-    const menuItems = [
-        { label: "Rendelések", onClick: () => setActiveSection("rendelesek") },
-        { label: "Termékek", onClick: () => setActiveSection("termekek") },
-        { label: "Statisztika", onClick: () => setActiveSection("statisztika") },
-        { label: "Beállítások", onClick: () => setActiveSection("beallitasok") }
-    ];
-
     useEffect(() => {
-        let webshopok2 = localStorage.getItem("webshopok");
-
-        if(!webshopok2) {
-            FetchWebshopok().then(data => localStorage.setItem("webshopok", JSON.stringify(data)));
-        }
-        else if (JSON.parse(webshopok2) != FetchWebshopok()) {
-            FetchWebshopok().then(data => localStorage.setItem("webshopok", JSON.stringify(data)));
-        }
-
-        updateWebshopok(JSON.parse(localStorage.getItem("webshopok")!));
+        FetchTermekek(webshopId).then(data => localStorage.setItem("termekek", JSON.stringify(data)));
     }, [webshopId]);
 
     useEffect(() => {
-        setSelectedWebshop(webshopok[0])
-    }, [webshopok]);
+        FetchRendelesek(webshopId).then(data => localStorage.setItem("rendelesek", JSON.stringify(data)));
+    }, [webshopId]);
+
+    useEffect(() => {
+        FetchWebshopok().then(data => localStorage.setItem("webshopok", JSON.stringify(data)));
+    }, [webshopId]);
+
+    useEffect(() => {
+        setSelectedWebshop(webshopok[0]);
+    }, [webshopId]);
 
     const logOut = async () => {
         await axios.post("http://localhost:3000/auth/logout", {}, {
@@ -84,16 +80,17 @@ export default function HomePage() {
                             <div>
                                 <Listbox value={selectedWebshop} onChange={(value) => {
                                     setSelectedWebshop(value)
-                                    updateWebshopId(value.webshopid)
+                                    localStorage.setItem("webshopId", value.webshopid.toString())
                                 }}>
                                     <div className="flex flex-col px-2 justify-center mt-1">
                                         <Listbox.Button
                                             className="relative text-left text-[15px] rounded-md bg-white py-1 pe-10 ps-2 text-[#60624d]"
                                             style={{boxShadow: "rgba(0, 0, 0, 0.27) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 2px"}}>
+
                                             <span>{selectedWebshop?.name}</span>
                                             <span className="absolute inset-y-0 right-0 flex items-center pr-2">
-                                    <ChevronUpDownIcon className="h-5 w-5"/>
-                                </span>
+                                                <ChevronUpDownIcon className="h-5 w-5"/>
+                                            </span>
                                         </Listbox.Button>
                                         <Transition
                                             as={Fragment}
@@ -103,9 +100,7 @@ export default function HomePage() {
                                         >
                                             <Listbox.Options className="z-50 mt-2 max-h-60 w-full text-xs button-style">
                                                 {webshopok.map((webshop) => (
-                                                    <Listbox.Option
-                                                        key={webshop.webshopid}
-                                                        className={({active}) =>
+                                                    <Listbox.Option key={webshop.webshopid} className={({active}) =>
                                                             `relative cursor-pointer select-none py-2 pl-10 pr-2 text-[#60624d] ${
                                                                 active ? 'bg-white rounded-lg' : ''
                                                             }`
@@ -114,17 +109,13 @@ export default function HomePage() {
                                                     >
                                                         {({selected}) => (
                                                             <>
-                                                    <span
-                                                        className={`block truncate ${
-                                                            selected ? 'font-medium' : 'font-normal'
-                                                        }`}>
-                                                        {webshop.name}
-                                                    </span>
+                                                                <span className={`block truncate ${ selected ? 'font-medium' : 'font-normal'}`}>
+                                                                    {webshop.name}
+                                                                </span>
                                                                 {selected ? (
-                                                                    <span
-                                                                        className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                                                            <CheckIcon className="h-4 w-4" aria-hidden="true"/>
-                                                        </span>
+                                                                    <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
+                                                                    <CheckIcon className="h-4 w-4" aria-hidden="true"/>
+                                                                    </span>
                                                                 ) : null}
                                                             </>
                                                         )}
@@ -143,7 +134,7 @@ export default function HomePage() {
                                     {menuItems.map((item) => (
                                         <li key={Math.random() * 0.1}
                                             className="cursor-pointer button-style py-1 px-2 my-2"
-                                            onClick={item.onClick}>{item.label}</li>
+                                            onClick={() => setActiveSection(item)}>{item}</li>
                                     ))}
                                 </ul>
                             </div>
@@ -160,15 +151,15 @@ export default function HomePage() {
                         </div>
                     </section>
 
-                    {activeSection === "rendelesek" ? (
+                    {activeSection === "Rendelések" ? (
                         <section className="col-start-3 ps-10">
                             <Rendelesek/>
                         </section>
-                    ) : activeSection === "termekek" ? (
+                    ) : activeSection === "Termékek" ? (
                         <section className="col-start-3 ps-10">
                             <Termekek/>
                         </section>
-                    ) : activeSection === "beallitasok" ? (
+                    ) : activeSection === "Beállítások" ? (
                         <section className="col-start-3 col-span-9">
                             <Beallitasok/>
                         </section>

@@ -1,17 +1,17 @@
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
+import {FItem} from "@/DTOs/Termekek/FTermek";
 
-export default function FetchTermekek(webshopId: number) {
+export default function FetchTermekek(webshopId: number) : Promise<FItem[]> {
     const fetchTermekek = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/item/all/`, {
+            const response : AxiosResponse<FItem[]> = await axios.get(`http://localhost:3000/item/all/`, {
                 withCredentials: true,
                 params: { webshopid: webshopId }
             });
 
             return response.data;
         } catch (error) {
-            console.log(error);
-            return [];
+            throw new Error("Termékek lekérése a szervertől sikertelen volt.")
         }
     };
 

@@ -2,15 +2,15 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import FWebshop from "@/DTOs/Webshopok/FetchWebshop";
 import {Orders} from "@/DTOs/Rendelesek/Rendeles";
-import {Item} from "@/DTOs/Termekek/FTermek";
+import {FItem} from "@/DTOs/Termekek/FTermek";
 
 interface GlobalContextType {
     webshopId: number;
     updateWebshopId: (newValue: number) => void;
     userName: string;
     updateUserName: (newValue: string) => void;
-    termekek: Item[];
-    updateTermekek: (newValue: Item[]) => void;
+    termekek: FItem[];
+    updateTermekek: (newValue: FItem[]) => void;
     webshopok: FWebshop[];
     updateWebshopok : (newValue: FWebshop[]) => void;
     rendelesek: Orders[];
@@ -34,7 +34,7 @@ interface GlobalProviderProps {
 export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
     const [webshopId, updateWebshopId] = useState<number>(0);
     const [userName, updateUserName] = useState<string>("");
-    const [termekek, updateTermekek] = useState<Item[]>([]);
+    const [termekek, updateTermekek] = useState<FItem[]>([]);
     const [webshopok, updateWebshopok] = useState<FWebshop[]>([]);
     const [rendelesek, updateRendelesek] = useState<Orders[]>([]);
 

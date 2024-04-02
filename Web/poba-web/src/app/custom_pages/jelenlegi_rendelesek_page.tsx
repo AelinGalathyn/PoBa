@@ -1,13 +1,11 @@
 import {Card, CardBody, CardFooter, CardHeader} from "@nextui-org/card";
 import {useEffect, useState} from "react";
 import Image from "next/image";
-import {useGlobal} from "@/app/Globals/global_values";
-import FetchRendelesek from "@/app/Fetching/fetch_rendelesek";
 import {Orders} from "@/DTOs/Rendelesek/Rendeles";
-import FItem from "@/DTOs/Termekek/Termek";
 
 export default function JelenlegiRendelesek() {
-    const {rendelesek, updateRendelesek, webshopId} = useGlobal();
+    const rendelesek : Orders[] = JSON.parse(localStorage.getItem("rendelesek")!);
+    const webshopId : number = JSON.parse(localStorage.getItem("webshopId")!);
 
     const [frissRendelesek, setFrissRendelesek] = useState<Orders[]>([]);
 
@@ -20,15 +18,10 @@ export default function JelenlegiRendelesek() {
         });
     }
 
-
     useEffect(() => {
-        FetchRendelesek(webshopId).then(data => updateRendelesek(data));
-    }, [webshopId]);
-
-    useEffect(() => {
-        updateRendelesek(sortedList(rendelesek));
+        localStorage.setItem("rendelesek", JSON.stringify(sortedList(rendelesek)));
         setFrissRendelesek(rendelesek.filter(item => item).splice(0, 15));
-    }, [rendelesek]);
+    }, [webshopId]);
 
     return (
         <div className="fixed w-fit h-3/4 mt-16">

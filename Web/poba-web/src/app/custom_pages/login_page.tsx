@@ -14,8 +14,6 @@ export default function Login() {
     const [felNev, setFelNev] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-    const { updateWebshopId } = useGlobal();
-    const { updateUserName } = useGlobal();
 
     const loginUser : User = new User(felNev, password)
 
@@ -28,8 +26,8 @@ export default function Login() {
                 },
             });
 
-            updateUserName(response.data.username);
-            updateWebshopId(response.data.webshopid);
+            localStorage.setItem("userName", response.data.username);
+            localStorage.setItem("webshopId", JSON.stringify(response.data.webshopid));
             setIsLoggedIn(true);
 
         } catch (e) {

@@ -5,21 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74dcd9a8-8566-496b-95e2-36b79367fb4c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/magyar_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Modify/modify_termek.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/item/item.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/item/item.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DTOs/Rendelesek/ShowRendeles.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/FixData/lists.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/Functions/create_html_elements.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/Functions/list_filtering.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DTOs/Rendelesek/Rendeles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Rendelesek/Rendeles.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DTOs/Rendelesek/RendelesItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Rendelesek/RendelesItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DTOs/Rendelesek/Vevo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Rendelesek/Vevo.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DTOs/Termekek/FTermek.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Termekek/FTermek.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DTOs/Termekek/ShowItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Termekek/ShowItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DTOs/Termekek/Termek.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTOs/Termekek/Termek.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Fetching/fetch_termekek.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Fetching/fetch_termekek.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Globals/global_values.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Globals/global_values.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Modify/modify_termek.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Modify/modify_termek.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/custom_pages/beallitasok_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/beallitasok_page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/custom_pages/home_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/home_page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/custom_pages/jelenleg_kifogyo_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/jelenleg_kifogyo_page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/custom_pages/jelenlegi_rendelesek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/jelenlegi_rendelesek_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/custom_pages/login_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/login_page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/custom_pages/rendelesek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/rendelesek_page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/custom_pages/termekek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/termekek_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,12 +63,13 @@
     &quot;git-widget-placeholder&quot;: &quot;web&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/STUDY/Webvalto/PoBa/Web/poba-web/public&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/STUDY/Webvalto/PoBa/Web/poba-web&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
     &quot;ts.external.directory.path&quot;: &quot;E:\\STUDY\\Webvalto\\PoBa\\Web\\poba-web\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -89,6 +100,14 @@
       <workItem from="1711523476588" duration="4547000" />
       <workItem from="1711528675129" duration="1144000" />
       <workItem from="1711530345348" duration="17097000" />
+      <workItem from="1711641872354" duration="2862000" />
+      <workItem from="1711700641242" duration="2685000" />
+      <workItem from="1711703345829" duration="3090000" />
+      <workItem from="1711864637290" duration="4716000" />
+      <workItem from="1711878975873" duration="11927000" />
+      <workItem from="1711956105466" duration="7432000" />
+      <workItem from="1711976146007" duration="5753000" />
+      <workItem from="1712041013437" duration="152000" />
     </task>
     <servers />
   </component>
