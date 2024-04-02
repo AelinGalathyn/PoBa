@@ -4,61 +4,61 @@ import { OrderItemEntity } from './entities/orderitem.entity';
 
 @Injectable()
 export class ItemService {
-  constructor() {}
+  constructor() {
+  }
 
-  async makeItems(data: any[]){
+  async makeItems(data: any[]) {
     console.log(data);
     let items: Item[] = [];
-    try{
-    data.forEach((item) => {
-      let qty: number;
-      if (item.Stocks.Status.Active === '0') {
-        qty = -1;
-      } else {
-        qty = parseFloat(item.Stocks.Stock.Qty);
-      }
-      let img: string;
-      try {
-        img = item.Images.Image.Filename;
-      } catch {
-        img = '';
-      }
-      let price;
-      try {
-        price = item.Prices.Price[0].Net;
-      }
-      catch {
-        price = item.Prices.Price.Net;
-      }
-
-      items.push({
-        id: item.Id,
-        sku: item.Sku,
-        name: item.Name,
-        qty: qty,
-        unit: item.Unit,
-        status: item.Statuses.Status.Value,
-        cat_name: item['Categories']['Category'].map((cat) => cat.Name),
-        url: item.Url,
-        pic_url: img,
-        price: price,
-      })
+    try {
+      data.forEach((item) => {
+        if (item.State != 'deleted') {
+          let qty: number;
+          if (item.Stocks.Status.Active === '0') {
+            qty = -1;
+          } else {
+            qty = parseFloat(item.Stocks.Stock.Qty);
+          }
+          let img: string;
+          try {
+            img = item.Images.Image.Filename;
+          } catch {
+            img = '';
+          }
+          let price;
+          try {
+            price = item.Prices.Price[0].Net;
+          } catch {
+            price = item.Prices.Price.Net;
+          }
 
 
-    });
-    } catch{
-
+          items.push({
+            id: item.Id,
+            sku: item.Sku,
+            name: item.Name,
+            qty: qty,
+            unit: item.Unit,
+            status: item['Statuses']['Status']['Value'],
+            cat_name: item['Categories']['Category'].map((cat) => cat.Name),
+            url: item.Url,
+            pic_url: img,
+            price: price,
+          });
+        }
+      });
+    } catch (err) {
+      console.log(err.message + '  ' + items.length);
       let price;
       try {
         price = data[0].Prices.Price[0].Net;
-      }
-      catch {
+      } catch {
         price = data[0].Prices.Price.Net;
       }
       let qty: number;
-      try{
+      try {
         qty = parseFloat(data[0].Stocks.Stock.Qty);
-      }catch{
+      } catch {
         qty = -1;
       }
       let img: string;
@@ -80,14 +80,16 @@ export class ItemService {
         pic_url: img,
         price: price,
       });
+
+      console.log('catch');
     }
 
     return items;
   }
 
-  async makeOrderItems(data: any[]){
+  async makeOrderItems(data: any[]) {
     let items: OrderItemEntity[] = [];
-    try{
+    try {
       data.forEach((item) => {
 
         items.push({
@@ -101,14 +103,12 @@ export class ItemService {
           gross: item.PriceGross,
           vat: item.Vat,
         });
-
-        console.log(item.Price)
       });
-    } catch{
+    } catch {
       let qty: number;
-      try{
+      try {
         qty = parseFloat(data[0].Stocks.Stock.Qty);
-      }catch{
+      } catch {
         qty = -1;
       }
 
