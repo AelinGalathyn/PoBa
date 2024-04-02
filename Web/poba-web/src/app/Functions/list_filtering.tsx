@@ -7,19 +7,20 @@ export function ItemListFiltering(kategoria : string, originalList : ShowItem[])
 
     switch (kategoria) {
         case "Raktárkezelt":
-            filteredList = originalList.filter(item => item.item.qty !== -1);
+            filteredList = filteredList.filter(item => item.item.qty !== -1);
             break;
         case "Termék neve szerint":
-            filteredList = originalList.sort((a, b) => a.item.name.localeCompare(b.item.name));
+            filteredList = filteredList.sort((a, b) => a.item.name.localeCompare(b.item.name));
             break;
         case "Mennyiség szerint":
-            filteredList = originalList.sort((a, b) => a.item.qty - b.item.qty);
+            filteredList = filteredList.sort((a, b) => a.item.qty - b.item.qty);
             break;
         case "Összes":
-            filteredList = originalList;
+            filteredList = [...originalList];
             break;
         default:
-            return originalList;
+            filteredList = [...originalList];
+            break;
     }
 
     return filteredList;
