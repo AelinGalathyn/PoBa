@@ -9,6 +9,7 @@ export default function FetchTermekek(webshopId: number) : Promise<FItem[]> {
                 params: { webshopid: webshopId }
             });
 
+            console.log(response.data);
             return response.data;
         } catch (error) {
             throw new Error("Termékek lekérése a szervertől sikertelen volt.")

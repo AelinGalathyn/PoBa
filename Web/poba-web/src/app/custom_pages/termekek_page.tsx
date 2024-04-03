@@ -68,7 +68,7 @@ export default function Termekek() {
                                             </ul>
                                         </div>
                                         <p className="col-span-2 text-center"><b>Ár:</b><br/> {termek.item.price + " Ft"}</p>
-                                        <p className="flex col-span-5 justify-center"><Image src={termek.item.pic_url} width={100} height={100} alt="termek_kep"/></p>
+                                        <div className="flex col-span-5 justify-center"><Image src={termek.item.pic_url} width={100} height={100} alt="termek_kep"/></div>
                                     </CardBody>
 
                                     <CardFooter className="grid grid-cols-12 card-class mt-5">

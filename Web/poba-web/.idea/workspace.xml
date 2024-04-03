@@ -6,9 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="74dcd9a8-8566-496b-95e2-36b79367fb4c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Functions/list_filtering.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Functions/list_filtering.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Modify/modify_termek.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Modify/modify_termek.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Fetching/fetch_termekek.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Fetching/fetch_termekek.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/FixData/lists.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/FixData/lists.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/custom_pages/rendelesek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/rendelesek_page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/custom_pages/termekek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/termekek_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +45,7 @@
     &quot;git-widget-placeholder&quot;: &quot;web&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/STUDY/Webvalto/PoBa/Backend/poba-backend&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/STUDY/Webvalto/PoBa/Web/poba-web&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -87,6 +90,8 @@
       <workItem from="1711956105466" duration="7432000" />
       <workItem from="1711976146007" duration="5753000" />
       <workItem from="1712041013437" duration="4747000" />
+      <workItem from="1712138516387" duration="3450000" />
+      <workItem from="1712147434480" duration="1191000" />
     </task>
     <servers />
   </component>

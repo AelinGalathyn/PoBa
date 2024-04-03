@@ -59,3 +59,26 @@
 .card-class {
     padding: 1px 3px 1px 3px;
 }
+
+.table-style {
+    background: white;
+    border-radius: 10px;
+}
+
+.table-style thead tr th, .table-style tbody tr td {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.table-style thead tr, .table-style tbody tr {
+    border-bottom: rgb(229 231 235) 10px solid;
+}
+
+.table-style tbody tr:hover{
+    background: rgb(229 231 235);
+    cursor: pointer;
+}
+
+.table-style tbody tr:last-child {
+    border: none;
+}
