@@ -3,8 +3,6 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ApicallsService } from './apicalls.service';
 import { ApiCalls } from '../entities/apicalls.entity';
-import { Webshop } from '../../webshop/entities/webshop.entity';
-import { never } from 'rxjs';
 
 // Mock repository functions
 const repositoryMockFactory: () => MockType<Repository<ApiCalls>> = jest.fn(() => ({

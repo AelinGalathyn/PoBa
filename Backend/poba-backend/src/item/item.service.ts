@@ -31,7 +31,7 @@ export class ItemService {
           } catch {
             price = item.Prices.Price.Net;
           }
-          console.log(item.Images.Image[0].SefUrl);
+          console.log(Math.round((price*100)/100));
 
           items.push({
             id: item.Id,
@@ -43,7 +43,7 @@ export class ItemService {
             cat_name: item['Categories']['Category'].map((cat) => cat.Name),
             url: item.Url,
             pic_url: img,
-            price: price,
+            price: (Math.round(price*100)/100),
           });
         }
       });
@@ -78,10 +78,10 @@ export class ItemService {
         cat_name: data[0]['Categories']['Category'].map((cat) => cat.Name),
         url: data[0].Url,
         pic_url: img,
-        price: price,
+        price: (Math.round((price*100)/100)),
       });
 
-      console.log('catch');
+      console.log(Math.round((price*100)/100));
     }
 
     return items;
@@ -99,8 +99,8 @@ export class ItemService {
           quantity: item.Quantity,
           unit: item.Unit,
           status: item.Status,
-          net: item.PriceNet,
-          gross: item.PriceGross,
+          net: (Math.round(item.PriceNet*100)/100),
+          gross: (Math.round(item.PriceGross*100)/100),
           vat: item.Vat,
         });
       });
@@ -119,8 +119,8 @@ export class ItemService {
         quantity: qty,
         unit: data[0].Unit,
         status: data[0].Status,
-        net: data[0].PriceNet,
-        gross: data[0].PriceGross,
+        net: (Math.round(data[0].PriceNet*100)/100),
+        gross: (Math.round(data[0].PriceGross*100)/100),
         vat: data[0].Vat,
       });
     }
