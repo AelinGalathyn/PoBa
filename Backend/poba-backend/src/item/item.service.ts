@@ -7,122 +7,77 @@ export class ItemService {
   constructor() {
   }
 
-  async makeItems(data: any[]) {
-    console.log(data);
+  async makeItems(data: any[] | any): Promise<Item[]> {
     let items: Item[] = [];
-    try {
-      data.forEach((item) => {
-        if (item.State != 'deleted') {
+    let errors: string[] = [];
+    const processData = (item: any) => {
+      try {
+        if (item.State !== 'deleted') {
           let qty: number;
-          if (item.Stocks.Status.Active === '0') {
+          try {
+            qty = item.Stocks.Status.Active === '0' ? -1 : parseFloat(item.Stocks.Stock.Qty);
+          } catch {
             qty = -1;
-          } else {
-            qty = parseFloat(item.Stocks.Stock.Qty);
           }
-          let img: string;
-          try {
-            img = item.Images.Image[0].SefUrl;
-          } catch {
-            img = '';
-          }
-          let price;
-          try {
-            price = item.Prices.Price[0].Net;
-          } catch {
-            price = item.Prices.Price.Net;
-          }
-          console.log(item.Images.Image[0].SefUrl);
+          const img = item.Images?.Image[0]?.SefUrl || '';
+          const price = Array.isArray(item.Prices.Price) ? item.Prices.Price[0].Net : item.Prices.Price.Net;
 
           items.push({
             id: item.Id,
             sku: item.Sku,
             name: item.Name,
-            qty: qty,
+            qty,
             unit: item.Unit,
-            status: item['Statuses']['Status']['Value'],
-            cat_name: item['Categories']['Category'].map((cat) => cat.Name),
+            status: item.Statuses.Status.Value,
+            cat_name: item.Categories.Category.map((cat) => cat.Name),
             url: item.Url,
             pic_url: img,
-            price: price,
+            price: Math.round(price * 100) / 100,
           });
         }
-      });
-    } catch (err) {
-      console.log(err.message + '  ' + items.length);
-      let price;
-      try {
-        price = data[0].Prices.Price[0].Net;
-      } catch {
-        price = data[0].Prices.Price.Net;
+      } catch (err) {
+        errors.push(`Error processing item ${item.Id}: ${err.message}`);
       }
-      let qty: number;
-      try {
-        qty = parseFloat(data[0].Stocks.Stock.Qty);
-      } catch {
-        qty = -1;
-      }
-      let img: string;
-      try {
-        img = data[0].Images.Image[0].SefUrl;
-      } catch {
-        img = '';
-      }
+    };
 
-      items.push({
-        id: data[0].Id,
-        sku: data[0].Sku,
-        name: data[0].Name,
-        qty: qty,
-        unit: data[0].Unit,
-        status: data[0].Statuses.Status.Value,
-        cat_name: data[0]['Categories']['Category'].map((cat) => cat.Name),
-        url: data[0].Url,
-        pic_url: img,
-        price: price,
-      });
+    if (Array.isArray(data)) {
+      data.forEach(processData);
+    } else {
+      processData(data);
+    }
 
-      console.log('catch');
+    if (errors.length > 0) {
+      throw new Error(`Errors encountered: ${errors.join(', ')}`);
     }
 
     return items;
   }
 
-  async makeOrderItems(data: any[]) {
-    let items: OrderItemEntity[] = [];
-    try {
-      data.forEach((item) => {
 
+  async makeOrderItems(data: any[] | any): Promise<OrderItemEntity[]> {
+    let items: OrderItemEntity[] = [];
+    const processData = (item: any) => {
+      try {
         items.push({
           id: item.Id,
           sku: item.Sku,
           name: item.Name,
-          quantity: item.Quantity,
+          quantity: parseFloat(item.Quantity),
           unit: item.Unit,
           status: item.Status,
-          net: item.PriceNet,
-          gross: item.PriceGross,
+          net: Math.round(item.PriceNet * 100) / 100,
+          gross: Math.round(item.PriceGross * 100) / 100,
           vat: item.Vat,
         });
-      });
-    } catch {
-      let qty: number;
-      try {
-        qty = parseFloat(data[0].Stocks.Stock.Qty);
-      } catch {
-        qty = -1;
+      } catch (err) {
+        console.error(`Error processing order item ${item.Id}: ${err.message}`);
       }
+    };
 
-      items.push({
-        id: data[0].Id,
-        sku: data[0].Sku,
-        name: data[0].Name,
-        quantity: qty,
-        unit: data[0].Unit,
-        status: data[0].Status,
-        net: data[0].PriceNet,
-        gross: data[0].PriceGross,
-        vat: data[0].Vat,
-      });
+    if (Array.isArray(data)) {
+      data.forEach(processData);
+    } else {
+      processData(data);
     }
 
     return items;
