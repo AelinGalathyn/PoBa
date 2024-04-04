@@ -6,20 +6,18 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import Image from "next/image";
 import JelenlegiRendelesek from "@/app/custom_pages/jelenlegi_rendelesek_page";
 import KifogyoTermekek from "@/app/custom_pages/jelenleg_kifogyo_page";
-import Statisztika from "@/app/custom_pages/statisztika_page";
+import HomepageStatisztika from "@/app/custom_pages/homepage_statisztika_page";
 import Termekek from "@/app/custom_pages/termekek_page";
 import FWebshop from "@/DTOs/Webshopok/FetchWebshop";
 import FetchWebshopok from "@/app/Fetching/fetch_webshopok";
 import Beallitasok from "@/app/custom_pages/beallitasok_page";
 import Rendelesek from "@/app/custom_pages/rendelesek_page";
-import axios from "axios";
 import Login from "@/app/custom_pages/login_page";
 import {menuItems} from "@/app/FixData/lists";
 import FetchTermekek from "@/app/Fetching/fetch_termekek";
 import FetchRendelesek from "@/app/Fetching/fetch_rendelesek";
-import {Item} from "@/DTOs/Termekek/Termek";
-import {sortedListItems} from "@/app/Functions/list_filtering";
-import {FItem} from "@/DTOs/Termekek/FTermek";
+import Statisztika from "@/app/custom_pages/statisztika_page";
+import {logOut} from "@/app/BackendConnections/reg_login_apicalls";
 
 export default function HomePage() {
     const userName : string = localStorage.getItem("userName")!;
@@ -36,18 +34,8 @@ export default function HomePage() {
             FetchRendelesek(webshopId);
             FetchWebshopok();
             setSelectedWebshop(webshopok[0]);
-            console.log(webshopok);
         }
     }, [webshopId]);
-
-    const logOut = async () => {
-        await axios.post("http://localhost:3000/auth/logout", {}, {
-            withCredentials: true,
-            headers : {}
-        });
-
-        setActiveSection("HomePage");
-    };
 
     return (
         <>
@@ -143,7 +131,7 @@ export default function HomePage() {
                             <div className="flex justify-center items-center h-full">
                                 <button
                                     className="text-[#FF442B] font-bold hover:bg-[#A3B389] hover:text-white p-2 rounded-md drop-shadow-md"
-                                    onClick={() => logOut()}>
+                                    onClick={() => logOut().then(data => setActiveSection(data))}>
                                     Kijelentkezés
                                 </button>
                             </div>
@@ -162,6 +150,10 @@ export default function HomePage() {
                         <section className="col-start-3 col-span-9">
                             <Beallitasok/>
                         </section>
+                    ) : activeSection === "Statisztika" ? (
+                        <section className="col-start-3 col-span-9">
+                            <Statisztika/>
+                        </section>
                     ) : activeSection === "Home" ? (
                         <>
                             <section className="col-start-3 col-end-5">
@@ -173,7 +165,7 @@ export default function HomePage() {
                                     <KifogyoTermekek/>
                                 </div>
                                 <div className="row-span-1">
-                                    <Statisztika/>
+                                    <HomepageStatisztika/>
                                 </div>
                             </section>
                         </>

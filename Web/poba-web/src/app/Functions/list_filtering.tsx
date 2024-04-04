@@ -30,29 +30,45 @@ export function ItemListFiltering(kategoria : string, originalList : ShowItem[],
 }
 
 export const weeklyStatistics = (orders: Orders[]) => {
-    return orders.reduce((statistics: {[dayOfWeek: number]: number}, order) => {
-        const dayOfWeek = new Date(order.date).getDay();
-        statistics[dayOfWeek] = (statistics[dayOfWeek] || 0) + 1;
-        return statistics;
-    }, {});
+    if (orders) {
+        return orders.reduce((statistics: {[dayOfWeek: number]: number}, order) => {
+            const dayOfWeek = new Date(order.date).getDay();
+            statistics[dayOfWeek] = (statistics[dayOfWeek] || 0) + 1;
+            return statistics;
+        }, {});
+    } else {
+        return [];
+    }
 }
 
 export const weeklyIncome = (orders: Orders[]) => {
-    return orders.reduce((statistics: {[dayOfWeek: number]: number}, order) => {
-        const dayOfWeek = new Date(order.date).getDay();
-        statistics[dayOfWeek] = (order.gross || 0) + order.gross;
-        return statistics;
-    }, {});
+    if (orders) {
+        return orders.reduce((statistics: {[dayOfWeek: number]: number}, order) => {
+            const dayOfWeek = new Date(order.date).getDay();
+            statistics[dayOfWeek] = (order.gross || 0) + order.gross;
+            return statistics;
+        }, {});
+    } else {
+        return [];
+    }
 }
 
 export const sortedListItems = (list: Item[]) => {
-    return list.sort((a, b) => {
-        return new Date(b.date).getTime() - new Date(a.date).getTime();
-    });
+    if (list) {
+        return list.sort((a, b) => {
+            return new Date(b.date).getTime() - new Date(a.date).getTime();
+        });
+    } else {
+        return [];
+    }
 }
 
 export const sortedListOrders = (list: Orders[]) => {
-    return list.sort((a, b) => {
-        return new Date(b.date).getTime() - new Date(a.date).getTime();
-    });
+    if (list) {
+        return list.sort((a, b) => {
+            return new Date(b.date).getTime() - new Date(a.date).getTime();
+        });
+    } else {
+        return [];
+    }
 }

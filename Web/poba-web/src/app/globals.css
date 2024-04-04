@@ -76,6 +76,11 @@
     border-bottom: rgb(229 231 235) 10px solid;
 }
 
+.table-style tbody .showing-row:hover {
+    cursor: pointer;
+    background: white;
+}
+
 .table-style tbody tr:hover{
     background: rgb(229 231 235);
     cursor: pointer;

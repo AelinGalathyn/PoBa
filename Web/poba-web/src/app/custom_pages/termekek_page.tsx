@@ -4,11 +4,13 @@ import Image from "next/image";
 import {useEffect, useState} from "react";
 import ShowItem from "@/DTOs/Termekek/ShowItem";
 import ModifyTermekQty from "@/app/Modify/modify_termek";
-import {itemsFunctions, itemsHeader, rendelesHeader} from "@/app/FixData/lists";
-import {CreateButton, CreateP} from "@/app/Functions/create_html_elements";
+import {itemsFunctions, itemsHeader} from "@/app/FixData/lists";
+import {CreateButton} from "@/app/Functions/create_html_elements";
 import {ItemListFiltering} from "@/app/Functions/list_filtering";
 import {FItem} from "@/DTOs/Termekek/FTermek";
 import {MagnifyingGlassIcon} from "@heroicons/react/20/solid";
+import {Input} from "@nextui-org/input";
+import {Button} from "@nextui-org/react";
 
 export default function Termekek() {
     const termekek : FItem[] = JSON.parse(localStorage.getItem("termekek")!);
@@ -17,6 +19,7 @@ export default function Termekek() {
     const [showTermekek, setShowTermekek] = useState<ShowItem[]>([]);
     const [showCorrectList, setShowCorrectList] = useState<string>("");
     const [keresoKifejezes, setKeresoKifejezes] = useState<string>("");
+    const [newQty, setNewQty] = useState<string>("");
 
     useEffect(() => {
         setShowTermekek(termekek.map(item => new ShowItem(item, false)));
@@ -62,23 +65,59 @@ export default function Termekek() {
                     </thead>
                     <tbody>
                     {ItemListFiltering(showCorrectList, showTermekek, keresoKifejezes).map((termek, index) => (
-                        <tr key={index} onClick={() => {
-                            toggleShowItem(termek.item.id);
-                        }} className={termek.item.qty === -1 ? "bg-gray-200" : ""}>
-                            <td>{index + 1}</td>
-                            <td>{termek.item.sku}</td>
-                            <td>{termek.item.cat_name.map(item => item + ", ")}</td>
-                            <td>{termek.item.name}</td>
-                            <td>{termek.item.qty === -1 ? "" : termek.item.qty}</td>
-                            <td>{termek.item.price + " Ft"}</td>
-                            <td className="flex justify-end pe-2">{termek.item.qty === 0 ?
-                                (<Image src="/elfogyott_icon.png" width={30} height={30} alt="szallito_ceg_icon"/>)
-                                : termek.item.qty === -1 ? ""
-                                    : termek.item.qty <= 10 ?
-                                        (<Image src="/kifogyoban_icon.png" width={30} height={30}
-                                                alt="szallito_ceg_icon"/>)
-                                        : ""}</td>
-                        </tr>
+                        termek.showItem ? (
+                            <tr key={index} className="h-fit border-b-8 border-gray-200 col-span-7 showing-row">
+                                <td colSpan={7}>
+                                    <div className="grid grid-rows-3">
+                                        <div className="row-span-1 grid grid-cols-12" onClick={() => {toggleShowItem(termek.item.id)}}>
+                                            <p className="col-span-1">{termekek.findIndex(item => item.id === termek.item.id) + 1}</p>
+                                            <p className="col-span-9 text-center">{termek.item.sku}</p>
+                                        </div>
+                                        <div className="row-span-1 grid grid-cols-12" onClick={() => {toggleShowItem(termek.item.id)}}>
+                                            <Image className="m-3 col-span-1" src={termek.item.pic_url} width={100}
+                                                   height={100} alt="termek_kep"/>
+                                            <div className="flex flex-col col-span-3">
+                                                <p><b>Név</b></p>
+                                                <p>{termek.item.name}</p>
+                                            </div>
+                                            <div className="flex flex-col col-span-1">
+                                                <p><b>Cikkszám</b></p>
+                                                <p>{termek.item.sku}</p>
+                                            </div>
+                                            <div className="flex flex-col col-span-1">
+                                                <p><b>Darab</b></p>
+                                                <p>{termek.item.qty}</p>
+                                            </div>
+                                        </div>
+                                        <div className="row-span-1 flex justify-center">
+                                            <div className="flex flex-col col-span-12">
+                                                <p><b>Darab</b></p>
+                                                <Input type="number" placeholder={termek.item.qty.toString()} onChange={(e) => setNewQty(e.target.value)}/>
+                                                <Button onClick={() => modifyItemQty(termek, newQty)}>Mentés</Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        ) : (
+                            <tr key={index} onClick={() => {
+                                toggleShowItem(termek.item.id);
+                            }} className={termek.item.qty === -1 ? "bg-gray-200" : ""}>
+                                <td>{index + 1}</td>
+                                <td>{termek.item.sku}</td>
+                                <td>{termek.item.cat_name.map(item => item + ", ")}</td>
+                                <td>{termek.item.name}</td>
+                                <td>{termek.item.qty === -1 ? "" : termek.item.qty}</td>
+                                <td>{termek.item.price + " Ft"}</td>
+                                <td className="flex justify-end pe-2">{termek.item.qty === 0 ?
+                                    (<Image src="/elfogyott_icon.png" width={30} height={30} alt="szallito_ceg_icon"/>)
+                                    : termek.item.qty === -1 ? ""
+                                        : termek.item.qty <= 10 ?
+                                            (<Image src="/kifogyoban_icon.png" width={30} height={30}
+                                                    alt="szallito_ceg_icon"/>)
+                                            : ""}</td>
+                            </tr>
+                        )
                     ))}
                     </tbody>
                 </table>
