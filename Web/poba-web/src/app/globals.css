@@ -24,7 +24,8 @@
 .button-style {
     background: white;
     border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.27) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 2px;
+    border: 1px rgb(229 231 235) solid;
+    box-shadow: rgb(211, 211, 211) 0 2px 2px;
     color: #60624d;
 }
 
@@ -63,6 +64,7 @@
 .table-style {
     background: white;
     border-radius: 10px;
+    text-align: center;
 }
 
 .table-style thead tr th, .table-style tbody tr td {
@@ -81,4 +83,8 @@
 
 .table-style tbody tr:last-child {
     border: none;
+}
+.nem-raktarkezelt-sor {
+    background: darkgray;
+    cursor: auto;
 }

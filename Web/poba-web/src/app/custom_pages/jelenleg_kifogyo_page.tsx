@@ -3,26 +3,16 @@ import Image from "next/image";
 import {useEffect, useState} from "react";
 import {Item} from "@/DTOs/Termekek/Termek";
 import {FItem} from "@/DTOs/Termekek/FTermek";
+import {webpack} from "next/dist/compiled/webpack/webpack";
 
 export default function KifogyoTermekek() {
-    const termekek : FItem[] = JSON.parse(localStorage.getItem("termekek")!);
     const webshopId : number = JSON.parse(localStorage.getItem("webshopId")!);
+
     const [fogyoTermekek, setFogyoTermekek] = useState<Item[]>([]);
 
     useEffect(() => {
-        let now = new Date();
-
-        setFogyoTermekek(sortedList(termekek.filter(item => item.qty <= 10 && item.qty >= 0).map(item =>
-            new Item(item, now)
-        ).slice(0, 15)));
-
+        setFogyoTermekek(JSON.parse(localStorage.getItem("datumosTermekek")!));
     }, [webshopId]);
-
-    const sortedList = (list: Item[]) => {
-        return list.sort((a, b) => {
-            return new Date(b.date).getTime() - new Date(a.date).getTime();
-        });
-    }
 
     return (
         <div className="fixed h-2/6 w-2/5 mt-[5vh]">

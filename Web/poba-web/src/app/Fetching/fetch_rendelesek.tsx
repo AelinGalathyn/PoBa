@@ -8,11 +8,11 @@ export default function FetchRendelesek(webshopId : number) {
                 params: { webshopid: webshopId }
             });
 
-            return response.data
+            localStorage.setItem("rendelesek", JSON.stringify(response.data));
         } catch (error) {
             console.log(error);
         }
     };
 
-    return fetchRendelesek();
+    fetchRendelesek();
 }

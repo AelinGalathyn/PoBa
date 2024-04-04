@@ -43,8 +43,8 @@ export default function Rendelesek() {
                             </div>
                             <div className="row-span-8">
                                 <div className="px-10">
-                                    <table className="w-full">
-                                        <caption className="text-center text-xl mb-10"><b>Kosár tartalma</b></caption>
+                                    <table className="w-full mt-5">
+                                        <caption className="text-center text-xl mb-10 pt-5 border-t-8 border-gray-100 border-double"><b>Kosár tartalma</b></caption>
                                         <thead>
                                             <tr className="text-lg border-b-gray-100 border-b-2">
                                                 <th>Név</th>
@@ -59,7 +59,7 @@ export default function Rendelesek() {
                                                 <tr>
                                                     <td>{item.name}</td>
                                                     <td>{item.sku}</td>
-                                                    <td>{item.net}</td>
+                                                    <td>{item.net + " Ft"}</td>
                                                     <td>{item.gross + " Ft"}</td>
                                                     <td>{item.quantity + " db"}</td>
                                                 </tr>

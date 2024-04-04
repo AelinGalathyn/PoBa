@@ -9,12 +9,12 @@ export default function FetchWebshopok()
                 withCredentials: true
             });
 
-            return response.data;
+            localStorage.setItem("webshopok", JSON.stringify(response.data));
 
         } catch (error) {
             console.log(error);
         }
     }
 
-    return fetchWebshopok();
+    fetchWebshopok();
 }

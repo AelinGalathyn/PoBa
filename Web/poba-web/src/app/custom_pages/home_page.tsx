@@ -17,20 +17,25 @@ import Login from "@/app/custom_pages/login_page";
 import {menuItems} from "@/app/FixData/lists";
 import FetchTermekek from "@/app/Fetching/fetch_termekek";
 import FetchRendelesek from "@/app/Fetching/fetch_rendelesek";
+import {Item} from "@/DTOs/Termekek/Termek";
+import {sortedListItems} from "@/app/Functions/list_filtering";
+import {FItem} from "@/DTOs/Termekek/FTermek";
 
 export default function HomePage() {
     const userName : string = localStorage.getItem("userName")!;
     const webshopId : number = JSON.parse(localStorage.getItem("webshopId")!);
     const webshopok : FWebshop[] = JSON.parse(localStorage.getItem("webshopok")!);
+    const termekek : FItem[] = JSON.parse(localStorage.getItem("termekek")!);
 
     const [activeSection, setActiveSection] = useState("Home");
     const [selectedWebshop, setSelectedWebshop] = useState<FWebshop>({webshopid : 0, name : ""});
 
     useEffect(() => {
+
         if (webshopId !== null) {
-            FetchTermekek(webshopId).then(data => localStorage.setItem("termekek", JSON.stringify(data)));
-            FetchRendelesek(webshopId).then(data => localStorage.setItem("rendelesek", JSON.stringify(data)));
-            FetchWebshopok().then(data => localStorage.setItem("webshopok", JSON.stringify(data)));
+            FetchTermekek(webshopId);
+            FetchRendelesek(webshopId);
+            FetchWebshopok();
             setSelectedWebshop(webshopok[0]);
         }
     }, [webshopId]);
@@ -79,8 +84,7 @@ export default function HomePage() {
                                 }}>
                                     <div className="flex flex-col px-2 justify-center mt-1">
                                         <Listbox.Button
-                                            className="relative text-left text-[15px] rounded-md bg-white py-1 pe-10 ps-2 text-[#60624d]"
-                                            style={{boxShadow: "rgba(0, 0, 0, 0.27) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 2px"}}>
+                                            className="relative text-left text-[15px] py-1 pe-10 ps-2 text-[#60624d] button-style">
 
                                             <span>{selectedWebshop?.name}</span>
                                             <span className="absolute inset-y-0 right-0 flex items-center pr-2">
@@ -122,13 +126,13 @@ export default function HomePage() {
                                 </Listbox>
                             </div>
                         </div>
-                        <div className="row-span-7 text-[15px] bg-yellow-50">
+                        <div className="row-span-7 text-[15px] bg-[#C6D8A7]">
                             <div className="relative w-full h-full flex flex-col items-center justify-center">
                                 <hr className="border-dotted border-t-8 w-full border-yellow-50 absolute top-[-4.5px]"/>
                                 <ul className="w-3/4">
                                     {menuItems.map((item) => (
                                         <li key={Math.random() * 0.1}
-                                            className="cursor-pointer button-style py-1 px-2 my-2"
+                                            className="cursor-pointer font-bold bg-[#A3B389] hover:bg-white text-white hover:text-stone-500 rounded-md drop-shadow-md py-1 px-2 my-2"
                                             onClick={() => setActiveSection(item)}>{item}</li>
                                     ))}
                                 </ul>

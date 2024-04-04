@@ -5,9 +5,10 @@ interface LineChartWeekProps {
     title: string;
     label: string;
     isChart1: boolean;
+    data: { [dayOfWeek: number]: number; };
 }
 
-export default function LineChartWeek({ title, label, isChart1 }: LineChartWeekProps) {
+export default function LineChartWeek({ title, label, isChart1, data }: LineChartWeekProps) {
 
     useEffect(() => {
         const ctx = document.getElementById(isChart1 ? "myChart" : "myChart2") as HTMLCanvasElement;
@@ -16,9 +17,9 @@ export default function LineChartWeek({ title, label, isChart1 }: LineChartWeekP
         const myChart = new Chart(ctx, {
             type: "line",
             data: {
-                labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                labels: Object.keys(data),
                 datasets: [{
-                    data: [10, 35, 24, 55, 100, 25, 88],
+                    data: Object.values(data),
                     label: label,
                     borderColor: "#3cba9f",
                     backgroundColor: "#71d1bd",

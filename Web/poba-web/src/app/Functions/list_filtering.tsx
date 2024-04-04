@@ -1,5 +1,6 @@
 import ShowItem from "@/DTOs/Termekek/ShowItem";
-import ShowRendeles from "@/DTOs/Rendelesek/ShowRendeles";
+import {Item} from "@/DTOs/Termekek/Termek";
+import {Orders} from "@/DTOs/Rendelesek/Rendeles";
 
 let filteredList: ShowItem[] = [];
 
@@ -26,10 +27,30 @@ export function ItemListFiltering(kategoria : string, originalList : ShowItem[])
     return filteredList;
 }
 
-export const toggleShowOrder = (id: number) => {
-    const showRendelesek : ShowRendeles[] = JSON.parse(localStorage.getItem("showRendelesek")!);
+export const weeklyStatistics = (items: Item[]) => {
+    return items.reduce((statistics: {[dayOfWeek: number]: number}, item) => {
+        const dayOfWeek = new Date(item.date).getDay();
+        statistics[dayOfWeek] = (statistics[dayOfWeek] || 0) + 1;
+        return statistics;
+    }, {});
+}
 
-    localStorage.setItem("showRendelesek", JSON.stringify(showRendelesek.map(order =>
-        order.order.orderid === id ? { ...order, isShown: !order.isShown } : order
-    )))
-};
+export const weeklyIncome = (items: Item[]) => {
+    return items.reduce((statistics: {[dayOfWeek: number]: number}, item) => {
+        const dayOfWeek = item.date.getDay();
+        statistics[dayOfWeek] = (statistics[dayOfWeek] || 0) + 1;
+        return statistics;
+    }, {});
+}
+
+export const sortedListItems = (list: Item[]) => {
+    return list.sort((a, b) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
+}
+
+export const sortedListOrders = (list: Orders[]) => {
+    return list.sort((a, b) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
+}

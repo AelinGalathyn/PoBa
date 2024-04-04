@@ -5,9 +5,10 @@ interface CircleChartWeekProps {
     title: string;
     label: string;
     isChart1: boolean;
+    data: { [dayOfWeek: number]: number; };
 }
 
-export default function CircleChartWeek({ title, label, isChart1 }: CircleChartWeekProps) {
+export default function CircleChartWeek({ title, label, isChart1, data }: CircleChartWeekProps) {
 
     useEffect(() => {
         const ctx = document.getElementById(isChart1 ? "myChart" : "myChart2") as HTMLCanvasElement;
@@ -16,9 +17,9 @@ export default function CircleChartWeek({ title, label, isChart1 }: CircleChartW
         const myChart = new Chart(ctx, {
             type: "doughnut",
             data: {
-                labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                labels: Object.keys(data),
                 datasets: [{
-                    data: [10, 35, 24, 55, 100, 25, 88],
+                    data: Object.values(data),
                     label: label,
                     backgroundColor: [
                         "rgb(41,141,255)",
