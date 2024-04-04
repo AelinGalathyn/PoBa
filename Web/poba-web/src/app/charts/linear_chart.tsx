@@ -17,7 +17,7 @@ export default function LineChartWeek({ title, label, isChart1, data }: LineChar
         const myChart = new Chart(ctx, {
             type: "line",
             data: {
-                labels: Object.keys(data),
+                labels: ["Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek"],
                 datasets: [{
                     data: Object.values(data),
                     label: label,

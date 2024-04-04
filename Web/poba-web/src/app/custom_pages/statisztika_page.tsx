@@ -3,11 +3,11 @@ import {useEffect, useState} from "react";
 import {Spacer} from "@nextui-org/react";
 import CircleChartWeek from "@/app/charts/circle_chart";
 import LinearChartWeek from "@/app/charts/linear_chart";
-import {weeklyStatistics} from "@/app/Functions/list_filtering";
-import {Item} from "@/DTOs/Termekek/Termek";
+import {weeklyIncome, weeklyStatistics} from "@/app/Functions/list_filtering";
+import {Orders} from "@/DTOs/Rendelesek/Rendeles";
 
 export default function Statisztika() {
-    const datumosTermekek : Item[] = JSON.parse(localStorage.getItem("datumosTermekek")!);
+    const rendelesek : Orders[] = JSON.parse(localStorage.getItem("rendelesek")!);
 
     const [isLinear, setIsLinear] = useState<boolean>(false);
     const [isLinear2, setIsLinear2] = useState<boolean>(false);
@@ -21,18 +21,18 @@ export default function Statisztika() {
                 <div className="grid grid-cols-2">
                     <div className="h-full text-center flex flex-col justify-center items-center">
                         {!isLinear ?
-                            <LinearChartWeek title="Heti rendelések" label="db" isChart1={true} data={weeklyStatistics(datumosTermekek)}/>
+                            <LinearChartWeek title="Heti rendelések" label="db" isChart1={true} data={weeklyStatistics(rendelesek)}/>
                             :
-                            <CircleChartWeek title="Heti rendelések" label="db" isChart1={true} data={weeklyStatistics(datumosTermekek)}/>
+                            <CircleChartWeek title="Heti rendelések" label="db" isChart1={true} data={weeklyStatistics(rendelesek)}/>
                         }
                         <Spacer/>
                         <Switch onValueChange={setIsLinear} size="lg" color="warning" className="py-[5px]">Circle</Switch>
                     </div>
                     <div className="h-full text-center flex flex-col justify-center items-center">
                         {!isLinear2 ?
-                            <LinearChartWeek title="Heti bevétel" label="Ezer Ft" isChart1={false} data={weeklyStatistics(datumosTermekek)}/>
+                            <LinearChartWeek title="Heti bevétel" label="Ezer Ft" isChart1={false} data={weeklyIncome(rendelesek)}/>
                             :
-                            <CircleChartWeek title="Heti bevétel" label="Ezer Ft" isChart1={false} data={weeklyStatistics(datumosTermekek)}/>
+                            <CircleChartWeek title="Heti bevétel" label="Ezer Ft" isChart1={false} data={weeklyIncome(rendelesek)}/>
                         }
                         <Spacer/>
                         <Switch onValueChange={setIsLinear2} size="lg" color="warning" className="py-[5px]">Circle</Switch>

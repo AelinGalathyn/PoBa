@@ -25,7 +25,6 @@ export default function HomePage() {
     const userName : string = localStorage.getItem("userName")!;
     const webshopId : number = JSON.parse(localStorage.getItem("webshopId")!);
     const webshopok : FWebshop[] = JSON.parse(localStorage.getItem("webshopok")!);
-    const termekek : FItem[] = JSON.parse(localStorage.getItem("termekek")!);
 
     const [activeSection, setActiveSection] = useState("Home");
     const [selectedWebshop, setSelectedWebshop] = useState<FWebshop>({webshopid : 0, name : ""});
@@ -37,6 +36,7 @@ export default function HomePage() {
             FetchRendelesek(webshopId);
             FetchWebshopok();
             setSelectedWebshop(webshopok[0]);
+            console.log(webshopok);
         }
     }, [webshopId]);
 

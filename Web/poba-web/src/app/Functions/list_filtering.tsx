@@ -27,18 +27,18 @@ export function ItemListFiltering(kategoria : string, originalList : ShowItem[])
     return filteredList;
 }
 
-export const weeklyStatistics = (items: Item[]) => {
-    return items.reduce((statistics: {[dayOfWeek: number]: number}, item) => {
-        const dayOfWeek = new Date(item.date).getDay();
+export const weeklyStatistics = (orders: Orders[]) => {
+    return orders.reduce((statistics: {[dayOfWeek: number]: number}, order) => {
+        const dayOfWeek = new Date(order.date).getDay();
         statistics[dayOfWeek] = (statistics[dayOfWeek] || 0) + 1;
         return statistics;
     }, {});
 }
 
-export const weeklyIncome = (items: Item[]) => {
-    return items.reduce((statistics: {[dayOfWeek: number]: number}, item) => {
-        const dayOfWeek = item.date.getDay();
-        statistics[dayOfWeek] = (statistics[dayOfWeek] || 0) + 1;
+export const weeklyIncome = (orders: Orders[]) => {
+    return orders.reduce((statistics: {[dayOfWeek: number]: number}, order) => {
+        const dayOfWeek = new Date(order.date).getDay();
+        statistics[dayOfWeek] = (order.gross || 0) + order.gross;
         return statistics;
     }, {});
 }
