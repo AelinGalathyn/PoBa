@@ -4,7 +4,7 @@ import {Orders} from "@/DTOs/Rendelesek/Rendeles";
 
 let filteredList: ShowItem[] = [];
 
-export function ItemListFiltering(kategoria : string, originalList : ShowItem[]) {
+export function ItemListFiltering(kategoria : string, originalList : ShowItem[], keresoKifejezes : string) {
 
     switch (kategoria) {
         case "Raktárkezelt":
@@ -16,6 +16,8 @@ export function ItemListFiltering(kategoria : string, originalList : ShowItem[])
         case "Mennyiség szerint":
             filteredList = filteredList.sort((a, b) => a.item.qty - b.item.qty);
             break;
+        case "Keresőmező" :
+            return filteredList.filter(item => item.item.name.toLowerCase().includes(keresoKifejezes.toLowerCase()))
         case "Összes":
             filteredList = [...originalList];
             break;

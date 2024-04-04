@@ -1,6 +1,5 @@
 "use client";
 
-import {Card, CardBody, CardFooter, CardHeader} from "@nextui-org/card";
 import Image from "next/image";
 import {useEffect, useState} from "react";
 import ShowItem from "@/DTOs/Termekek/ShowItem";
@@ -9,6 +8,7 @@ import {itemsFunctions, itemsHeader, rendelesHeader} from "@/app/FixData/lists";
 import {CreateButton, CreateP} from "@/app/Functions/create_html_elements";
 import {ItemListFiltering} from "@/app/Functions/list_filtering";
 import {FItem} from "@/DTOs/Termekek/FTermek";
+import {MagnifyingGlassIcon} from "@heroicons/react/20/solid";
 
 export default function Termekek() {
     const termekek : FItem[] = JSON.parse(localStorage.getItem("termekek")!);
@@ -16,6 +16,7 @@ export default function Termekek() {
 
     const [showTermekek, setShowTermekek] = useState<ShowItem[]>([]);
     const [showCorrectList, setShowCorrectList] = useState<string>("");
+    const [keresoKifejezes, setKeresoKifejezes] = useState<string>("");
 
     useEffect(() => {
         setShowTermekek(termekek.map(item => new ShowItem(item, false)));
@@ -39,8 +40,15 @@ export default function Termekek() {
             <div className="text-center">
                 <h1 className="text-2xl font-bold drop-shadow-md">Termékek</h1>
             </div>
-            <div className="space-x-2 mt-3">
-                {itemsFunctions.map(item => CreateButton(item, () => setShowCorrectList(item)))}
+            <div className="mt-3 grid grid-cols-2">
+                <div className="space-x-2">
+                    {itemsFunctions.map(item => CreateButton(item, () => setShowCorrectList(item)))}
+                </div>
+                <div className="flex justify-end items-center grid-cols-2">
+                    <MagnifyingGlassIcon width={25} height={25} />
+                    <input className="ms-2 p-2 border-2 border-gray-300 rounded-md" type="text" onClick={() => setShowCorrectList("Keresőmező")}
+                           onChange={(e) => setKeresoKifejezes(e.target.value)}/>
+                </div>
             </div>
             <div
                 className="max-h-full w-full mt-5 p-2 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto scroll-smooth">
@@ -53,7 +61,7 @@ export default function Termekek() {
                     </tr>
                     </thead>
                     <tbody>
-                    {ItemListFiltering(showCorrectList, showTermekek).map((termek, index) => (
+                    {ItemListFiltering(showCorrectList, showTermekek, keresoKifejezes).map((termek, index) => (
                         <tr key={index} onClick={() => {
                             toggleShowItem(termek.item.id);
                         }} className={termek.item.qty === -1 ? "bg-gray-200" : ""}>

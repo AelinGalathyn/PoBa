@@ -7,9 +7,8 @@
     <list default="true" id="7f197a7f-b474-48b6-84fe-4e366523ff24" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/Functions/list_filtering.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Functions/list_filtering.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/charts/linear_chart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/charts/linear_chart.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/custom_pages/home_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/home_page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/custom_pages/statisztika_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/statisztika_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/custom_pages/rendelesek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/rendelesek_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/custom_pages/termekek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/custom_pages/termekek_page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +54,7 @@
       <option name="presentableId" value="Default" />
       <updated>1712163843733</updated>
       <workItem from="1712163844783" duration="3870000" />
-      <workItem from="1712221692650" duration="761000" />
+      <workItem from="1712221692650" duration="2723000" />
     </task>
     <servers />
   </component>
