@@ -20,6 +20,7 @@ import { WebshopId } from './users/decorators/webshopid.param';
 import { RegDto } from './auth/dto/reg.dto';
 import { ItemService } from './item/item.service';
 import { Request, Response } from 'express';
+import { ChangePasswordDto } from './users/dto/change-password.dto';
 
 
 @Controller ()
@@ -89,6 +90,19 @@ export class AppController{
         });
 
         return res.send({ message: 'Logout successful' });
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('auth/changePassword')
+    async changePassword(@UserId()userid, @Body()passwords: ChangePasswordDto){
+        const user = await this.usersService.findById(userid);
+        console.log(passwords);
+        const valid = await this.authService.validateUser({username: user.username, password: passwords.opw});
+        if(!valid){
+            throw new UnauthorizedException('Invalid old password');
+        }
+
+        return await this.authService.changePassword(user, passwords.npw);
     }
 }
 

@@ -5,6 +5,7 @@ import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UsersService } from '../users/users.service';
 import { LoginDto } from './login.dto';
 import { WebshopService } from '../webshop/webshop.service';
+import { Users } from '../users/entities/users.entity';
 
 @Injectable()
 export class AuthService {
@@ -64,5 +65,10 @@ export class AuthService {
         } catch (err) {
             throw new InternalServerErrorException('Unable to register user');
         }
+    }
+
+    async changePassword(user: Users, password: string){
+        const hashedPassword = await this.pwService.hashPassword(password);
+        return await this.usersService.changePassword(user, hashedPassword);
     }
 }
