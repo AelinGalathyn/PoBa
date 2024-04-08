@@ -1,13 +1,24 @@
 import {Switch} from "@nextui-org/switch";
-import {weeklyIncome, weeklyStatistics} from "@/app/(Functions)/list_filtering";
+import {sortedListOrders, weeklyIncome, weeklyStatistics} from "@/app/(Functions)/list_filtering";
 import {Orders} from "@/app/(DTOs)/Rendelesek/Rendeles";
 import {renderChart} from "@/app/(Functions)/charts";
 import {Spacer} from "@nextui-org/react";
 import {fetch_rendelesek} from "@/app/(ApiCalls)/fetch";
 import {webshopid} from "@/app/(FixData)/variables";
+import {useEffect, useState} from "react";
 
-export default async function HomepageStatisztika() {
-    const rendelesek : Orders[] = await fetch_rendelesek(webshopid.webshopid);
+export default function HomepageStatisztika() {
+
+    const [rendelesek, setRendelesek] = useState<Orders[]>([])
+
+    useEffect(() => {
+        const getRendelsesek = async () => {
+            const rendelesek : Orders[] = await fetch_rendelesek(webshopid.webshopid);
+            setRendelesek(sortedListOrders(rendelesek));
+        }
+
+        getRendelsesek();
+    }, []);
 
     let charts = [ "linear", "linear"];
 

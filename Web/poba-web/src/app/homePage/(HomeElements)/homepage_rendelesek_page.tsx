@@ -3,11 +3,19 @@ import {Orders} from "@/app/(DTOs)/Rendelesek/Rendeles";
 import {fetch_rendelesek} from "@/app/(ApiCalls)/fetch";
 import {webshopid} from "@/app/(FixData)/variables";
 import {sortedListOrders} from "@/app/(Functions)/list_filtering";
-import React from "react";
+import React, {useEffect, useState} from "react";
 
-export default async function JelenlegiRendelesek() {
-    const rendelesek : Orders[] = await fetch_rendelesek(webshopid.webshopid);
-    const frissRendelesek : Orders[] = sortedListOrders(rendelesek);
+export default function JelenlegiRendelesek() {
+    const [frissRendelesek, setFrissRendelesek] = useState<Orders[]>([])
+
+    useEffect(() => {
+        const getRendelsesek = async () => {
+            const rendelesek : Orders[] = await fetch_rendelesek(webshopid.webshopid);
+            setFrissRendelesek(sortedListOrders(rendelesek));
+        }
+
+        getRendelsesek();
+    }, []);
 
     return (
         <div className="fixed w-fit max-h-3/4 mt-16">

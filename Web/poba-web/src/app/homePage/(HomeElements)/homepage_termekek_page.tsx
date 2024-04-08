@@ -1,13 +1,22 @@
 import {Card, CardHeader} from "@nextui-org/card";
 import {Item} from "@/app/(DTOs)/Termekek/Termek";
 import {FItem} from "@/app/(DTOs)/Termekek/FTermek";
-import {createDatedItems} from "@/app/(Functions)/list_filtering";
-import {fetch_termekek} from "@/app/(ApiCalls)/fetch";
+import {createDatedItems, sortedListOrders} from "@/app/(Functions)/list_filtering";
+import {fetch_rendelesek, fetch_termekek} from "@/app/(ApiCalls)/fetch";
 import {webshopid} from "@/app/(FixData)/variables";
+import {useEffect, useState} from "react";
 
-export default async function KifogyoTermekek() {
-    const termekek : FItem[] = await fetch_termekek(webshopid.webshopid);
-    const fogyoTermekek = createDatedItems(termekek);
+export default function KifogyoTermekek() {
+    const [fogyoTermekek, setFogyoTermekek] = useState<Item[]>([])
+
+    useEffect(() => {
+        const getTermekek = async () => {
+            const termekek : FItem[] = await fetch_termekek(webshopid.webshopid);
+            setFogyoTermekek(createDatedItems(termekek));
+        }
+
+        getTermekek();
+    }, []);
 
     return (
         <div className="fixed h-2/6 w-2/5 mt-[5vh]">

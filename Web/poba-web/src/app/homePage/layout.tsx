@@ -4,15 +4,18 @@ import Image from "next/image";
 import React, {Fragment, useEffect, useState} from "react";
 import {menuItems} from "@/app/(FixData)/lists";
 import {logOut} from "@/app/(ApiCalls)/calls";
-import {redirect} from "next/navigation";
+import {redirect, useRouter} from "next/navigation";
 import Webshopok from "@/app/homePage/(ServerMenu)/webshopok";
 import FWebshop from "@/app/(DTOs)/Webshopok/FetchWebshop";
 import {Listbox, Transition} from "@headlessui/react";
 import {webshopid} from "@/app/(FixData)/variables";
 import {ChevronUpDownIcon} from "@heroicons/react/20/solid";
 import {fetch_username} from "@/app/(ApiCalls)/fetch";
+import Home from "@/app/page";
 
 export default function HomePageLayout({children} : { children : React.ReactNode }) {
+
+    Home();
 
     const [selectedWebshop, setSelectedWebshop] = useState<FWebshop>({webshopid : 0, name : ""})
     const [username, setUsername] = useState("");
@@ -107,9 +110,7 @@ export default function HomePageLayout({children} : { children : React.ReactNode
                     </div>
                 </div>
             </section>
-            <section>
-                {children}
-            </section>
+            {children}
         </main>
     )
 }

@@ -29,7 +29,10 @@ export const fetch_rendeles = cache( async(webshopId : number, orderId : number)
 export const fetch_termekek = async(webshopId : number) => {
     const response = await axios.get(`http://localhost:3000/item/all`, {
         withCredentials: true,
-        params: { webshopid: webshopId }
+        params: { webshopid: webshopId },
+        headers: {
+            'Content-Type': 'application/json',
+        }
     });
 
     console.log(response);
@@ -50,7 +53,10 @@ export const fetch_termek = cache( async(webshopId : number, termekId : number) 
 
 export const fetch_webshopok = cache( async() => {
     const response = await axios.get(`http://localhost:3000/webshop/list`, {
-        withCredentials: true
+        withCredentials: true,
+        headers: {
+            'Content-Type': 'application/json',
+        }
     });
 
     const webshopok : FWebshop[] = response.data;
