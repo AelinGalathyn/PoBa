@@ -11,20 +11,20 @@ export class OrdersService {
   ) {
   }
 
-  async makeOrders(data: any[]) {
+  async makeOrders(data: any[] | any) {
     let orders: Orders[] = [];
-    try {
-      const orderslist = data.map(async (order) => {
+    const orderslist = async (order: any) => {
+      try {
         const items: OrderItemEntity[] = await this.itemService.makeOrderItems(order.Items.Item);
         const customer: Customer = {
-          id: order.Customer.Id,
+          id: order.Customer.Key,
           c_name: order.Customer.Contact.Name,
           email: order.Customer.Email,
           username: order.Customer.Username,
           c_mobile: order.Customer.Contact.Phone,
-        }
-        return {
-          orderid: order.Id,
+        };
+        orders.push({
+          orderid: order.Key,
           date: order.Date,
           type: order.Type,
           status_id: order.Status,
@@ -33,32 +33,19 @@ export class OrdersService {
           weight: order.Weight,
           customer: customer,
           items: items,
-          gross: order.SumPriceGross
-        };
-      });
-      orders = await Promise.all(orderslist);
-    }catch{
-      let items: OrderItemEntity[] = await this.itemService.makeOrderItems(data[0].Items.Item);
-      const customer: Customer = {
-        id: data[0].Customer.Id,
-        c_name: data[0]['Customer']['Contact']['Name'],
-        email: data[0].Customer.Email,
-        username: data[0].Customer.Username,
-        c_mobile: data[0].Customer.Contact.Phone,
+          gross: order.SumPriceGross,
+        });
+      } catch (err) {
+        console.error(`Error processing order order ${order.Key}: ${err.message}`);
       }
-      orders.push({
-        orderid: data[0].Id,
-        date: data[0].Date,
-        type: data[0].Type,
-        status_id: data[0].Status,
-        sender: data[0]['Shipping']['Name'],
-        payment: data[0].Payment.Type,
-        weight: data[0].Weight,
-        customer: customer,
-        items: items,
-        gross: data[0].SumPriceGross
-      });
     }
+
+    if(Array.isArray(data)){
+      data.forEach(orderslist);
+    } else {
+      await orderslist(data);
+    }
+
     return orders;
   }
 }

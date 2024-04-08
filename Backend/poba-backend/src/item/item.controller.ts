@@ -30,6 +30,17 @@ export class ItemController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  async getOrder(@UserId() userid: number, @Body('webshopid') webshopid: number, @Param('id')id: string){
+    let ws = await this.webshopService.findAndValidate(userid, webshopid);
+    ws = await this.webshopService.unasLogin(ws);
+    const data = await this.externalService.getItemsById(ws, id);
+    console.log(id);
+    console.log(data);
+    return this.itemService.makeItems(data);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Post('setStock')
   async setStock(@UserId() userid: number, @Query() itemInput: InputItemDto) {
     let ws = await this.webshopService.findAndValidate(userid, itemInput.webshopid);

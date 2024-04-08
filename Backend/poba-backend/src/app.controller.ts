@@ -20,6 +20,7 @@ import { WebshopId } from './users/decorators/webshopid.param';
 import { RegDto } from './auth/dto/reg.dto';
 import { ItemService } from './item/item.service';
 import { Request, Response } from 'express';
+import { ChangePasswordDto } from './users/dto/change-password.dto';
 
 
 @Controller ()
@@ -36,10 +37,8 @@ export class AppController{
         if(token !==undefined){
             const valid = await this.authService.validateToken(token);
             if(valid !== false){
-                const webshop = await this.webshopService.getShopsByUser(valid);
-                const wsid = webshop[0].webshopid;
                 const user = await this.usersService.findById(valid);
-                return res.json({webshopid: wsid, username: user.username});
+                return res.json({username: user.username});
             }
         }
         return res.json({isValid: false});
@@ -89,6 +88,19 @@ export class AppController{
         });
 
         return res.send({ message: 'Logout successful' });
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('auth/changePassword')
+    async changePassword(@UserId()userid, @Body()passwords: ChangePasswordDto){
+        const user = await this.usersService.findById(userid);
+        console.log(passwords);
+        const valid = await this.authService.validateUser({username: user.username, password: passwords.opw});
+        if(!valid){
+            throw new UnauthorizedException('Invalid old password');
+        }
+
+        return await this.authService.changePassword(user, passwords.npw);
     }
 }
 

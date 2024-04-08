@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { ApiCalls } from '../entities/apicalls.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -12,24 +12,20 @@ export class ApicallsService {
 
   async createOrUpdate(webshop: Webshop, url: string){
     let apicall: ApiCalls;
-    try{
-       apicall = await this.findOne(webshop, url);
-       apicall.counter += 1;
-      await this.apicallsRepository.save(apicall);
-    }
-    catch{
-      apicall = this.apicallsRepository.create({webshop: webshop, url: url, counter: 1});
-      await this.apicallsRepository.save(apicall);
-    }
-  }
 
-  async findOne(webshop: Webshop, url: string){
-    const apicall = this.apicallsRepository.findOne({where: {webshop: webshop, url: url}});
-    if (apicall !== null){
-      return apicall;
+    try{
+       apicall = await this.apicallsRepository.findOne({where: {webshop, url}});
+       if(apicall) {
+         apicall.counter += 1;
+       }
+       else {
+         apicall = this.apicallsRepository.create({webshop: webshop, url: url, counter: 1});
+       }
+
+       await this.apicallsRepository.save(apicall);
     }
-    else {
-      throw new NotFoundException;
+    catch (err) {
+      throw new InternalServerErrorException('An error occurred while processing the API call record.');
     }
   }
 }
