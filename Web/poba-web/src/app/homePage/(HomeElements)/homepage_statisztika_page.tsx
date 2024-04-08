@@ -4,8 +4,9 @@ import {Orders} from "@/app/(DTOs)/Rendelesek/Rendeles";
 import {renderChart} from "@/app/(Functions)/charts";
 import {Spacer} from "@nextui-org/react";
 import {fetch_rendelesek} from "@/app/(ApiCalls)/fetch";
-import {webshopid} from "@/app/(FixData)/variables";
 import {useEffect, useState} from "react";
+import {webshopId} from "@/app/(FixData)/variables";
+
 
 export default function HomepageStatisztika() {
 
@@ -13,7 +14,7 @@ export default function HomepageStatisztika() {
 
     useEffect(() => {
         const getRendelsesek = async () => {
-            const rendelesek : Orders[] = await fetch_rendelesek(webshopid.webshopid);
+            const rendelesek : Orders[] = await fetch_rendelesek(webshopId);
             setRendelesek(sortedListOrders(rendelesek));
         }
 

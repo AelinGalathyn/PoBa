@@ -1,13 +1,26 @@
+"use client";
+
 import { weeklyIncome, weeklyStatistics } from "@/app/(Functions)/list_filtering";
 import { Spacer } from "@nextui-org/react";
 import { Switch } from "@nextui-org/switch";
 import { Orders } from "@/app/(DTOs)/Rendelesek/Rendeles";
 import { fetch_rendelesek } from "@/app/(ApiCalls)/fetch";
-import { webshopid } from "@/app/(FixData)/variables";
 import { renderChart } from "@/app/(Functions)/charts";
+import {useEffect, useState} from "react";
+import {webshopId} from "@/app/(FixData)/variables";
 
-export default async function Statisztika() {
-    const rendelesek: Orders[] = await fetch_rendelesek(webshopid.webshopid);
+export default function Statisztika() {
+
+    const [rendelesek, setRendelesek] = useState<Orders[]>([])
+
+    useEffect(() => {
+        const getRendelsesek = async () => {
+            const rendelesek : Orders[] = await fetch_rendelesek(webshopId);
+            setRendelesek(rendelesek);
+        }
+
+        getRendelsesek();
+    }, []);
 
     let charts = [ "linear", "linear", "linear"];
 

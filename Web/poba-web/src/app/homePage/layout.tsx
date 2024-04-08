@@ -5,20 +5,20 @@ import React, {Fragment, useEffect, useState} from "react";
 import {menuItems} from "@/app/(FixData)/lists";
 import {logOut} from "@/app/(ApiCalls)/calls";
 import {redirect, useRouter} from "next/navigation";
-import Webshopok from "@/app/homePage/(ServerMenu)/webshopok";
 import FWebshop from "@/app/(DTOs)/Webshopok/FetchWebshop";
 import {Listbox, Transition} from "@headlessui/react";
-import {webshopid} from "@/app/(FixData)/variables";
-import {ChevronUpDownIcon} from "@heroicons/react/20/solid";
-import {fetch_username} from "@/app/(ApiCalls)/fetch";
+import {CheckIcon, ChevronUpDownIcon} from "@heroicons/react/20/solid";
+import {fetch_username, fetch_webshopok} from "@/app/(ApiCalls)/fetch";
 import Home from "@/app/page";
 
 export default function HomePageLayout({children} : { children : React.ReactNode }) {
 
     Home();
-
+    const [webshopok, setWebshopok] = useState<FWebshop[]>([]);
     const [selectedWebshop, setSelectedWebshop] = useState<FWebshop>({webshopid : 0, name : ""})
     const [username, setUsername] = useState("");
+
+    const router = useRouter();
 
     useEffect(() => {
         const getUsername = async () => {
@@ -33,6 +33,16 @@ export default function HomePageLayout({children} : { children : React.ReactNode
         };
 
         getUsername();
+    }, []);
+
+    useEffect(() => {
+        const getWebshopok = async () => {
+            const webshopok : FWebshop[] = await fetch_webshopok();
+            setWebshopok(webshopok);
+            setSelectedWebshop(webshopok[0]);
+        }
+
+        getWebshopok();
     }, []);
 
     return (
@@ -60,10 +70,10 @@ export default function HomePageLayout({children} : { children : React.ReactNode
                         <p className="text-white font-bold ps-1 drop-shadow-lg">{username}</p>
                     </div>
                 </div>
-                <div>
+                <div className="row-span-1 bg-[#C6D8A7]">
                     <Listbox value={selectedWebshop} onChange={(value) => {
                         setSelectedWebshop(value);
-                        webshopid.webshopid = value.webshopid;
+                        localStorage.setItem("webshopId", JSON.stringify(value.webshopid));
                     }}>
                         <div className="flex flex-col px-2 justify-center mt-1">
                             <Listbox.Button
@@ -81,7 +91,28 @@ export default function HomePageLayout({children} : { children : React.ReactNode
                                 leaveTo="opacity-0"
                             >
                                 <Listbox.Options className="z-50 mt-2 max-h-60 w-full text-xs button-style">
-                                    <Webshopok />
+                                    {webshopok && webshopok.map((webshop) => (
+                                        <Listbox.Option key={webshop.webshopid} className={({active}) =>
+                                            `relative cursor-pointer select-none py-2 pl-10 pr-2 text-[#60624d] ${
+                                                active ? 'bg-white rounded-lg' : ''
+                                            }`
+                                        }
+                                                        value={webshop}
+                                        >
+                                            {({selected}) => (
+                                                <>
+                            <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
+                                {webshop.name}
+                            </span>
+                                                    {selected ? (
+                                                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
+                                    <CheckIcon className="h-4 w-4" aria-hidden="true"/>
+                                    </span>
+                                                    ) : null}
+                                                </>
+                                            )}
+                                        </Listbox.Option>
+                                    ))}
                                 </Listbox.Options>
                             </Transition>
                         </div>
@@ -94,7 +125,7 @@ export default function HomePageLayout({children} : { children : React.ReactNode
                             {menuItems.map((item) => (
                                 <li key={Math.random() * 0.1}
                                     className="cursor-pointer font-bold bg-[#A3B389] hover:bg-white text-white hover:text-stone-500 rounded-md drop-shadow-md py-1 px-2 my-2"
-                                    onClick={() => redirect("/" + item)}>{item}</li>
+                                    onClick={() => router.push("/" + item.destination)}>{item.name}</li>
                             ))}
                         </ul>
                     </div>

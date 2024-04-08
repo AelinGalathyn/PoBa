@@ -2,8 +2,8 @@ import {ItemListFiltering} from "@/app/(Functions)/list_filtering";
 import {redirect} from "next/navigation";
 import {FItem} from "@/app/(DTOs)/Termekek/FTermek";
 import {fetch_termekek} from "@/app/(ApiCalls)/fetch";
-import {webshopid} from "@/app/(FixData)/variables";
 import React from "react";
+import {webshopId} from "@/app/(FixData)/variables";
 
 export default async function TermekekAll({searchParams,}: {
     searchParams: {
@@ -11,7 +11,7 @@ export default async function TermekekAll({searchParams,}: {
         correctList: string
     }
 }) {
-    const termekek : FItem[] = await fetch_termekek(webshopid.webshopid);
+    const termekek : FItem[] = await fetch_termekek(webshopId);
     const query = searchParams.searchParams ?? "";
 
     return <>
@@ -30,7 +30,7 @@ export default async function TermekekAll({searchParams,}: {
                     : termek.qty === -1 ? ""
                         : termek.qty <= 10 ?
                             (<img src="/kifogyoban_icon.png" width={30} height={30}
-                                    alt="szallito_ceg_icon"/>)
+                                  alt="szallito_ceg_icon"/>)
                             : ""}</td>
             </tr>
         ))}

@@ -1,4 +1,21 @@
-export const menuItems = [ "Rendelések", "Termékek", "Statisztika", "Beállítások"];
+export const menuItems = [
+    {
+        name : "Rendelések",
+        destination : "rendelesek"
+
+    }, {
+        name : "Termékek",
+        destination : "termekek"
+
+    },{
+        name : "Statisztika",
+        destination : "statisztika"
+
+    },{
+        name : "Beállítások",
+        destination : "beallitasok"
+
+    }];
 
 export const itemsFunctions = [ "Összes", "Raktárkezelt", "Termék neve szerint", "Mennyiség szerint" ];
 

@@ -4,11 +4,11 @@ import Image from "next/image";
 import {Input} from "@nextui-org/input";
 import {Button} from "@nextui-org/react";
 import {fetch_termek, fetch_termekek} from "@/app/(ApiCalls)/fetch";
-import {webshopid} from "@/app/(FixData)/variables";
 import {redirect} from "next/navigation";
 import {ModifyTermekQty} from "@/app/(ApiCalls)/modify";
 import {FItem} from "@/app/(DTOs)/Termekek/FTermek";
 import React, {useEffect, useState} from "react";
+import {webshopId} from "@/app/(FixData)/variables";
 
 export default function SingleTermekLayout({ params } : any) {
     const [quantity, setQuantity] = useState<string>("");
@@ -18,8 +18,8 @@ export default function SingleTermekLayout({ params } : any) {
 
     useEffect(() => {
         const fetchTermek = async () => {
-            const fetchedTermek: FItem = await fetch_termek(webshopid.webshopid, params.id);
-            const fetchedTermekek: FItem[] = await fetch_termekek(webshopid.webshopid);
+            const fetchedTermek: FItem = await fetch_termek(webshopId, params.id);
+            const fetchedTermekek: FItem[] = await fetch_termekek(webshopId);
             setTermek(fetchedTermek);
             setTermekek(fetchedTermekek);
             setIndex(termekek.findIndex(item => item.id === termek?.id))
@@ -28,7 +28,7 @@ export default function SingleTermekLayout({ params } : any) {
     }, [params.id]);
 
     const modify = async () => {
-            await ModifyTermekQty(webshopid.webshopid, termek! , Number.parseInt(quantity));
+            await ModifyTermekQty(webshopId, termek! , Number.parseInt(quantity));
     }
 
     return (

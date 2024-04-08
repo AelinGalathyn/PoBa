@@ -2,12 +2,12 @@ import {Card, CardBody, CardFooter, CardHeader} from "@nextui-org/card";
 import {ArrowLeftIcon} from "@heroicons/react/20/solid";
 import {redirect} from "next/navigation";
 import {fetch_rendeles, fetch_rendelesek} from "@/app/(ApiCalls)/fetch";
-import {webshopid} from "@/app/(FixData)/variables";
 import {Orders} from "@/app/(DTOs)/Rendelesek/Rendeles";
+import {webshopId} from "@/app/(FixData)/variables";
 
 export default async function SingleRendeles({ params } : any) {
-    const rendelesek : Orders[] = await fetch_rendelesek(webshopid.webshopid);
-    const rendeles : Orders = await fetch_rendeles(webshopid.webshopid, Number.parseInt(params.id));
+    const rendelesek : Orders[] = await fetch_rendelesek(webshopId);
+    const rendeles : Orders = await fetch_rendeles(webshopId, Number.parseInt(params.id));
 
     return (
         <div className="max-h-[95vh] w-[75vw] mt-5 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto scroll-smooth">

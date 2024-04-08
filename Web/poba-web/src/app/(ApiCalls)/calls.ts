@@ -1,7 +1,6 @@
 import axios from "axios";
 import User from "@/app/(DTOs)/Users/User";
 import RegisterUser from "@/app/(DTOs)/Users/RegisterUser";
-import {cache} from "react";
 
 export const logOut = async () => {
     await axios.post("http://localhost:3000/auth/logout", {}, {
@@ -18,7 +17,7 @@ export const login = async (loginUser : User) => {
         },
     });
 
-    console.log(response);
+    return response.data;
 }
 
 export const reg = async (regUser : RegisterUser) => {

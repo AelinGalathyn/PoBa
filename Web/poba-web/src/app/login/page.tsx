@@ -15,7 +15,7 @@ export default function Login() {
     const router = useRouter();
 
     const handleLoginClick = async () => {
-        await login(loginUser);
+        await login(loginUser).then(data => localStorage.setItem("webshopId", data.webshopid));
         router.push("/homePage");
     }
 

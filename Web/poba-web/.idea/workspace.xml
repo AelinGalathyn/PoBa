@@ -5,15 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f197a7f-b474-48b6-84fe-4e366523ff24" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/item/item.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/item/item.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/orders/orders.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/orders/orders.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(ApiCalls)/calls.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(ApiCalls)/calls.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/(ApiCalls)/fetch.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(ApiCalls)/fetch.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(FixData)/lists.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(FixData)/lists.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(FixData)/variables.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(FixData)/variables.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_rendelesek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_rendelesek_page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_statisztika_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_statisztika_page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_termekek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_termekek_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/(ServerMenu)/username.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/(ServerMenu)/webshopok.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/Beállítások/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/beallitasok/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/Rendelések/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/rendelesek/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/Rendelések/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/rendelesek/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/Statisztika/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/statisztika/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/Termékek/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/termekek/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/Termékek/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/termekek/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/Termékek/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/termekek/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/homePage/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/homePage/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +69,7 @@
     "git-widget-placeholder": "web",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/szand/Documents/PoBa/Web/poba-web",
+    "last_opened_file_path": "E:/STUDY/Webvalto/PoBa/Web/poba-web",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -74,11 +87,20 @@
       <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\src\app" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\src\app\homePage\termekek" />
+      <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\src\app\homePage\rendelesek" />
       <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\src\app\(DTOs)" />
       <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\src\app" />
       <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\src\app\homePage\(HomeElements)" />
-      <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\src" />
     </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -104,6 +126,7 @@
       <workItem from="1712566451057" duration="3086000" />
       <workItem from="1712577659991" duration="300000" />
       <workItem from="1712578395934" duration="7018000" />
+      <workItem from="1712598364560" duration="4522000" />
     </task>
     <servers />
   </component>
