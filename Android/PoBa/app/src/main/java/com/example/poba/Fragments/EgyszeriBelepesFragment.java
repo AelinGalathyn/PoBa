@@ -70,7 +70,7 @@ public class EgyszeriBelepesFragment extends Fragment {
         OkHttpClient client = okBuild.build();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.11.116:3000/")
+                .baseUrl("http://192.168.137.1:3000/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
