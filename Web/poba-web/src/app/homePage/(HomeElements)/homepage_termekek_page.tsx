@@ -1,5 +1,4 @@
 import {Card, CardHeader} from "@nextui-org/card";
-import Image from "next/image";
 import {Item} from "@/app/(DTOs)/Termekek/Termek";
 import {FItem} from "@/app/(DTOs)/Termekek/FTermek";
 import {createDatedItems} from "@/app/(Functions)/list_filtering";
@@ -25,9 +24,9 @@ export default async function KifogyoTermekek() {
                                     <p className="col-span-1 text-center">{termek.fItem.qty}</p>
                                     <div className="col-span-1 justify-self-end">
                                         {termek.fItem.qty === 0 ? (
-                                            <Image src="/elfogyott_icon.png" width={30} height={30} alt="elfogyott_icon" />
+                                            <img src="/elfogyott_icon.png" width={30} height={30} alt="elfogyott_icon" />
                                         ) : termek.fItem.qty > 0 ? (
-                                            <Image src="/kifogyoban_icon.png" width={30} height={30} alt="kifogyoban_icon" />
+                                            <img src="/kifogyoban_icon.png" width={30} height={30} alt="kifogyoban_icon" />
                                         ) : ("")}
                                     </div>
                                 </CardHeader>

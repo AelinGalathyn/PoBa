@@ -3,7 +3,6 @@
 import {fetch_username} from "@/app/(ApiCalls)/fetch";
 import {useEffect} from "react";
 import {useRouter} from "next/navigation";
-import {webshopid} from "@/app/(FixData)/variables";
 
 export default function Home() {
     const router = useRouter();

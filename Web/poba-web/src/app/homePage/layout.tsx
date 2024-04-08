@@ -1,20 +1,36 @@
 "use client";
 
 import Image from "next/image";
-import React, {Fragment, useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import {menuItems} from "@/app/(FixData)/lists";
 import {logOut} from "@/app/(ApiCalls)/calls";
 import {redirect} from "next/navigation";
-import UserName from "@/app/homePage/(ServerMenu)/username";
 import Webshopok from "@/app/homePage/(ServerMenu)/webshopok";
 import FWebshop from "@/app/(DTOs)/Webshopok/FetchWebshop";
 import {Listbox, Transition} from "@headlessui/react";
 import {webshopid} from "@/app/(FixData)/variables";
 import {ChevronUpDownIcon} from "@heroicons/react/20/solid";
+import {fetch_username} from "@/app/(ApiCalls)/fetch";
 
 export default function HomePageLayout({children} : { children : React.ReactNode }) {
 
     const [selectedWebshop, setSelectedWebshop] = useState<FWebshop>({webshopid : 0, name : ""})
+    const [username, setUsername] = useState("");
+
+    useEffect(() => {
+        const getUsername = async () => {
+            try {
+                const userData = await fetch_username();
+                if (typeof userData === "string") {
+                    setUsername(userData);
+                }
+            } catch (error) {
+                console.error("Error fetching username:", error);
+            }
+        };
+
+        getUsername();
+    }, []);
 
     return (
         <main className="grid grid-cols-12">
@@ -38,7 +54,7 @@ export default function HomePageLayout({children} : { children : React.ReactNode
                             height={50}
                             alt="Profil_beallitasok_gomb"
                         />
-                        <UserName/>
+                        <p className="text-white font-bold ps-1 drop-shadow-lg">{username}</p>
                     </div>
                 </div>
                 <div>

@@ -1,9 +1,9 @@
 import {Card, CardBody, CardFooter, CardHeader} from "@nextui-org/card";
-import Image from "next/image";
 import {Orders} from "@/app/(DTOs)/Rendelesek/Rendeles";
 import {fetch_rendelesek} from "@/app/(ApiCalls)/fetch";
 import {webshopid} from "@/app/(FixData)/variables";
 import {sortedListOrders} from "@/app/(Functions)/list_filtering";
+import React from "react";
 
 export default async function JelenlegiRendelesek() {
     const rendelesek : Orders[] = await fetch_rendelesek(webshopid.webshopid);
@@ -21,10 +21,10 @@ export default async function JelenlegiRendelesek() {
                             <Card className="bg-white m-2 rounded-md text-xs shadow-lg shadow-gray-400">
                                 <CardHeader className="card-class text-xl font-bold flex justify-between">
                                     {rendeles.orderid}
-                                    {rendeles.sender.toString().toLowerCase().includes("gls") ? (<Image src="/gls_logo.png" width={30} height={30} alt="szallito_ceg_icon"/>) :
-                                        rendeles.sender.toString().toLowerCase().includes("foxpost") ? (<Image src="/foxpost_logo.png" width={30} height={30} alt="szallito_ceg_icon"/>) :
+                                    {rendeles.sender.toString().toLowerCase().includes("gls") ? (<img src="/gls_logo.png" width={30} height={30} alt="szallito_ceg_icon"/>) :
+                                        rendeles.sender.toString().toLowerCase().includes("foxpost") ? (<img src="/foxpost_logo.png" width={30} height={30} alt="szallito_ceg_icon"/>) :
                                             rendeles.sender.toString().toLowerCase().includes("posta") ||  rendeles.sender.toString().toLowerCase().includes("mpl")?
-                                                (<Image src="/magyar_icon.png" width={30} height={30} alt="szallito_ceg_icon"/>) : ("")}
+                                                (<img src="/magyar_icon.png" width={30} height={30} alt="szallito_ceg_icon"/>) : ("")}
                                 </CardHeader>
                                 <CardBody className="text-[15px] card-class">{rendeles.customer.c_name}</CardBody>
                                 <CardFooter className="card-class">{rendeles.date.toString()}</CardFooter>

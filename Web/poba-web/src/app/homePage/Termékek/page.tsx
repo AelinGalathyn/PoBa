@@ -1,9 +1,9 @@
 import {ItemListFiltering} from "@/app/(Functions)/list_filtering";
 import {redirect} from "next/navigation";
-import Image from "next/image";
 import {FItem} from "@/app/(DTOs)/Termekek/FTermek";
 import {fetch_termekek} from "@/app/(ApiCalls)/fetch";
 import {webshopid} from "@/app/(FixData)/variables";
+import React from "react";
 
 export default async function TermekekAll({searchParams,}: {
     searchParams: {
@@ -26,10 +26,10 @@ export default async function TermekekAll({searchParams,}: {
                 <td>{termek.qty === -1 ? "" : termek.qty + " " + termek.unit}</td>
                 <td>{termek.price + " Ft"}</td>
                 <td className="flex justify-end pe-2">{termek.qty === 0 ?
-                    (<Image src="/elfogyott_icon.png" width={30} height={30} alt="szallito_ceg_icon"/>)
+                    (<img src="/elfogyott_icon.png" width={30} height={30} alt="szallito_ceg_icon"/>)
                     : termek.qty === -1 ? ""
                         : termek.qty <= 10 ?
-                            (<Image src="/kifogyoban_icon.png" width={30} height={30}
+                            (<img src="/kifogyoban_icon.png" width={30} height={30}
                                     alt="szallito_ceg_icon"/>)
                             : ""}</td>
             </tr>

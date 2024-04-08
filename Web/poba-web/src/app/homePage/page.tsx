@@ -3,7 +3,7 @@
 import JelenlegiRendelesek from "@/app/homePage/(HomeElements)/homepage_rendelesek_page";
 import KifogyoTermekek from "@/app/homePage/(HomeElements)/homepage_termekek_page";
 import HomepageStatisztika from "@/app/homePage/(HomeElements)/homepage_statisztika_page";
-import React from "react";
+import React, {useEffect} from "react";
 import Home from "@/app/page";
 
 export default function HomePage() {

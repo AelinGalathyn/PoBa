@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {fetch_username} from "@/app/(ApiCalls)/fetch";
 
 export default async function Beallitasok() {
@@ -8,7 +7,7 @@ export default async function Beallitasok() {
     return (
         <div className="h-[95vh] w-full mt-5 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto scroll-smooth">
             <div>
-                <Image src="/nav_profil.png" width={50} height={50} alt="profil_icon"/>
+                <img src="/nav_profil.png" width={50} height={50} alt="profil_icon"/>
                 <p>{username}</p>
             </div>
             <div>
