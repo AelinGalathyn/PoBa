@@ -2,8 +2,11 @@ import JelenlegiRendelesek from "@/app/homePage/(HomeElements)/homepage_rendeles
 import KifogyoTermekek from "@/app/homePage/(HomeElements)/homepage_termekek_page";
 import HomepageStatisztika from "@/app/homePage/(HomeElements)/homepage_statisztika_page";
 import React from "react";
+import Home from "@/app/page";
 
-export default function HomePage() {
+export default async function HomePage() {
+
+    await Home();
 
     return <>
         <section className="col-start-3 col-end-5">

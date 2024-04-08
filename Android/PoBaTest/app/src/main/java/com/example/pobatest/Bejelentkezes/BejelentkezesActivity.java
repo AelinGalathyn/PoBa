@@ -1,14 +1,12 @@
-package com.example.pobatest;
+package com.example.pobatest.Bejelentkezes;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.ActivityNavigator;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.transition.Transition;
-import android.transition.TransitionValues;
-import android.view.Window;
 import android.widget.ImageButton;
+
+import com.example.pobatest.R;
 
 public class BejelentkezesActivity extends AppCompatActivity {
 

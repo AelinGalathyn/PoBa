@@ -18,7 +18,6 @@ export class OrdersController {
   async getAll(@UserId() userid: number, @Body('webshopid') webshopid: number) {
     let ws = await this.webshopService.findAndValidate(userid, webshopid);
     ws = await this.webshopService.unasLogin(ws);
-    console.log(ws.token)
     const data = await this.externalService.getOrders(ws);
     return this.ordersService.makeOrders(data);
   }
@@ -29,8 +28,6 @@ export class OrdersController {
     let ws = await this.webshopService.findAndValidate(userid, webshopid);
     ws = await this.webshopService.unasLogin(ws);
     const data = await this.externalService.getOrderById(ws, id);
-    console.log(id);
-    console.log(data);
     return this.ordersService.makeOrders(data);
   }
 }

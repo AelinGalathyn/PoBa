@@ -45,13 +45,13 @@ export const fetch_webshopok = cache( async() => {
     return response.data;
 })
 
-export const fetch_username = cache( async() => {
-    const response = await axios.get('http://localhost:3000', {
+export const fetch_username = async() => {
+    const response = await axios.get('http://localhost:3000/', {
         withCredentials: true,
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         }
     });
 
     return response.data;
-})
+}

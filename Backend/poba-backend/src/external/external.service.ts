@@ -116,7 +116,6 @@ export class ExternalService {
 
   async unasRequest(url: string, headers: {}, body: {}, webshop: Webshop) {
     const response = await this.httpService.post(`${ApiUrl}${url}`, body, { headers }).toPromise();
-    console.log(response);
     const xmlData = response.data;
     const result = await this.parseXML(xmlData);
     await this.apicallService.createOrUpdate(webshop, url);

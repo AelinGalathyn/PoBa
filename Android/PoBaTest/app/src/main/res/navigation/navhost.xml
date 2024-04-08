@@ -6,7 +6,7 @@
     app:startDestination="@id/loginActivity">
     <activity
         android:id="@+id/loginActivity"
-        android:name="com.example.pobatest.BejelentkezesActivity"
+        android:name="com.example.pobatest.Bejelentkezes.BejelentkezesActivity"
         android:label="activity_login"
         tools:layout="@layout/bejelentkezes_activity" />
     <activity
@@ -16,7 +16,7 @@
         tools:layout="@layout/fo_activity" />
     <activity
         android:id="@+id/onceLoginActivity"
-        android:name="com.example.pobatest.EgyszeriBelepesActivity"
+        android:name="com.example.pobatest.Bejelentkezes.EgyszeriBelepesActivity"
         android:label="activity_once_login"
         tools:layout="@layout/belepes_egyszeri_activity" />
 </navigation>
