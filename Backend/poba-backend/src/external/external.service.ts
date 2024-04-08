@@ -25,6 +25,19 @@ export class ExternalService {
     return result.Products.Product;
   }
 
+  async getItemsById(webshop: Webshop, id: string){
+    const headers = {
+      'Authorization': `Bearer ${webshop.unas_token}`,
+      'Content-Type': 'application/json',
+    }
+    const body = {
+      'ContentType': 'full',
+      'Id': id,
+    }
+    const response = await this.unasRequest('getProduct', headers, body, webshop);
+    return response.Products.Product;
+  }
+
   async getOrders(webshop: Webshop) {
     const headers = {
       'Authorization': `Bearer ${webshop.unas_token}`,
@@ -33,6 +46,19 @@ export class ExternalService {
     const body = {
       'ContentType': 'full',
     };
+    const response = await this.unasRequest('getOrder', headers, body, webshop);
+    return response.Orders.Order;
+  }
+
+  async getOrderById(webshop: Webshop, id: string){
+    const headers = {
+      'Authorization': `Bearer ${webshop.unas_token}`,
+      'Content-Type': 'application/json',
+    }
+    const body = {
+      'ContentType': 'full',
+      'Key': id,
+    }
     const response = await this.unasRequest('getOrder', headers, body, webshop);
     return response.Orders.Order;
   }
@@ -90,6 +116,7 @@ export class ExternalService {
 
   async unasRequest(url: string, headers: {}, body: {}, webshop: Webshop) {
     const response = await this.httpService.post(`${ApiUrl}${url}`, body, { headers }).toPromise();
+    console.log(response);
     const xmlData = response.data;
     const result = await this.parseXML(xmlData);
     await this.apicallService.createOrUpdate(webshop, url);
