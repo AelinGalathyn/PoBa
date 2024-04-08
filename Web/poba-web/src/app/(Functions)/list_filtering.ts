@@ -76,7 +76,8 @@ export const sortedListOrders = (list: Orders[]) => {
 export const createDatedItems = (list : FItem[]) => {
     if (list) {
         const now = new Date();
-        return list.map(item => new Item(item, now));
+        const newList: Item[] = list.map(item => new Item(item, now)).filter(item => item);
+        return newList;
     } else {
         return [];
     }

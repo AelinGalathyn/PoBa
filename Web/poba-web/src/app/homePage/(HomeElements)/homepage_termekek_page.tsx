@@ -1,9 +1,7 @@
 import {Card, CardHeader} from "@nextui-org/card";
 import Image from "next/image";
-import {useEffect, useState} from "react";
 import {Item} from "@/app/(DTOs)/Termekek/Termek";
 import {FItem} from "@/app/(DTOs)/Termekek/FTermek";
-import {webpack} from "next/dist/compiled/webpack/webpack";
 import {createDatedItems} from "@/app/(Functions)/list_filtering";
 import {fetch_termekek} from "@/app/(ApiCalls)/fetch";
 import {webshopid} from "@/app/(FixData)/variables";

@@ -1,13 +1,27 @@
+"use client"
+
 import {fetch_username} from "@/app/(ApiCalls)/fetch";
-import {redirect} from "next/navigation";
+import {useEffect} from "react";
+import {useRouter} from "next/navigation";
+import {webshopid} from "@/app/(FixData)/variables";
 
-export default async function Home() {
-    const response = await fetch_username();
+export default function Home() {
+    const router = useRouter();
 
-    if (response.isValid === false) {
-        console.log(response)
-        redirect("/login")
-    } else {
-        redirect("/homePage")
-    }
+    useEffect(() => {
+        const getUsername = async () => {
+            const response = await fetch_username()
+
+            if (response === false) {
+                router.push("/login")
+            } else {
+                router.push("/homePage")
+            }
+        }
+
+        getUsername();
+    }, [webshopid.webshopid]);
+
+
+
 }

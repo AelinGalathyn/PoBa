@@ -19,7 +19,7 @@ export class OrdersController {
     let ws = await this.webshopService.findAndValidate(userid, webshopid);
     ws = await this.webshopService.unasLogin(ws);
     const data = await this.externalService.getOrders(ws);
-    return this.ordersService.makeOrders(data);
+    return await this.ordersService.makeOrders(data);
   }
 
   @UseGuards(JwtAuthGuard)

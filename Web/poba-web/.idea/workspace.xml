@@ -5,29 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f197a7f-b474-48b6-84fe-4e366523ff24" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../Android/PoBa/.idea/deploymentTargetDropDown.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Android/PoBa/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/homePage/loading.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Android/PoBaTest/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Android/PoBaTest/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Android/PoBaTest/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Android/PoBaTest/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Android/PoBaTest/app/src/main/java/com/example/pobatest/BejelentkezesActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Android/PoBaTest/app/src/main/java/com/example/pobatest/Bejelentkezes/BejelentkezesActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Android/PoBaTest/app/src/main/java/com/example/pobatest/EgyszeriBelepesActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Android/PoBaTest/app/src/main/java/com/example/pobatest/Bejelentkezes/EgyszeriBelepesActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Android/PoBaTest/app/src/main/res/layout/bejelentkezes_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Android/PoBaTest/app/src/main/res/layout/bejelentkezes_activity.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Android/PoBaTest/app/src/main/res/layout/belepes_egyszeri_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Android/PoBaTest/app/src/main/res/layout/belepes_egyszeri_activity.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Android/PoBaTest/app/src/main/res/layout/engedelyek_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Android/PoBaTest/app/src/main/res/layout/engedelyek_activity.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Android/PoBaTest/app/src/main/res/layout/jelszo_valtoztatas_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Android/PoBaTest/app/src/main/res/layout/jelszo_valtoztatas_activity.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Android/PoBaTest/app/src/main/res/navigation/navhost.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Android/PoBaTest/app/src/main/res/navigation/navhost.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Android/PoBaTest/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Android/PoBaTest/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Android/PoBaTest/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../Android/PoBaTest/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/app.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/app.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/external/external.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/external/external.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/item/item.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/item/item.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/orders/orders.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/orders/orders.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(ApiCalls)/calls.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(ApiCalls)/calls.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/(ApiCalls)/fetch.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(ApiCalls)/fetch.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(Functions)/list_filtering.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(Functions)/list_filtering.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_termekek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_termekek_page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/homePage/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
     </list>

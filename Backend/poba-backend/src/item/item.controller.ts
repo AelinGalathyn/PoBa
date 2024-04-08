@@ -22,7 +22,7 @@ export class ItemController {
       let ws = await this.webshopService.findAndValidate(userid, webshopid);
       ws = await this.webshopService.unasLogin(ws);
       const data = await this.externalService.getItems(ws);
-      return this.itemService.makeItems(data);
+      return await this.itemService.makeItems(data);
     } catch (err) {
       return err;
     }
