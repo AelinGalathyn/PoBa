@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, InternalServerErrorException, Param, Post, Query, UseGuards } from '@nestjs/common';
 import { ItemService } from './item.service';
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { UserId } from '../users/decorators/UserId.param';
@@ -24,7 +24,7 @@ export class ItemController {
       const data = await this.externalService.getItems(ws);
       return await this.itemService.makeItems(data);
     } catch (err) {
-      return err;
+      throw new InternalServerErrorException('An unexpected error occurred');
     }
   }
 

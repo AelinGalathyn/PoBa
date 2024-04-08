@@ -8,7 +8,7 @@ import {webshopid} from "@/app/(FixData)/variables";
 
 export default async function KifogyoTermekek() {
     const termekek : FItem[] = await fetch_termekek(webshopid.webshopid);
-    const fogyoTermekek : Item[] = createDatedItems(termekek);
+    const fogyoTermekek = createDatedItems(termekek);
 
     return (
         <div className="fixed h-2/6 w-2/5 mt-[5vh]">

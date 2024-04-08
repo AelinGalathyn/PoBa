@@ -3,7 +3,7 @@
 import Image from "next/image";
 import {Input} from "@nextui-org/input";
 import {Button} from "@nextui-org/react";
-import {fetch_termek} from "@/app/(ApiCalls)/fetch";
+import {fetch_termek, fetch_termekek} from "@/app/(ApiCalls)/fetch";
 import {webshopid} from "@/app/(FixData)/variables";
 import {redirect} from "next/navigation";
 import {ModifyTermekQty} from "@/app/(ApiCalls)/modify";
@@ -19,7 +19,7 @@ export default function SingleTermekLayout({ params } : any) {
     useEffect(() => {
         const fetchTermek = async () => {
             const fetchedTermek: FItem = await fetch_termek(webshopid.webshopid, params.id);
-            const fetchedTermekek: FItem[] = await fetch_termek(webshopid.webshopid, params.id);
+            const fetchedTermekek: FItem[] = await fetch_termekek(webshopid.webshopid);
             setTermek(fetchedTermek);
             setTermekek(fetchedTermekek);
             setIndex(termekek.findIndex(item => item.id === termek?.id))

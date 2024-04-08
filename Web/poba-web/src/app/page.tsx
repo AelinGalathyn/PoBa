@@ -10,18 +10,16 @@ export default function Home() {
 
     useEffect(() => {
         const getUsername = async () => {
-            const response = await fetch_username()
+            const response = await fetch_username();
+            console.log("response if előtt: " + response);
 
             if (response === false) {
                 router.push("/login")
             } else {
                 router.push("/homePage")
             }
-        }
+        };
 
         getUsername();
-    }, [webshopid.webshopid]);
-
-
-
+    }, []);
 }

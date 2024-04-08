@@ -4,7 +4,7 @@ import {FItem} from "@/app/(DTOs)/Termekek/FTermek";
 
 let filteredList: FItem[] = [];
 
-export function ItemListFiltering(kategoria : string, originalList : FItem[], keresoKifejezes : string) {
+export function ItemListFiltering(kategoria: string, originalList: FItem[], keresoKifejezes: string) {
 
     switch (kategoria) {
         case "Raktárkezelt":
@@ -31,7 +31,7 @@ export function ItemListFiltering(kategoria : string, originalList : FItem[], ke
 
 export const weeklyStatistics = (orders: Orders[]) => {
     if (orders) {
-        return orders.reduce((statistics: {[dayOfWeek: number]: number}, order) => {
+        return orders.reduce((statistics: { [dayOfWeek: number]: number }, order) => {
             const dayOfWeek = new Date(order.date).getDay();
             statistics[dayOfWeek] = (statistics[dayOfWeek] || 0) + 1;
             return statistics;
@@ -43,7 +43,7 @@ export const weeklyStatistics = (orders: Orders[]) => {
 
 export const weeklyIncome = (orders: Orders[]) => {
     if (orders) {
-        return orders.reduce((statistics: {[dayOfWeek: number]: number}, order) => {
+        return orders.reduce((statistics: { [dayOfWeek: number]: number }, order) => {
             const dayOfWeek = new Date(order.date).getDay();
             statistics[dayOfWeek] = (order.gross || 0) + order.gross;
             return statistics;
@@ -73,12 +73,15 @@ export const sortedListOrders = (list: Orders[]) => {
     }
 }
 
-export const createDatedItems = (list : FItem[]) => {
+export const createDatedItems = (list: FItem[]) => {
+    let newList: Item[] = [];
     if (list) {
         const now = new Date();
-        const newList: Item[] = list.map(item => new Item(item, now)).filter(item => item);
-        return newList;
-    } else {
-        return [];
+        if (Array.isArray(list)) {
+            newList = list.map(item => new Item(item, now)).filter(item => item);
+            return newList;
+        }
     }
+    return newList;
+
 }

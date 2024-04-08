@@ -9,7 +9,9 @@ export default function UserName() {
         const getUsername = async () => {
             try {
                 const userData = await fetch_username();
-                setUsername(userData.username);
+                if(typeof userData === "string") {
+                    setUsername(userData);
+                }
             } catch (error) {
                 console.error("Error fetching username:", error);
             }

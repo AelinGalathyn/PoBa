@@ -32,7 +32,7 @@ export const fetch_termekek = async(webshopId : number) => {
         params: { webshopid: webshopId }
     });
 
-    console.log(response.data)
+    console.log(response);
     const termekek : FItem[] = response.data;
     return termekek;
 }
@@ -65,11 +65,14 @@ export const fetch_username = async() => {
             'Content-Type': 'application/json',
         }
     });
+    console.log("response data: "+JSON.stringify(response.data, null, 2));
+    console.log("response data: "+response.data.webshopid);
 
-    if (response.data === false) {
+    if (response.data.isValid === false) {
         return false;
     } else {
-        const username : string = response.data;
+        const username : string = response.data.username;
+        console.log("username: "+username);
         return username;
     }
 }

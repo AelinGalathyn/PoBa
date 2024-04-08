@@ -101,7 +101,6 @@ export class ExternalService {
           'Content-Type': 'application/json',
         };
         const body = {
-          'ApiKey': webshop.unas_api,
           'WebshopInfo': 'true',
         };
         const data = await this.unasRequest('login', headers, body, webshop);
@@ -115,10 +114,23 @@ export class ExternalService {
   }
 
   async unasRequest(url: string, headers: {}, body: {}, webshop: Webshop) {
-    const response = await this.httpService.post(`${ApiUrl}${url}`, body, { headers }).toPromise();
-    const xmlData = response.data;
-    const result = await this.parseXML(xmlData);
-    await this.apicallService.createOrUpdate(webshop, url);
-    return result;
+    try {
+      const response = await this.httpService.post(`${ApiUrl}${url}`, body, { headers }).toPromise();
+      try {
+        const result = await this.parseXML(response.data);
+        await this.apicallService.createOrUpdate(webshop, url);
+        return result;
+      } catch (xmlParseError) {
+        console.error(`Error parsing XML from unasRequest for ${url}:`, xmlParseError);
+        throw new Error(`Failed to parse XML response for ${url}`);
+      }
+    } catch (httpError) {
+      console.log(url);
+      console.log(headers);
+      console.log(body);
+      console.log(webshop);
+      throw new Error(`HTTP request failed for ${url}`);
+    }
   }
+
 }
