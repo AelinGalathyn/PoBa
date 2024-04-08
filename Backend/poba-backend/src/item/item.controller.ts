@@ -30,12 +30,24 @@ export class ItemController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Get('all/:id')
+  async getOneItem(@UserId() userid: number, @Query('webshopid') webshopid: number, @Param('id') itemId : number) {
+    try {
+      let ws = await this.webshopService.findAndValidate(userid, webshopid);
+      ws = await this.webshopService.unasLogin(ws);
+      const data = await this.externalService.getItems(ws);
+      const items = this.itemService.makeItems(data);
+      return items.then(data => data.find(item => item.id === itemId));
+    } catch (err) {
+      return err;
+    }
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Post('setStock')
   async setStock(@UserId() userid: number, @Query() itemInput: InputItemDto) {
     let ws = await this.webshopService.findAndValidate(userid, itemInput.webshopid);
     ws = await this.webshopService.unasLogin(ws);
-    const status = await this.externalService.setStock(ws, itemInput.sku, itemInput.stock);
-    console.log(status);
-    return status;
+    return await this.externalService.setStock(ws, itemInput.sku, itemInput.stock);
   }
 }

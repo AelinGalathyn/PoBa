@@ -37,10 +37,8 @@ export class AppController{
         if(token !==undefined){
             const valid = await this.authService.validateToken(token);
             if(valid !== false){
-                const webshop = await this.webshopService.getShopsByUser(valid);
-                const wsid = webshop[0].webshopid;
                 const user = await this.usersService.findById(valid);
-                return res.json({webshopid: wsid, username: user.username});
+                return res.json({username : user.username});
             }
         }
         return res.json({isValid: false});
