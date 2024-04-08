@@ -31,7 +31,33 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5cd4f8c-1388-4ccf-80fd-5ddc2ad7d8ad" name="Changes" comment="" />
+    <list default="true" id="a5cd4f8c-1388-4ccf-80fd-5ddc2ad7d8ad" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Web/poba-web/src/app/homePage/loading.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PoBaTest/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../PoBaTest/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PoBaTest/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PoBaTest/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PoBaTest/app/src/main/java/com/example/pobatest/BejelentkezesActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PoBaTest/app/src/main/java/com/example/pobatest/Bejelentkezes/BejelentkezesActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PoBaTest/app/src/main/java/com/example/pobatest/EgyszeriBelepesActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PoBaTest/app/src/main/java/com/example/pobatest/Bejelentkezes/EgyszeriBelepesActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PoBaTest/app/src/main/res/layout/bejelentkezes_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PoBaTest/app/src/main/res/layout/bejelentkezes_activity.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PoBaTest/app/src/main/res/layout/belepes_egyszeri_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PoBaTest/app/src/main/res/layout/belepes_egyszeri_activity.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PoBaTest/app/src/main/res/layout/engedelyek_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PoBaTest/app/src/main/res/layout/engedelyek_activity.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PoBaTest/app/src/main/res/layout/jelszo_valtoztatas_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PoBaTest/app/src/main/res/layout/jelszo_valtoztatas_activity.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PoBaTest/app/src/main/res/navigation/navhost.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PoBaTest/app/src/main/res/navigation/navhost.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PoBaTest/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../PoBaTest/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PoBaTest/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../PoBaTest/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/app.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/app.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/external/external.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/external/external.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/item/item.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/item/item.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/orders/orders.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/orders/orders.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/poba-web/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/poba-web/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/poba-web/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/poba-web/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/poba-web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/poba-web/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/poba-web/src/app/(ApiCalls)/calls.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/poba-web/src/app/(ApiCalls)/calls.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/poba-web/src/app/(ApiCalls)/fetch.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/poba-web/src/app/(ApiCalls)/fetch.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/poba-web/src/app/homePage/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/poba-web/src/app/homePage/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/poba-web/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/poba-web/src/app/page.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -65,9 +91,12 @@
     "RunOnceActivity.cidr.known.project.marker": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "android",
+    "git-widget-placeholder": "web",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "E:/STUDY/Webvalto/PoBa/Android/PoBa",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "configurable.group.build"
   }
 }]]></component>
