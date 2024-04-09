@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="begombfelirat">Bejelentkezés</string>
+    <string name="egybefel_szoveg">Felhasználónév</string>
+    <string name="egybejel_szoveg">Jelszó</string>
+    <string name="nav_profil_gomb">nav_profil_gomb</string>
+    <style name="Base.Theme.PoBa" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style>
+</resources>

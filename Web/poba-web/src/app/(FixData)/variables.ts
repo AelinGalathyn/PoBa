@@ -1,0 +1,1 @@
+export let webshopId : number = JSON.parse(localStorage.getItem("webshopId")!) ?? 0;

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { UserId } from '../users/decorators/UserId.param';
@@ -14,14 +14,12 @@ export class OrdersController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('all')
-  async getAll(@UserId() userid: number, @Body('webshopid') webshopid: number) {
-    let ws = await this.webshopService.findAndValidate(userid, webshopid);
+  @Post('all')
+  async getAll(@UserId() userid: number, @Query('webshopid') webshopid: number) {
+    let ws = await this.webshopService.findAndValidate(userid, +webshopid);
     ws = await this.webshopService.unasLogin(ws);
-    console.log(ws.token)
     const data = await this.externalService.getOrders(ws);
-    console.log(data);
-    return this.ordersService.makeOrders(data);
+    return await this.ordersService.makeOrders(data);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -30,8 +28,6 @@ export class OrdersController {
     let ws = await this.webshopService.findAndValidate(userid, webshopid);
     ws = await this.webshopService.unasLogin(ws);
     const data = await this.externalService.getOrderById(ws, id);
-    console.log(id);
-    console.log(data);
     return this.ordersService.makeOrders(data);
   }
 }

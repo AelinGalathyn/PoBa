@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        font-family: "Inter", sans-serif;
+        color: #60624d;
+    }
+}
+
+.input-group input {
+    background: white;
+    background-size: cover;
+    border-radius: 5px;
+    box-shadow: inset 0 3px 4px rgba(0, 0, 0, 0.35);
+    height: 48px;
+    text-align: center;
+    padding: 5px;
+}
+
+.button-style {
+    background: white;
+    border-radius: 5px;
+    border: 1px rgb(229 231 235) solid;
+    box-shadow: rgb(211, 211, 211) 0 2px 2px;
+    color: #60624d;
+}
+
+.button-style:hover {
+    background: #e8e8e8;
+    font-weight: bold;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #cbcbcb;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #a6a6a6;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #707070;
+    border-radius: 10px;
+}
+
+.card-class {
+    padding: 1px 3px 1px 3px;
+}
+
+.table-style {
+    background: white;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.table-style thead tr th, .table-style tbody tr td {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.table-style thead tr, .table-style tbody tr {
+    border-bottom: rgb(229 231 235) 10px solid;
+}
+
+.table-style tbody .showing-row:hover {
+    cursor: pointer;
+    background: white;
+}
+
+.table-style tbody tr:hover{
+    background: rgb(229 231 235);
+    cursor: pointer;
+}
+
+.table-style tbody tr:last-child {
+    border: none;
+}
+.nem-raktarkezelt-sor {
+    background: darkgray;
+    cursor: auto;
+}

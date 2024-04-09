@@ -19,9 +19,6 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".EngedelyekActivity"
-            android:exported="false" />
-        <activity
             android:name=".Beallitasok.BeallitasokErtesitesekActivity"
             android:exported="false" />
         <activity
@@ -56,7 +53,7 @@
             android:name=".Rendeles.EgyikRendelesActivity"
             android:exported="false" />
         <activity
-            android:name=".EgyszeriBelepesActivity"
+            android:name=".Bejelentkezes.EgyszeriBelepesActivity"
             android:exported="false" />
         <activity
             android:name=".Rendeles.RendelesActivity"
@@ -65,7 +62,7 @@
             android:name=".FoActivity"
             android:exported="false" />
         <activity
-            android:name=".BejelentkezesActivity"
+            android:name=".Bejelentkezes.BejelentkezesActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
