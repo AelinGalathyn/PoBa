@@ -45,9 +45,9 @@
                 />
 
             <ImageView
-                android:layout_width="44dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="end"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="end|center"
                 android:layout_marginEnd="10dp"
                 android:id="@+id/darab_icon_helye"
                 />

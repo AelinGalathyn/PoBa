@@ -15,7 +15,6 @@ import android.provider.Settings;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
@@ -26,7 +25,6 @@ import com.google.android.material.navigation.NavigationView;
 
 public class FoActivity extends AppCompatActivity{
 
-    private FrameLayout fo_framelayout;
     private CardView rendelesek_card;
     private CardView termekek_card;
     private NavigationView nav_hamburger_menu;
@@ -43,9 +41,17 @@ public class FoActivity extends AppCompatActivity{
         
         Init();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fo_framelayout, new BejelentkezesFragment())
-                        .addToBackStack(null)
-                        .commit();
+        rendelesek_card.setOnClickListener(v -> {
+            Intent intent = new Intent(FoActivity.this, RendelesActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+        termekek_card.setOnClickListener(v -> {
+            Intent intent = new Intent(FoActivity.this, TermekekActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
         nav_hamburger_menu.setNavigationItemSelectedListener(item -> {
             menuOnClick(item);
@@ -69,8 +75,8 @@ public class FoActivity extends AppCompatActivity{
     }
 
     public void Init() {
-        fo_framelayout = findViewById(R.id.fo_framelayout);
-
+        rendelesek_card = findViewById(R.id.rendelesek_card);
+        termekek_card = findViewById(R.id.termekek_card);
         nav_hamburger_menu = findViewById(R.id.nav_hamburger_menu);
         hamburger_header = nav_hamburger_menu.getHeaderView(0);
         nav_profil = hamburger_header.findViewById(R.id.nav_profil);
