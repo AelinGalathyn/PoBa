@@ -104,8 +104,6 @@ export class ExternalService {
           "ApiKey": webshop.unas_api,
           "WebshopInfo": "true"
         };
-        console.log(headers);
-        console.log(body);
         const data = await this.unasRequest('login', headers, body, webshop);
         webshop.unas_token = data.Login.Token;
         webshop.token_date = new Date();
@@ -128,11 +126,6 @@ export class ExternalService {
         throw new Error(`Failed to parse XML response for ${url}`);
       }
     } catch (httpError) {
-      /*console.log(url);
-      console.log(headers);
-      console.log(body);
-      console.log(webshop);*/
-      console.log(httpError);
       throw new Error(`HTTP request failed for ${url}`);
     }
   }

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { UserId } from '../users/decorators/UserId.param';
@@ -15,8 +15,8 @@ export class OrdersController {
 
   @UseGuards(JwtAuthGuard)
   @Post('all')
-  async getAll(@UserId() userid: number, @Body('webshopid') webshopid: number) {
-    let ws = await this.webshopService.findAndValidate(userid, webshopid);
+  async getAll(@UserId() userid: number, @Query('webshopid') webshopid: number) {
+    let ws = await this.webshopService.findAndValidate(userid, +webshopid);
     ws = await this.webshopService.unasLogin(ws);
     const data = await this.externalService.getOrders(ws);
     return await this.ordersService.makeOrders(data);
