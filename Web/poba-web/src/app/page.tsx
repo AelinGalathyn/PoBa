@@ -18,8 +18,6 @@ export default function Home() {
             if (webshopId === 0) {
                 await fetch_webshopok().then(data => localStorage.setItem("webshopId", JSON.stringify(data[0].webshopid)))
                 router.push("/homePage")
-            } else {
-                router.push("/homePage")
             }
         };
 

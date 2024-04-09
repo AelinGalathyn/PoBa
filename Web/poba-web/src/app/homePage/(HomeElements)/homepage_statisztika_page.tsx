@@ -16,7 +16,6 @@ export default function HomepageStatisztika() {
             const rendelesek : Orders[] = await fetch_rendelesek(webshopId);
             setRendelesek(sortedListOrders(rendelesek));
         }
-
         getRendelsesek();
     }, []);
 

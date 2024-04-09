@@ -56,7 +56,7 @@ export const weeklyIncome = (orders: Orders[]) => {
 export const sortedListItems = (list: Item[]) => {
     if (list) {
         return list.sort((a, b) => {
-            return new Date(b.date).getTime() - new Date(a.date).getTime();
+            return new Date(a.date).getTime() - new Date(b.date).getTime();
         });
     } else {
         return [];
@@ -78,10 +78,8 @@ export const createDatedItems = (list: FItem[]) => {
     if (list) {
         const now = new Date();
         if (Array.isArray(list)) {
-            newList = list.map(item => new Item(item, now)).filter(item => item);
-            return newList;
+            newList = list.filter(item => item.qty >= 0 && item.qty <= 10).map(item => new Item(item, now)).splice(0, 15);
         }
     }
     return newList;
-
 }
