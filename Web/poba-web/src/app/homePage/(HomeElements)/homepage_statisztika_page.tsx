@@ -5,14 +5,13 @@ import {renderChart} from "@/app/(Functions)/charts";
 import {Spacer} from "@nextui-org/react";
 import {fetch_rendelesek} from "@/app/(ApiCalls)/fetch";
 import {useEffect, useState} from "react";
-import {webshopId} from "@/app/(FixData)/variables";
 
 
 export default function HomepageStatisztika() {
-
     const [rendelesek, setRendelesek] = useState<Orders[]>([])
 
     useEffect(() => {
+        const webshopId = JSON.parse(localStorage.getItem("webshopId") ?? "0");
         const getRendelsesek = async () => {
             const rendelesek : Orders[] = await fetch_rendelesek(webshopId);
             setRendelesek(sortedListOrders(rendelesek));

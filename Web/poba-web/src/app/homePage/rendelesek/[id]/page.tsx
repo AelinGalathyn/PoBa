@@ -1,20 +1,39 @@
+"use client";
+
 import {Card, CardBody, CardFooter, CardHeader} from "@nextui-org/card";
 import {ArrowLeftIcon} from "@heroicons/react/20/solid";
 import {redirect} from "next/navigation";
 import {fetch_rendeles, fetch_rendelesek} from "@/app/(ApiCalls)/fetch";
 import {Orders} from "@/app/(DTOs)/Rendelesek/Rendeles";
-import {webshopId} from "@/app/(FixData)/variables";
+import {useEffect, useState} from "react";
 
-export default async function SingleRendeles({ params } : any) {
-    const rendelesek : Orders[] = await fetch_rendelesek(webshopId);
-    const rendeles : Orders = await fetch_rendeles(webshopId, Number.parseInt(params.id));
+export default function SingleRendeles({ params } : any) {
+    const [rendelesek, setRendelesek] = useState<Orders[]>([]);
+    const [rendeles, setRendeles] = useState<Orders>({} as Orders);
+
+    useEffect(() => {
+        const webshopId = JSON.parse(localStorage.getItem("webshopId") ?? "0");
+        const getApiCalls = async () => {
+            const getRendeles : Orders = await fetch_rendeles(webshopId, Number.parseInt(params.id));
+            const getRendelesek : Orders[] = await fetch_rendelesek(webshopId);
+            setRendelesek(getRendelesek);
+            setRendeles(getRendeles);
+        }
+
+        getApiCalls();
+
+    }, [params.id]);
+
+    if (!rendeles.orderid) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="max-h-[95vh] w-[75vw] mt-5 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto scroll-smooth">
             <Card className="bg-white m-2 rounded-md p-1 shadow-lg shadow-gray-400">
 
                 <CardHeader className="grid grid-cols-12 card-class mt-5 mb-5">
-                    <ArrowLeftIcon height={50} width={50} onClick={() => redirect("/Rendelések")}/>
+                    <ArrowLeftIcon height={50} width={50} onClick={() => redirect("..")}/>
                     <p className="col-span-1 ps-3">{rendelesek.findIndex(item => item.orderid === rendeles.orderid) + 1}</p>
                     <p className="col-span-8 text-center text-2xl font-bold">{rendeles.orderid}</p>
                 </CardHeader>

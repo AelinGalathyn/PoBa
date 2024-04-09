@@ -3,14 +3,16 @@
 import {rendelesHeader} from "@/app/(FixData)/lists";
 import {Orders} from "@/app/(DTOs)/Rendelesek/Rendeles";
 import {fetch_rendelesek} from "@/app/(ApiCalls)/fetch";
-import {redirect} from "next/navigation";
+import { useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
-import {webshopId} from "@/app/(FixData)/variables";
 
 export default function Rendelesek() {
     const [rendelesek, setRendelesek] = useState<Orders[]>([])
 
+    const router = useRouter();
+
     useEffect(() => {
+        const webshopId : number = JSON.parse(localStorage.getItem("webshopId") ?? "0");
         const getRendelsesek = async () => {
             const rendelesek : Orders[] = await fetch_rendelesek(webshopId);
             setRendelesek(rendelesek);
@@ -20,7 +22,8 @@ export default function Rendelesek() {
     }, []);
 
     return (
-        <div className="fixed w-[75vw] h-3/4 mt-16">
+        <section className="col-start-3 ps-10">
+            <div className="fixed w-[75vw] h-3/4 mt-16">
                 <div className="text-center">
                     <h1 className="text-2xl font-bold drop-shadow-md">Rendelések</h1>
                 </div>
@@ -36,7 +39,7 @@ export default function Rendelesek() {
                         <tbody>
                         {rendelesek.map((rendeles, index) => (
                             <tr key={index} onClick={() => {
-                                redirect(`/Rendelések/${rendeles.orderid}`)
+                                router.push(`rendelesek/${rendeles.orderid}`)
                             }} className="text-center">
                                 <td>{index + 1}</td>
                                 <td>{rendeles.orderid}</td>
@@ -51,5 +54,6 @@ export default function Rendelesek() {
                     </table>
                 </div>
             </div>
+        </section>
     )
 }

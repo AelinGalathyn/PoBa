@@ -15,7 +15,7 @@ export default function HomePageLayout({children} : { children : React.ReactNode
 
     Home();
     const [webshopok, setWebshopok] = useState<FWebshop[]>([]);
-    const [selectedWebshop, setSelectedWebshop] = useState<FWebshop>({webshopid : 0, name : ""})
+    const [selectedWebshop, setSelectedWebshop] = useState<FWebshop>({} as FWebshop)
     const [username, setUsername] = useState("");
 
     const router = useRouter();
@@ -57,7 +57,7 @@ export default function HomePageLayout({children} : { children : React.ReactNode
                             height={80}
                             alt="Home_poba_logo"
                             className="drop-shadow-lg cursor-pointer"
-                            onClick={() => redirect("/homePage")}
+                            onClick={() => router.push("/homePage")}
                         />
                     </div>
                     <div className="flex flex-row items-center">
@@ -108,9 +108,9 @@ export default function HomePageLayout({children} : { children : React.ReactNode
                                                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
                                     <CheckIcon className="h-4 w-4" aria-hidden="true"/>
                                     </span>
-                                                    ) : null}
-                                                </>
-                                            )}
+                                        ) : null}
+                                </>
+                                    )}
                                         </Listbox.Option>
                                     ))}
                                 </Listbox.Options>
@@ -125,7 +125,7 @@ export default function HomePageLayout({children} : { children : React.ReactNode
                             {menuItems.map((item) => (
                                 <li key={Math.random() * 0.1}
                                     className="cursor-pointer font-bold bg-[#A3B389] hover:bg-white text-white hover:text-stone-500 rounded-md drop-shadow-md py-1 px-2 my-2"
-                                    onClick={() => router.push("/" + item.destination)}>{item.name}</li>
+                                    onClick={() => router.push(`/homePage/${item.destination}`)}>{item.name}</li>
                             ))}
                         </ul>
                     </div>

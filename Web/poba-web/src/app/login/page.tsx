@@ -7,7 +7,6 @@ import {login} from "@/app/(ApiCalls)/calls";
 import {useRouter} from "next/navigation";
 
 export default function Login() {
-
     const [felNev, setFelNev] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 

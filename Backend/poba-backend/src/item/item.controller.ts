@@ -16,8 +16,8 @@ export class ItemController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Post('all')
-  async getAll(@UserId() userid: number, @Body('webshopid') webshopid: number) {
+  @Get('all')
+  async getAll(@UserId() userid: number, @Query('webshopid') webshopid: number) {
     try {
       let ws = await this.webshopService.findAndValidate(userid, webshopid);
       ws = await this.webshopService.unasLogin(ws);

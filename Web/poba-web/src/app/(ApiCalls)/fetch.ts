@@ -5,7 +5,7 @@ import {FItem} from "@/app/(DTOs)/Termekek/FTermek";
 import FWebshop from "@/app/(DTOs)/Webshopok/FetchWebshop";
 
 export const fetch_rendelesek = cache( async(webshopId : number) => {
-    const response = await axios.post(`http://localhost:3000/orders/all/`, {webshopid : webshopId}, {
+    const response = await axios.get(`http://localhost:3000/orders/all?webshopid=${webshopId}`, {
         withCredentials: true,
         headers: {
             'Content-Type': 'application/json',
@@ -18,10 +18,9 @@ export const fetch_rendelesek = cache( async(webshopId : number) => {
 })
 
 export const fetch_rendeles = cache( async(webshopId : number, orderId : number) => {
-    const response = await axios.get(`http://localhost:3000/orders/${orderId}`, {
+    const response = await axios.get(`http://localhost:3000/orders/${orderId}?webshopid=${webshopId}`, {
         withCredentials: true,
-        params: { webshopid: webshopId }
-    }).catch(e => {throw new Error("Failed to get this single order - " + e)});
+    }).catch(e => {console.log(e); throw new Error("Failed to get this single order - " + e)});
 
     const order : Orders = response.data;
 
@@ -29,7 +28,7 @@ export const fetch_rendeles = cache( async(webshopId : number, orderId : number)
 })
 
 export const fetch_termekek = cache(async(webshopId : number) => {
-    const response = await axios.post(`http://localhost:3000/item/all`, {webshopid: webshopId}, {
+    const response = await axios.get(`http://localhost:3000/item/all?webshopid=${webshopId}`, {
         withCredentials: true,
         headers: {
             'Content-Type': 'application/json',
@@ -76,7 +75,6 @@ export const fetch_username = async() => {
         return false;
     } else {
         const username : string = response.data.username;
-        console.log("username: "+username);
         return username;
     }
 }

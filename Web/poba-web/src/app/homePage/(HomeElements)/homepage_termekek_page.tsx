@@ -4,12 +4,12 @@ import {FItem} from "@/app/(DTOs)/Termekek/FTermek";
 import {createDatedItems, sortedListOrders} from "@/app/(Functions)/list_filtering";
 import {fetch_termekek} from "@/app/(ApiCalls)/fetch";
 import {useEffect, useState} from "react";
-import {webshopId} from "@/app/(FixData)/variables";
 
 export default function KifogyoTermekek() {
     const [fogyoTermekek, setFogyoTermekek] = useState<Item[]>([])
 
     useEffect(() => {
+        const webshopId = JSON.parse(localStorage.getItem("webshopId") ?? "0");
         const getTermekek = async () => {
             const termekek : FItem[] = await fetch_termekek(webshopId);
             setFogyoTermekek(createDatedItems(termekek));

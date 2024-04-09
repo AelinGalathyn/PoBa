@@ -3,17 +3,16 @@ import {Orders} from "@/app/(DTOs)/Rendelesek/Rendeles";
 import {fetch_rendelesek} from "@/app/(ApiCalls)/fetch";
 import {sortedListOrders} from "@/app/(Functions)/list_filtering";
 import React, {useEffect, useState} from "react";
-import {webshopId} from "@/app/(FixData)/variables";
 
 export default function JelenlegiRendelesek() {
     const [frissRendelesek, setFrissRendelesek] = useState<Orders[]>([])
 
     useEffect(() => {
+        const webshopId = JSON.parse(localStorage.getItem("webshopId") ?? "0");
         const getRendelsesek = async () => {
             const rendelesek : Orders[] = await fetch_rendelesek(webshopId);
             setFrissRendelesek(sortedListOrders(rendelesek));
         }
-
         getRendelsesek();
     }, []);
 
