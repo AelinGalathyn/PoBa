@@ -1,0 +1,114 @@
+[
+    {
+        "merged": "com.example.poba.app-debug-43:/drawable_poba_logo.png.flat",
+        "source": "com.example.poba.app-main-45:/drawable/poba_logo.png"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.poba.app-main-45:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/layout_fragment_main.xml.flat",
+        "source": "com.example.poba.app-main-45:/layout/fragment_main.xml"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/drawable_nav_profil_gomb.png.flat",
+        "source": "com.example.poba.app-main-45:/drawable/nav_profil_gomb.png"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.poba.app-main-45:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/layout_activity_main.xml.flat",
+        "source": "com.example.poba.app-main-45:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.poba.app-main-45:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.poba.app-main-45:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/font_courier_prime_bold.xml.flat",
+        "source": "com.example.poba.app-main-45:/font/courier_prime_bold.xml"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/layout_fragment_egyszeri_belepes.xml.flat",
+        "source": "com.example.poba.app-main-45:/layout/fragment_egyszeri_belepes.xml"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.poba.app-main-45:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.poba.app-main-45:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.poba.app-main-45:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/navigation_navhost.xml.flat",
+        "source": "com.example.poba.app-main-45:/navigation/navhost.xml"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.poba.app-main-45:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.poba.app-main-45:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/drawable_interactive_buttons.xml.flat",
+        "source": "com.example.poba.app-main-45:/drawable/interactive_buttons.xml"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.poba.app-main-45:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.poba.app-main-45:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/mipmap-anydpi_ic_launcher.xml.flat",
+        "source": "com.example.poba.app-main-45:/mipmap-anydpi/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/font_space_mono.ttf.flat",
+        "source": "com.example.poba.app-main-45:/font/space_mono.ttf"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/layout_fragment_bejelentkezes.xml.flat",
+        "source": "com.example.poba.app-main-45:/layout/fragment_bejelentkezes.xml"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.poba.app-main-45:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/xml_backup_rules.xml.flat",
+        "source": "com.example.poba.app-main-45:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.poba.app-main-45:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/drawable_input_background.xml.flat",
+        "source": "com.example.poba.app-main-45:/drawable/input_background.xml"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/font_courier_prime.ttf.flat",
+        "source": "com.example.poba.app-main-45:/font/courier_prime.ttf"
+    },
+    {
+        "merged": "com.example.poba.app-debug-43:/mipmap-anydpi_ic_launcher_round.xml.flat",
+        "source": "com.example.poba.app-main-45:/mipmap-anydpi/ic_launcher_round.xml"
+    }
+]

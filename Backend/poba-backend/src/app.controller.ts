@@ -34,11 +34,12 @@ export class AppController{
     @Get()
     async checkCookie(@Req()req: Request, @Res()res: Response){
         const token = req.cookies['Authentication'];
+        console.log("token : " + token);
         if(token !==undefined){
             const valid = await this.authService.validateToken(token);
             if(valid !== false){
                 const user = await this.usersService.findById(valid);
-                return res.json({username: user.username});
+                return res.json({username : user.username});
             }
         }
         return res.json({isValid: false});
@@ -62,7 +63,6 @@ export class AppController{
         const webshopid = webshop[0].webshopid;
         const user = await this.usersService.findById(userid);
         await this.webshopService.newToken(webshopid);
-
         return res.send({ message: 'Login successful', webshopid: webshopid, username: user.username });
     }
 
@@ -94,7 +94,6 @@ export class AppController{
     @Post('auth/changePassword')
     async changePassword(@UserId()userid, @Body()passwords: ChangePasswordDto){
         const user = await this.usersService.findById(userid);
-        console.log(passwords);
         const valid = await this.authService.validateUser({username: user.username, password: passwords.opw});
         if(!valid){
             throw new UnauthorizedException('Invalid old password');

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7f197a7f-b474-48b6-84fe-4e366523ff24" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/item/item.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/item/item.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/orders/orders.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/orders/orders.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(ApiCalls)/calls.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(ApiCalls)/calls.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(ApiCalls)/fetch.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(ApiCalls)/fetch.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(FixData)/lists.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(FixData)/lists.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(FixData)/variables.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(FixData)/variables.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_rendelesek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_rendelesek_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_statisztika_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_statisztika_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_termekek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_termekek_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/(ServerMenu)/username.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/(ServerMenu)/webshopok.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/Beállítások/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/beallitasok/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/Rendelések/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/rendelesek/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/Rendelések/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/rendelesek/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/Statisztika/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/statisztika/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/Termékek/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/termekek/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/Termékek/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/termekek/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/Termékek/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/termekek/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Butter3eer&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/AelinGalathyn/PoBa.git&quot;,
+    &quot;accountId&quot;: &quot;f899e8a3-a5a3-4531-a79b-9c6cef5e5462&quot;
+  }
+}</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2ebCMcxOSsbETdzBCIMGw0e03Zr" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "web",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/STUDY/Webvalto/PoBa/Web/poba-web",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
+    "ts.external.directory.path": "E:\\STUDY\\Webvalto\\PoBa\\Web\\poba-web\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\src\app" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\src\app\homePage\termekek" />
+      <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\src\app\homePage\rendelesek" />
+      <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\src\app\(DTOs)" />
+      <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\src\app" />
+      <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\src\app\homePage\(HomeElements)" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7f197a7f-b474-48b6-84fe-4e366523ff24" name="Changes" comment="" />
+      <created>1712163843733</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1712163843733</updated>
+      <workItem from="1712163844783" duration="3870000" />
+      <workItem from="1712221692650" duration="5148000" />
+      <workItem from="1712230414202" duration="5431000" />
+      <workItem from="1712236354123" duration="269000" />
+      <workItem from="1712236636482" duration="1611000" />
+      <workItem from="1712238278459" duration="17000" />
+      <workItem from="1712238376519" duration="6842000" />
+      <workItem from="1712402248069" duration="16095000" />
+      <workItem from="1712419298085" duration="4605000" />
+      <workItem from="1712464860732" duration="4506000" />
+      <workItem from="1712479875452" duration="1623000" />
+      <workItem from="1712555718080" duration="2895000" />
+      <workItem from="1712558702803" duration="7556000" />
+      <workItem from="1712566451057" duration="3086000" />
+      <workItem from="1712577659991" duration="300000" />
+      <workItem from="1712578395934" duration="7018000" />
+      <workItem from="1712598364560" duration="4522000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+</project>

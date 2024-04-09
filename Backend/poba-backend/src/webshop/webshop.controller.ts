@@ -23,7 +23,6 @@ export class WebshopController {
   @Get('list')
   async getAllWebshops(@UserId()userid: number){
     const webshops = await this.webshopService.getShopsByUser(userid);
-    const list = webshops.map(webshop => `${webshop.webshopid}:${webshop.name}`);
-    return list;
+    return webshops.map(webshop => ({ "webshopid": webshop.webshopid, "name": webshop.name }));
   }
 }
