@@ -23,7 +23,6 @@ export class Item {
 }
 
 export class InputItemDto{
-  webshopid: number;
 
   sku: string;
 

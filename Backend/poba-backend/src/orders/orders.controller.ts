@@ -5,6 +5,7 @@ import { UserId } from '../users/decorators/UserId.param';
 import { WebshopService } from '../webshop/webshop.service';
 import { Webshop } from '../webshop/entities/webshop.entity';
 import { ExternalService } from '../external/external.service';
+import { GetOrderInput, SetStatusInput } from './entities/orderinput.dto';
 
 @Controller('orders')
 export class OrdersController {
@@ -14,8 +15,8 @@ export class OrdersController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Post('all')
-  async getAll(@UserId() userid: number, @Query('webshopid') webshopid: number) {
+  @Get(':webshopid')
+  async getAll(@UserId() userid: number, @Param('webshopid') webshopid: number) {
     let ws = await this.webshopService.findAndValidate(userid, +webshopid);
     ws = await this.webshopService.unasLogin(ws);
     const data = await this.externalService.getOrders(ws);
@@ -23,11 +24,21 @@ export class OrdersController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get(':id')
-  async getOrder(@UserId() userid: number, @Body('webshopid') webshopid: number, @Param('id')id: string){
-    let ws = await this.webshopService.findAndValidate(userid, webshopid);
+  @Get(':webshopid/:id')
+  async getOrder(@UserId() userid: number, @Param() getOrderInput: GetOrderInput){
+    let ws = await this.webshopService.findAndValidate(userid, +getOrderInput.webshopid);
     ws = await this.webshopService.unasLogin(ws);
-    const data = await this.externalService.getOrderById(ws, id);
+    const data = await this.externalService.getOrderById(ws, getOrderInput.id);
     return this.ordersService.makeOrders(data);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post(':webshopid/:id/:statusid')
+  async setStatus(@UserId() userid: number, @Param() setStatusInput: SetStatusInput){
+    let ws = await this.webshopService.findAndValidate(userid, +setStatusInput.webshopid);
+    ws = await this.webshopService.unasLogin(ws);
+    const data = await this.externalService.getOrderById(ws, setStatusInput.id);
+    const order = await this.ordersService.makeOrders(data);
+    return this.externalService.setStatus(ws, order[0], +setStatusInput.statusid);
   }
 }

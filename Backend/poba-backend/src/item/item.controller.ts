@@ -16,10 +16,10 @@ export class ItemController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Post('all')
-  async getAll(@UserId() userid: number, @Body('webshopid') webshopid: number) {
+  @Get(':webshopid')
+  async getAll(@UserId() userid: number, @Param('webshopid') webshopid: number) {
     try {
-      let ws = await this.webshopService.findAndValidate(userid, webshopid);
+      let ws = await this.webshopService.findAndValidate(userid, +webshopid);
       ws = await this.webshopService.unasLogin(ws);
       const data = await this.externalService.getItems(ws);
       return await this.itemService.makeItems(data);
@@ -29,18 +29,18 @@ export class ItemController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get(':id')
-  async getOrder(@UserId() userid: number, @Body('webshopid') webshopid: number, @Param('id')id: string){
-    let ws = await this.webshopService.findAndValidate(userid, webshopid);
+  @Get(':webshopid/:id')
+  async getOrder(@UserId() userid: number, @Param('webshopid') webshopid: number, @Param('id')id: string){
+    let ws = await this.webshopService.findAndValidate(userid, +webshopid);
     ws = await this.webshopService.unasLogin(ws);
     const data = await this.externalService.getItemsById(ws, id);
     return this.itemService.makeItems(data);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Post('setStock')
-  async setStock(@UserId() userid: number, @Query() itemInput: InputItemDto) {
-    let ws = await this.webshopService.findAndValidate(userid, itemInput.webshopid);
+  @Post(':webshopid/setStock')
+  async setStock(@UserId() userid: number, @Param('webshopid') webshopid: number, @Query() itemInput: InputItemDto) {
+    let ws = await this.webshopService.findAndValidate(userid, +webshopid);
     ws = await this.webshopService.unasLogin(ws);
     return await this.externalService.setStock(ws, itemInput.sku, itemInput.stock);
   }
