@@ -10,7 +10,7 @@ export class WebshopController {
               private readonly usersService: UsersService) {}
 
   @UseGuards(JwtAuthGuard)
-  @Post('new')
+  @Post()
   async newWebshop(@UserId() userid: number, @Query('api_key')apikey: string){
     const user = await this.usersService.findById(userid);
     console.log(apikey);
@@ -20,7 +20,7 @@ export class WebshopController {
 
 
   @UseGuards(JwtAuthGuard)
-  @Get('list')
+  @Get()
   async getAllWebshops(@UserId()userid: number){
     const webshops = await this.webshopService.getShopsByUser(userid);
     return webshops.map(webshop => ({ "webshopid": webshop.webshopid, "name": webshop.name }));
