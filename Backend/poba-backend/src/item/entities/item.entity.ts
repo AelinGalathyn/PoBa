@@ -20,6 +20,8 @@ export class Item {
   pic_url: string;
 
   price: number;
+
+  package: boolean;
 }
 
 export class InputItemDto{
