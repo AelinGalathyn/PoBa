@@ -21,7 +21,7 @@ export class Item {
 
   price: number;
 
-  package: boolean;
+  packaged: boolean;
 }
 
 export class InputItemDto{

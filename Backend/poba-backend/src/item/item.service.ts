@@ -33,7 +33,7 @@ export class ItemService {
             url: item.Url,
             pic_url: img,
             price: Math.round(price * 100) / 100,
-            package: item.PackageProduct ==='yes' ? true : false,
+            packaged: item.PackageProduct ==='yes' ? true : false,
           });
         }
       } catch (err) {
