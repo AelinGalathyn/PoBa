@@ -5,7 +5,7 @@ import { FItem } from "@/app/(DTOs)/Termekek/FTermek";
 import { fetch_termekek } from "@/app/(ApiCalls)/fetch";
 import { Button } from "@nextui-org/react";
 import { ModifyTermekQty } from "@/app/(ApiCalls)/modify";
-import {ItemListFiltering, sortedListItems} from "@/app/(Functions)/list_filtering";
+import { ItemListFiltering, sortedListItems} from "@/app/(Functions)/list_filtering";
 import {Item} from "@/app/(DTOs)/Termekek/Termek";
 import {itemsFunctions, itemsHeader} from "@/app/(FixData)/lists";
 import {CreateButton} from "@/app/(Functions)/create_html_elements";
@@ -39,25 +39,26 @@ export default function Termekek() {
         const webshopId: number = JSON.parse(localStorage.getItem("webshopId") ?? "0");
         await ModifyTermekQty(webshopId, modifiedTermek, modifiedQuantity);
 
-        const updatedTermekek = termekek.map(item => {
-            if (item.id === modifiedTermek.id) {
-                return { ...item, qty: modifiedQuantity };
+        const newTermekek = await fetch_termekek(webshopId);
+        setTermekek(newTermekek);
+
+        const oldFogyoTermekek : Item[] = JSON.parse(localStorage.getItem("fogyoTermekek")!);
+
+        newTermekek.map(item => {
+            if (!oldFogyoTermekek.find(termek => termek.fItem.id === item.id)) {
+                oldFogyoTermekek.push(new Item(item, new Date()))
+            } else {
+                oldFogyoTermekek.map(termek => {
+                    if (item === modifiedTermek && termek.fItem.id === item.id) {
+                        termek.date = new Date();
+                        return termek;
+                    }
+                    return termek;
+                })
             }
-            return item;
-        });
+        })
 
-        const oldFogyoTermekek : Item[] = JSON.parse(localStorage.getItem("fogyoTermekek") ?? "[]");
-
-        const updatedFogyoTermekek = oldFogyoTermekek.map(item => {
-            if (item.fItem.id === modifiedTermek.id) {
-                return { ...item, date: new Date(), fItem: { ...item.fItem, qty: modifiedQuantity } };
-            }
-            return item;
-        });
-
-        localStorage.setItem("fogyoTermekek", JSON.stringify(sortedListItems(updatedFogyoTermekek)));
-
-        setTermekek(updatedTermekek);
+        localStorage.setItem("fogyoTermekek", JSON.stringify(sortedListItems(oldFogyoTermekek)));
     }
 
     return (
@@ -121,17 +122,23 @@ export default function Termekek() {
                                                 </div>
                                             </div>
                                             <div className="row-span-1 flex justify-center">
-                                                <div className="flex flex-col col-span-12">
-                                                    <p><b>{termek.unit.toUpperCase()}</b></p>
-                                                    <input className="p-1" type="number" id="qtyInput" value={quantity} placeholder="Új mennyiség" onChange={(e) => setQuantity(e.target.value)} />
-                                                    <Button onClick={() => modify(termek, Number(quantity))}>Mentés</Button>
-                                                </div>
+                                                {termek.qty === -1 ? ("") : (
+                                                    <div className="flex flex-col col-span-12">
+                                                        <p><b>{termek.unit.toUpperCase()}</b></p>
+                                                        <input className="p-1" type="number" id="qtyInput"
+                                                               value={quantity} placeholder="Új mennyiség"
+                                                               onChange={(e) => setQuantity(e.target.value)}/>
+                                                        <Button
+                                                            onClick={() => modify(termek, Number(quantity))}>Mentés</Button>
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
                             ) : (
-                                <tr key={termek.id} onClick={() => toggleRow(index)} className={termek.qty === -1 ? "bg-gray-200" : ""}>
+                                <tr key={termek.id} onClick={() => toggleRow(index)}
+                                    className={termek.qty === -1 ? "bg-gray-200" : ""}>
                                     <td>{index + 1}</td>
                                     <td>{termek.sku}</td>
                                     <td>{termek.cat_name.map(item => item + ", ")}</td>

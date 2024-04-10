@@ -4,8 +4,7 @@ import RegisterUser from "@/app/(DTOs)/Users/RegisterUser";
 
 export const logOut = async () => {
     await axios.post("http://localhost:3000/auth/logout", {}, {
-        withCredentials: true,
-        headers: {}
+        withCredentials: true
     });
 }
 
