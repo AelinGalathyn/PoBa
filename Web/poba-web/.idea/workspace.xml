@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f197a7f-b474-48b6-84fe-4e366523ff24" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/external/external.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/external/external.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/poba-backend/src/orders/orders.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/poba-backend/src/orders/orders.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(ApiCalls)/fetch.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(ApiCalls)/fetch.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(DTOs)/Rendelesek/Rendeles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(DTOs)/Rendelesek/Rendeles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(DTOs)/Termekek/FTermek.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(DTOs)/Termekek/FTermek.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(FixData)/lists.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(FixData)/lists.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/(Functions)/list_filtering.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(Functions)/list_filtering.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_termekek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_termekek_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/rendelesek/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/rendelesek/[id]/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/homePage/termekek/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/termekek/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -111,7 +117,7 @@
       <workItem from="1712578395934" duration="7018000" />
       <workItem from="1712598364560" duration="4605000" />
       <workItem from="1712644548531" duration="23505000" />
-      <workItem from="1712729454535" duration="4150000" />
+      <workItem from="1712729454535" duration="7129000" />
     </task>
     <servers />
   </component>

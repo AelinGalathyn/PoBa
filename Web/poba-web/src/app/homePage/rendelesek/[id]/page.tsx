@@ -14,7 +14,7 @@ export default function SingleRendeles({ params } : any) {
     useEffect(() => {
         const webshopId = JSON.parse(localStorage.getItem("webshopId") ?? "0");
         const getApiCalls = async () => {
-            const getRendeles : Orders = await fetch_rendeles(webshopId, Number.parseInt(params.id));
+            const getRendeles : Orders = await fetch_rendeles(webshopId, params.id);
             const getRendelesek : Orders[] = await fetch_rendelesek(webshopId);
             setRendelesek(getRendelesek);
             setRendeles(getRendeles);

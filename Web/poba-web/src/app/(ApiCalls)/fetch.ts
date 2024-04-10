@@ -17,7 +17,7 @@ export const fetch_rendelesek = cache( async(webshopId : number) => {
     return orders;
 })
 
-export const fetch_rendeles = cache( async(webshopId : number, orderId : number) => {
+export const fetch_rendeles = cache( async(webshopId : number, orderId : string) => {
     const response = await axios.get(`http://localhost:3000/orders/${webshopId}/${orderId}`, {
         withCredentials: true,
     }).catch(e => {console.log(e); throw new Error("Failed to get this single order - " + e)});

@@ -18,6 +18,8 @@ export function ItemListFiltering(kategoria: string, originalList: FItem[], kere
             break;
         case "Keresőmező" :
             return filteredList.filter(item => item.name.toLowerCase().includes(keresoKifejezes.toLowerCase()))
+        case "Csomagtermék" :
+            return filteredList.filter(item => item.name.toLowerCase().includes(keresoKifejezes.toLowerCase()))
         case "Összes":
             filteredList = [...originalList];
             break;
@@ -30,7 +32,7 @@ export function ItemListFiltering(kategoria: string, originalList: FItem[], kere
 }
 
 export const weeklyStatistics = (orders: Orders[]) => {
-    if (orders) {
+    if (orders && Array.isArray(orders)) {
         return orders.reduce((statistics: { [dayOfWeek: number]: number }, order) => {
             const dayOfWeek = new Date(order.date).getDay();
             statistics[dayOfWeek] = (statistics[dayOfWeek] || 0) + 1;
@@ -42,7 +44,7 @@ export const weeklyStatistics = (orders: Orders[]) => {
 }
 
 export const weeklyIncome = (orders: Orders[]) => {
-    if (orders) {
+    if (orders && Array.isArray(orders)) {
         return orders.reduce((statistics: { [dayOfWeek: number]: number }, order) => {
             const dayOfWeek = new Date(order.date).getDay();
             statistics[dayOfWeek] = (order.gross || 0) + order.gross;

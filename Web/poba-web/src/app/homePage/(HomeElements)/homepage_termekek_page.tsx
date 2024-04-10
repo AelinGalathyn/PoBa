@@ -19,7 +19,6 @@ export default function KifogyoTermekek() {
                 localStorage.setItem("fogyoTermekek", JSON.stringify(createDatedItems(ftermekek)));
                 setFogyoTermekek(createDatedItems(ftermekek));
             } else {
-                console.log(fogyoTermekekStorage)
                 setFogyoTermekek(fogyoTermekekStorage);
             }
             setTermekek(ftermekek);

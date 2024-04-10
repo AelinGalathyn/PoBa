@@ -3,7 +3,7 @@ import { Customer } from "@/app/(DTOs)/Rendelesek/Vevo";
 
 export class Orders {
     constructor(
-        public orderid: number,
+        public orderid: string,
         public date: Date,
         public type: string,
         public status_id: number,

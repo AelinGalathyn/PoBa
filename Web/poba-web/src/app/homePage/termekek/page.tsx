@@ -44,19 +44,14 @@ export default function Termekek() {
 
         const oldFogyoTermekek : Item[] = JSON.parse(localStorage.getItem("fogyoTermekek")!);
 
-        newTermekek.map(item => {
-            if (!oldFogyoTermekek.find(termek => termek.fItem.id === item.id) && item.qty <= 10 && item.qty >= 0) {
-                oldFogyoTermekek.push(new Item(item, new Date()))
-            } else {
-                oldFogyoTermekek.map(termek => {
-                    if (item === modifiedTermek && termek.fItem.id === item.id) {
-                        termek.date = new Date();
-                        return termek;
-                    }
-                    return termek;
-                })
+        newTermekek.forEach(item => {
+            const existingItemIndex = oldFogyoTermekek.findIndex(termek => termek.fItem.id === item.id);
+            if (existingItemIndex === -1 && item.qty <= 10 && item.qty >= 0) {
+                oldFogyoTermekek.push(new Item(item, new Date()));
+            } else if (existingItemIndex !== -1 && item.qty !== oldFogyoTermekek[existingItemIndex].fItem.qty) {
+                oldFogyoTermekek[existingItemIndex] = new Item(item, new Date());
             }
-        })
+        });
 
         console.log(sortedListItems(oldFogyoTermekek));
         localStorage.setItem("fogyoTermekek", JSON.stringify(sortedListItems(oldFogyoTermekek)));
@@ -127,7 +122,7 @@ export default function Termekek() {
                                                 </div>
                                             </div>
                                             <div className="row-span-1 flex justify-center">
-                                                {termek.qty === -1 ? ("") : (
+                                                {termek.qty === -1 || termek.packaged ? ("") : (
                                                     <div className="flex flex-col col-span-12">
                                                         <p><b>{termek.unit.toUpperCase()}</b></p>
                                                         <input className="p-1" type="number" id="qtyInput"
