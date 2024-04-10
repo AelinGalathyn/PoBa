@@ -54,32 +54,32 @@ export const weeklyIncome = (orders: Orders[]) => {
 }
 
 export const sortedListItems = (list: Item[]) => {
-    if (list) {
-        return list.sort((a, b) => {
+    let newList : Item[] = [];
+    if (list && Array.isArray(list)) {
+        newList = list.sort((a, b) => {
             return new Date(b.date).getTime() - new Date(a.date).getTime();
         });
-    } else {
-        return [];
     }
+
+    return newList;
 }
 
 export const sortedListOrders = (list: Orders[]) => {
-    if (list) {
-        return list.sort((a, b) => {
+    let newList : Orders[] = [];
+    if (list && Array.isArray(list)) {
+        newList = list.sort((a, b) => {
             return new Date(b.date).getTime() - new Date(a.date).getTime();
         });
-    } else {
-        return [];
     }
+
+    return newList;
 }
 
 export const createDatedItems = (list: FItem[]) => {
     let newList: Item[] = [];
-    if (list) {
+    if (list && Array.isArray(list)) {
         const now = new Date();
-        if (Array.isArray(list)) {
-            newList = list.filter(item => item.qty >= 0 && item.qty <= 10).map(item => new Item(item, now)).splice(0, 15);
-        }
+        newList = list.filter(item => item.qty >= 0 && item.qty <= 10).map(item => new Item(item, now)).splice(0, 15);
     }
     return newList;
 }

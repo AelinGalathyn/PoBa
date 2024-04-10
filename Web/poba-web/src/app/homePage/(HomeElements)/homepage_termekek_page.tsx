@@ -16,7 +16,6 @@ export default function KifogyoTermekek() {
 
             let fogyoTermekekStorage: Item[] | null = JSON.parse(localStorage.getItem("fogyoTermekek") ?? "null");
             if (fogyoTermekekStorage === null) {
-                console.log(createDatedItems(ftermekek));
                 localStorage.setItem("fogyoTermekek", JSON.stringify(createDatedItems(ftermekek)));
                 setFogyoTermekek(createDatedItems(ftermekek));
             } else {
@@ -28,10 +27,6 @@ export default function KifogyoTermekek() {
 
         getTermekek();
     }, []);
-
-    useEffect(() => {
-        localStorage.setItem("fogyoTermekek", JSON.stringify(fogyoTermekek));
-    }, [fogyoTermekek]);
 
     return (
         <div className="fixed h-2/6 w-2/5 mt-[5vh]">

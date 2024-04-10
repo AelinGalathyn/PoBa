@@ -83,6 +83,7 @@ export class ExternalService {
     </Products>`;
 
     const response = await this.unasRequest('setStock', headers, body, webshop);
+    console.log(response)
     return response.Products.Product.Status;
   }
 

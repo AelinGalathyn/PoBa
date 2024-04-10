@@ -45,7 +45,7 @@ export default function Termekek() {
         const oldFogyoTermekek : Item[] = JSON.parse(localStorage.getItem("fogyoTermekek")!);
 
         newTermekek.map(item => {
-            if (!oldFogyoTermekek.find(termek => termek.fItem.id === item.id)) {
+            if (!oldFogyoTermekek.find(termek => termek.fItem.id === item.id) && item.qty <= 10 && item.qty >= 0) {
                 oldFogyoTermekek.push(new Item(item, new Date()))
             } else {
                 oldFogyoTermekek.map(termek => {
@@ -58,6 +58,7 @@ export default function Termekek() {
             }
         })
 
+        console.log(sortedListItems(oldFogyoTermekek));
         localStorage.setItem("fogyoTermekek", JSON.stringify(sortedListItems(oldFogyoTermekek)));
     }
 
@@ -113,8 +114,12 @@ export default function Termekek() {
                                                     <p>{termek?.sku}</p>
                                                 </div>
                                                 <div className="flex flex-col col-span-1">
-                                                    <p><b>{termek.unit.toUpperCase()}</b></p>
-                                                    <p>{termek?.qty + " " + termek?.unit}</p>
+                                                    {termek.qty === -1 ? ("") : (
+                                                        <>
+                                                            <p><b>{termek.unit.toUpperCase()}</b></p>
+                                                            <p>{termek?.qty + " " + termek?.unit}</p>
+                                                        </>
+                                                    )}
                                                 </div>
                                                 <div className="flex flex-col col-span-1">
                                                     <p><b>Ár</b></p>
