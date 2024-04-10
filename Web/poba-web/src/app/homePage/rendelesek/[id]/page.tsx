@@ -18,15 +18,12 @@ export default function SingleRendeles({ params } : any) {
             const getRendelesek : Orders[] = await fetch_rendelesek(webshopId);
             setRendelesek(getRendelesek);
             setRendeles(getRendeles);
+            console.log(rendeles)
         }
 
         getApiCalls();
 
     }, [params.id]);
-
-    if (!rendeles.orderid) {
-        return <div>Loading...</div>;
-    }
 
     return (
         <div className="max-h-[95vh] w-[75vw] mt-5 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto scroll-smooth">

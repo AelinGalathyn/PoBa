@@ -14,6 +14,7 @@ import Home from "@/app/page";
 export default function HomePageLayout({children} : { children : React.ReactNode }) {
 
     Home();
+
     const [webshopok, setWebshopok] = useState<FWebshop[]>([]);
     const [selectedWebshop, setSelectedWebshop] = useState<FWebshop>({} as FWebshop)
     const [username, setUsername] = useState("");
@@ -135,7 +136,7 @@ export default function HomePageLayout({children} : { children : React.ReactNode
                     <div className="flex justify-center items-center h-full">
                         <button
                             className="text-[#FF442B] font-bold hover:bg-[#A3B389] hover:text-white p-2 rounded-md drop-shadow-md"
-                            onClick={() => logOut()}>
+                            onClick={() => {logOut(); router.push("/login")}}>
                             Kijelentkezés
                         </button>
                     </div>
