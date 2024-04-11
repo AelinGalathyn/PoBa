@@ -6,7 +6,7 @@ import {
     Body,
     Res,
     createParamDecorator,
-    ExecutionContext, UnauthorizedException, Param, Req,
+    ExecutionContext, UnauthorizedException, Param, Req, Query,
 } from '@nestjs/common';
 import { AuthService } from './auth/auth.service';
 import { CreateUserDto } from './users/dto/create-user.dto';
@@ -45,8 +45,8 @@ export class AppController{
         return res.json({isValid: false});
     }
 
-    @Post('auth/login')
-    async login(@Body() userdto: LoginDto, @Res() res: Response) {
+    @Post('login')
+    async login(@Query() userdto: LoginDto, @Res() res: Response) {
         const { userid,...jwt} = await this.authService.login(userdto);
 
         if (!jwt || !jwt.access_token) {
@@ -66,8 +66,8 @@ export class AppController{
         return res.send({ message: 'Login successful', webshopid: webshopid, username: user.username });
     }
 
-    @Post('auth/reg')
-    async reg(@Body() regdto: RegDto, ){
+    @Post('reg')
+    async reg(@Query() regdto: RegDto, ){
         const {api_key, ...newUser} = regdto;
         if(await this.usersService.findByUName(regdto.username) === null) {
             const user = await this.authService.register(newUser);
@@ -78,7 +78,7 @@ export class AppController{
         }
     }
 
-    @Post('auth/logout')
+    @Post('logout')
     logout(@Res() res: Response) {
         res.cookie('Authentication', '', {
             httpOnly: true,
@@ -91,8 +91,8 @@ export class AppController{
     }
 
     @UseGuards(JwtAuthGuard)
-    @Post('auth/changePassword')
-    async changePassword(@UserId()userid, @Body()passwords: ChangePasswordDto){
+    @Post('changePassword')
+    async changePassword(@UserId()userid, @Query()passwords: ChangePasswordDto){
         const user = await this.usersService.findById(userid);
         const valid = await this.authService.validateUser({username: user.username, password: passwords.opw});
         if(!valid){

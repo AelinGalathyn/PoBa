@@ -20,10 +20,11 @@ export class Item {
   pic_url: string;
 
   price: number;
+
+  packaged: boolean;
 }
 
 export class InputItemDto{
-  webshopid: number;
 
   sku: string;
 
