@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">PoBa</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="nav_profil_gomb">nav_profil_gomb</string>
-    <string name="begombfelirat">Bejelentkezés</string>
-    <string name="egybefel_szoveg">Felhasználónév</string>
-    <string name="egybejel_szoveg">Jelszó</string>
-</resources>
