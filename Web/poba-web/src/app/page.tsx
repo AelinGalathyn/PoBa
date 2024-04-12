@@ -10,21 +10,21 @@ export default function Home() {
 
     useEffect(() => {
         const webshopId = JSON.parse(localStorage.getItem("webshopId") ?? "0");
-        const getUsername = async () => {
-            const response = await fetch_username();
 
+        fetch_username().then(response => {
             if (response === false) {
                 router.push("/login")
             }
             if (webshopId === 0) {
-                await fetch_webshopok().then(data => localStorage.setItem("webshopId", JSON.stringify(data[0].webshopid)))
-                router.push("/homePage")
+                fetch_webshopok().then(data => {
+                    localStorage.setItem("webshopId", JSON.stringify(data[0].webshopid));
+                    router.push("/homePage");
+                })
             }
             if (path === "/") {
                 router.push("/homePage")
             }
-        };
+        })
 
-        getUsername();
     }, []);
 }

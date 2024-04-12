@@ -5,14 +5,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f197a7f-b474-48b6-84fe-4e366523ff24" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/homePage/lodaing.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/homePage/rendelesek/[id]/lodaing.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/homePage/rendelesek/lodaing.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(Charts)/bar_chart.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(Charts)/stacked_line_cat.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/homePage/beallitasok/changePassword/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/homePage/beallitasok/layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/homePage/beallitasok/webshopok/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/(ApiCalls)/calls.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(ApiCalls)/calls.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(ApiCalls)/fetch.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(ApiCalls)/fetch.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(ApiCalls)/modify.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(ApiCalls)/modify.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(Charts)/circle_chart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(Charts)/circle_chart.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(Charts)/linear_chart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(Charts)/linear_chart.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(DTOs)/Rendelesek/RendelesItem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(DTOs)/Rendelesek/RendelesItem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(FixData)/lists.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(FixData)/lists.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(FixData)/variables.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(Charts)/stacked_bar_line.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(Functions)/charts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(Functions)/charts.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(Functions)/create_html_elements.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(Functions)/create_html_elements.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(Functions)/list_filtering.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(Functions)/list_filtering.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_rendelesek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_rendelesek_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_statisztika_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_statisztika_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_termekek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_termekek_page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/beallitasok/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/beallitasok/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/homePage/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/lodaing.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/rendelesek/[id]/lodaing.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/homePage/rendelesek/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/rendelesek/[id]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/loading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/loading.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/rendelesek/lodaing.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/rendelesek/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/rendelesek/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/statisztika/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/statisztika/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/homePage/termekek/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/termekek/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/reg/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/reg/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,26 +73,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "web",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/STUDY/Webvalto/PoBa/Web/poba-web/src/app/homePage",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
-    "ts.external.directory.path": "E:\\STUDY\\Webvalto\\PoBa\\Web\\poba-web\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;web&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/STUDY/Webvalto/PoBa/Web/poba-web&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.linters.eslint&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;E:\\STUDY\\Webvalto\\PoBa\\Web\\poba-web\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\STUDY\Webvalto\PoBa\Web\poba-web\src\app\homePage" />
@@ -117,7 +141,9 @@
       <workItem from="1712578395934" duration="7018000" />
       <workItem from="1712598364560" duration="4605000" />
       <workItem from="1712644548531" duration="23505000" />
-      <workItem from="1712729454535" duration="8505000" />
+      <workItem from="1712729454535" duration="24456000" />
+      <workItem from="1712819790590" duration="21541000" />
+      <workItem from="1712909760539" duration="6738000" />
     </task>
     <servers />
   </component>

@@ -22,8 +22,7 @@ export const fetch_rendeles = cache( async(webshopId : number, orderId : string)
         withCredentials: true,
     }).catch(e => {console.log(e); throw new Error("Failed to get this single order - " + e)});
 
-    const order : Orders = response.data;
-
+    const order : Orders = response.data[0];
     return order;
 })
 
@@ -49,15 +48,15 @@ export const fetch_termek = cache( async(webshopId : number, termekId : number) 
     return termek;
 })
 
-export const fetch_webshopok = cache( async() => {
+export const fetch_webshopok = async() => {
     const response = await axios.get(`http://localhost:3000/webshop`, {
         withCredentials: true
-    }).catch(e => {throw new Error("Failed to get webshop list - " + e)});
+    }).catch(e => {console.log(e);throw new Error("Failed to get webshop list - " + e)});
 
     const webshopok : FWebshop[] = response.data;
 
     return webshopok;
-})
+}
 
 export const fetch_username = async() => {
     const response = await axios.get('http://localhost:3000/', {

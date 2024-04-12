@@ -24,3 +24,7 @@ export const itemsHeader = [ "Sorszám", "Cikkszám", "Kategória", "Termék nev
 export const rendelesHeader = [ "Sorszám", "Azonosító", "Megrendelő", "Termékek DB", "Fizetés típus", "Összeg", "Státusz" ];
 
 export const beallitasMenuItems = [ "Csatolt webshopok", "Jelszó változtatás", "Kijelentkezés" ];
+
+export const statisztikaPage = ["linear", "linear", "bar", "barline", "linecat"];
+
+export const homeStatisztikaPage = ["linear", "linear"];

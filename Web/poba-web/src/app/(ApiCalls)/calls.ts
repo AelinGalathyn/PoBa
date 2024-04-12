@@ -1,9 +1,9 @@
 import axios from "axios";
 import User from "@/app/(DTOs)/Users/User";
 import RegisterUser from "@/app/(DTOs)/Users/RegisterUser";
-import Home from "@/app/page";
 
 export const logOut = async () => {
+
     await axios.post("http://localhost:3000/logout", {}, {
         withCredentials: true
     });
@@ -19,7 +19,7 @@ export const login = async (loginUser : User) => {
             username : loginUser.username,
             password : loginUser.password
         }
-    });
+    }).catch(e => {console.log(e);throw new Error(e)});
 
     return response.data;
 }
@@ -31,4 +31,17 @@ export const reg = async (regUser : RegisterUser) => {
             'Content-Type': 'application/json'
         },
     });
+}
+
+export const ChangePassword = async (oldPassword : string, newPassword : string) => {
+    await axios.post("http://localhost:3000/changePassword", {}, {
+        withCredentials: true,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        params : {
+            opw : oldPassword,
+            npw : newPassword
+        }
+    })
 }

@@ -15,9 +15,8 @@ export default function Reg() {
     const newUser : RegisterUser = new RegisterUser(felNev, password, apikey);
     const router = useRouter();
 
-    const handleReg = async () => {
-        await reg(newUser);
-        router.push("/login");
+    const handleReg = () => {
+        reg(newUser).then(() => router.push("/login"));
     }
 
     return (

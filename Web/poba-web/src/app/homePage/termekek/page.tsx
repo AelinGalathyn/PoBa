@@ -20,11 +20,7 @@ export default function Termekek() {
 
     useEffect(() => {
         const webshopId: number = JSON.parse(localStorage.getItem("webshopId") ?? "0");
-        const getApiCalls = async () => {
-            const fetchedTermekek: FItem[] = await fetch_termekek(webshopId);
-            setTermekek(fetchedTermekek);
-        }
-        getApiCalls();
+        fetch_termekek(webshopId).then(data => setTermekek(data));
     }, []);
 
     const toggleRow = (index: number) => {
@@ -53,21 +49,26 @@ export default function Termekek() {
             }
         });
 
-        console.log(sortedListItems(oldFogyoTermekek));
         localStorage.setItem("fogyoTermekek", JSON.stringify(sortedListItems(oldFogyoTermekek)));
+    }
+
+    if (termekek.length === 0) {
+        return <div className="col-start-3 ps-10 w-[75vw] h-3/4 flex justify-center items-center">
+            <p>Loading...</p>
+        </div>
     }
 
     return (
         <section className="col-start-3 ps-10">
-            <div className="fixed w-[75vw] h-3/4 mt-5">
+        <div className="fixed w-[75vw] h-3/4 mt-5">
                 <div className="text-center">
                     <h1 className="text-2xl font-bold drop-shadow-md">Termékek</h1>
                 </div>
-                <div className="mt-3 grid grid-cols-2">
-                    <div className="space-x-2">
+                <div className="mt-3 grid grid-cols-6">
+                    <div className="space-x-2 space-y-2 col-span-4">
                         {itemsFunctions.map(item => CreateButton(item, () => setShowCorrectList(item)))}
                     </div>
-                    <div className="flex justify-end items-center grid-cols-2">
+                    <div className="flex justify-end items-center grid-cols-2 col-span-2">
                         <MagnifyingGlassIcon width={25} height={25}/>
                         <input className="ms-2 p-2 border-2 border-gray-300 rounded-md" type="text"
                                onClick={() => setShowCorrectList("Keresőmező")}

@@ -9,19 +9,19 @@ export default function JelenlegiRendelesek() {
 
     useEffect(() => {
         const webshopId = JSON.parse(localStorage.getItem("webshopId") ?? "0");
-        const getRendelsesek = async () => {
-            const rendelesek : Orders[] = await fetch_rendelesek(webshopId);
-            setFrissRendelesek(sortedListOrders(rendelesek));
-        }
-        getRendelsesek();
+        fetch_rendelesek(webshopId).then(data => setFrissRendelesek(sortedListOrders(data)));
     }, []);
+
+    if (frissRendelesek.length === 0) {
+        return <p className="w-[25vw] h-full flex justify-center items-center">Loading...</p>
+    }
 
     return (
         <div className="fixed w-fit max-h-3/4 mt-16">
             <div className="text-center">
                 <h1 className="text-2xl font-bold drop-shadow-md">Rendelések</h1>
             </div>
-            <div className="max-h-full w-[25vw] mt-5 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto scroll-smooth">
+            <div className="max-h-[75vh] w-[25vw] mt-5 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto scroll-smooth">
                 <ul>
                     {frissRendelesek.map((rendeles) => (
                         <li key={rendeles.orderid}>

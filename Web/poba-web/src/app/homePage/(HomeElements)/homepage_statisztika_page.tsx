@@ -4,29 +4,34 @@ import {Orders} from "@/app/(DTOs)/Rendelesek/Rendeles";
 import {renderChart} from "@/app/(Functions)/charts";
 import {Spacer} from "@nextui-org/react";
 import {fetch_rendelesek} from "@/app/(ApiCalls)/fetch";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
+import {homeStatisztikaPage} from "@/app/(FixData)/lists";
 
 
 export default function HomepageStatisztika() {
     const [rendelesek, setRendelesek] = useState<Orders[]>([])
+    const [charts, setCharts] = useState<string[]>([]);
 
     useEffect(() => {
         const webshopId = JSON.parse(localStorage.getItem("webshopId") ?? "0");
-        const getRendelsesek = async () => {
-            const rendelesek : Orders[] = await fetch_rendelesek(webshopId);
-            setRendelesek(sortedListOrders(rendelesek));
-        }
-        getRendelsesek();
+        fetch_rendelesek(webshopId).then(data => setRendelesek(sortedListOrders(data)));
+        setCharts(homeStatisztikaPage);
     }, []);
 
-    let charts = [ "linear", "linear"];
+    const changeCharts = (index: number, changeTo: string) => {
+        setCharts(prevCharts => {
+            const newCharts = [...prevCharts];
+            if (changeTo !== "linear" && changeTo !== newCharts[index]) {
+                newCharts[index] = changeTo;
+            } else {
+                newCharts[index] = "linear";
+            }
+            return newCharts;
+        });
+    };
 
-    const changeCharts = (index : number, changeTo : string) => {
-        if (changeTo !== "linear" && changeTo !== charts[index]) {
-            charts[index] = changeTo;
-        } else {
-            charts[index] = "linear";
-        }
+    if (rendelesek.length === 0) {
+        return <p className="h-full w-[45vw] flex justify-center items-center">Loading...</p>
     }
 
     return (
@@ -37,12 +42,12 @@ export default function HomepageStatisztika() {
             <div className="h-full w-full mt-5 pe-2 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto scroll-smooth">
                 <div className="grid grid-cols-2">
                     <div className="h-full text-center flex flex-col justify-center items-center">
-                        {renderChart(charts[0], "Heti rendelések", "db", weeklyStatistics(rendelesek), "chart1")}
+                        {renderChart(charts[0], "Heti rendelések", "db", "", "", weeklyStatistics(rendelesek), {}, {}, "chart1")}
                         <Spacer/>
                         <Switch onValueChange={() => changeCharts(0, "circle")} size="lg" color="warning" className="py-[5px]">Circle</Switch>
                     </div>
                     <div className="h-full text-center flex flex-col justify-center items-center">
-                        {renderChart(charts[1], "Heti bevétel", "Ezer Ft", weeklyIncome(rendelesek), "chart2")}
+                        {renderChart(charts[1], "Heti bevétel", "Ezer Ft", "", "", weeklyIncome(rendelesek), {}, {}, "chart2")}
                         <Spacer/>
                         <Switch onValueChange={() => changeCharts(1, "circle")} size="lg" color="warning" className="py-[5px]">Circle</Switch>
                     </div>
