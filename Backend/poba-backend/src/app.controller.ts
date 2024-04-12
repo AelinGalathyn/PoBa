@@ -6,7 +6,7 @@ import {
     Body,
     Res,
     createParamDecorator,
-    ExecutionContext, UnauthorizedException, Param, Req, Query,
+    ExecutionContext, UnauthorizedException, Param, Req, Query, Delete,
 } from '@nestjs/common';
 import { AuthService } from './auth/auth.service';
 import { CreateUserDto } from './users/dto/create-user.dto';
@@ -21,6 +21,8 @@ import { RegDto } from './auth/dto/reg.dto';
 import { ItemService } from './item/item.service';
 import { Request, Response } from 'express';
 import { ChangePasswordDto } from './users/dto/change-password.dto';
+import { Webshop } from './webshop/entities/webshop.entity';
+import { ApicallsService } from './external/apicalls/apicalls.service';
 
 
 @Controller ()
@@ -29,7 +31,8 @@ export class AppController{
                  private externalService: ExternalService,
                  private usersService: UsersService,
                  private webshopService: WebshopService,
-                 private itemService: ItemService) {}
+                 private itemService: ItemService,
+                 private apicallsService: ApicallsService) {}
 
     @Get()
     async checkCookie(@Req()req: Request, @Res()res: Response){
@@ -92,7 +95,7 @@ export class AppController{
 
     @UseGuards(JwtAuthGuard)
     @Post('changePassword')
-    async changePassword(@UserId()userid, @Query()passwords: ChangePasswordDto){
+    async changePassword(@UserId() userid, @Query()passwords: ChangePasswordDto){
         const user = await this.usersService.findById(userid);
         const valid = await this.authService.validateUser({username: user.username, password: passwords.opw});
         if(!valid){
