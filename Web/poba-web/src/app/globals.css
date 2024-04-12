@@ -4,11 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-    html {
-        font-family: "Inter", sans-serif;
-        color: #60624d;
-    }
+body {
+    font-family: "Inter", sans-serif;
+    color: #60624d;
 }
 
 .input-group input {

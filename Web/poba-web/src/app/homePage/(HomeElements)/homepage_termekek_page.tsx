@@ -1,22 +1,32 @@
 import {Card, CardHeader} from "@nextui-org/card";
 import {Item} from "@/app/(DTOs)/Termekek/Termek";
 import {FItem} from "@/app/(DTOs)/Termekek/FTermek";
-import {createDatedItems, sortedListOrders} from "@/app/(Functions)/list_filtering";
+import {createDatedItems} from "@/app/(Functions)/list_filtering";
 import {fetch_termekek} from "@/app/(ApiCalls)/fetch";
-import {useEffect, useState} from "react";
-import {webshopId} from "@/app/(FixData)/variables";
+import React, {useEffect, useState} from "react";
 
 export default function KifogyoTermekek() {
     const [fogyoTermekek, setFogyoTermekek] = useState<Item[]>([])
+    const [termekek, setTermekek] = useState<FItem[]>([])
 
     useEffect(() => {
-        const getTermekek = async () => {
-            const termekek : FItem[] = await fetch_termekek(webshopId);
-            setFogyoTermekek(createDatedItems(termekek));
-        }
+        const webshopId = JSON.parse(localStorage.getItem("webshopId") ?? "0");
+        fetch_termekek(webshopId).then(data => setTermekek(data));
 
-        getTermekek();
+        let fogyoTermekekStorage: Item[] | null = JSON.parse(localStorage.getItem("fogyoTermekek") ?? "null");
+        if (fogyoTermekekStorage === null) {
+            localStorage.setItem("fogyoTermekek", JSON.stringify(createDatedItems(termekek)));
+            setFogyoTermekek(createDatedItems(termekek));
+        } else {
+            setFogyoTermekek(fogyoTermekekStorage);
+        }
     }, []);
+
+    if (termekek.length === 0) {
+        return <div className="h-[45vh] w-[45vw] flex justify-center items-center">
+            <p>Loading...</p>
+        </div>
+    }
 
     return (
         <div className="fixed h-2/6 w-2/5 mt-[5vh]">

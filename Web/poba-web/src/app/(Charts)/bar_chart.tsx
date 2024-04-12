@@ -2,37 +2,35 @@
 
 import { useEffect } from "react";
 import Chart from "chart.js/auto";
-import {getRandomRgbColor} from "@/app/(Functions)/list_filtering";
+import {lab} from "d3-color";
 
-interface CircleChartWeekProps {
+interface BarChartWeekProps {
     title: string;
     label: string;
     data: Record<string, number>;
     canvasId : string;
 }
 
-export default function CircleChartWeek({ title, label, data, canvasId }: CircleChartWeekProps) {
+export default function BarChartWeek({ title, label, data, canvasId }: BarChartWeekProps) {
 
     useEffect(() => {
         const ctx = document.getElementById(canvasId) as HTMLCanvasElement;
         if (!ctx) return;
 
-        let backgroundColors = [];
-
-        for(let i = 0; i < Object.keys(data).length; i++) {
-            backgroundColors.push(getRandomRgbColor());
-        }
-
         const myChart = new Chart(ctx, {
-            type: "doughnut",
+            type: 'bar',
             data: {
                 labels: Object.keys(data),
-                datasets: [{
-                    data: Object.values(data),
-                    label: label,
-                    backgroundColor: backgroundColors
-                }],
-            },
+                datasets: [
+            {
+                label: label,
+                data: Object.values(data),
+                borderColor: "#F4B499",
+                backgroundColor: "rgba(244, 180, 153, 0.50)",
+                borderWidth: 2,
+                borderRadius: Number.MAX_VALUE,
+                borderSkipped: false,
+            }]},
             options: {
                 responsive: true,
                 maintainAspectRatio: true,
@@ -40,8 +38,8 @@ export default function CircleChartWeek({ title, label, data, canvasId }: Circle
                 plugins: {
                     legend: {
                         display: true,
-                        position: 'right'
-                    }
+                        position: 'top',
+                    },
                 },
                 layout: {
                     padding: 10

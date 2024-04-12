@@ -4,7 +4,7 @@ import Image from "next/image";
 import React, {Fragment, useEffect, useState} from "react";
 import {menuItems} from "@/app/(FixData)/lists";
 import {logOut} from "@/app/(ApiCalls)/calls";
-import {redirect, useRouter} from "next/navigation";
+import {useRouter} from "next/navigation";
 import FWebshop from "@/app/(DTOs)/Webshopok/FetchWebshop";
 import {Listbox, Transition} from "@headlessui/react";
 import {CheckIcon, ChevronUpDownIcon} from "@heroicons/react/20/solid";
@@ -14,36 +14,30 @@ import Home from "@/app/page";
 export default function HomePageLayout({children} : { children : React.ReactNode }) {
 
     Home();
+
     const [webshopok, setWebshopok] = useState<FWebshop[]>([]);
-    const [selectedWebshop, setSelectedWebshop] = useState<FWebshop>({webshopid : 0, name : ""})
+    const [selectedWebshop, setSelectedWebshop] = useState<FWebshop>({} as FWebshop)
     const [username, setUsername] = useState("");
 
     const router = useRouter();
 
     useEffect(() => {
-        const getUsername = async () => {
-            try {
-                const userData = await fetch_username();
-                if (typeof userData === "string") {
-                    setUsername(userData);
-                }
-            } catch (error) {
-                console.error("Error fetching username:", error);
+        const webshopId: number = JSON.parse(localStorage.getItem("webshopId") ?? "0");
+        console.log(webshopId)
+        fetch_username().then(userData => {
+            if (typeof userData === "string") {
+                setUsername(userData);
             }
-        };
-
-        getUsername();
-    }, []);
-
-    useEffect(() => {
-        const getWebshopok = async () => {
-            const webshopok : FWebshop[] = await fetch_webshopok();
+        });
+        fetch_webshopok().then(webshopok => {
             setWebshopok(webshopok);
-            setSelectedWebshop(webshopok[0]);
-        }
-
-        getWebshopok();
+            setSelectedWebshop(webshopok.find(item => item.webshopid === webshopId) ?? webshopok[0]);
+        });
     }, []);
+
+    if (webshopok.length === 0) {
+        return <p className="h-[100vh] w-[100vw] flex justify-center items-center">Loading...</p>
+    }
 
     return (
         <main className="grid grid-cols-12">
@@ -57,7 +51,7 @@ export default function HomePageLayout({children} : { children : React.ReactNode
                             height={80}
                             alt="Home_poba_logo"
                             className="drop-shadow-lg cursor-pointer"
-                            onClick={() => redirect("/homePage")}
+                            onClick={() => router.push("/homePage")}
                         />
                     </div>
                     <div className="flex flex-row items-center">
@@ -74,6 +68,7 @@ export default function HomePageLayout({children} : { children : React.ReactNode
                     <Listbox value={selectedWebshop} onChange={(value) => {
                         setSelectedWebshop(value);
                         localStorage.setItem("webshopId", JSON.stringify(value.webshopid));
+                        router.refresh();
                     }}>
                         <div className="flex flex-col px-2 justify-center mt-1">
                             <Listbox.Button
@@ -97,20 +92,19 @@ export default function HomePageLayout({children} : { children : React.ReactNode
                                                 active ? 'bg-white rounded-lg' : ''
                                             }`
                                         }
-                                                        value={webshop}
-                                        >
+                                        value={webshop}>
                                             {({selected}) => (
                                                 <>
-                            <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
-                                {webshop.name}
-                            </span>
+                                                    <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
+                                                        {webshop.name}
+                                                    </span>
                                                     {selected ? (
                                                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                                    <CheckIcon className="h-4 w-4" aria-hidden="true"/>
-                                    </span>
-                                                    ) : null}
+                                                            <CheckIcon className="h-4 w-4" aria-hidden="true"/>
+                                                        </span>
+                                                        ) : null}
                                                 </>
-                                            )}
+                                    )}
                                         </Listbox.Option>
                                     ))}
                                 </Listbox.Options>
@@ -125,7 +119,7 @@ export default function HomePageLayout({children} : { children : React.ReactNode
                             {menuItems.map((item) => (
                                 <li key={Math.random() * 0.1}
                                     className="cursor-pointer font-bold bg-[#A3B389] hover:bg-white text-white hover:text-stone-500 rounded-md drop-shadow-md py-1 px-2 my-2"
-                                    onClick={() => router.push("/" + item.destination)}>{item.name}</li>
+                                    onClick={() => router.push(`/homePage/${item.destination}`)}>{item.name}</li>
                             ))}
                         </ul>
                     </div>
@@ -135,7 +129,7 @@ export default function HomePageLayout({children} : { children : React.ReactNode
                     <div className="flex justify-center items-center h-full">
                         <button
                             className="text-[#FF442B] font-bold hover:bg-[#A3B389] hover:text-white p-2 rounded-md drop-shadow-md"
-                            onClick={() => logOut()}>
+                            onClick={() => {logOut().then(() => (router.push("/login")))}}>
                             Kijelentkezés
                         </button>
                     </div>

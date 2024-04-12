@@ -3,7 +3,7 @@
 import Image from "next/image";
 import {useState} from "react";
 import RegisterUser from "@/app/(DTOs)/Users/RegisterUser";
-import {redirect, useRouter} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {reg} from "@/app/(ApiCalls)/calls";
 
 export default function Reg() {
@@ -15,9 +15,8 @@ export default function Reg() {
     const newUser : RegisterUser = new RegisterUser(felNev, password, apikey);
     const router = useRouter();
 
-    const handleReg = async () => {
-        await reg(newUser);
-        router.push("/login");
+    const handleReg = () => {
+        reg(newUser).then(() => router.push("/login"));
     }
 
     return (
@@ -53,7 +52,7 @@ export default function Reg() {
             </div>
             <div>
                 <button className="hover:text-gray-500 py-2 px-4 active:border-0 active:mt-1"
-                        onClick={() => redirect("/login")}>
+                        onClick={() => router.push("/login")}>
                     Már van fiókom
                 </button>
             </div>
