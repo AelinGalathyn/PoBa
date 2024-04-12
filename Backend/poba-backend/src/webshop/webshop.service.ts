@@ -123,4 +123,8 @@ export class WebshopService {
     await this.webshopRepository.save(webshop);
     return webshop;
   }
+
+  async deleteWebshop(webshop: Webshop){
+    return await this.webshopRepository.delete({webshopid: webshop.webshopid});
+  }
 }

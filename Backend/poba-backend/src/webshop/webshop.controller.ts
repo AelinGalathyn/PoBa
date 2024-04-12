@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { WebshopService } from './webshop.service';
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { UserId } from '../users/decorators/UserId.param';
@@ -24,5 +24,12 @@ export class WebshopController {
   async getAllWebshops(@UserId()userid: number){
     const webshops = await this.webshopService.getShopsByUser(userid);
     return webshops.map(webshop => ({ "webshopid": webshop.webshopid, "name": webshop.name }));
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete()
+  async removeWebshop(@UserId() userid, @Query('webshopid') webshopid: number){
+    let ws = await this.webshopService.findAndValidate(userid, +webshopid);
+    return await this.webshopService.deleteWebshop(ws);
   }
 }
