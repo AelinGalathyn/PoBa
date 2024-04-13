@@ -18,13 +18,27 @@ export const ModifyTermekQty = async(webshopId: number, item : FItem, modifiedQt
 }
 
 export const AddWebshop = async (apiKey : string) => {
-    await axios.post(`http://localhost:3000/webshop`, {}, {
+    const response = await axios.post(`http://localhost:3000/webshop`, {}, {
         withCredentials: true,
         headers: {
             'Content-Type': 'application/json'
         },
         params: {
             api_key : apiKey
+        }
+    }).catch(e => {console.log(e); throw new Error(e)});
+
+    return response.data;
+}
+
+export const DeleteWebshop = async (webshopId : number) => {
+    await axios.delete(`http://localhost:3000/webshop`, {
+        withCredentials: true,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        params: {
+            webshopid : webshopId
         }
     }).catch(e => {console.log(e); throw new Error(e)});
 }

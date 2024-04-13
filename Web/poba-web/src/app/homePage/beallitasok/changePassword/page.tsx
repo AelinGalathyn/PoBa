@@ -26,16 +26,17 @@ export default function PasswordBeallitasok() {
             alert("A jelszónak legalább 1 nagybetűt [A-Z], 1 számot [0-9] és egy speciális karaktert [#?!@$ %^&*-] tartalmaznia kell.")
         }
         else {
-            ChangePassword(oldPassword, newPassword).then(() => logOut()).catch(e => {console.log(e);throw new Error(e)});
+            ChangePassword(oldPassword, newPassword).then(() => logOut()).catch(e => {alert("A jelszó változtatása nem sikerült"); router.push("/login")});
         }
     }
 
     return (
-        <div>
-            <div>
-                <input type="text" onChange={(e) => setOldPassword(e.target.value)} />
-                <input type="text" onChange={(e) => setNewPassword(e.target.value)} />
-                <button onClick={handleOnclick}>Módosít</button>
+        <div className="p-24">
+            <div className="space-y-2 flex flex-col items-center">
+                <h1 className="text-3xl mb-[5vh] text-center">Jelszó változtatás</h1>
+                <input placeholder="Jelenlegi jelszó" className="w-2/3 p-2 border-2 border-gray-400 rounded-md" type="text" onChange={(e) => setOldPassword(e.target.value)} />
+                <input placeholder="Új jelszó" className="w-2/3 p-2 border-2 border-gray-400 rounded-md" type="text" onChange={(e) => setNewPassword(e.target.value)} />
+                <button className="p-2 bg-[#A28B93] text-white rounded-md hover:bg-gray-200 hover:text-[#60624d] font-bold" onClick={handleOnclick}>Módosít</button>
             </div>
         </div>
     )

@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Chart from "chart.js/auto";
+import {lab} from "d3-color";
 
 interface BarChartWeekProps {
     title: string;
@@ -13,14 +14,14 @@ interface BarChartWeekProps {
     canvasId : string;
 }
 
-export default function StackedLineCatChartWeek({ title, label, label1, label2, data1, data2, canvasId }: BarChartWeekProps) {
+export default function DoubleBarChartWeek({ title, label, label1, label2, data1, data2, canvasId }: BarChartWeekProps) {
 
     useEffect(() => {
         const ctx = document.getElementById(canvasId) as HTMLCanvasElement;
         if (!ctx) return;
 
         const myChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: Object.keys(data1),
                 datasets: [
@@ -29,13 +30,18 @@ export default function StackedLineCatChartWeek({ title, label, label1, label2, 
                         data: Object.values(data1),
                         borderColor: "#F4B499",
                         backgroundColor: "rgba(244, 180, 153, 0.50)",
+                        borderWidth: 2,
+                        borderRadius: Number.MAX_VALUE,
+                        borderSkipped: false,
                     },
                     {
                         label: label2,
                         data: Object.values(data2),
                         borderColor: "#3cba9f",
                         backgroundColor: "#71d1bd",
-                        yAxisID: 'y2',
+                        borderWidth: 2,
+                        borderRadius: 5,
+                        borderSkipped: false,
                     }
                 ]},
             options: {

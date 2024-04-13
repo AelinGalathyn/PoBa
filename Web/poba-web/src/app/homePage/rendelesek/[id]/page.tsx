@@ -26,8 +26,8 @@ export default function SingleRendeles({ params } : any, {query} : any) {
     }
 
     return (
-        <section className="col-start-3 ps-10">
-            <div className="max-h-[95vh] w-[75vw] mt-5 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto scroll-smooth">
+        <section className="col-span-1 md:col-start-3 md:ps-10">
+            <div className="h-fit md:max-h-[95vh] md:w-[75vw] mt-5 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto scroll-smooth">
                 <Card className="bg-white m-2 rounded-md p-1 shadow-lg shadow-gray-400">
 
                     <CardHeader className="grid grid-cols-12 card-class mt-5 mb-5">
@@ -36,7 +36,7 @@ export default function SingleRendeles({ params } : any, {query} : any) {
                         <p className="col-span-8 text-center text-2xl font-bold">{rendeles.orderid}</p>
                     </CardHeader>
 
-                    <CardBody className="grid grid-rows-12 card-class">
+                    <CardBody className="grid md:grid-rows-12 grid-rows-8 card-class">
                         <div className="row-span-4 grid grid-cols-12">
                             <div className="col-span-4 ps-10">
                                 <p className="text-center text-lg pb-5"><b>Megrendelői adatok</b></p>
@@ -54,7 +54,7 @@ export default function SingleRendeles({ params } : any, {query} : any) {
                             </div>
                         </div>
                         <div className="row-span-8">
-                            <div className="px-10">
+                            <div className="md:px-10">
                                 <table className="w-full mt-5">
                                     <caption
                                         className="text-center text-xl mb-10 pt-5 border-t-8 border-gray-100 border-double">
@@ -70,7 +70,7 @@ export default function SingleRendeles({ params } : any, {query} : any) {
                                     </thead>
                                     <tbody>
                                     {rendeles.items.map(item =>
-                                        <tr>
+                                        <tr className="tr-side-borders">
                                             <td>{item.name}</td>
                                             <td>{item.sku}</td>
                                             <td>{item.net + " Ft"}</td>

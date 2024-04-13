@@ -5,7 +5,7 @@ import {renderChart} from "@/app/(Functions)/charts";
 import {Spacer} from "@nextui-org/react";
 import {fetch_rendelesek} from "@/app/(ApiCalls)/fetch";
 import React, {useEffect, useState} from "react";
-import {homeStatisztikaPage} from "@/app/(FixData)/lists";
+import {homeStatisztikaPage, statisztikaPage} from "@/app/(FixData)/lists";
 
 
 export default function HomepageStatisztika() {
@@ -18,16 +18,13 @@ export default function HomepageStatisztika() {
         setCharts(homeStatisztikaPage);
     }, []);
 
-    const changeCharts = (index: number, changeTo: string) => {
-        setCharts(prevCharts => {
-            const newCharts = [...prevCharts];
-            if (changeTo !== "linear" && changeTo !== newCharts[index]) {
-                newCharts[index] = changeTo;
-            } else {
-                newCharts[index] = "linear";
-            }
-            return newCharts;
-        });
+    const changeCharts = (chartId: string, changeTo: string) => {
+        const fixCharts = homeStatisztikaPage;
+        const numberChartId = Number.parseInt(chartId);
+        setCharts(prevCharts => ({
+            ...prevCharts,
+            [chartId]: prevCharts[numberChartId] === changeTo ? fixCharts[numberChartId] : changeTo
+        }));
     };
 
     if (rendelesek.length === 0) {
@@ -35,21 +32,21 @@ export default function HomepageStatisztika() {
     }
 
     return (
-        <div className="fixed h-fit w-fit pe-[3vw]">
+        <div className="h-full w-full pe-[3vw]">
             <div className="text-center">
-                <h1 className="text-2xl font-bold drop-shadow-md">Statisztika</h1>
+                <h1 className="text-[25px] font-bold drop-shadow-md">Statisztika</h1>
             </div>
             <div className="h-full w-full mt-5 pe-2 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto scroll-smooth">
-                <div className="grid grid-cols-2">
+                <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
                     <div className="h-full text-center flex flex-col justify-center items-center">
                         {renderChart(charts[0], "Heti rendelések", "db", "", "", weeklyStatistics(rendelesek), {}, {}, "chart1")}
                         <Spacer/>
-                        <Switch onValueChange={() => changeCharts(0, "circle")} size="lg" color="warning" className="py-[5px]">Circle</Switch>
+                        <Switch onValueChange={() => changeCharts("0", "circle")} size="lg" color="warning" className="py-[5px]">Circle</Switch>
                     </div>
                     <div className="h-full text-center flex flex-col justify-center items-center">
                         {renderChart(charts[1], "Heti bevétel", "Ezer Ft", "", "", weeklyIncome(rendelesek), {}, {}, "chart2")}
                         <Spacer/>
-                        <Switch onValueChange={() => changeCharts(1, "circle")} size="lg" color="warning" className="py-[5px]">Circle</Switch>
+                        <Switch onValueChange={() => changeCharts("1", "circle")} size="lg" color="warning" className="py-[5px]">Circle</Switch>
                     </div>
                 </div>
             </div>

@@ -20,7 +20,6 @@ body {
 }
 
 .button-style {
-    background: white;
     border-radius: 5px;
     border: 1px rgb(229 231 235) solid;
     box-shadow: rgb(211, 211, 211) 0 2px 2px;
@@ -28,7 +27,9 @@ body {
 }
 
 .button-style:hover {
-    background: #e8e8e8;
+    background: rgb(209 213 219);
+    box-shadow: rgb(211, 211, 211) 0 2px 2px;
+    border: 1px rgb(229 231 235) solid;
     font-weight: bold;
 }
 
@@ -90,4 +91,14 @@ body {
 .nem-raktarkezelt-sor {
     background: darkgray;
     cursor: auto;
+}
+
+@media (max-width: 768px) {
+    .tr-side-borders td {
+        border-right: rgb(229 231 235) 2px solid;
+    }
+
+    .tr-side-borders td:last-child {
+        border: none;
+    }
 }
