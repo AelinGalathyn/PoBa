@@ -23,6 +23,7 @@ export default function WebshopokBeallitasok() {
                 console.log(data)
                 localStorage.setItem("webshopId", JSON.stringify(data));
                 fetch_webshopok().then(data => setWebshopok(data));
+                router.push("/");
             })
         }
         else {
@@ -33,8 +34,9 @@ export default function WebshopokBeallitasok() {
 
     const handleDelete = (webshopId : number) => {
         DeleteWebshop(webshopId).then(() => {
-            localStorage.setItem("webshopId", JSON.stringify(webshopok[0]));
+            localStorage.setItem("webshopId", JSON.stringify(webshopok[0].webshopid));
             fetch_webshopok().then(data => setWebshopok(data));
+            router.push("/");
         })
     }
 

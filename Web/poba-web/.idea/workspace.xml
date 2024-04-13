@@ -5,27 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f197a7f-b474-48b6-84fe-4e366523ff24" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/(Charts)/double_bar_chart.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/magyar_icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/posta_logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(ApiCalls)/modify.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(ApiCalls)/modify.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(Charts)/stacked_line_cat.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(Charts)/stacked_line_cat.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(Functions)/charts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(Functions)/charts.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(Functions)/create_html_elements.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(Functions)/create_html_elements.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(Functions)/list_filtering.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(Functions)/list_filtering.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_rendelesek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_rendelesek_page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_statisztika_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_statisztika_page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_termekek_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_termekek_page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/homePage/beallitasok/changePassword/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/beallitasok/changePassword/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/homePage/beallitasok/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/beallitasok/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/homePage/beallitasok/webshopok/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/beallitasok/webshopok/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/homePage/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/homePage/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/homePage/rendelesek/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/rendelesek/[id]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/homePage/rendelesek/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/rendelesek/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/homePage/statisztika/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/statisztika/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/homePage/termekek/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/termekek/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +117,7 @@
       <workItem from="1712922643535" duration="6728000" />
       <workItem from="1712993367704" duration="6667000" />
       <workItem from="1713000159031" duration="18205000" />
-      <workItem from="1713029332769" duration="8689000" />
+      <workItem from="1713029332769" duration="8962000" />
     </task>
     <servers />
   </component>
