@@ -37,7 +37,7 @@ export default function Login() {
                     </div>
                     <div className="flex flex-col">
                         <label className="italic ps-5 pb-1">Jelszó</label>
-                        <input type="text" id="jelszo_input" onChange={(e) => setPassword(e.target.value)}/>
+                        <input type="password" id="jelszo_input" onChange={(e) => setPassword(e.target.value)}/>
                     </div>
                 </div>
                 <div>
