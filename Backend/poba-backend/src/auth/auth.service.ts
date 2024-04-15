@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { PasswordService } from './password.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UsersService } from '../users/users.service';
-import { LoginDto } from './login.dto';
+import { LoginDto } from './dto/login.dto';
 import { WebshopService } from '../webshop/webshop.service';
 import { Users } from '../users/entities/users.entity';
 

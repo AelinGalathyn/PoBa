@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Item } from './entities/item.entity';
 import { OrderItemEntity } from './entities/orderitem.entity';
 
@@ -10,6 +10,9 @@ export class ItemService {
   async makeItems(data: any[] | any): Promise<Item[]> {
     let items: Item[] = [];
     let errors: string[] = [];
+    if(data === undefined){
+      throw new NotFoundException;
+    }
     const processData = (item: any) => {
       try {
         if (item.State !== 'deleted') {

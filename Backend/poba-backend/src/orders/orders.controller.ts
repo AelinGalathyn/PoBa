@@ -6,7 +6,15 @@ import { WebshopService } from '../webshop/webshop.service';
 import { Webshop } from '../webshop/entities/webshop.entity';
 import { ExternalService } from '../external/external.service';
 import { GetOrderInput, SetStatusInput } from './entities/orderinput.dto';
+import {
+  ApiCreatedResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiTags,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
 
+@ApiTags('orders')
 @Controller('orders')
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService,
@@ -16,6 +24,9 @@ export class OrdersController {
 
   @UseGuards(JwtAuthGuard)
   @Get(':webshopid')
+  @ApiOkResponse({description: 'Kilistázza a webshop összes rendelését, vagy a legfrissebb 500-at.'})
+  @ApiNotFoundResponse({description: 'Nincs ilyen azonosítójú webshop.'})
+  @ApiUnauthorizedResponse({description: 'Nincs bejelentkezve.'})
   async getAll(@UserId() userid: number, @Param('webshopid') webshopid: number) {
     let ws = await this.webshopService.findAndValidate(userid, +webshopid);
     ws = await this.webshopService.unasLogin(ws);
@@ -25,6 +36,9 @@ export class OrdersController {
 
   @UseGuards(JwtAuthGuard)
   @Get(':webshopid/:id')
+  @ApiOkResponse({description: 'Visszaadja az adott azonosítóhoz tartozó rendelés adatait.'})
+  @ApiNotFoundResponse({description: 'Nincs ilyen rendelése a webshopnak, vagy ilyen azonosítójú webshop.'})
+  @ApiUnauthorizedResponse({description: 'Nincs bejelentkezve.'})
   async getOrder(@UserId() userid: number, @Param() getOrderInput: GetOrderInput){
     console.log(getOrderInput)
     let ws = await this.webshopService.findAndValidate(userid, +getOrderInput.webshopid);
@@ -36,6 +50,10 @@ export class OrdersController {
 
   @UseGuards(JwtAuthGuard)
   @Post(':webshopid/:id/:statusid')
+  @ApiCreatedResponse({description: 'Megváltoztatta a rendelés státuszát'})
+  @ApiNotFoundResponse({description: 'Nincs ilyen rendelése a webshopnak, ilyen azonosítójú webshop vagy nincs ilyen' +
+      ' azonosítójú státusz.'})
+  @ApiUnauthorizedResponse({description: 'Nincs bejelentkezve.'})
   async setStatus(@UserId() userid: number, @Param() setStatusInput: SetStatusInput){
     let ws = await this.webshopService.findAndValidate(userid, +setStatusInput.webshopid);
     ws = await this.webshopService.unasLogin(ws);
