@@ -47,6 +47,7 @@ export class AppController{
 
     @Post('login')
     async login(@Query() userdto: LoginDto, @Res() res: Response) {
+        console.log("attempt to log in")
         const { userid,...jwt} = await this.authService.login(userdto);
 
         if (!jwt || !jwt.access_token) {

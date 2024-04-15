@@ -93,12 +93,14 @@ public class EgyszeriBelepesActivity extends AppCompatActivity {
 
         HttpClient hc = new HttpClient();
 
-        HttpUrl.Builder urlBuilder = HttpUrl.parse("http://192.168.0.25:3000/login").newBuilder();
+        HttpUrl.Builder urlBuilder = HttpUrl.parse("http://192.168.11.62:3000/login").newBuilder();
         urlBuilder
                 .addQueryParameter("username", user.getUsername())
                 .addQueryParameter("password", user.getPassword());
 
         String url = urlBuilder.build().toString();
+
+        Log.println(Log.DEBUG, "url", url);
 
 
         hc.getHttpClient(this);
