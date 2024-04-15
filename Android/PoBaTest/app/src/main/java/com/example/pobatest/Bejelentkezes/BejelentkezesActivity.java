@@ -29,5 +29,4 @@ public class BejelentkezesActivity extends AppCompatActivity {
     public void Init() {
         bejelentkezes_gomb = findViewById(R.id.bejelentkezes_gomb);
     }
-
 }
