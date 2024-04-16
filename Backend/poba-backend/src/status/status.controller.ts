@@ -4,7 +4,9 @@ import { ExternalService } from '../external/external.service';
 import { WebshopService } from '../webshop/webshop.service';
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { UserId } from '../users/decorators/UserId.param';
+import { ApiNotFoundResponse, ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 
+@ApiTags('status')
 @Controller('status')
 export class StatusController {
   constructor(private readonly statusService: StatusService,
@@ -13,6 +15,9 @@ export class StatusController {
 
   @UseGuards(JwtAuthGuard)
   @Get(':webshopid')
+  @ApiOkResponse({description: 'Visszaküldi a felhasználó létező státuszait.'})
+  @ApiNotFoundResponse({description: 'Nincs ilyen azonosítójú webshop.'})
+  @ApiUnauthorizedResponse({description: 'Nincs bejelentkezve.'})
   async getStatuses(@UserId() userid: number, @Param('webshopid') webshopid: number){
     try {
       let ws = await this.webshopService.findAndValidate(userid, webshopid);

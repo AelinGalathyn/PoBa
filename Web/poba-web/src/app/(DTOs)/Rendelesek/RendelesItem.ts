@@ -4,7 +4,7 @@ export class OrderItemEntity {
         public sku: string,
         public name: string,
         public unit: string,
-        public quantity: string,
+        public quantity: number,
         public net: number,
         public gross: number,
         public vat: string,

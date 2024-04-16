@@ -6,7 +6,7 @@ import Chart from "chart.js/auto";
 interface LineChartWeekProps {
     title: string;
     label: string;
-    data: { [dayOfWeek: number]: number; };
+    data: Record<string, number>;
     canvasId : string;
 }
 
@@ -19,7 +19,7 @@ export default function LineChartWeek({ title, label, data, canvasId }: LineChar
         const myChart = new Chart(ctx, {
             type: "line",
             data: {
-                labels: ["Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek"],
+                labels: Object.keys(data),
                 datasets: [{
                     data: Object.values(data),
                     label: label,

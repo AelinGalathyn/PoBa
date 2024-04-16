@@ -2,37 +2,44 @@
 
 import { useEffect } from "react";
 import Chart from "chart.js/auto";
-import {getRandomRgbColor} from "@/app/(Functions)/list_filtering";
 
-interface CircleChartWeekProps {
+interface BarChartWeekProps {
     title: string;
     label: string;
-    data: Record<string, number>;
+    label1: string;
+    label2: string;
+    data1: Record<string, number>;
+    data2: Record<string, number>;
     canvasId : string;
 }
 
-export default function CircleChartWeek({ title, label, data, canvasId }: CircleChartWeekProps) {
+export default function StackedBarLineChartWeek({ title, label, label1, label2, data1, data2, canvasId }: BarChartWeekProps) {
 
     useEffect(() => {
         const ctx = document.getElementById(canvasId) as HTMLCanvasElement;
         if (!ctx) return;
 
-        let backgroundColors = [];
-
-        for(let i = 0; i < Object.keys(data).length; i++) {
-            backgroundColors.push(getRandomRgbColor());
-        }
-
         const myChart = new Chart(ctx, {
-            type: "doughnut",
+            type: 'line',
             data: {
-                labels: Object.keys(data),
-                datasets: [{
-                    data: Object.values(data),
-                    label: label,
-                    backgroundColor: backgroundColors
-                }],
-            },
+                labels: Object.keys(data1),
+                datasets: [
+                    {
+                        label: label1,
+                        data: Object.values(data1),
+                        borderColor: "#F4B499",
+                        backgroundColor: "rgba(244, 180, 153, 0.50)",
+                        stack: 'combined',
+                        type: 'bar'
+                    },
+                    {
+                        label: label2,
+                        data: Object.values(data2),
+                        borderColor: "#3cba9f",
+                        backgroundColor: "#71d1bd",
+                        stack: 'combined'
+                    }
+                ]},
             options: {
                 responsive: true,
                 maintainAspectRatio: true,
@@ -40,8 +47,8 @@ export default function CircleChartWeek({ title, label, data, canvasId }: Circle
                 plugins: {
                     legend: {
                         display: true,
-                        position: 'right'
-                    }
+                        position: 'top',
+                    },
                 },
                 layout: {
                     padding: 10
@@ -54,7 +61,7 @@ export default function CircleChartWeek({ title, label, data, canvasId }: Circle
         };
     }, [ label, title]);
 
-    if (!Object.keys(data).length) {
+    if (!Object.keys(data1).length || !Object.keys(data2).length) {
         return <p className="h-full w-full flex justify-center items-center">Loading...</p>
     }
 

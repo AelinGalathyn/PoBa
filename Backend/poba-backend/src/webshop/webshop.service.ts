@@ -1,4 +1,10 @@
-import { ImATeapotException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  ImATeapotException,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Webshop } from './entities/webshop.entity';
 import { Repository } from 'typeorm';
@@ -64,13 +70,19 @@ export class WebshopService {
   }
 
   async newApiKey(users: Users, api_key: string){
-    let shop = this.webshopRepository.create({
-      user: users,
-      unas_api: api_key,
-      unas_token: 'asd',
-    });
-    shop = await this.unasLogin(shop);
-    return await this.webshopRepository.save(shop);
+    const ws = await this.webshopRepository.findOne({where: {unas_api: api_key}});
+    if(!ws) {
+      let shop = this.webshopRepository.create({
+        user: users,
+        unas_api: api_key,
+        unas_token: 'asd',
+      });
+      shop = await this.unasLogin(shop);
+      return await this.webshopRepository.save(shop);
+    }
+    else {
+      throw new ConflictException;
+    }
   }
 
   async getToken(webshopid: number){
@@ -111,10 +123,10 @@ export class WebshopService {
         return ws;
       }
       else {
-        return false;
+        throw new UnauthorizedException;
       }
-    } catch (err){
-      return err;
+    } catch {
+      throw new NotFoundException;
     }
   }
 
@@ -122,5 +134,9 @@ export class WebshopService {
     webshop = await this.externalService.unasLogin(webshop);
     await this.webshopRepository.save(webshop);
     return webshop;
+  }
+
+  async deleteWebshop(webshop: Webshop){
+    return await this.webshopRepository.delete({webshopid: webshop.webshopid});
   }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Orders } from './entities/orders.entity';
 import { ItemService } from '../item/item.service';
 import { OrderItemEntity } from '../item/entities/orderitem.entity';
@@ -13,6 +13,9 @@ export class OrdersService {
 
   async makeOrders(data: any[] | any) {
     let orders: Orders[] = [];
+    if(data === undefined){
+      throw new NotFoundException;
+    }
     const orderslist = async (order: any) => {
       try {
         const items: OrderItemEntity[] = await this.itemService.makeOrderItems(order.Items.Item);

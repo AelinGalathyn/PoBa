@@ -1,11 +1,30 @@
-import Image from "next/image";
+"use client"
+
+import {fetch_username, fetch_webshopok} from "@/app/(ApiCalls)/fetch";
+import {useEffect} from "react";
+import {usePathname, useRouter} from "next/navigation";
 
 export default function Home() {
-  return (
-    <main class="bg-amber-400">
-        <div>
-            <h1>Helloo</h1>
-        </div>
-    </main>
-  );
+    const router = useRouter();
+    const path = usePathname();
+
+    useEffect(() => {
+        const webshopId = JSON.parse(localStorage.getItem("webshopId") ?? "0");
+
+        fetch_username().then(response => {
+            if (response === false) {
+                router.push("/login")
+            }
+            if (webshopId === 0) {
+                fetch_webshopok().then(data => {
+                    localStorage.setItem("webshopId", JSON.stringify(data[0].webshopid));
+                    router.push("/homePage");
+                })
+            }
+            if (path === "/") {
+                router.push("/homePage")
+            }
+        })
+
+    }, []);
 }

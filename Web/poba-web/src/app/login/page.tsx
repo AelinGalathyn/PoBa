@@ -1,22 +1,20 @@
 "use client";
 
 import Image from "next/image";
-import { useState} from "react";
+import React, { useState} from "react";
 import User from "@/app/(DTOs)/Users/User";
 import {login} from "@/app/(ApiCalls)/calls";
 import {useRouter} from "next/navigation";
 
 export default function Login() {
-
     const [felNev, setFelNev] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
     const loginUser : User = new User(felNev, password)
     const router = useRouter();
 
-    const handleLoginClick = async () => {
-        await login(loginUser).then(data => localStorage.setItem("webshopId", data.webshopid));
-        router.push("/homePage");
+    const handleLoginClick = () => {
+        login(loginUser).then(data => {localStorage.setItem("webshopId", data.webshopid); router.push("/homePage");});
     }
 
     return (

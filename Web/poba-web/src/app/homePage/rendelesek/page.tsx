@@ -3,24 +3,28 @@
 import {rendelesHeader} from "@/app/(FixData)/lists";
 import {Orders} from "@/app/(DTOs)/Rendelesek/Rendeles";
 import {fetch_rendelesek} from "@/app/(ApiCalls)/fetch";
-import {redirect} from "next/navigation";
-import {useEffect, useState} from "react";
-import {webshopId} from "@/app/(FixData)/variables";
+import { useRouter} from "next/navigation";
+import React, {useEffect, useState} from "react";
 
 export default function Rendelesek() {
     const [rendelesek, setRendelesek] = useState<Orders[]>([])
 
-    useEffect(() => {
-        const getRendelsesek = async () => {
-            const rendelesek : Orders[] = await fetch_rendelesek(webshopId);
-            setRendelesek(rendelesek);
-        }
+    const router = useRouter();
 
-        getRendelsesek();
+    useEffect(() => {
+        const webshopId : number = JSON.parse(localStorage.getItem("webshopId") ?? "0");
+        fetch_rendelesek(webshopId).then(data => setRendelesek(data));
     }, []);
 
+    if (rendelesek.length === 0) {
+        return <div className="col-start-3 ps-10 w-[75vw] h-3/4 flex justify-center items-center">
+            <p>Loading...</p>
+        </div>
+    }
+
     return (
-        <div className="fixed w-[75vw] h-3/4 mt-16">
+        <section className="col-start-3 ps-10">
+            <div className="fixed w-[75vw] max-h-3/4 mt-16">
                 <div className="text-center">
                     <h1 className="text-2xl font-bold drop-shadow-md">Rendelések</h1>
                 </div>
@@ -36,7 +40,7 @@ export default function Rendelesek() {
                         <tbody>
                         {rendelesek.map((rendeles, index) => (
                             <tr key={index} onClick={() => {
-                                redirect(`/Rendelések/${rendeles.orderid}`)
+                                router.push(`rendelesek/${rendeles.orderid}?index=${index + 1}`)
                             }} className="text-center">
                                 <td>{index + 1}</td>
                                 <td>{rendeles.orderid}</td>
@@ -51,5 +55,6 @@ export default function Rendelesek() {
                     </table>
                 </div>
             </div>
+        </section>
     )
 }

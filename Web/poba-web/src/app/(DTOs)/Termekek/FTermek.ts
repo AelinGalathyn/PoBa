@@ -9,6 +9,7 @@ export class FItem {
         public cat_name: string[],
         public url: string,
         public pic_url: string,
-        public price: number
+        public price: number,
+        public packaged : boolean
     ) {}
 }
