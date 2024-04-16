@@ -1,4 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  ImATeapotException,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Webshop } from './entities/webshop.entity';
 import { Repository } from 'typeorm';
@@ -11,8 +17,6 @@ export class WebshopService {
   constructor(
     @InjectRepository(Webshop)
     private webshopRepository: Repository<Webshop>,
-
-    private usersService: UsersService,
     private externalService: ExternalService) {}
 
   async getWebshopById(webshopid: number){
@@ -66,23 +70,25 @@ export class WebshopService {
   }
 
   async newApiKey(users: Users, api_key: string){
-    const shop = this.webshopRepository.create({
-      user: users,
-      unas_api: api_key,
-      foxpost_api: '',
-      gls_api: '',
-      unas_token: 'asd'
-    });
-    const token = await this.externalService.unasLogin(shop);
-    shop.unas_token = token;
-    return await this.webshopRepository.save(shop);
+    const ws = await this.webshopRepository.findOne({where: {unas_api: api_key}});
+    if(!ws) {
+      let shop = this.webshopRepository.create({
+        user: users,
+        unas_api: api_key,
+        unas_token: 'asd',
+      });
+      shop = await this.unasLogin(shop);
+      return await this.webshopRepository.save(shop);
+    }
+    else {
+      throw new ConflictException;
+    }
   }
 
   async getToken(webshopid: number){
     const webshop = await this.webshopRepository.findOne({where: {webshopid}});
     if(webshop){
-      const token = await this.externalService.unasLogin(webshop);
-      webshop.unas_token = token;
+      let res = await this.unasLogin(webshop);
       await this.webshopRepository.update(webshopid, webshop);
     }
     return webshop.unas_token;
@@ -96,15 +102,41 @@ export class WebshopService {
     return ws;
   }
 
-  /*async getProducts(webshopid: number, productId: number){
+  async validateMatch(userid: number, webshopid: number){
+    try {
+      const ws = await this.getWebshopById(webshopid);
+      if(ws.user.userid === userid){
+        return true;
+      }
+      else {
+        throw new ImATeapotException;
+      }
+    }catch (err){
+      return err;
+    }
+  }
 
-    const product = .findOne({
-      where: {
-        webshop: { id: webshopid },
-        productId: productId
-      },
-      relations: ['webshop']
-    });
-    return this.externalService.getProduct(product.webshop, productId);
-  }*/
+  async findAndValidate(userid: number, webshopid: number){
+    try {
+      const ws = await this.getWebshopById(webshopid);
+      if(await this.validateMatch(userid, webshopid)){
+        return ws;
+      }
+      else {
+        throw new UnauthorizedException;
+      }
+    } catch {
+      throw new NotFoundException;
+    }
+  }
+
+  async unasLogin(webshop: Webshop){
+    webshop = await this.externalService.unasLogin(webshop);
+    await this.webshopRepository.save(webshop);
+    return webshop;
+  }
+
+  async deleteWebshop(webshop: Webshop){
+    return await this.webshopRepository.delete({webshopid: webshop.webshopid});
+  }
 }

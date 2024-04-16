@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PasswordService } from './auth/password.service';
@@ -10,6 +9,8 @@ import { AuthModule } from './auth/auth.module';
 import { ExternalModule } from './external/external.module';
 import { WebshopModule } from './webshop/webshop.module';
 import { ItemModule } from './item/item.module';
+import { OrdersModule } from './orders/orders.module';
+import { StatusModule } from './status/status.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -26,9 +27,9 @@ import { ItemModule } from './item/item.module';
     ConfigModule.forRoot({
       isGlobal: true
     }),
-    UsersModule, AuthModule, ExternalModule, WebshopModule, ItemModule],
+    UsersModule, AuthModule, ExternalModule, WebshopModule, ItemModule, OrdersModule, StatusModule],
   controllers: [AppController],
-  providers: [AppService, PasswordService],
+  providers: [PasswordService],
 })
 
 export class AppModule {

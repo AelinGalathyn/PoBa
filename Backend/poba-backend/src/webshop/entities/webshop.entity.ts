@@ -1,10 +1,14 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Users } from '../../users/entities/users.entity';
+import { ApiCalls } from '../../external/entities/apicalls.entity';
 
 @Entity()
 export class Webshop{
   @PrimaryGeneratedColumn()
   webshopid: number;
+
+  @Column()
+  name: string;
 
   @ManyToOne(() => Users)
   @JoinColumn({name: "userid"})
@@ -21,4 +25,10 @@ export class Webshop{
 
   @Column({nullable: true})
   unas_token: string;
+
+  @Column({type: 'timestamptz'})
+  token_date: Date;
+
+  @OneToMany(() => ApiCalls, apicalls => apicalls.webshop)
+  apicalls: ApiCalls[];
 }

@@ -1,3 +1,5 @@
+import { Webshop } from '../../webshop/entities/webshop.entity';
+
 export class Item {
   id: number;
 
@@ -11,7 +13,20 @@ export class Item {
 
   status: number;
 
-  cat_name: string;
+  cat_name: string[];
 
   url: string;
+
+  pic_url: string;
+
+  price: number;
+
+  packaged: boolean;
+}
+
+export class InputItemDto{
+
+  sku: string;
+
+  stock: number;
 }

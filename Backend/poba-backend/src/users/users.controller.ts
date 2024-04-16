@@ -1,10 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { UserId } from './decorators/UserId.param';
+import { ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 
+@ApiTags('users')
 @Controller('user')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -12,28 +12,10 @@ export class UsersController {
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
-  async getProfile(@UserId() userid){
-    return await this.usersService.findById(userid);
+  @ApiOkResponse({description: 'Visszaküldi a felhasználó nevét és azonosítóját.'})
+  @ApiUnauthorizedResponse({description: 'Nincs bejelentkezve.'})
+  async getProfile(@UserId()userid){
+    const {password, ...user} = await this.usersService.findById(userid);
+    return user;
   }
-  @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: number) {
-    return this.usersService.findById(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
-  }
-
-
 }

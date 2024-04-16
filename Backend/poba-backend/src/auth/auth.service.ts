@@ -1,10 +1,11 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PasswordService } from './password.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UsersService } from '../users/users.service';
-import { LoginDto } from './login.dto';
+import { LoginDto } from './dto/login.dto';
 import { WebshopService } from '../webshop/webshop.service';
+import { Users } from '../users/entities/users.entity';
 
 @Injectable()
 export class AuthService {
@@ -12,47 +13,62 @@ export class AuthService {
         private usersService: UsersService,
         private jwtService: JwtService,
         private pwService: PasswordService,
-        private webshopService: WebshopService
     ){}
 
     async validateUser(loginUser: LoginDto){
         const user = await this.usersService.findByUName(loginUser.username);
-        if(user){
+        if(!user){
+            throw new UnauthorizedException('User not found');
+        }
         const uPassword = await this.usersService.getPassword(loginUser.username);
-        if(user&&await this.pwService.verifyPassword(uPassword, loginUser.password)){
-            return user;
-        }}
-        throw new UnauthorizedException();
+        const validPassword = await this.pwService.verifyPassword(uPassword, loginUser.password);
+        if(!validPassword){
+            throw new UnauthorizedException('Invalid password.');
+        }
+        return user;
+    }
+
+    async validateToken(token: string){
+        try {
+            const payload = this.jwtService.verify(token);
+            return payload.userid;
+        } catch (error){
+            return false;
+        }
     }
 
     async login(loginUser: LoginDto) {
-        const user = await this.validateUser(loginUser);
+        try {
+            const user = await this.validateUser(loginUser);
 
-        const payload = { username: user.username, sub: user.userid, };
+            const payload = { username: user.username, sub: user.userid, };
 
-        return {
-            access_token: this.jwtService.sign(payload),
-            userid: user.userid,
-        };
+            return {
+                access_token: this.jwtService.sign(payload),
+                userid: user.userid,
+            };
+        } catch (err) {
+            throw err;
+        }
     }
 
 
     async register(user: CreateUserDto) {
-        const hashedPassword = await this.pwService.hashPassword(user.password);
-        const newUser = await this.usersService.create({
-          ...user,
-          password: hashedPassword,
-        });
-        const { password, ...result } = newUser;
-        return result;
+        try {
+            const hashedPassword = await this.pwService.hashPassword(user.password);
+            const newUser = await this.usersService.create({
+                ...user,
+                password: hashedPassword,
+            });
+            const { password, ...result } = newUser;
+            return result;
+        } catch (err) {
+            throw new InternalServerErrorException('Unable to register user');
+        }
     }
 
-    async changeJwt(webshopid: number){
-        const user = await this.webshopService.getUser(webshopid);
-        const payload = {username: user.username, sub: user.userid};
-
-        return{
-            access_token: this.jwtService.sign(payload),
-        };
+    async changePassword(user: Users, password: string){
+        const hashedPassword = await this.pwService.hashPassword(password);
+        return await this.usersService.changePassword(user, hashedPassword);
     }
 }
