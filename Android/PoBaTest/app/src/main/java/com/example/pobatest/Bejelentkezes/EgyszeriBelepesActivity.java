@@ -13,11 +13,15 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.pobatest.ApiCalls.HttpClient;
+import com.example.pobatest.ApiCalls.SharedPrefWebshopId;
 import com.example.pobatest.FoActivity;
 import com.example.pobatest.R;
 import com.example.pobatest.Users.IUsers;
 import com.example.pobatest.Users.ResponseMessage;
 import com.example.pobatest.Users.UsersInputDto;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -26,6 +30,7 @@ import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import retrofit2.Retrofit;
 
@@ -77,8 +82,21 @@ public class EgyszeriBelepesActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (response.message().equals("Login successful")) {
+                        if (response.code() == 201) {
                             Toast.makeText(EgyszeriBelepesActivity.this, "Sikeres belépés.", Toast.LENGTH_SHORT).show();
+                            String responseData = null;
+                            try {
+                                responseData = response.body().string();
+                                Log.i("body", responseData);
+                                JSONObject jsonObject = new JSONObject(responseData);
+                                Integer webshopid = jsonObject.getInt("webshopid");
+                                SharedPrefWebshopId sp = new SharedPrefWebshopId();
+                                sp.setWebshopId(EgyszeriBelepesActivity.this, webshopid.toString());
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
                             Intent intent = new Intent(EgyszeriBelepesActivity.this, FoActivity.class);
                             startActivity(intent);
                             finish();
@@ -93,20 +111,6 @@ public class EgyszeriBelepesActivity extends AppCompatActivity {
 
         HttpClient hc = new HttpClient();
 
-        HttpUrl.Builder urlBuilder = HttpUrl.parse("http://192.168.11.62:3000/login").newBuilder();
-        urlBuilder
-                .addQueryParameter("username", user.getUsername())
-                .addQueryParameter("password", user.getPassword());
-
-        String url = urlBuilder.build().toString();
-
-        Log.println(Log.DEBUG, "url", url);
-
-
-        hc.getHttpClient(this);
-        hc.makeHttpRequest(this, url , cb);
+        hc.makeLoginHttpRequest(hc, user, this, cb);
     }
-
-
-
 }
