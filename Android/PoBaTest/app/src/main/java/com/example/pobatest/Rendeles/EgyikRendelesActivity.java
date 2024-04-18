@@ -42,7 +42,7 @@ public class EgyikRendelesActivity extends AppCompatActivity {
         kiszallito_icon = findViewById(R.id.kiszallito_icon);
         rendeloi_adatok_textview = findViewById(R.id.rendeloi_adatok_textview);
 
-        rendeles_szam_textView.setText(rendeles.orderId);
+        rendeles_szam_textView.setText(rendeles.orderid);
         rendeles_reszletek_textview.setText(rendelesReszletekString());
         rendeles_reszletek_textview.setMovementMethod(new ScrollingMovementMethod());
         kiszallito_icon.setImageResource(rendeles.image);
@@ -52,8 +52,8 @@ public class EgyikRendelesActivity extends AppCompatActivity {
     public String rendelesReszletekString() {
         String szoveg = "";
 
-        for (String item : rendeles.kosarTartalma) {
-            szoveg += rendeles.kosarTartalma.indexOf(item) + 1 + ". " + item + "\n";
+        for (RendelesTermek item : rendeles.termekList) {
+            szoveg += rendeles.termekList.indexOf(item) + 1 + ". " + item.getName() + " " + item.getQty() + item.getUnit() + "\n";
         }
 
         return szoveg;

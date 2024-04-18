@@ -48,8 +48,8 @@ public class RendelesAdapter extends RecyclerView.Adapter<RendelesAdapter.Rendel
     @Override
     public void onBindViewHolder(@NonNull RendelesHolder holder, int position) {
         Rendeles rendeles = rendelesek.get(position);
-        holder.rendeles_szam_textView.setText(rendeles.getOrderId());
-        holder.futar_logo_helye.setImageResource(rendeles.getImage());
+        holder.rendeles_szam_textView.setText(rendeles.orderid);
+        holder.futar_logo_helye.setImageResource(rendeles.image);
 
         holder.itemView.setOnClickListener(v -> {
             IntentAdatAtadas(rendeles);

@@ -25,13 +25,11 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
-import retrofit2.Retrofit;
 
 public class EgyszeriBelepesActivity extends AppCompatActivity {
     private ImageButton egyszeri_belepes_gomb;
     private EditText felhasznalonev_input;
     private EditText jelszo_input;
-    private Retrofit retrofit;
     private OkHttpClient.Builder okBuild;
 
     @Override

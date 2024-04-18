@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -37,13 +38,14 @@ public class RendelesActivity extends AppCompatActivity {
     private ImageView nav_vissza_gomb;
     private RecyclerView recyclerview_rendelesek;
     private List<Rendeles> megrendelesLista;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rendelesek_activity);
 
         Init();
-        Rendelesek();
+        new NetworkTask().execute();
 
         nav_vissza_gomb.setOnClickListener(v -> {
             Intent intent = new Intent(RendelesActivity.this, FoActivity.class);
@@ -56,13 +58,25 @@ public class RendelesActivity extends AppCompatActivity {
         nav_vissza_gomb = findViewById(R.id.nav_vissza_gomb);
         recyclerview_rendelesek = findViewById(R.id.recyclerview_rendelesek);
         megrendelesLista = new ArrayList<>();
-
-        recyclerview_rendelesek.setLayoutManager(new LinearLayoutManager(this));
-        recyclerview_rendelesek.setAdapter(new RendelesAdapter(getApplicationContext(), megrendelesLista));
     }
 
+    private class NetworkTask extends AsyncTask<Void, Void, List<Rendeles>> {
 
-    public void Rendelesek(){
+        @Override
+        protected List<Rendeles> doInBackground(Void... voids) {
+            // Perform your network operation here
+            // Return the result to onPostExecute()
+            return Rendelesek();
+        }
+
+        @Override
+        protected void onPostExecute(List<Rendeles> result) {
+            recyclerview_rendelesek.setLayoutManager(new LinearLayoutManager(RendelesActivity.this));
+            recyclerview_rendelesek.setAdapter(new RendelesAdapter(getApplicationContext(), result));
+        }
+    }
+
+    public List<Rendeles> Rendelesek(){
         Callback cb = new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -80,13 +94,12 @@ public class RendelesActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            List<Rendeles> rendelesek = new ArrayList<>();
                             String responseData = response.body().string();
                             JSONArray jsonArray = new JSONArray(responseData);
                             for(int i = 0; i < jsonArray.length(); i++){
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 Rendeles rendeles = new Rendeles(jsonObject);
-                                rendelesek.add(rendeles);
+                                megrendelesLista.add(rendeles);
                             }
                         } catch (IOException e) {
                             throw new RuntimeException(e);
@@ -102,5 +115,6 @@ public class RendelesActivity extends AppCompatActivity {
         String url = "orders";
         hc.getHttpClient(RendelesActivity.this);
         hc.makeGetHttpRequest(this, url, cb);
+        return megrendelesLista;
     }
 }

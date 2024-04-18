@@ -25,4 +25,40 @@ public class RendelesTermek {
         vat = object.getString("vat");
         status = object.getString("status");
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public Double getQty() {
+        return qty;
+    }
+
+    public Double getNet() {
+        return net;
+    }
+
+    public Integer getGross() {
+        return gross;
+    }
+
+    public String getVat() {
+        return vat;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 }

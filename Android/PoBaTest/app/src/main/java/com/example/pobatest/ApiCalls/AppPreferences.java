@@ -2,13 +2,14 @@ package com.example.pobatest.ApiCalls;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import okhttp3.Cookie;
-import okhttp3.HttpUrl;
 
 public class AppPreferences {
     private static final String PREF_NAME = "AppPrefs";

@@ -25,11 +25,16 @@ export const login = async (loginUser : User) => {
 }
 
 export const reg = async (regUser : RegisterUser) => {
-    await axios.post("http://localhost:3000/reg", regUser, {
+    await axios.post("http://localhost:3000/reg", {}, {
         withCredentials: true,
         headers: {
             'Content-Type': 'application/json'
         },
+        params: {
+            username : regUser.username,
+            password: regUser.password,
+            api_key: regUser.api_key
+        }
     });
 }
 

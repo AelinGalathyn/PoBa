@@ -73,7 +73,7 @@ public class BejelentkezesActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (response.isSuccessful() && finalResponseData != null) {
+                        if (response.code() == 200) {
                             try {
                                 Log.i("json response", finalResponseData);
                                 JSONObject jsonObject = new JSONObject(finalResponseData);
@@ -111,15 +111,8 @@ public class BejelentkezesActivity extends AppCompatActivity {
 
         HttpClient hc = new HttpClient();
 
-        HttpUrl.Builder urlBuilder = HttpUrl.parse("http://192.168.11.62:3000/").newBuilder();
-
-        String url = urlBuilder.build().toString();
-
-        Log.println(Log.DEBUG, "url", url);
-
-
         hc.getHttpClient(this);
-        hc.makeGetHttpRequest(this, url , cb);
+        hc.checkRequest(this, cb);
     }
 
     public void Init() {
