@@ -68,7 +68,7 @@ export default function Termekek() {
                         />
                     </div>
                 </div>
-                <div className="max-h-full md:max-h-[95vh] w-full mt-5 p-2 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto hover:overflow-x-auto scroll-smooth">
+                <div className="max-h-full md:max-h-[75vh] w-full mt-5 p-2 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto hover:overflow-x-auto scroll-smooth">
                     <table className="w-full table-style">
                         <thead>
                         <tr>

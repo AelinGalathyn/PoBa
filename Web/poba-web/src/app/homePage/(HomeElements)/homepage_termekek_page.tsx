@@ -39,7 +39,7 @@ export default function KifogyoTermekek() {
             <div className="text-center">
                 <h1 className="mb-5 text-[25px] font-bold drop-shadow-md">Kifogyóban lévő termékek</h1>
             </div>
-            <div className="h-full w-full bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto scroll-smooth">
+            <div className="max-h-[25vh] w-full bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto scroll-smooth">
                 <ul>
                     {fogyoTermekek.map((termek) => (
                         <li key={termek.fItem.id}>

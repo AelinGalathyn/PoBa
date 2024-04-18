@@ -34,8 +34,8 @@ export default function WebshopokBeallitasok() {
 
     const handleDelete = (webshopId : number) => {
         DeleteWebshop(webshopId).then(() => {
-            localStorage.setItem("webshopId", JSON.stringify(webshopok[0].webshopid));
             fetch_webshopok().then(data => setWebshopok(data));
+            localStorage.setItem("webshopId", JSON.stringify(webshopok[0].webshopid));
             router.push("/");
         })
     }
