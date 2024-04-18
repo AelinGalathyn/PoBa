@@ -30,35 +30,11 @@ public class HttpClient {
     private final String PREF_NAME = "Cookies";
     private String URL = "http://192.168.11.62:3000/";
 
-    // Store cookies in SharedPreferences
-    public void saveCookies(Context context, List<Cookie> cookies) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        for (Cookie cookie : cookies) {
-            editor.putString(cookie.name(), cookie.toString());  // Consider storing individual attributes if necessary
-        }
-        editor.apply();
-    }
-
-    public List<Cookie> loadCookies(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        Map<String, ?> cookiesMap = sharedPreferences.getAll();
-        List<Cookie> storedCookies = new ArrayList<>();
-        for (Map.Entry<String, ?> entry : cookiesMap.entrySet()) {
-            // Here, ensure your Cookie.parse can handle the string format correctly
-            Cookie cookie = Cookie.parse(HttpUrl.get("http://192.168.11.62:3000/"), (String) entry.getValue());
-            if (cookie != null) {
-                storedCookies.add(cookie);
-            }
-        }
-        return storedCookies;
-    }
-
 
     // Create and configure OkHttpClient with stored cookies
     public OkHttpClient getHttpClient(Context context) {
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
-        final List<Cookie> storedCookies = loadCookies(context);
+        final List<Cookie> storedCookies = AppPreferences.loadCookies(context);
 
         httpClientBuilder.cookieJar(new CookieJar() {
             private final List<Cookie> cache = new ArrayList<>();
@@ -66,7 +42,7 @@ public class HttpClient {
             @Override
             public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
                 cache.addAll(cookies);
-                saveCookies(context, cookies);
+                AppPreferences.saveCookies(context, cookies);
             }
 
             @Override
@@ -81,15 +57,12 @@ public class HttpClient {
 
 
     // Make HTTP request
-    public void makeLoginHttpRequest(HttpClient hc, UsersInputDto user, Context context, Callback callback) {
-        HttpUrl.Builder urlBuilder = HttpUrl.parse("http://192.168.11.62:3000/login").newBuilder();
-        urlBuilder
-                .addQueryParameter("username", user.getUsername())
-                .addQueryParameter("password", user.getPassword());
+    public void makeLoginHttpRequest(UsersInputDto user, Context context, Callback callback) {
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(URL + "login").newBuilder();
+        urlBuilder.addQueryParameter("username", user.getUsername());
+        urlBuilder.addQueryParameter("password", user.getPassword());
 
         String fullurl = urlBuilder.build().toString();
-
-
         RequestBody emptyBody = RequestBody.create(new byte[0]);
 
         OkHttpClient httpClient = getHttpClient(context);
@@ -108,6 +81,5 @@ public class HttpClient {
                 .build();
         httpClient.newCall(request).enqueue(callback);
     }
-
 }
 

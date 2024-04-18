@@ -46,7 +46,7 @@ public class EgyikRendelesActivity extends AppCompatActivity {
         rendeles_reszletek_textview.setText(rendelesReszletekString());
         rendeles_reszletek_textview.setMovementMethod(new ScrollingMovementMethod());
         kiszallito_icon.setImageResource(rendeles.image);
-        rendeloi_adatok_textview.setText(rendeles.rendeloNeve);
+        rendeloi_adatok_textview.setText(rendeles.c_name);
     }
 
     public String rendelesReszletekString() {

@@ -1,19 +1,36 @@
 package com.example.pobatest.Rendeles;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.example.pobatest.ApiCalls.HttpClient;
+import com.example.pobatest.Bejelentkezes.BejelentkezesActivity;
+import com.example.pobatest.Bejelentkezes.EgyszeriBelepesActivity;
 import com.example.pobatest.FoActivity;
 import com.example.pobatest.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Response;
 
 public class RendelesActivity extends AppCompatActivity {
 
@@ -26,7 +43,7 @@ public class RendelesActivity extends AppCompatActivity {
         setContentView(R.layout.rendelesek_activity);
 
         Init();
-        ListaFeltolt();
+        Rendelesek();
 
         nav_vissza_gomb.setOnClickListener(v -> {
             Intent intent = new Intent(RendelesActivity.this, FoActivity.class);
@@ -44,21 +61,46 @@ public class RendelesActivity extends AppCompatActivity {
         recyclerview_rendelesek.setAdapter(new RendelesAdapter(getApplicationContext(), megrendelesLista));
     }
 
-    public void ListaFeltolt() {
-        ArrayList<String> kosar1 = new ArrayList<>(Arrays.asList("Alma", "Körte", "Zsepi"));
-        ArrayList<String> kosar2 = new ArrayList<>(Arrays.asList("Cica", "Kutya", "Süni", "Béka", "Póni", "Mountain Bike", "Pap ruha", "Kereszt", "Lánc", "Biblia"));
-        ArrayList<String> kosar3 = new ArrayList<>(Arrays.asList("Kréta", "Ceruza", "Vonalzó", "Drog", "Kenyér", "Samsung Galaxy Ultra Mega", "Tucsok"));
 
-        Rendeles rendeles1 = new Rendeles("123123", R.drawable.foxpost_logo, "Mákos Guba");
-        Rendeles rendeles2 = new Rendeles("456456", R.drawable.gls_logo, "Hófehérke");
-        Rendeles rendeles3 = new Rendeles("789789", 0, "Nagy Henrik the Third Jr.");
+    public void Rendelesek(){
+        Callback cb = new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(RendelesActivity.this, "Sikertelen rendelés lekérés.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
 
-        rendeles1.setKosarTartalma(kosar1);
-        rendeles2.setKosarTartalma(kosar2);
-        rendeles3.setKosarTartalma(kosar3);
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            List<Rendeles> rendelesek = new ArrayList<>();
+                            String responseData = response.body().string();
+                            JSONArray jsonArray = new JSONArray(responseData);
+                            for(int i = 0; i < jsonArray.length(); i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                Rendeles rendeles = new Rendeles(jsonObject);
+                                rendelesek.add(rendeles);
+                            }
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                });
+            }
+        };
 
-        megrendelesLista.add(rendeles1);
-        megrendelesLista.add(rendeles2);
-        megrendelesLista.add(rendeles3);
+        HttpClient hc = new HttpClient();
+        String url = "orders";
+        hc.getHttpClient(RendelesActivity.this);
+        hc.makeGetHttpRequest(this, url, cb);
     }
 }

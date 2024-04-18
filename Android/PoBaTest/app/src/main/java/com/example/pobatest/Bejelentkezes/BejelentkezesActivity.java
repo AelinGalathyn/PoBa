@@ -4,14 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.pobatest.ApiCalls.AppPreferences;
 import com.example.pobatest.ApiCalls.HttpClient;
-import com.example.pobatest.ApiCalls.SharedPrefWebshopId;
 import com.example.pobatest.FoActivity;
 import com.example.pobatest.R;
 
@@ -55,39 +54,55 @@ public class BejelentkezesActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
+                // Move reading response data outside of UI thread handling
+                String responseData = null;
+                if (response.isSuccessful()) {
+                    try {
+                        responseData = response.body().string();
+                    } catch (IOException e) {
+                        Log.e("LOGIN", "Error reading response body", e);
+                        return; // Exit early if response cannot be read
+                    }
+                }
+
+                // Ensure to close the response after extracting the data to free resources
+                response.close();
+
+                final String finalResponseData = responseData;
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (response.isSuccessful()) {
-                            String responseData = null;
+                        if (response.isSuccessful() && finalResponseData != null) {
                             try {
-                                responseData = response.body().string();
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                            try {
-                                Log.i("json response", responseData);
-                                JSONObject jsonObject = new JSONObject(responseData);
+                                Log.i("json response", finalResponseData);
+                                JSONObject jsonObject = new JSONObject(finalResponseData);
+
                                 if (jsonObject.has("isValid")) {
                                     boolean isValid = jsonObject.getBoolean("isValid");
-                                    Intent intent = new Intent(BejelentkezesActivity.this, EgyszeriBelepesActivity.class);
-                                    startActivity(intent);
-                                    finish();
+                                    if (!isValid) {
+                                        Intent intent = new Intent(BejelentkezesActivity.this, EgyszeriBelepesActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(BejelentkezesActivity.this, "Invalid login attempt.", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                                 if (jsonObject.has("username")) {
-                                    SharedPrefWebshopId sp = new SharedPrefWebshopId();
-                                    Log.i("webshopid: ", sp.getWebshopId(BejelentkezesActivity.this).toString());
+                                    // Assuming username presence confirms login
+                                    // Here you can also use AppPreferences if needed for storing relevant data
+                                    Log.i("webshopid: ", AppPreferences.getWebshopId(BejelentkezesActivity.this));
                                     Intent intent = new Intent(BejelentkezesActivity.this, FoActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
                             } catch (JSONException e) {
-                                e.printStackTrace();
+                                Log.e("LOGIN", "JSON parsing error", e);
+                                Toast.makeText(BejelentkezesActivity.this, "Error processing login response.", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Log.e("LOGIN", "Login failed: " + response);
-                            Toast.makeText(BejelentkezesActivity.this, " " + response, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(BejelentkezesActivity.this, "Login failed. Please try again.", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
