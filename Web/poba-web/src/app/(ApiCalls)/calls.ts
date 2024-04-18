@@ -6,7 +6,7 @@ export const logOut = async () => {
 
     await axios.post("http://localhost:3000/logout", {}, {
         withCredentials: true
-    });
+    }).catch(e => alert("A kijelentkezés hibába futott. " + e.code));
 }
 
 export const login = async (loginUser : User) => {
@@ -19,7 +19,7 @@ export const login = async (loginUser : User) => {
             username : loginUser.username,
             password : loginUser.password
         }
-    }).catch(e => {console.log(e);throw new Error(e)});
+    }).catch(e => {throw new Error(e)});
 
     return response.data;
 }

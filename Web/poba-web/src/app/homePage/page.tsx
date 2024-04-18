@@ -8,15 +8,15 @@ import React from "react";
 export default function HomePage() {
 
     return <>
-        <section className="col-start-3 col-end-5">
+        <section className="col-span-1 row-span-1 md:col-span-4 md:col-start-4 lg:col-start-3 lg:col-span-3">
             <JelenlegiRendelesek/>
         </section>
 
-        <section className="grid grid-rows-2 ps-[18vw]">
-            <div className="row-span-1">
+        <section className="col-span-1 row-span-1 grid-rows-subgrid md:col-start-8 md:col-span-5 lg:col-start-7 lg:col-span-6">
+            <div className="row-span-3">
                 <KifogyoTermekek/>
             </div>
-            <div className="row-span-1">
+            <div className="row-span-3 mt-16">
                 <HomepageStatisztika/>
             </div>
         </section>

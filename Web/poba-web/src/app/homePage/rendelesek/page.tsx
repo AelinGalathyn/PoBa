@@ -23,12 +23,12 @@ export default function Rendelesek() {
     }
 
     return (
-        <section className="col-start-3 ps-10">
-            <div className="fixed w-[75vw] max-h-3/4 mt-16">
+        <section className="col-span-1 md:col-start-4 md:col-span-7 lg:col-start-3">
+            <div className="fixed w-full h-full lg:w-[75vw] lg:max-h-[75vh] mt-16">
                 <div className="text-center">
                     <h1 className="text-2xl font-bold drop-shadow-md">Rendelések</h1>
                 </div>
-                <div className="max-h-full w-full mt-5 p-2 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto scroll-smooth">
+                <div className="max-h-full w-full mt-5 p-2 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-y-auto hover:overflow-x-auto scroll-smooth">
                     <table className="w-full table-style">
                         <thead>
                         <tr>

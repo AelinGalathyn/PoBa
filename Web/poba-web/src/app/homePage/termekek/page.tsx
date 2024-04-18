@@ -5,7 +5,7 @@ import { FItem } from "@/app/(DTOs)/Termekek/FTermek";
 import { fetch_termekek } from "@/app/(ApiCalls)/fetch";
 import { Button } from "@nextui-org/react";
 import { ModifyTermekQty } from "@/app/(ApiCalls)/modify";
-import { ItemListFiltering, sortedListItems} from "@/app/(Functions)/list_filtering";
+import {feltoltFogyoTermekek, ItemListFiltering, sortedListItems} from "@/app/(Functions)/list_filtering";
 import {Item} from "@/app/(DTOs)/Termekek/Termek";
 import {itemsFunctions, itemsHeader} from "@/app/(FixData)/lists";
 import {CreateButton} from "@/app/(Functions)/create_html_elements";
@@ -40,16 +40,7 @@ export default function Termekek() {
 
         const oldFogyoTermekek : Item[] = JSON.parse(localStorage.getItem("fogyoTermekek")!);
 
-        newTermekek.forEach(item => {
-            const existingItemIndex = oldFogyoTermekek.findIndex(termek => termek.fItem.id === item.id);
-            if (existingItemIndex === -1 && item.qty <= 10 && item.qty >= 0) {
-                oldFogyoTermekek.push(new Item(item, new Date()));
-            } else if (existingItemIndex !== -1 && item.qty !== oldFogyoTermekek[existingItemIndex].fItem.qty) {
-                oldFogyoTermekek[existingItemIndex] = new Item(item, new Date());
-            }
-        });
-
-        localStorage.setItem("fogyoTermekek", JSON.stringify(sortedListItems(oldFogyoTermekek)));
+        localStorage.setItem("fogyoTermekek", JSON.stringify(sortedListItems(feltoltFogyoTermekek(newTermekek, oldFogyoTermekek))));
     }
 
     if (termekek.length === 0) {
@@ -59,26 +50,25 @@ export default function Termekek() {
     }
 
     return (
-        <section className="col-start-3 ps-10">
-        <div className="fixed w-[75vw] h-3/4 mt-5">
+        <section className="md:col-start-3">
+        <div className="fixed w-full h-full m-5 overflow-y-auto scroll-smooth md:w-3/4 md:max-h-[95vh] md:mt-5 md:overflow-hidden">
                 <div className="text-center">
                     <h1 className="text-2xl font-bold drop-shadow-md">Termékek</h1>
                 </div>
-                <div className="mt-3 grid grid-cols-6">
-                    <div className="space-x-2 space-y-2 col-span-4">
+                <div className="mt-3 grid grid-cols-2 md:grid-cols-6">
+                    <div className="space-x-2 space-y-2 col-span-1 md:col-span-4">
                         {itemsFunctions.map(item => CreateButton(item, () => setShowCorrectList(item)))}
                     </div>
-                    <div className="flex justify-end items-center grid-cols-2 col-span-2">
+                    <div className="flex flex-col md:flex-row justify-end items-center grid-rows-2 md:grid-cols-2 col-span-1 md:col-span-2">
                         <MagnifyingGlassIcon width={25} height={25}/>
-                        <input className="ms-2 p-2 border-2 border-gray-300 rounded-md" type="text"
+                        <input className="p-2 w-3/4 border-2 border-gray-300 rounded-md" type="text"
                                onClick={() => setShowCorrectList("Keresőmező")}
                                onChange={(e) => setSearch(e.target.value)}
                                defaultValue={search}
                         />
                     </div>
                 </div>
-                <div
-                    className="max-h-full w-full mt-5 p-2 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto scroll-smooth">
+                <div className="max-h-full md:max-h-[75vh] w-full mt-5 p-2 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto hover:overflow-x-auto scroll-smooth">
                     <table className="w-full table-style">
                         <thead>
                         <tr>
@@ -91,21 +81,21 @@ export default function Termekek() {
                             {ItemListFiltering(showCorrectList, termekek, search).map((termek, index) => (
                             expandedRows.includes(index) ? (
                                 <tr key={termekek.findIndex(item => item.id === termek?.id)}
-                                    className="h-fit border-b-8 border-gray-200 col-span-7 showing-row">
+                                    className="h-fit border-b-8 border-gray-200 showing-row">
                                     <td colSpan={7}>
                                         <div className="grid grid-rows-3">
                                             <div className="row-span-1 grid grid-cols-12" onClick={() => toggleRow(index)}>
-                                                <p className="col-span-1">{index + 1}</p>
-                                                <p className="col-span-9 text-center">{termek?.sku}</p>
+                                                <p className="lg:col-span-1 md:col-span-2 col-span-4">{index + 1}</p>
+                                                <p className="lg:col-span-9 md:col-span-8 col-span-6 text-center">{termek?.sku}</p>
                                             </div>
                                             <div className="row-span-1 grid grid-cols-12" onClick={() => toggleRow(index)}>
                                                 <img className="m-3 col-span-1" src={termek?.pic_url ?? ""} width={100} height={100}
                                                      alt="termek_kep"/>
-                                                <div className="flex flex-col col-span-3">
+                                                <div className="flex flex-col col-span-4">
                                                     <p><b>Név</b></p>
                                                     <p>{termek?.name}</p>
                                                 </div>
-                                                <div className="flex flex-col col-span-1">
+                                                <div className="flex flex-col col-span-2">
                                                     <p><b>Cikkszám</b></p>
                                                     <p>{termek?.sku}</p>
                                                 </div>
@@ -117,7 +107,7 @@ export default function Termekek() {
                                                         </>
                                                     )}
                                                 </div>
-                                                <div className="flex flex-col col-span-1">
+                                                <div className="flex flex-col col-span-2">
                                                     <p><b>Ár</b></p>
                                                     <p>{termek?.price + " Ft"}</p>
                                                 </div>
@@ -142,7 +132,7 @@ export default function Termekek() {
                                     className={termek.qty === -1 ? "bg-gray-200" : ""}>
                                     <td>{index + 1}</td>
                                     <td>{termek.sku}</td>
-                                    <td>{termek.cat_name.map(item => item + ", ")}</td>
+                                    <td>{termek.cat_name.map(item => item + ", ").splice(0, 5)}</td>
                                     <td>{termek.name}</td>
                                     <td>{termek.qty === -1 ? "" : termek.qty + " " + termek.unit}</td>
                                     <td>{termek.price + " Ft"}</td>

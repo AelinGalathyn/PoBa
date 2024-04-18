@@ -6,34 +6,50 @@ import React, {useEffect, useState} from "react";
 
 export default function JelenlegiRendelesek() {
     const [frissRendelesek, setFrissRendelesek] = useState<Orders[]>([])
+    const [szallitoiCegek, setSzallitoiCegek] = useState<string[]>([])
 
     useEffect(() => {
         const webshopId = JSON.parse(localStorage.getItem("webshopId") ?? "0");
-        fetch_rendelesek(webshopId).then(data => setFrissRendelesek(sortedListOrders(data)));
+        fetch_rendelesek(webshopId).then(data => {
+            setFrissRendelesek(sortedListOrders(data));
+            setSzallitoiCegek(["gls", "foxpost", "posta", "mpl"])
+        });
     }, []);
+
+    const renderImage = (src : string) => {
+        return <img src={src} width={30} height={30} alt="szallito_ceg_icon"/>
+    }
+
+    const isContains = (amibeKeresed : Orders, parameter : string) => {
+        return amibeKeresed.sender.toString().toLowerCase().includes(parameter)
+    }
+
+    const renderSzallitoIcon = (rendeles : Orders, szallitoiCegek : string[]) => {
+        return isContains(rendeles, szallitoiCegek[0]) ? (renderImage(`/${szallitoiCegek[0]}_logo.png`)) :
+            isContains(rendeles, szallitoiCegek[1]) ? (renderImage(`/${szallitoiCegek[1]}_logo.png`)) :
+                isContains(rendeles, szallitoiCegek[2]) ||  isContains(rendeles, szallitoiCegek[3])?
+                    (renderImage(`/${szallitoiCegek[2]}_logo.png`)) : ("")
+    }
 
     if (frissRendelesek.length === 0) {
         return <p className="w-[25vw] h-full flex justify-center items-center">Loading...</p>
     }
 
     return (
-        <div className="fixed w-fit max-h-3/4 mt-16">
+        <div className="w-full md:mt-16">
             <div className="text-center">
-                <h1 className="text-2xl font-bold drop-shadow-md">Rendelések</h1>
+                <h1 className="text-[25px] font-bold drop-shadow-md">Rendelések</h1>
             </div>
-            <div className="max-h-[75vh] w-[25vw] mt-5 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto scroll-smooth">
+            <div className="h-full p-0.5 lg:max-h-[75vh] w-full mt-5 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner md:overflow-hidden md:hover:overflow-auto md:scroll-smooth">
                 <ul>
                     {frissRendelesek.map((rendeles) => (
                         <li key={rendeles.orderid}>
-                            <Card className="bg-white m-2 rounded-md text-xs shadow-lg shadow-gray-400">
-                                <CardHeader className="card-class text-xl font-bold flex justify-between">
+                            <Card className="bg-white m-2 rounded-md text-[12px] shadow-lg shadow-gray-400">
+                                <CardHeader className="card-class text-[20px] font-bold flex justify-between">
                                     {rendeles.orderid}
-                                    {rendeles.sender.toString().toLowerCase().includes("gls") ? (<img src="/gls_logo.png" width={30} height={30} alt="szallito_ceg_icon"/>) :
-                                        rendeles.sender.toString().toLowerCase().includes("foxpost") ? (<img src="/foxpost_logo.png" width={30} height={30} alt="szallito_ceg_icon"/>) :
-                                            rendeles.sender.toString().toLowerCase().includes("posta") ||  rendeles.sender.toString().toLowerCase().includes("mpl")?
-                                                (<img src="/magyar_icon.png" width={30} height={30} alt="szallito_ceg_icon"/>) : ("")}
+                                    {renderSzallitoIcon(rendeles, szallitoiCegek)}
                                 </CardHeader>
-                                <CardBody className="text-[15px] card-class">{rendeles.customer.c_name}</CardBody>
+                                <CardBody className="text-[18px] card-class">{rendeles.customer.c_name}</CardBody>
                                 <CardFooter className="card-class">{rendeles.date.toString()}</CardFooter>
                             </Card>
                         </li>

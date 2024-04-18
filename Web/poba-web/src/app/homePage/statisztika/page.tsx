@@ -35,9 +35,9 @@ export default function Statisztika() {
     }
 
     return (
-        <section className="col-start-3 col-span-9">
+        <section className="md:col-start-4 md:col-span-8 lg:col-start-3 lg:col-span-9 overflow-auto scroll-smooth">
             <div
-                className="h-[95vh] w-full mt-5 grid grid-cols-3 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto scroll-smooth">
+                className="grid grid-cols-1 lg:grid-cols-3 h-full w-full md:h-[95vh] pe-1 mt-5 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner">
                 <div className="text-center">
                     {renderChart(charts[0], "Heti rendelések", "db", "", "", weeklyStatistics(rendelesek), {}, {}, "chart1")}
                     <Spacer/>

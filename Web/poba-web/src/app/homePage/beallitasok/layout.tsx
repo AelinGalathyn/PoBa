@@ -23,29 +23,29 @@ export default function BeallitasokLayout({children} : { children : React.ReactN
     const buttonOnclick = (buttonName : string) => {
         switch (buttonName) {
             case "Csatolt webshopok" :
-                return () => {router.push("beallitasok/webshopok")}
+                return () => {router.push("/homePage/beallitasok/webshopok")}
             case "Jelszó változtatás" :
-                return () => {router.push("ballitasok/changePassword")}
+                return () => {router.push("/homePage/beallitasok/changePassword")}
             case "Kijelentkezés" :
-                return () => {logOut(); router.push("beallitasok/login")}
+                return () => {logOut(); router.push("/login")}
             default :
                 return () => {}
         }
     }
 
     return (
-        <section className="col-start-3 col-span-9">
-            <div className="grid grid-cols-12 h-[95vh] w-full mt-5 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto scroll-smooth">
-                <div className="col-span-2 border-l-2 border-b-gray-50">
-                    <div className="flex justify-center items-center h-[15%]">
+        <section className="md:col-start-4 md:col-span-8 lg:col-start-3 lg:col-span-9 overflow-auto scroll-smooth">
+            <div className="grid grid-cols-1 md:grid-cols-12 md:grid-rows-1 h-fit md:h-[95vh] w-full mt-5 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner">
+                <div className="lg:col-span-2 md:col-span-3 p-3 md:p-0 md:border-l-2 md:border-b-gray-50 grid-rows-12">
+                    <div className="flex row-span-2 mb-5 md:mb-0 justify-center items-center h-[55px] md:h-[15%]">
                         <img src="/nav_profil.png" width={50} height={50} alt="profil_icon"/>
                         <p>{username}</p>
                     </div>
-                    <div className="h-[75%] flex flex-col px-3 space-y-2 justify-center">
-                    {beallitasMenuItems.map(item => CreateButton(item, buttonOnclick(item)))}
+                    <div className="h-[100px] md:h-3/4 row-span-3 flex flex-col lg:px-3 space-y-2 justify-center">
+                        {beallitasMenuItems.map(item => CreateButton(item, buttonOnclick(item)))}
                     </div>
                 </div>
-                <div className="col-span-10 bg-white m-2 rounded-md">
+                <div className="h-11/12 md:col-span-9 lg:col-span-10 row-span-7 bg-white m-2 rounded-md">
                     {children}
                 </div>
             </div>
