@@ -20,9 +20,10 @@
 # Telepítés
 
 ## Első futtatás előtt
-* futtatás előtt szükséges létrehozni a /Backend/poba-backend/ mappába .env nevű fájlt az alábbi tartalommal
+Futtatás előtt szükséges létrehozni a /Backend/poba-backend/ mappába .env nevű fájlt az alábbi tartalommal
+A JWT_SECRET-nek egyéni stringet kell megadni. 
 ```
-JWT_SECRET=BalatonTagadok
+JWT_SECRET=
 DB_HOST=db
 DB_PORT=5432
 DB_USERNAME=postgres
