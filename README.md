@@ -6,6 +6,7 @@
 * Követelmények futtatáshoz
 * Telepítés
 * Indítási útmutató
+* Ismert problémák
 
 ***
 # Követelmények futtatáshoz
@@ -13,8 +14,8 @@
 * Docker ([Docker Desktop](https://www.docker.com/products/docker-desktop/))
 * Node.js ([Node.js](https://nodejs.org/en))
 * Kódszerkesztő ([IntelliJ](https://www.jetbrains.com/idea/) vagy [VSC](https://code.visualstudio.com))
-* (ajánlott) Git ([Git](https://git-scm.com/downloads))
 * [UNAS](https://unas.hu/belepes) webshop(ok) és apikulcs(ok)
+* (ajánlott) Git ([Git](https://git-scm.com/downloads))
 
 ***
 # Telepítés
@@ -77,6 +78,45 @@ Connection
 
 8. futtatás
 
+### UNAS fiók(ok) előkészítése
+
+Új fiókot [itt](https://unas.hu/webaruhaz-nyitas) lehet létrehozni. Az összes funkció teszteléséhez legalább 2 fiók létrehozása ajánlott!
+
+Létrehozás utáni tennivalók:
+* Szállítási módok hozzáadása
+* Rendelések feltöltése
+* API kulcs létrehozása
+
+**Szállítási módok hozzáadása**
+1. Beállítások -> Fizetés, szállítás, logisztika -> Szállítási módok
+
+![image](https://github.com/AelinGalathyn/PoBa/assets/70639095/c306d899-5425-420f-b094-a2c0abeaa87e)
+
+2. Hozzáadás
+- 3 szállítási mód létrehozása, néven kívül nincs szükség mást beállítani
+- Megnevezés után mentés
+
+Szállítási mód megnevezése:
+1. GLS
+2. FoxPost
+3. MPL
+
+**Rendelések feltöltése**
+1. Lépjünk a webshopunk oldalára
+2. Hozzunk létre egy vásárlói fiókot
+3. Adjunk le legalább 2 rendelést a feljebb említett szállítási módokkal
+
+**API kulcs létrehozása**
+1. Lépjünk be a webshop admin felületére
+2. Beállítások -> Külső kapcsolatok -> API kapcsolat
+
+![image](https://github.com/AelinGalathyn/PoBa/assets/70639095/75fb216b-a29e-4c32-b924-bd692a4ccfee)
+
+3. API kulcs létrehozása
+4. Megnevezés mezőbe tetszőlegesen nevezzük el az API kulcsot
+
+**Fontos**: egy API kulcsot egy felhasználóhoz lehet rendelni, így ha több felhasználóhoz szeretnénk rendelni egy webshopot, annyi API kulcsot kell létrehoznunk!
+
 ***
 ## Indítási útmutató
 Indításkor fontos, hogy a docker induljon el először, így biztosítva a :3000 portot a backendnek.
@@ -108,3 +148,7 @@ npm run dev
 ### Android app indítása
 
 
+
+## Ismert problémák
+**Lejárt/megszünt webshop vagy API kulcs**
+* Ha teszt időszakban lévő webshopot használunk, ami lejár, utána errort kapunk a weboldalon a komponensek betöltésekor. A beállítások fülön töröljük a lejárt webshopot, vagy az adatbázisban a megfelelő rekordot.
