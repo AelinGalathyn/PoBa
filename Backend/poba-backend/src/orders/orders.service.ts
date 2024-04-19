@@ -29,7 +29,6 @@ export class OrdersService {
         orders.push({
           orderid: order.Key,
           date: order.Date,
-          type: order.Type,
           status_id: order.Status,
           sender: order['Shipping']['Name'],
           payment: order.Payment.Type,
