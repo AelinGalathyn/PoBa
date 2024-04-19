@@ -8,7 +8,7 @@ export class Orders {
 
   status_id: number;
 
-  sender: number;
+  sender: string;
 
   payment: string;
 
