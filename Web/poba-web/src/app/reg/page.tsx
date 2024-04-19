@@ -16,7 +16,13 @@ export default function Reg() {
     const router = useRouter();
 
     const handleReg = () => {
-        reg(newUser).then(() => router.push("/login"));
+        let regex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$", "gm");
+        if (!regex.test(password)) {
+            alert("A jelszónak legalább 1 nagybetűt [A-Z], 1 számot [0-9] és egy speciális karaktert [#?!@$ %^&*-] tartalmaznia kell.")
+        }
+        else {
+            reg(newUser).then(() => router.push("/login"));
+        }
     }
 
     return (
