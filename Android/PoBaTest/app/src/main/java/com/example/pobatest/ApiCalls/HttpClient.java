@@ -5,6 +5,9 @@ import android.util.Log;
 
 import com.example.pobatest.Users.UsersInputDto;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 import okhttp3.Callback;
@@ -18,9 +21,7 @@ import okhttp3.RequestBody;
 
 public class HttpClient {
     private final String PREF_NAME = "Cookies";
-    public String URL = "http://10.0.2.2:3000/";
-
-    // Create and configure OkHttpClient with stored cookies
+    public String URL = "http://192.168.69.67:3000/";
     public OkHttpClient getHttpClient(Context context) {
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
         final List<Cookie> storedCookies = AppPreferences.loadCookies(context);
@@ -36,7 +37,6 @@ public class HttpClient {
 
             @Override
             public List<Cookie> loadForRequest(HttpUrl url) {
-                // Optionally, filter cookies by url
                 return cache.isEmpty() ? storedCookies : cache;
             }
         });
@@ -45,7 +45,6 @@ public class HttpClient {
     }
 
 
-    // Make HTTP request
     public void makeLoginHttpRequest(UsersInputDto user, Context context, Callback callback) {
         HttpUrl.Builder urlBuilder = HttpUrl.parse(URL + "login").newBuilder();
         urlBuilder.addQueryParameter("username", user.getUsername());
@@ -92,11 +91,16 @@ public class HttpClient {
                 .build()
                 .toString();
 
+        RequestBody requestBody = new FormBody.Builder().build();
+
         Request request = new Request.Builder()
                 .url(finalUrl)
+                .post(requestBody)
                 .build();
+
         httpClient.newCall(request).enqueue(callback);
     }
+
 
     public void getActions(Context context, String url, okhttp3.Callback callback) {
         OkHttpClient httpClient = getHttpClient(context);
@@ -120,6 +124,42 @@ public class HttpClient {
         Request request = new Request.Builder()
                 .url(finalUrl)
                 .build();
+        httpClient.newCall(request).enqueue(callback);
+    }
+
+    public void deleteWebshop(Context context, String url, okhttp3.Callback callback, String webshopid) {
+        OkHttpClient httpClient = getHttpClient(context);
+
+        String finalUrl = HttpUrl.parse(URL + url)
+                .newBuilder()
+                .addQueryParameter("webshopid", webshopid)
+                .build()
+                .toString();
+
+        Request request = new Request.Builder()
+                .url(finalUrl)
+                .delete()
+                .build();
+
+        httpClient.newCall(request).enqueue(callback);
+    }
+
+    public void addWebshop(Context context, String url, okhttp3.Callback callback, String api_key) {
+        OkHttpClient httpClient = getHttpClient(context);
+
+        String finalUrl = HttpUrl.parse(URL + url)
+                .newBuilder()
+                .addQueryParameter("api_key", api_key)
+                .build()
+                .toString();
+
+        RequestBody requestBody = new FormBody.Builder().build();
+
+        Request request = new Request.Builder()
+                .url(finalUrl)
+                .post(requestBody)
+                .build();
+
         httpClient.newCall(request).enqueue(callback);
     }
 

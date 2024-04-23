@@ -3,6 +3,7 @@ package com.example.pobatest.ApiCalls;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.pobatest.Webshopok.Webshop;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -44,5 +45,22 @@ public class AppPreferences {
     public static String getWebshopId(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString("webshopid", null);
+    }
+
+    public static void saveWebshops(Context context, List<Webshop> webshopok) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String jsonWebshopok = gson.toJson(webshopok);
+        editor.putString("webshopok", jsonWebshopok);
+        editor.apply();
+    }
+
+    public static List<Webshop> getWebshopok(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        String jsonWebshopok = sharedPreferences.getString("webshopok", "");
+        if (jsonWebshopok.isEmpty()) return new ArrayList<>();
+
+        Type listType = new TypeToken<List<Webshop>>() {}.getType();
+        return gson.fromJson(jsonWebshopok, listType);
     }
 }

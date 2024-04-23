@@ -12,4 +12,8 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <style name="corner_radius" >
+        <item name="cornerRadius">10dp</item>
+    </style>
+
 </resources>

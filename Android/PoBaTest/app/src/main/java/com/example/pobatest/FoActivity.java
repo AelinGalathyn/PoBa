@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.example.pobatest.ApiCalls.AppPreferences;
 import com.example.pobatest.ApiCalls.HttpClient;
-import com.example.pobatest.Ertesites.ErtesitesekActivity;
 import com.example.pobatest.Rendeles.RendelesActivity;
 import com.example.pobatest.Termek.TermekekActivity;
 import com.example.pobatest.Webshopok.Webshop;
@@ -52,7 +51,6 @@ public class FoActivity extends AppCompatActivity{
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private List<Webshop> webshopok;
     private int selectedSpinnerPosition = 0;
-    private static final String SPINNER_POSITION_KEY = "SpinnerPosition";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,42 +99,34 @@ public class FoActivity extends AppCompatActivity{
         hamburger_header = nav_hamburger_menu.getHeaderView(0);
         nav_profil = hamburger_header.findViewById(R.id.nav_profil);
         hamburger_webshopHely = hamburger_header.findViewById(R.id.hamburger_webshopHely);
+        hamburger_webshopHely.setDropDownVerticalOffset(100);
         hamburger_drawerLayout = findViewById(R.id.hamburger_drawerLayout);
         nav_profil_gomb = findViewById(R.id.nav_profil_gomb);
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, hamburger_drawerLayout, R.string.nav_open, R.string.nav_close);
         hamburger_drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-
-        if (savedInstanceState != null) {
-            selectedSpinnerPosition = savedInstanceState.getInt(SPINNER_POSITION_KEY, 0);
-        }
     }
 
     public void menuOnClick(MenuItem item) {
         Intent intent;
         int id = item.getItemId();
-        int ertesitesek = R.id.hamburger_ertesitesek;
         int beallitasok = R.id.hamburger_beallitasok;
         int termekek = R.id.hamburger_termekek;
         int rendelesek = R.id.hamburger_rendelesek;
 
 
-        if (id == ertesitesek)
-        {
-            intent = new Intent(FoActivity.this, ErtesitesekActivity.class);
-        }
-        else if (id == beallitasok)
-        {
-            intent = new Intent(FoActivity.this, BeallitasokActivity.class);
-        }
-        else if (id == termekek)
+        if (id == termekek)
         {
             intent = new Intent(FoActivity.this, TermekekActivity.class);
         }
         else if (id == rendelesek)
         {
             intent = new Intent(FoActivity.this, RendelesActivity.class);
+        }
+        else if (id == beallitasok)
+        {
+            intent = new Intent(FoActivity.this, ProfilBeallitasokActivity.class);
         }
         else {
             throw new IllegalStateException("Unexpected value: " + id);
@@ -146,7 +136,7 @@ public class FoActivity extends AppCompatActivity{
         finish();
     }
 
-    private void getAllWebshops() {
+    public void getAllWebshops() {
         Callback cb = new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -168,6 +158,7 @@ public class FoActivity extends AppCompatActivity{
                     }
 
                     webshopok.sort(Comparator.comparingInt((Webshop obj) -> obj.webshopid));
+                    AppPreferences.saveWebshops(FoActivity.this, webshopok);
 
                     runOnUiThread(new Runnable() {
                         @Override
@@ -181,7 +172,7 @@ public class FoActivity extends AppCompatActivity{
                             }
                             String[] webshopNevek = webshopok.stream().map(Webshop::getName).toArray(String[]::new);
                             ArrayAdapter<String> adapter = new ArrayAdapter<>(FoActivity.this, android.R.layout.simple_spinner_item, webshopNevek);
-                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                            adapter.setDropDownViewResource(R.layout.spinner_row);
                             adapter.setNotifyOnChange(true);
                             hamburger_webshopHely.setAdapter(adapter);
                             hamburger_webshopHely.setSelection(selectedSpinnerPosition);

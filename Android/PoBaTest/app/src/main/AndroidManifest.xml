@@ -23,7 +23,7 @@
             android:name=".Beallitasok.BeallitasokErtesitesekActivity"
             android:exported="false" />
         <activity
-            android:name=".ApikulcsActivity"
+            android:name=".Webshopok.ApikulcsActivity"
             android:exported="false" />
         <activity
             android:name=".Webshopok.WebShopokActivity"

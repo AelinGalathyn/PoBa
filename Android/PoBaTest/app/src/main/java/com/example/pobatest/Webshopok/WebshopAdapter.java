@@ -1,20 +1,40 @@
 package com.example.pobatest.Webshopok;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pobatest.ApiCalls.AppPreferences;
+import com.example.pobatest.ApiCalls.HttpClient;
+import com.example.pobatest.FoActivity;
 import com.example.pobatest.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class WebshopAdapter extends RecyclerView.Adapter<WebshopAdapter.WebshopHolder> {
     private final Context context;
@@ -77,11 +97,31 @@ public class WebshopAdapter extends RecyclerView.Adapter<WebshopAdapter.WebshopH
 
         popup_no_icon.setOnClickListener(view -> ab.dismiss());
         popup_yes_icon.setOnClickListener(view -> {
-            webshopok.remove(webshop);
-            this.notifyItemRemoved(position);
+            RemoveWebshop(webshop.webshopid.toString());
             ab.dismiss();
+            context.startActivity(new Intent(context, FoActivity.class));
         });
 
         ab.show();
+    }
+
+    private void RemoveWebshop(String webshopid) {
+        Callback cb = new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.d("DELWEBSHOP", "onResponse: " + e + ": " + call);
+                Toast.makeText(context, "Sikertelen webshop törlés.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                context.startActivity(new Intent(context, FoActivity.class));
+            }
+        };
+
+        HttpClient hc = new HttpClient();
+        String url = "webshop";
+        hc.getHttpClient(context);
+        hc.deleteWebshop(context, url, cb, webshopid);
     }
 }
