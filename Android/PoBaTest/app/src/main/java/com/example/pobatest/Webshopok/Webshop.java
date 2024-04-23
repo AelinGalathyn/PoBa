@@ -5,15 +5,16 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-public class Webshop implements Parcelable {
-    String nev;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-    public Webshop(String nev) {
-        this.nev = nev;
-    }
+public class Webshop implements Parcelable {
+    public Integer webshopid;
+    private String name;
 
     protected Webshop(Parcel in) {
-        nev = in.readString();
+        webshopid = (in.readByte() == 0) ? null : in.readInt();
+        name = in.readString();
     }
 
     public static final Creator<Webshop> CREATOR = new Creator<Webshop>() {
@@ -35,6 +36,21 @@ public class Webshop implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeString(nev);
+        dest.writeByte((webshopid == null) ? (byte) 0 : (byte) 1); if (webshopid != null) dest.writeInt(webshopid);
+        dest.writeString(name);
+    }
+
+    public Webshop(JSONObject object){
+
+        try {
+            webshopid = object.getInt("webshopid");
+            name = object.getString("name");
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String getName() {
+        return name;
     }
 }

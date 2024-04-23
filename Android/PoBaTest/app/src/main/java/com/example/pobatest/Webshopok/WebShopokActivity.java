@@ -47,10 +47,6 @@ public class WebShopokActivity extends AppCompatActivity {
     }
 
     public void Init() {
-        webshop_lista.add(new Webshop("Aham1"));
-        webshop_lista.add(new Webshop("Aham2"));
-        webshop_lista.add(new Webshop("Aham3"));
-
         nav_vissza_gomb = findViewById(R.id.nav_vissza_gomb);
         recyclerview_webshopok = findViewById(R.id.recyclerview_webshopok);
         plusz_webshop_gomb = findViewById(R.id.plusz_webshop_gomb);

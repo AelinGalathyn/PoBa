@@ -48,6 +48,7 @@ public class BejelentkezesActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        Log.d("LOGINERR", "run: " + e);
                         Toast.makeText(BejelentkezesActivity.this, "Nem lehetett ellenőrizni a cookie állapotát.", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -62,7 +63,7 @@ public class BejelentkezesActivity extends AppCompatActivity {
                         responseData = response.body().string();
                     } catch (IOException e) {
                         Log.e("LOGIN", "Error reading response body", e);
-                        return; // Exit early if response cannot be read
+                        return;
                     }
                 }
 
@@ -89,9 +90,6 @@ public class BejelentkezesActivity extends AppCompatActivity {
                                     }
                                 }
                                 if (jsonObject.has("username")) {
-                                    // Assuming username presence confirms login
-                                    // Here you can also use AppPreferences if needed for storing relevant data
-                                    Log.i("webshopid: ", AppPreferences.getWebshopId(BejelentkezesActivity.this));
                                     Intent intent = new Intent(BejelentkezesActivity.this, FoActivity.class);
                                     startActivity(intent);
                                     finish();

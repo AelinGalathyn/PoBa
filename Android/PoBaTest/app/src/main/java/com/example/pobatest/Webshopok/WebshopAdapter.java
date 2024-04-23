@@ -46,7 +46,7 @@ public class WebshopAdapter extends RecyclerView.Adapter<WebshopAdapter.WebshopH
     @Override
     public void onBindViewHolder(@NonNull WebshopAdapter.WebshopHolder holder, int position) {
         Webshop webshop = webshopok.get(position);
-        holder.webshop_nev_textview.setText(webshop.nev);
+        holder.webshop_nev_textview.setText(webshop.getName());
         holder.torles_icon.setOnClickListener(v -> {
             showPopup(v, holder.getAdapterPosition());
         });
@@ -72,7 +72,7 @@ public class WebshopAdapter extends RecyclerView.Adapter<WebshopAdapter.WebshopH
         TextView apikey_helye = popupView.findViewById(R.id.apikey_helye);
 
         kerdes_helye.setText("Biztos szeretné törölni?");
-        webshop_nev_helye.setText(webshop.nev);
+        webshop_nev_helye.setText(webshop.getName());
         apikey_helye.setVisibility(View.INVISIBLE);
 
         popup_no_icon.setOnClickListener(view -> ab.dismiss());

@@ -42,4 +42,6 @@ dependencies {
     implementation ("com.squareup.okhttp3:okhttp-urlconnection:4.12.0")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation ("com.google.code.gson:gson:2.10.1")
+    implementation("com.koushikdutta.ion:ion:3.1.0")
+
 }

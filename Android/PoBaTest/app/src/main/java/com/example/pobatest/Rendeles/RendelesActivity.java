@@ -6,15 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.pobatest.ApiCalls.HttpClient;
-import com.example.pobatest.Bejelentkezes.BejelentkezesActivity;
-import com.example.pobatest.Bejelentkezes.EgyszeriBelepesActivity;
 import com.example.pobatest.FoActivity;
 import com.example.pobatest.R;
 
@@ -24,13 +21,11 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
 public class RendelesActivity extends AppCompatActivity {
@@ -45,7 +40,7 @@ public class RendelesActivity extends AppCompatActivity {
         setContentView(R.layout.rendelesek_activity);
 
         Init();
-        new NetworkTask().execute();
+        Rendelesek();
 
         nav_vissza_gomb.setOnClickListener(v -> {
             Intent intent = new Intent(RendelesActivity.this, FoActivity.class);
@@ -60,54 +55,40 @@ public class RendelesActivity extends AppCompatActivity {
         megrendelesLista = new ArrayList<>();
     }
 
-    private class NetworkTask extends AsyncTask<Void, Void, List<Rendeles>> {
-
-        @Override
-        protected List<Rendeles> doInBackground(Void... voids) {
-            // Perform your network operation here
-            // Return the result to onPostExecute()
-            return Rendelesek();
-        }
-
-        @Override
-        protected void onPostExecute(List<Rendeles> result) {
-            recyclerview_rendelesek.setLayoutManager(new LinearLayoutManager(RendelesActivity.this));
-            recyclerview_rendelesek.setAdapter(new RendelesAdapter(getApplicationContext(), result));
-        }
-    }
-
-    public List<Rendeles> Rendelesek(){
+    public void Rendelesek(){
         Callback cb = new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(RendelesActivity.this, "Sikertelen rendelés lekérés.", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                Log.d("RES", "onResponse: " + e + ": " + call);
+                Toast.makeText(RendelesActivity.this, "Sikertelen rendelés lekérés.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            String responseData = response.body().string();
-                            JSONArray jsonArray = new JSONArray(responseData);
-                            for(int i = 0; i < jsonArray.length(); i++){
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                Rendeles rendeles = new Rendeles(jsonObject);
-                                megrendelesLista.add(rendeles);
-                            }
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
+                try {
+                    String responseData = response.body().string();
+                    JSONArray jsonArray = new JSONArray(responseData);
+
+                    for(int i = 0; i < jsonArray.length(); i++){
+
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        Rendeles rendeles = new Rendeles(jsonObject);
+                        megrendelesLista.add(rendeles);
                     }
-                });
+
+                    megrendelesLista.sort(Comparator.comparingLong(b -> b.date.getTime()));
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            recyclerview_rendelesek.setLayoutManager(new LinearLayoutManager(RendelesActivity.this));
+                            recyclerview_rendelesek.setAdapter(new RendelesAdapter(RendelesActivity.this, megrendelesLista));
+                        }
+                    });
+
+                } catch (IOException | JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
         };
 
@@ -115,6 +96,5 @@ public class RendelesActivity extends AppCompatActivity {
         String url = "orders";
         hc.getHttpClient(RendelesActivity.this);
         hc.makeGetHttpRequest(this, url, cb);
-        return megrendelesLista;
     }
 }

@@ -38,16 +38,6 @@ export const fetch_termekek = cache(async(webshopId : number) => {
     return termekek;
 })
 
-export const fetch_termek = cache( async(webshopId : number, termekId : number) => {
-    const response = await axios.get(`http://localhost:3000/item/${webshopId}/${termekId}`, {
-        withCredentials: true,
-    }).catch(e => {throw new Error("Failed to get this single item - " + e)});
-
-    const termek : FItem = response.data;
-
-    return termek;
-})
-
 export const fetch_webshopok = async() => {
     const response = await axios.get(`http://localhost:3000/webshop`, {
         withCredentials: true

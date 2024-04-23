@@ -1,14 +1,56 @@
 package com.example.pobatest;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.pobatest.ApiCalls.HttpClient;
+import com.example.pobatest.Bejelentkezes.BejelentkezesActivity;
+import com.example.pobatest.Bejelentkezes.EgyszeriBelepesActivity;
+import com.example.pobatest.Termek.Termek;
+import com.example.pobatest.Termek.TermekAdapter;
+import com.example.pobatest.Termek.TermekekActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.regex.Pattern;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class JelszoValtoztatasActivity extends AppCompatActivity {
 
+    private EditText regi_jelszo_input;
+    private EditText uj_jelszo_input;
     private ImageView nav_vissza_gomb;
+    private ImageButton password_ok_button;
+    private String regi_jelszo;
+    private String uj_jelszo;
+    private AlertDialog.Builder abBuilder;
+    private AlertDialog ab;
+
+    private RelativeLayout popup_layout;
+    private ImageButton popup_no_icon;
+    private ImageButton popup_yes_icon;
+    private ImageButton popup_ok_icon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +64,86 @@ public class JelszoValtoztatasActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
+        password_ok_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                regi_jelszo = regi_jelszo_input.getText().toString();
+                uj_jelszo = uj_jelszo_input.getText().toString();
+
+                changePassword(regi_jelszo, uj_jelszo);
+            }
+        });
+
+        popup_ok_icon.setOnClickListener(v -> ab.dismiss());
+
+    }
+
+    private void changePassword(String regiJelszo, String ujJelszo) {
+        String regex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$";
+        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+
+        if (pattern.matcher(ujJelszo).find() && !regiJelszo.isEmpty()) {
+            ChangePasswordBackend();
+        }
+        else {
+            ab.show();
+        }
     }
 
     public void Init() {
         nav_vissza_gomb = findViewById(R.id.nav_vissza_gomb);
+        regi_jelszo_input = findViewById(R.id.regi_jelszo_input);
+        uj_jelszo_input = findViewById(R.id.uj_jelszo_input);
+        password_ok_button = findViewById(R.id.password_ok_button);
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View v = inflater.inflate(R.layout.apikulcs_popup_activity, null);
+
+        TextView kerdes_helye = v.findViewById(R.id.kerdes_helye);
+        TextView webshop_nev_helye = v.findViewById(R.id.webshop_nev_helye);
+        TextView apikey_helye = v.findViewById(R.id.apikey_helye);
+        kerdes_helye.setText("Helytelen jelszó formátum");
+        webshop_nev_helye.setText("A jelszónak legalább 1 nagybetűt [A-Z], 1 számot [0-9] és egy speciális karaktert [#?!@$ %^&*-] tartalmaznia kell.");
+        apikey_helye.setText("");
+
+        abBuilder = new AlertDialog.Builder(this);
+        ab = abBuilder.setView(v).create();
+        ab.getWindow().setBackgroundDrawableResource(R.drawable.custom_popup);
+
+        popup_layout = v.findViewById(R.id.popup_layout);
+        popup_no_icon = popup_layout.findViewById(R.id.popup_no_icon);
+        popup_yes_icon = popup_layout.findViewById(R.id.popup_yes_icon);
+        popup_ok_icon = popup_layout.findViewById(R.id.popup_ok_icon);
+
+        popup_no_icon.setVisibility(View.GONE);
+        popup_yes_icon.setVisibility(View.GONE);
+        popup_ok_icon.setVisibility(View.VISIBLE);
+    }
+
+    public void ChangePasswordBackend() {
+        Callback cb = new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Toast.makeText(JelszoValtoztatasActivity.this, "Sikertelen jelszó változtatás.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
+                if (response.code() == 201) {
+                    Intent intent = new Intent(JelszoValtoztatasActivity.this, EgyszeriBelepesActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    Log.d("PASSWORD", "onResponse: " + response);
+                }
+            }
+        };
+
+        HttpClient hc = new HttpClient();
+        String url = "changePassword";
+        hc.getHttpClient(JelszoValtoztatasActivity.this);
+        hc.changePassword(this, url, cb, regi_jelszo, uj_jelszo);
     }
 }

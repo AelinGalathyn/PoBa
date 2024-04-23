@@ -67,7 +67,7 @@
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="75dp"
                         android:id="@+id/termek_kep_helye"
                         android:src="@drawable/ideiglenes_termek_kep"
                         android:layout_marginTop="25dp"

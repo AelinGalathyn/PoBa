@@ -6,43 +6,71 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 import com.example.pobatest.R;
+import com.example.pobatest.Rendeles.RendelesTermek;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class Termek implements Parcelable {
-    String termekId;
-    String termekNeve;
-    int image;
-    int darab_imge;
-    int darabSzam;
-    ArrayList<String> adatok;
+    public Integer id;
+    public String sku;
 
-    public Termek(String termekId, String termekNeve, int darabSzam) {
-        this.termekId = termekId;
-        this.termekNeve = termekNeve;
-        this.image = R.drawable.ideiglenes_termek_kep;
+    public String name;
+    public Double qty;
+    public String unit;
+    public Integer status;
+    public List<String> cat_name;
+    public String url;
+    public String pic_url;
+    public Double price;
+    public Boolean packaged;
+    public Integer mennyiseg_img;
 
-        if (darabSzam == 0) {
-            this.darab_imge = R.drawable.elfogyott_icon;
-        }
-        else if (darabSzam <= 5 && darabSzam > 0){
-            this.darab_imge = R.drawable.kifogyoban_icon;
-        }
-        else {
-            this.darab_imge = 0;
-        }
+    public Termek(JSONObject object){
 
-        this.darabSzam = darabSzam;
-        adatok = new ArrayList<>();
+        try {
+            id = object.getInt("id");
+            sku = object.getString("sku");
+            name = object.getString("name");
+            qty = object.getDouble("qty");
+            unit = object.getString("unit");
+            status = object.getInt("status");
+
+            catNameFeltolt(object);
+
+            url = object.getString("url");
+            pic_url = object.getString("pic_url");
+            price = object.getDouble("price");
+            packaged = object.getBoolean("packaged");
+
+            mennyisegAlapjanIcon();
+
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     protected Termek(Parcel in) {
-        termekId = in.readString();
-        termekNeve = in.readString();
-        image = in.readInt();
-        darab_imge = in.readInt();
-        darabSzam = in.readInt();
-        adatok = in.createStringArrayList();
+        id = (in.readByte() == 0) ? null : in.readInt();
+        sku = in.readString();
+        name = in.readString();
+        qty = (in.readByte() == 0) ? null : in.readDouble();
+        unit = in.readString();
+        status = (in.readByte() == 0) ? null : in.readInt();
+        cat_name = in.createStringArrayList();
+        url = in.readString();
+        pic_url = in.readString();
+        price = (in.readByte() == 0) ? null : in.readDouble();
+        byte tmpPackaged = in.readByte();
+        packaged = (tmpPackaged == 0) ? null : (tmpPackaged == 1);
+        mennyiseg_img = (in.readByte() == 0) ? null : in.readInt();
     }
 
     public static final Creator<Termek> CREATOR = new Creator<Termek>() {
@@ -57,38 +85,6 @@ public class Termek implements Parcelable {
         }
     };
 
-    public String getTermekId() {
-        return termekId;
-    }
-
-    public String getTermekNeve() {
-        return termekNeve;
-    }
-
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
-        this.image = image;
-    }
-
-    public int getDarabSzam() {
-        return darabSzam;
-    }
-
-    public ArrayList<String> getAdatok() {
-        return adatok;
-    }
-
-    public void setAdatok(ArrayList<String> adatok) {
-        this.adatok = adatok;
-    }
-
-    public void setDarabSzam(int darabSzam) {
-        this.darabSzam = darabSzam;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -96,11 +92,38 @@ public class Termek implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeString(this.termekId);
-        dest.writeString(this.termekNeve);
-        dest.writeInt(this.image);
-        dest.writeInt(this.darab_imge);
-        dest.writeInt(this.darabSzam);
-        dest.writeStringList(this.adatok);
+        dest.writeByte((id == null) ? (byte) 0 : (byte) 1); if (id != null) dest.writeInt(id);
+        dest.writeString(sku);
+        dest.writeString(name);
+        dest.writeByte((qty == null) ? (byte) 0 : (byte) 1); if (qty != null) dest.writeDouble(qty);
+        dest.writeString(unit);
+        dest.writeByte((status == null) ? (byte) 0 : (byte) 1); if (status != null) dest.writeInt(status);
+        dest.writeStringList(cat_name);
+        dest.writeString(url);
+        dest.writeString(pic_url);
+        dest.writeByte((price == null) ? (byte) 0 : (byte) 1); if (price != null) dest.writeDouble(price);
+        dest.writeByte((byte) (packaged == null ? 0 : packaged ? 1 : 2));
+        dest.writeByte((mennyiseg_img == null) ? (byte) 0 : (byte) 1); if (mennyiseg_img != null) dest.writeInt(mennyiseg_img);
+    }
+
+    public void mennyisegAlapjanIcon() {
+        mennyiseg_img = (qty > 0 && qty <= 10) ?
+                R.drawable.kifogyoban_icon :
+                (qty == 0) ? R.drawable.elfogyott_icon :
+                0;
+
+    }
+
+    public void catNameFeltolt(JSONObject object) {
+        cat_name = new ArrayList<>();
+        try {
+            JSONArray cat_namejson = object.getJSONArray("cat_name");
+            for (int i = 0; i < cat_namejson.length(); i++) {
+                String cat = cat_namejson.getString(i);
+                cat_name.add(cat);
+            }
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

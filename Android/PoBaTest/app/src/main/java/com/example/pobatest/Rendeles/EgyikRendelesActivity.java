@@ -1,8 +1,10 @@
 package com.example.pobatest.Rendeles;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.ImageView;
@@ -45,15 +47,15 @@ public class EgyikRendelesActivity extends AppCompatActivity {
         rendeles_szam_textView.setText(rendeles.orderid);
         rendeles_reszletek_textview.setText(rendelesReszletekString());
         rendeles_reszletek_textview.setMovementMethod(new ScrollingMovementMethod());
-        kiszallito_icon.setImageResource(rendeles.image);
         rendeloi_adatok_textview.setText(rendeles.c_name);
+        kiszallito_icon.setImageResource(rendeles.image);
     }
 
     public String rendelesReszletekString() {
         String szoveg = "";
 
         for (RendelesTermek item : rendeles.termekList) {
-            szoveg += rendeles.termekList.indexOf(item) + 1 + ". " + item.getName() + " " + item.getQty() + item.getUnit() + "\n";
+            szoveg += rendeles.termekList.indexOf(item) + 1 + ". " + item.name + " " + item.qty + item.unit + "\n";
         }
 
         return szoveg;

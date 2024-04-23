@@ -2,6 +2,9 @@ package com.example.pobatest.Rendeles;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pobatest.R;
@@ -48,6 +52,7 @@ public class RendelesAdapter extends RecyclerView.Adapter<RendelesAdapter.Rendel
     @Override
     public void onBindViewHolder(@NonNull RendelesHolder holder, int position) {
         Rendeles rendeles = rendelesek.get(position);
+        Log.d("RENDELKEP", "onBindViewHolder: " + rendeles.image);
         holder.rendeles_szam_textView.setText(rendeles.orderid);
         holder.futar_logo_helye.setImageResource(rendeles.image);
 

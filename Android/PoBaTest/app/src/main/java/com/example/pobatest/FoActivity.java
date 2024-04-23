@@ -1,5 +1,6 @@
 package com.example.pobatest;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -7,21 +8,36 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.PowerManager;
-import android.provider.Settings;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.example.pobatest.ApiCalls.AppPreferences;
+import com.example.pobatest.ApiCalls.HttpClient;
 import com.example.pobatest.Ertesites.ErtesitesekActivity;
 import com.example.pobatest.Rendeles.RendelesActivity;
 import com.example.pobatest.Termek.TermekekActivity;
+import com.example.pobatest.Webshopok.Webshop;
 import com.google.android.material.navigation.NavigationView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class FoActivity extends AppCompatActivity{
 
@@ -34,12 +50,16 @@ public class FoActivity extends AppCompatActivity{
     private ImageView nav_profil_gomb;
     private DrawerLayout hamburger_drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
+    private List<Webshop> webshopok;
+    private int selectedSpinnerPosition = 0;
+    private static final String SPINNER_POSITION_KEY = "SpinnerPosition";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fo_activity);
         
-        Init();
+        Init(savedInstanceState);
+        getAllWebshops();
 
         rendelesek_card.setOnClickListener(v -> {
             Intent intent = new Intent(FoActivity.this, RendelesActivity.class);
@@ -74,7 +94,7 @@ public class FoActivity extends AppCompatActivity{
         });
     }
 
-    public void Init() {
+    public void Init(Bundle savedInstanceState) {
         rendelesek_card = findViewById(R.id.rendelesek_card);
         termekek_card = findViewById(R.id.termekek_card);
         nav_hamburger_menu = findViewById(R.id.nav_hamburger_menu);
@@ -88,9 +108,9 @@ public class FoActivity extends AppCompatActivity{
         hamburger_drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.Webshopok, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        hamburger_webshopHely.setAdapter(adapter);
+        if (savedInstanceState != null) {
+            selectedSpinnerPosition = savedInstanceState.getInt(SPINNER_POSITION_KEY, 0);
+        }
     }
 
     public void menuOnClick(MenuItem item) {
@@ -125,4 +145,74 @@ public class FoActivity extends AppCompatActivity{
         startActivity(intent);
         finish();
     }
+
+    private void getAllWebshops() {
+        Callback cb = new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.d("RES", "onResponse: " + e + ": " + call);
+                Toast.makeText(FoActivity.this, "Sikertelen webshopok lekérés.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                try {
+                    String responseData = response.body().string();
+                    JSONArray jsonArray = new JSONArray(responseData);
+
+                    for(int i = 0; i < jsonArray.length(); i++){
+
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        Webshop webshop = new Webshop(jsonObject);
+                        webshopok.add(webshop);
+                    }
+
+                    webshopok.sort(Comparator.comparingInt((Webshop obj) -> obj.webshopid));
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (selectedSpinnerPosition == 0) {
+                                Webshop aktualis = webshopok.stream()
+                                        .filter(item -> item.webshopid == Integer.parseInt(AppPreferences.getWebshopId(FoActivity.this)))
+                                        .findFirst()
+                                        .orElse(null);
+                                selectedSpinnerPosition = webshopok.indexOf(aktualis);
+                            }
+                            String[] webshopNevek = webshopok.stream().map(Webshop::getName).toArray(String[]::new);
+                            ArrayAdapter<String> adapter = new ArrayAdapter<>(FoActivity.this, android.R.layout.simple_spinner_item, webshopNevek);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                            adapter.setNotifyOnChange(true);
+                            hamburger_webshopHely.setAdapter(adapter);
+                            hamburger_webshopHely.setSelection(selectedSpinnerPosition);
+                            hamburger_webshopHely.setOnItemSelectedListener(SpinnerHandleOnclick);
+                        }
+                    });
+
+                } catch (IOException | JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+
+        webshopok = new ArrayList<>();
+        HttpClient hc = new HttpClient();
+        String url = "webshop";
+        hc.getHttpClient(FoActivity.this);
+        hc.getActions(this, url, cb);
+    }
+
+    public AdapterView.OnItemSelectedListener SpinnerHandleOnclick = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            String clickedWebshopName = (String) parent.getItemAtPosition(position);
+            Webshop clickedWebshop = webshopok.stream().filter(obj -> obj.getName().equals(clickedWebshopName)).findFirst().orElse(null);
+            if (clickedWebshop != null) {
+                AppPreferences.setWebshopId(FoActivity.this, Integer.toString(clickedWebshop.webshopid));
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {}
+    };
 }

@@ -25,7 +25,6 @@ public class ApikulcsActivity extends AppCompatActivity {
     private RelativeLayout popup_layout;
     private ImageButton popup_no_icon;
     private ImageButton popup_yes_icon;
-    private WebShopokActivity wb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +45,7 @@ public class ApikulcsActivity extends AppCompatActivity {
 
         popup_yes_icon.setOnClickListener(v -> {
             Intent intent = new Intent(this, WebShopokActivity.class);
-            intent.putExtra("webshop", new Webshop("webshop4"));
+            intent.putExtra("webshop", "webshop4");
             startActivity(intent);
             finish();
         });
@@ -55,7 +54,6 @@ public class ApikulcsActivity extends AppCompatActivity {
     public void Init() {
         nav_vissza_gomb = findViewById(R.id.nav_vissza_gomb);
         apikulcs_ok_button = findViewById(R.id.apikulcs_ok_button);
-        wb = new WebShopokActivity();
 
         LayoutInflater inflater = this.getLayoutInflater();
         View v = inflater.inflate(R.layout.apikulcs_popup_activity, null);

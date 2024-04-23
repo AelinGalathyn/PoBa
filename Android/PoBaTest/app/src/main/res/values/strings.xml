@@ -1,14 +1,5 @@
 <resources>
     <string name="app_name">PoBaTest</string>
-
-    <string-array name="Webshopok">
-        <item>C</item>
-        <item>C++</item>
-        <item>Java</item>
-        <item>JavaScript</item>
-        <item>VisualBasic</item>
-    </string-array>
-
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
 </resources>

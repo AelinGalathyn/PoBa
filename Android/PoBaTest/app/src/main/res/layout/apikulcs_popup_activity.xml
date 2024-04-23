@@ -83,5 +83,17 @@
         android:id="@+id/popup_yes_icon"
         />
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ok_gomb"
+        android:background="@color/menu_text_transparent"
+        android:layout_below="@+id/apikey_helye"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:id="@+id/popup_ok_icon"
+        android:visibility="gone"
+        />
+
 </RelativeLayout>
 

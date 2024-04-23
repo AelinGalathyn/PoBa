@@ -24,7 +24,7 @@ export class Item {
   packaged: boolean;
 }
 
-export class InputItemDto{
+export class InputItemDto {
 
   sku: string;
 
