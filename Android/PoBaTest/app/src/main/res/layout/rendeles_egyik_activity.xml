@@ -98,6 +98,7 @@
                     android:paddingTop="20dp"
                     android:layout_below="@+id/rendeloi_adatok_textview"
                     android:isScrollContainer="true"
+                    android:paddingHorizontal="15dp"
                     />
 
             </RelativeLayout>

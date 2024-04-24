@@ -17,9 +17,7 @@ import java.util.List;
 public class WebShopokActivity extends AppCompatActivity {
 
     private ImageView nav_vissza_gomb;
-    private RecyclerView recyclerview_webshopok;
     private ImageView plusz_webshop_gomb;
-    private List<Webshop> webshop_lista;
 
 
     @Override
@@ -44,9 +42,9 @@ public class WebShopokActivity extends AppCompatActivity {
 
     public void Init() {
         nav_vissza_gomb = findViewById(R.id.nav_vissza_gomb);
-        recyclerview_webshopok = findViewById(R.id.recyclerview_webshopok);
+        RecyclerView recyclerview_webshopok = findViewById(R.id.recyclerview_webshopok);
         plusz_webshop_gomb = findViewById(R.id.plusz_webshop_gomb);
-        webshop_lista = AppPreferences.getWebshopok(WebShopokActivity.this);
+        List<Webshop> webshop_lista = AppPreferences.getWebshops(WebShopokActivity.this);
 
         recyclerview_webshopok.setLayoutManager(new LinearLayoutManager(this));
         recyclerview_webshopok.setAdapter(new WebshopAdapter(this, webshop_lista));

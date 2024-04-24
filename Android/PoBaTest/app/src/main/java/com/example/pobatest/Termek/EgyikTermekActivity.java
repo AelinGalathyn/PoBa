@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -106,9 +107,9 @@ public class EgyikTermekActivity extends AppCompatActivity {
     public String termekReszletekString() {
         String szoveg = "";
 
-        szoveg += termek.name + "\n";
+        szoveg += "Kategóriák: <hr><br>" + String.join(", ", termek.cat_name.subList(0, 5));
 
-        return szoveg;
+        return Html.fromHtml(szoveg, Html.FROM_HTML_MODE_LEGACY).toString();
     }
 
     private void setTermekKepHelye() {
@@ -122,12 +123,11 @@ public class EgyikTermekActivity extends AppCompatActivity {
         Callback cb = new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.d("FAILURE", "onFailure: " + call.request());
+                Toast.makeText(EgyikTermekActivity.this, "A kiválasztott termék lekérése sikertelen.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) {
-                Log.d("MODIFY", "onResponse: " + response);
                 termek.qty = newQty;
                 termek.mennyisegAlapjanIcon();
 

@@ -17,6 +17,20 @@
         android:id="@+id/nav_profil"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:textSize="20sp"
+        android:layout_alignBottom="@+id/nav_profil"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="90dp"
+        android:ellipsize="middle"
+        android:textColor="@color/cardview_light_background"
+        android:textStyle="bold"
+        android:id="@+id/hamburger_username"
+        />
+
     <Spinner
         android:id="@+id/hamburger_webshopHely"
         android:layout_width="wrap_content"

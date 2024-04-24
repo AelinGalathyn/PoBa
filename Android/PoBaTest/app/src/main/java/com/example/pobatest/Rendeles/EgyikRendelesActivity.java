@@ -1,10 +1,8 @@
 package com.example.pobatest.Rendeles;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.ImageView;
@@ -15,10 +13,6 @@ import com.example.pobatest.R;
 public class EgyikRendelesActivity extends AppCompatActivity {
 
     private ImageView nav_vissza_gomb;
-    private TextView rendeles_szam_textView;
-    private TextView rendeles_reszletek_textview;
-    private ImageView kiszallito_icon;
-    private TextView rendeloi_adatok_textview;
     private Rendeles rendeles;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +33,10 @@ public class EgyikRendelesActivity extends AppCompatActivity {
         rendeles = intent.getParcelableExtra("rendeles");
 
         nav_vissza_gomb = findViewById(R.id.nav_vissza_gomb);
-        rendeles_reszletek_textview = findViewById(R.id.rendeles_reszletek_textview);
-        rendeles_szam_textView = findViewById(R.id.rendeles_szam_textView);
-        kiszallito_icon = findViewById(R.id.kiszallito_icon);
-        rendeloi_adatok_textview = findViewById(R.id.rendeloi_adatok_textview);
+        TextView rendeles_reszletek_textview = findViewById(R.id.rendeles_reszletek_textview);
+        TextView rendeles_szam_textView = findViewById(R.id.rendeles_szam_textView);
+        ImageView kiszallito_icon = findViewById(R.id.kiszallito_icon);
+        TextView rendeloi_adatok_textview = findViewById(R.id.rendeloi_adatok_textview);
 
         rendeles_szam_textView.setText(rendeles.orderid);
         rendeles_reszletek_textview.setText(rendelesReszletekString());
@@ -52,12 +46,12 @@ public class EgyikRendelesActivity extends AppCompatActivity {
     }
 
     public String rendelesReszletekString() {
-        String szoveg = "";
+        StringBuilder szoveg = new StringBuilder();
 
         for (RendelesTermek item : rendeles.termekList) {
-            szoveg += rendeles.termekList.indexOf(item) + 1 + ". " + item.name + " " + item.qty + item.unit + "\n";
+            szoveg.append(rendeles.termekList.indexOf(item) + 1).append(". ").append(item.name).append(" ").append(item.qty).append(item.unit).append("\n");
         }
 
-        return szoveg;
+        return szoveg.toString();
     }
 }

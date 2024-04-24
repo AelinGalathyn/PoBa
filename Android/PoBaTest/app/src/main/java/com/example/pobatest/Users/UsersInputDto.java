@@ -1,8 +1,8 @@
 package com.example.pobatest.Users;
 
 public class UsersInputDto {
-    private String username;
-    private String password;
+    private final String username;
+    private final String password;
 
     public UsersInputDto(String username, String password) {
         this.username = username;
@@ -13,15 +13,7 @@ public class UsersInputDto {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

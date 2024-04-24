@@ -1,22 +1,14 @@
 package com.example.pobatest.Rendeles;
 
-import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
-
-import androidx.core.content.res.ResourcesCompat;
 
 import com.example.pobatest.R;
-import com.example.pobatest.Rendeles.RendelesTermek;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

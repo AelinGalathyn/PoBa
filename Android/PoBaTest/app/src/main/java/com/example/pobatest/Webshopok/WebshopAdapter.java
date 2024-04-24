@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -83,7 +84,7 @@ public class WebshopAdapter extends RecyclerView.Adapter<WebshopAdapter.WebshopH
         View popupView = LayoutInflater.from(v.getContext()).inflate(R.layout.apikulcs_popup_activity, null);
         AlertDialog.Builder abBuilder = new AlertDialog.Builder(v.getContext());
         AlertDialog ab = abBuilder.setView(popupView).create();
-        ab.getWindow().setBackgroundDrawableResource(R.drawable.custom_popup);
+        Objects.requireNonNull(ab.getWindow()).setBackgroundDrawableResource(R.drawable.custom_popup);
 
         ImageButton popup_no_icon = (ImageButton) popupView.findViewById(R.id.popup_no_icon);
         ImageButton popup_yes_icon = (ImageButton) popupView.findViewById(R.id.popup_yes_icon);
@@ -91,7 +92,7 @@ public class WebshopAdapter extends RecyclerView.Adapter<WebshopAdapter.WebshopH
         TextView webshop_nev_helye = popupView.findViewById(R.id.webshop_nev_helye);
         TextView apikey_helye = popupView.findViewById(R.id.apikey_helye);
 
-        kerdes_helye.setText("Biztos szeretné törölni?");
+        kerdes_helye.setText(R.string.webshop_torles_kerdes);
         webshop_nev_helye.setText(webshop.getName());
         apikey_helye.setVisibility(View.INVISIBLE);
 

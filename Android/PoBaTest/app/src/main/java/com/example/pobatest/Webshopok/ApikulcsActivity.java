@@ -1,37 +1,24 @@
 package com.example.pobatest.Webshopok;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pobatest.ApiCalls.AppPreferences;
 import com.example.pobatest.ApiCalls.HttpClient;
 import com.example.pobatest.FoActivity;
 import com.example.pobatest.R;
-import com.example.pobatest.Webshopok.WebShopokActivity;
-import com.example.pobatest.Webshopok.Webshop;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -40,15 +27,8 @@ import okhttp3.Response;
 public class ApikulcsActivity extends AppCompatActivity {
     private ImageView nav_vissza_gomb;
     private ImageButton apikulcs_ok_button;
-    private AlertDialog.Builder abBuilder;
-    private AlertDialog ab;
-    private RelativeLayout popup_layout;
-    private ImageButton popup_no_icon;
-    private ImageButton popup_yes_icon;
-    private Webshop addedWebshop;
     private String api_key;
     private EditText apikulcs_input;
-    private List<Webshop> webshopok;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +69,9 @@ public class ApikulcsActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) {
                 try {
-                    String webshopid = response.body().string();
+                    String webshopid = Objects.requireNonNull(response.body()).string();
+
+                    response.close();
 
                     AppPreferences.setWebshopId(ApikulcsActivity.this, webshopid);
                     startActivity(new Intent(ApikulcsActivity.this, FoActivity.class));

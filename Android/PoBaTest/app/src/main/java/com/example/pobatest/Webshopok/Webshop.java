@@ -10,7 +10,7 @@ import org.json.JSONObject;
 
 public class Webshop implements Parcelable {
     public Integer webshopid;
-    private String name;
+    private final String name;
 
     protected Webshop(Parcel in) {
         webshopid = (in.readByte() == 0) ? null : in.readInt();

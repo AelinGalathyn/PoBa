@@ -1,15 +1,15 @@
 package com.example.pobatest.ApiCalls;
 
 import android.content.Context;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.example.pobatest.Users.UsersInputDto;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 import okhttp3.Callback;
 import okhttp3.Cookie;
 import okhttp3.CookieJar;
@@ -20,8 +20,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 public class HttpClient {
-    private final String PREF_NAME = "Cookies";
-    public String URL = "http://192.168.69.67:3000/";
+    public String URL = "http://192.168.90.67:3000/";
+    public RequestBody emptyBody = RequestBody.create(new byte[0]);
     public OkHttpClient getHttpClient(Context context) {
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
         final List<Cookie> storedCookies = AppPreferences.loadCookies(context);
@@ -30,13 +30,14 @@ public class HttpClient {
             private final List<Cookie> cache = new ArrayList<>();
 
             @Override
-            public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
+            public void saveFromResponse(@NonNull HttpUrl url, @NonNull List<Cookie> cookies) {
                 cache.addAll(cookies);
                 AppPreferences.saveCookies(context, cookies);
             }
 
+            @NonNull
             @Override
-            public List<Cookie> loadForRequest(HttpUrl url) {
+            public List<Cookie> loadForRequest(@NonNull HttpUrl url) {
                 return cache.isEmpty() ? storedCookies : cache;
             }
         });
@@ -46,12 +47,11 @@ public class HttpClient {
 
 
     public void makeLoginHttpRequest(UsersInputDto user, Context context, Callback callback) {
-        HttpUrl.Builder urlBuilder = HttpUrl.parse(URL + "login").newBuilder();
+        HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse(URL + "login")).newBuilder();
         urlBuilder.addQueryParameter("username", user.getUsername());
         urlBuilder.addQueryParameter("password", user.getPassword());
 
         String fullurl = urlBuilder.build().toString();
-        RequestBody emptyBody = RequestBody.create(new byte[0]);
 
         OkHttpClient httpClient = getHttpClient(context);
         Request request = new Request.Builder()
@@ -84,18 +84,18 @@ public class HttpClient {
         OkHttpClient httpClient = getHttpClient(context);
         String webshopId = AppPreferences.getWebshopId(context);
 
-        String finalUrl = HttpUrl.parse(URL + url + "/" + webshopId + "/setStock")
+        String finalUrl = Objects.requireNonNull(HttpUrl.parse(URL + url + "/" + webshopId + "/setStock"))
                 .newBuilder()
                 .addQueryParameter("sku", sku)
                 .addQueryParameter("stock", stock.toString())
                 .build()
                 .toString();
 
-        RequestBody requestBody = new FormBody.Builder().build();
+
 
         Request request = new Request.Builder()
                 .url(finalUrl)
-                .post(requestBody)
+                .post(emptyBody)
                 .build();
 
         httpClient.newCall(request).enqueue(callback);
@@ -114,7 +114,7 @@ public class HttpClient {
     public void changePassword(Context context, String url, okhttp3.Callback callback, String opw, String npw) {
         OkHttpClient httpClient = getHttpClient(context);
 
-        String finalUrl = HttpUrl.parse(URL + url)
+        String finalUrl = Objects.requireNonNull(HttpUrl.parse(URL + url))
                 .newBuilder()
                 .addQueryParameter("opw", opw)
                 .addQueryParameter("npw", npw)
@@ -130,7 +130,7 @@ public class HttpClient {
     public void deleteWebshop(Context context, String url, okhttp3.Callback callback, String webshopid) {
         OkHttpClient httpClient = getHttpClient(context);
 
-        String finalUrl = HttpUrl.parse(URL + url)
+        String finalUrl = Objects.requireNonNull(HttpUrl.parse(URL + url))
                 .newBuilder()
                 .addQueryParameter("webshopid", webshopid)
                 .build()
@@ -147,7 +147,7 @@ public class HttpClient {
     public void addWebshop(Context context, String url, okhttp3.Callback callback, String api_key) {
         OkHttpClient httpClient = getHttpClient(context);
 
-        String finalUrl = HttpUrl.parse(URL + url)
+        String finalUrl = Objects.requireNonNull(HttpUrl.parse(URL + url))
                 .newBuilder()
                 .addQueryParameter("api_key", api_key)
                 .build()
@@ -162,6 +162,5 @@ public class HttpClient {
 
         httpClient.newCall(request).enqueue(callback);
     }
-
 }
 

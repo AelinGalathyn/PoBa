@@ -20,17 +20,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
 public class EgyszeriBelepesActivity extends AppCompatActivity {
     private ImageButton egyszeri_belepes_gomb;
     private EditText felhasznalonev_input;
     private EditText jelszo_input;
-    private OkHttpClient.Builder okBuild;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class EgyszeriBelepesActivity extends AppCompatActivity {
         Init();
 
         egyszeri_belepes_gomb.setOnClickListener(view -> {
-            String username = felhasznalonev_input.getText().toString();
+            username = felhasznalonev_input.getText().toString();
             String password = jelszo_input.getText().toString();
 
             if (!username.isEmpty() || !password.isEmpty()) {
@@ -60,41 +60,32 @@ public class EgyszeriBelepesActivity extends AppCompatActivity {
         Callback cb = new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(EgyszeriBelepesActivity.this, "Ilyen fiók nem létezik.", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                runOnUiThread(() -> Toast.makeText(EgyszeriBelepesActivity.this, "Ilyen fiók nem létezik.", Toast.LENGTH_SHORT).show());
             }
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                String responseData = response.body().string();  // Move outside the UI thread to avoid blocking it.
-                response.close(); // Ensure to close the response after extracting the data.
+                String responseData = Objects.requireNonNull(response.body()).string();
+                response.close();
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (response.code() == 201) {
-                            Toast.makeText(EgyszeriBelepesActivity.this, "Sikeres belépés.", Toast.LENGTH_SHORT).show();
-
-                            try {
-                                JSONObject jsonObject = new JSONObject(responseData);
-                                int webshopId = jsonObject.getInt("webshopid");
-                                AppPreferences.setWebshopId(EgyszeriBelepesActivity.this, Integer.toString(webshopId));
-                            } catch (JSONException e) {
-                                Log.e("LOGIN", "JSON parsing error: " + e.getMessage());
-                                Toast.makeText(EgyszeriBelepesActivity.this, "Hiba a válasz feldolgozásakor.", Toast.LENGTH_SHORT).show();
-                            }
-
-                            Intent intent = new Intent(EgyszeriBelepesActivity.this, FoActivity.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            Log.e("LOGIN", "Login failed: " + response);
-                            Toast.makeText(EgyszeriBelepesActivity.this, "Sikertelen belépés, próbálja újra.", Toast.LENGTH_LONG).show();
+                runOnUiThread(() -> {
+                    if (response.code() == 201) {
+                        Toast.makeText(EgyszeriBelepesActivity.this, "Sikeres belépés.", Toast.LENGTH_SHORT).show();
+                        AppPreferences.setUsername(EgyszeriBelepesActivity.this, username);
+                        try {
+                            JSONObject jsonObject = new JSONObject(responseData);
+                            int webshopId = jsonObject.getInt("webshopid");
+                            AppPreferences.setWebshopId(EgyszeriBelepesActivity.this, Integer.toString(webshopId));
+                        } catch (JSONException e) {
+                            Toast.makeText(EgyszeriBelepesActivity.this, "Hiba a válasz feldolgozásakor.", Toast.LENGTH_SHORT).show();
                         }
+
+                        Intent intent = new Intent(EgyszeriBelepesActivity.this, FoActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Log.e("LOGIN", "Login failed: " + response);
+                        Toast.makeText(EgyszeriBelepesActivity.this, "Sikertelen belépés, próbálja újra.", Toast.LENGTH_LONG).show();
                     }
                 });
             }

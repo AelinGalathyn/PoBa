@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -66,8 +67,10 @@ public class RendelesActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 try {
-                    String responseData = response.body().string();
+                    String responseData = Objects.requireNonNull(response.body()).string();
                     JSONArray jsonArray = new JSONArray(responseData);
+
+                    response.close();
 
                     for(int i = 0; i < jsonArray.length(); i++){
 
@@ -78,12 +81,9 @@ public class RendelesActivity extends AppCompatActivity {
 
                     megrendelesLista.sort(Comparator.comparingLong(b -> b.date.getTime()));
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            recyclerview_rendelesek.setLayoutManager(new LinearLayoutManager(RendelesActivity.this));
-                            recyclerview_rendelesek.setAdapter(new RendelesAdapter(RendelesActivity.this, megrendelesLista));
-                        }
+                    runOnUiThread(() -> {
+                        recyclerview_rendelesek.setLayoutManager(new LinearLayoutManager(RendelesActivity.this));
+                        recyclerview_rendelesek.setAdapter(new RendelesAdapter(RendelesActivity.this, megrendelesLista));
                     });
 
                 } catch (IOException | JSONException e) {

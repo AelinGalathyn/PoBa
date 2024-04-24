@@ -3,14 +3,12 @@ package com.example.pobatest;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -18,18 +16,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pobatest.ApiCalls.AppPreferences;
 import com.example.pobatest.ApiCalls.HttpClient;
-import com.example.pobatest.Bejelentkezes.BejelentkezesActivity;
 import com.example.pobatest.Bejelentkezes.EgyszeriBelepesActivity;
-import com.example.pobatest.Termek.Termek;
-import com.example.pobatest.Termek.TermekAdapter;
-import com.example.pobatest.Termek.TermekekActivity;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import okhttp3.Call;
@@ -44,12 +36,7 @@ public class JelszoValtoztatasActivity extends AppCompatActivity {
     private ImageButton password_ok_button;
     private String regi_jelszo;
     private String uj_jelszo;
-    private AlertDialog.Builder abBuilder;
     private AlertDialog ab;
-
-    private RelativeLayout popup_layout;
-    private ImageButton popup_no_icon;
-    private ImageButton popup_yes_icon;
     private ImageButton popup_ok_icon;
 
     @Override
@@ -103,17 +90,17 @@ public class JelszoValtoztatasActivity extends AppCompatActivity {
         TextView kerdes_helye = v.findViewById(R.id.kerdes_helye);
         TextView webshop_nev_helye = v.findViewById(R.id.webshop_nev_helye);
         TextView apikey_helye = v.findViewById(R.id.apikey_helye);
-        kerdes_helye.setText("Helytelen jelszó formátum");
-        webshop_nev_helye.setText("A jelszónak legalább 1 nagybetűt [A-Z], 1 számot [0-9] és egy speciális karaktert [#?!@$ %^&*-] tartalmaznia kell.");
+        kerdes_helye.setText(R.string.helytelen_jelszo_felirat);
+        webshop_nev_helye.setText(R.string.jelszo_regex_felszolitas);
         apikey_helye.setText("");
 
-        abBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder abBuilder = new AlertDialog.Builder(this);
         ab = abBuilder.setView(v).create();
-        ab.getWindow().setBackgroundDrawableResource(R.drawable.custom_popup);
+        Objects.requireNonNull(ab.getWindow()).setBackgroundDrawableResource(R.drawable.custom_popup);
 
-        popup_layout = v.findViewById(R.id.popup_layout);
-        popup_no_icon = popup_layout.findViewById(R.id.popup_no_icon);
-        popup_yes_icon = popup_layout.findViewById(R.id.popup_yes_icon);
+        RelativeLayout popup_layout = v.findViewById(R.id.popup_layout);
+        ImageButton popup_no_icon = popup_layout.findViewById(R.id.popup_no_icon);
+        ImageButton popup_yes_icon = popup_layout.findViewById(R.id.popup_yes_icon);
         popup_ok_icon = popup_layout.findViewById(R.id.popup_ok_icon);
 
         popup_no_icon.setVisibility(View.GONE);

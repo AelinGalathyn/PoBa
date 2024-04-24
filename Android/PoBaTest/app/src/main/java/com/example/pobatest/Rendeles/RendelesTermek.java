@@ -3,12 +3,15 @@ package com.example.pobatest.Rendeles;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class RendelesTermek implements Parcelable {
     public Integer id;
     public String sku;
+
     public String name;
     public String unit;
     public Double qty;
@@ -30,62 +33,26 @@ public class RendelesTermek implements Parcelable {
     }
 
     protected RendelesTermek(Parcel in) {
-        if (in.readByte() == 0) {
-            id = null;
-        } else {
-            id = in.readInt();
-        }
+        id = (in.readByte() == 0) ? null : in.readInt();
         sku = in.readString();
         name = in.readString();
         unit = in.readString();
-        if (in.readByte() == 0) {
-            qty = null;
-        } else {
-            qty = in.readDouble();
-        }
-        if (in.readByte() == 0) {
-            net = null;
-        } else {
-            net = in.readDouble();
-        }
-        if (in.readByte() == 0) {
-            gross = null;
-        } else {
-            gross = in.readInt();
-        }
+        qty = (in.readByte() == 0) ? null : in.readDouble();
+        net = (in.readByte() == 0) ? null : in.readDouble();
+        gross = (in.readByte() == 0) ? null : in.readInt();
         vat = in.readString();
         status = in.readString();
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        if (id == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(id);
-        }
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeByte(id == null ? (byte) 0 : (byte) 1); if (id != null) dest.writeInt(id);
         dest.writeString(sku);
         dest.writeString(name);
         dest.writeString(unit);
-        if (qty == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeDouble(qty);
-        }
-        if (net == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeDouble(net);
-        }
-        if (gross == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(gross);
-        }
+        dest.writeByte(qty == null ? (byte) 0 : (byte) 1); if (qty != null) dest.writeDouble(qty);
+        dest.writeByte(net == null ? (byte) 0 : (byte) 1); if (net != null) dest.writeDouble(net);
+        dest.writeByte(gross == null ? (byte) 0 : (byte) 1); if (gross != null) dest.writeInt(gross);
         dest.writeString(vat);
         dest.writeString(status);
     }

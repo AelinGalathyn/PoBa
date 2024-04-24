@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pobatest.ApiCalls.AppPreferences;
@@ -33,6 +34,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -44,19 +46,18 @@ public class FoActivity extends AppCompatActivity{
     private CardView termekek_card;
     private NavigationView nav_hamburger_menu;
     private ImageView nav_profil;
-    private View hamburger_header;
     private Spinner hamburger_webshopHely;
     private ImageView nav_profil_gomb;
     private DrawerLayout hamburger_drawerLayout;
-    private ActionBarDrawerToggle actionBarDrawerToggle;
     private List<Webshop> webshopok;
     private int selectedSpinnerPosition = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fo_activity);
         
-        Init(savedInstanceState);
+        Init();
         getAllWebshops();
 
         rendelesek_card.setOnClickListener(v -> {
@@ -92,18 +93,20 @@ public class FoActivity extends AppCompatActivity{
         });
     }
 
-    public void Init(Bundle savedInstanceState) {
+    public void Init() {
         rendelesek_card = findViewById(R.id.rendelesek_card);
         termekek_card = findViewById(R.id.termekek_card);
         nav_hamburger_menu = findViewById(R.id.nav_hamburger_menu);
-        hamburger_header = nav_hamburger_menu.getHeaderView(0);
+        View hamburger_header = nav_hamburger_menu.getHeaderView(0);
         nav_profil = hamburger_header.findViewById(R.id.nav_profil);
         hamburger_webshopHely = hamburger_header.findViewById(R.id.hamburger_webshopHely);
+        TextView hamburger_username = hamburger_header.findViewById(R.id.hamburger_username);
+        hamburger_username.setText(AppPreferences.getUsername(FoActivity.this));
         hamburger_webshopHely.setDropDownVerticalOffset(100);
         hamburger_drawerLayout = findViewById(R.id.hamburger_drawerLayout);
         nav_profil_gomb = findViewById(R.id.nav_profil_gomb);
 
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, hamburger_drawerLayout, R.string.nav_open, R.string.nav_close);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, hamburger_drawerLayout, R.string.nav_open, R.string.nav_close);
         hamburger_drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
     }
@@ -145,9 +148,9 @@ public class FoActivity extends AppCompatActivity{
             }
 
             @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
                 try {
-                    String responseData = response.body().string();
+                    String responseData = Objects.requireNonNull(response.body()).string();
                     JSONArray jsonArray = new JSONArray(responseData);
 
                     for(int i = 0; i < jsonArray.length(); i++){
@@ -160,24 +163,21 @@ public class FoActivity extends AppCompatActivity{
                     webshopok.sort(Comparator.comparingInt((Webshop obj) -> obj.webshopid));
                     AppPreferences.saveWebshops(FoActivity.this, webshopok);
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (selectedSpinnerPosition == 0) {
-                                Webshop aktualis = webshopok.stream()
-                                        .filter(item -> item.webshopid == Integer.parseInt(AppPreferences.getWebshopId(FoActivity.this)))
-                                        .findFirst()
-                                        .orElse(null);
-                                selectedSpinnerPosition = webshopok.indexOf(aktualis);
-                            }
-                            String[] webshopNevek = webshopok.stream().map(Webshop::getName).toArray(String[]::new);
-                            ArrayAdapter<String> adapter = new ArrayAdapter<>(FoActivity.this, android.R.layout.simple_spinner_item, webshopNevek);
-                            adapter.setDropDownViewResource(R.layout.spinner_row);
-                            adapter.setNotifyOnChange(true);
-                            hamburger_webshopHely.setAdapter(adapter);
-                            hamburger_webshopHely.setSelection(selectedSpinnerPosition);
-                            hamburger_webshopHely.setOnItemSelectedListener(SpinnerHandleOnclick);
+                    runOnUiThread(() -> {
+                        if (selectedSpinnerPosition == 0) {
+                            Webshop aktualis = webshopok.stream()
+                                    .filter(item -> item.webshopid == Integer.parseInt(AppPreferences.getWebshopId(FoActivity.this)))
+                                    .findFirst()
+                                    .orElse(null);
+                            selectedSpinnerPosition = webshopok.indexOf(aktualis);
                         }
+                        String[] webshopNevek = webshopok.stream().map(Webshop::getName).toArray(String[]::new);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(FoActivity.this, android.R.layout.simple_spinner_item, webshopNevek);
+                        adapter.setDropDownViewResource(R.layout.spinner_row);
+                        adapter.setNotifyOnChange(true);
+                        hamburger_webshopHely.setAdapter(adapter);
+                        hamburger_webshopHely.setSelection(selectedSpinnerPosition);
+                        hamburger_webshopHely.setOnItemSelectedListener(SpinnerHandleOnclick);
                     });
 
                 } catch (IOException | JSONException e) {
@@ -197,10 +197,7 @@ public class FoActivity extends AppCompatActivity{
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             String clickedWebshopName = (String) parent.getItemAtPosition(position);
-            Webshop clickedWebshop = webshopok.stream().filter(obj -> obj.getName().equals(clickedWebshopName)).findFirst().orElse(null);
-            if (clickedWebshop != null) {
-                AppPreferences.setWebshopId(FoActivity.this, Integer.toString(clickedWebshop.webshopid));
-            }
+            webshopok.stream().filter(obj -> obj.getName().equals(clickedWebshopName)).findFirst().ifPresent(clickedWebshop -> AppPreferences.setWebshopId(FoActivity.this, Integer.toString(clickedWebshop.webshopid)));
         }
 
         @Override
