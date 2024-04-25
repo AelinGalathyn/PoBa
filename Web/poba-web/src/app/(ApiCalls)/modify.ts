@@ -1,5 +1,4 @@
 import axios from "axios";
-import {cache} from "react";
 import {FItem} from "@/app/(DTOs)/Termekek/FTermek";
 
 export const ModifyTermekQty = async(webshopId: number, item : FItem, modifiedQty : number) => {

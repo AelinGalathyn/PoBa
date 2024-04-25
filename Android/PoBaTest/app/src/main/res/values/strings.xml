@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PoBaTest</string>
+    <string name="app_name">PoBa</string>
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
     <string name="webshop_torles_kerdes">Biztos szeretné törölni?</string>

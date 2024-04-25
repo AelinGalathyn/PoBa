@@ -3,7 +3,7 @@
 import {Card, CardBody, CardFooter, CardHeader} from "@nextui-org/card";
 import {ArrowLeftIcon} from "@heroicons/react/20/solid";
 import {useRouter} from "next/navigation";
-import {fetch_rendeles, fetch_rendelesek} from "@/app/(ApiCalls)/fetch";
+import {fetch_rendeles} from "@/app/(ApiCalls)/fetch";
 import {Orders} from "@/app/(DTOs)/Rendelesek/Rendeles";
 import {useEffect, useState} from "react";
 
