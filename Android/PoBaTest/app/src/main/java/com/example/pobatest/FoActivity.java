@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +21,8 @@ import android.widget.Toast;
 
 import com.example.pobatest.ApiCalls.AppPreferences;
 import com.example.pobatest.ApiCalls.HttpClient;
+import com.example.pobatest.Bejelentkezes.BejelentkezesActivity;
+import com.example.pobatest.Bejelentkezes.EgyszeriBelepesActivity;
 import com.example.pobatest.Rendeles.RendelesActivity;
 import com.example.pobatest.Termek.TermekekActivity;
 import com.example.pobatest.Webshopok.Webshop;
@@ -31,12 +34,14 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Cookie;
 import okhttp3.Response;
 
 public class FoActivity extends AppCompatActivity{
@@ -116,6 +121,7 @@ public class FoActivity extends AppCompatActivity{
         int beallitasok = R.id.hamburger_beallitasok;
         int termekek = R.id.hamburger_termekek;
         int rendelesek = R.id.hamburger_rendelesek;
+        int kijelentkezes = R.id.hamburger_kijelentkezes;
 
 
         if (id == termekek)
@@ -129,6 +135,11 @@ public class FoActivity extends AppCompatActivity{
         else if (id == beallitasok)
         {
             intent = new Intent(FoActivity.this, ProfilBeallitasokActivity.class);
+        }
+        else if (id == kijelentkezes)
+        {
+            logOut();
+            intent = new Intent(FoActivity.this, BejelentkezesActivity.class);
         }
         else {
             throw new IllegalStateException("Unexpected value: " + id);
@@ -201,4 +212,24 @@ public class FoActivity extends AppCompatActivity{
         @Override
         public void onNothingSelected(AdapterView<?> parent) {}
     };
+
+    public void logOut() {
+        Callback cb = new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Toast.makeText(FoActivity.this, "Sikertelen kijelentkezés.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
+                List<Cookie> cookies = Collections.emptyList();
+                Log.d("LOGOUT", "onResponse: " + response);
+                AppPreferences.saveCookies(FoActivity.this, cookies);
+            }
+        };
+
+        HttpClient hc = new HttpClient();
+        hc.getHttpClient(FoActivity.this);
+        hc.logOut(this, cb);
+    }
 }

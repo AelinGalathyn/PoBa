@@ -123,7 +123,6 @@
         app:headerLayout="@layout/hamburger_header_layout"
         app:menu="@menu/hamburger_menu"
         app:itemTextColor="@color/text_color"
-        app:itemIconTint="@color/text_color"
         app:itemBackground="@color/background_yellow"
         />
 

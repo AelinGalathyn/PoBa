@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f197a7f-b474-48b6-84fe-4e366523ff24" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Android/PoBaTest/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Android/PoBaTest/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(ApiCalls)/modify.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(ApiCalls)/modify.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(Charts)/bar_chart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(Charts)/bar_chart.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(Charts)/double_bar_chart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(Charts)/double_bar_chart.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(DTOs)/Termekek/FTermek.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(DTOs)/Termekek/FTermek.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(DTOs)/Users/BDUser.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_statisztika_page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/(HomeElements)/homepage_statisztika_page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/homePage/rendelesek/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/homePage/rendelesek/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Android/PoBaTest/app/src/main/java/com/example/pobatest/ApiCalls/HttpClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Android/PoBaTest/app/src/main/java/com/example/pobatest/ApiCalls/HttpClient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

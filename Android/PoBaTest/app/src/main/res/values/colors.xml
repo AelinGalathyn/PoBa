@@ -6,4 +6,5 @@
     <color name="text_color">#60624D</color>
     <color name="menu_text_transparent">#00FFFFFF</color>
     <color name="card_back">#D9D9D9</color>
+    <color name="kijelentkezes_red">#FF6741</color>
 </resources>

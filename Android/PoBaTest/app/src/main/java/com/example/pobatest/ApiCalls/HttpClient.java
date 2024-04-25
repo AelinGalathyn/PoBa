@@ -162,5 +162,16 @@ public class HttpClient {
 
         httpClient.newCall(request).enqueue(callback);
     }
+
+    public void logOut(Context context, okhttp3.Callback callback) {
+        OkHttpClient httpClient = getHttpClient(context);
+
+        Request request = new Request.Builder()
+                .url(URL + "logout")
+                .post(emptyBody)
+                .build();
+
+        httpClient.newCall(request).enqueue(callback);
+    }
 }
 

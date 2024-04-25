@@ -17,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Objects;
 
 import okhttp3.Call;
@@ -36,7 +37,7 @@ public class BejelentkezesActivity extends AppCompatActivity {
         bejelentkezes_gomb.setOnClickListener(view -> checkLogin());
     }
 
-    private void checkLogin(){
+    private void checkLogin() {
         Callback cb = new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
