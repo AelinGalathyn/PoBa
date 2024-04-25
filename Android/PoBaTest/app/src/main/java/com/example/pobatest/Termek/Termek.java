@@ -6,17 +6,13 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 import com.example.pobatest.R;
-import com.example.pobatest.Rendeles.RendelesTermek;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class Termek implements Parcelable {
     public Integer id;

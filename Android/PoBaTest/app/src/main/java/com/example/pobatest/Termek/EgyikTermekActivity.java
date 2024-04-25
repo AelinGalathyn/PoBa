@@ -2,19 +2,11 @@ package com.example.pobatest.Termek;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -25,17 +17,9 @@ import android.widget.Toast;
 
 import com.example.pobatest.ApiCalls.HttpClient;
 import com.example.pobatest.R;
-import com.example.pobatest.Rendeles.EgyikRendelesActivity;
 import com.koushikdutta.ion.Ion;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -47,7 +31,6 @@ public class EgyikTermekActivity extends AppCompatActivity {
     private ImageView mennyiseg_icon;
     private EditText darab_editText;
     private TextView termek_reszletek_textview;
-    private TextView termek_kep_nev_textview;
     private ImageView termek_kep_helye;
     private Termek termek;
     private ImageButton darab_confirm_button;
@@ -87,7 +70,7 @@ public class EgyikTermekActivity extends AppCompatActivity {
         darab_editText = findViewById(R.id.darab_editText);
         darab_confirm_button = findViewById(R.id.darab_confirm_button);
         termek_reszletek_textview = findViewById(R.id.termek_reszletek_textview);
-        termek_kep_nev_textview = findViewById(R.id.termek_kep_nev_textview);
+        TextView termek_kep_nev_textview = findViewById(R.id.termek_kep_nev_textview);
         nav_vissza_gomb = findViewById(R.id.nav_vissza_gomb);
         termek_kep_helye = findViewById(R.id.termek_kep_helye);
         mennyiseg_icon = findViewById(R.id.mennyiseg_icon);

@@ -60,7 +60,7 @@ public class TermekekActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
                 try {
                     String responseData = Objects.requireNonNull(response.body()).string();
                     JSONArray jsonArray = new JSONArray(responseData);
@@ -73,12 +73,9 @@ public class TermekekActivity extends AppCompatActivity {
                         termeklista.add(termek);
                     }
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            recyclerview_termekek.setLayoutManager(new LinearLayoutManager(TermekekActivity.this));
-                            recyclerview_termekek.setAdapter(new TermekAdapter(TermekekActivity.this, termeklista));
-                        }
+                    runOnUiThread(() -> {
+                        recyclerview_termekek.setLayoutManager(new LinearLayoutManager(TermekekActivity.this));
+                        recyclerview_termekek.setAdapter(new TermekAdapter(TermekekActivity.this, termeklista));
                     });
 
                 } catch (IOException | JSONException e) {

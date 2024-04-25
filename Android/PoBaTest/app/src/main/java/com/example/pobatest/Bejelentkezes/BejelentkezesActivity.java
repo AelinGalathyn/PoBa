@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -41,9 +40,7 @@ public class BejelentkezesActivity extends AppCompatActivity {
         Callback cb = new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                runOnUiThread(() -> {
-                    Toast.makeText(BejelentkezesActivity.this, "Nem lehetett ellenőrizni a cookie állapotát.", Toast.LENGTH_SHORT).show();
-                });
+                runOnUiThread(() -> Toast.makeText(BejelentkezesActivity.this, "Nem lehetett ellenőrizni a cookie állapotát.", Toast.LENGTH_SHORT).show());
             }
 
             @Override
@@ -63,7 +60,6 @@ public class BejelentkezesActivity extends AppCompatActivity {
                 runOnUiThread(() -> {
                     if (response.code() == 200) {
                         try {
-                            Log.i("json response", finalResponseData);
                             JSONObject jsonObject = new JSONObject(finalResponseData);
 
                             if (jsonObject.has("isValid")) {
@@ -83,11 +79,9 @@ public class BejelentkezesActivity extends AppCompatActivity {
                                 finish();
                             }
                         } catch (JSONException e) {
-                            Log.e("LOGIN", "JSON parsing error", e);
                             Toast.makeText(BejelentkezesActivity.this, "Error processing login response.", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Log.e("LOGIN", "Login failed: " + response);
                         Toast.makeText(BejelentkezesActivity.this, "Login failed. Please try again.", Toast.LENGTH_LONG).show();
                     }
                 });

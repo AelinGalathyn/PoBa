@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -16,7 +15,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.pobatest.ApiCalls.AppPreferences;
 import com.example.pobatest.ApiCalls.HttpClient;
 import com.example.pobatest.Bejelentkezes.EgyszeriBelepesActivity;
 
@@ -52,14 +50,11 @@ public class JelszoValtoztatasActivity extends AppCompatActivity {
             finish();
         });
 
-        password_ok_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                regi_jelszo = regi_jelszo_input.getText().toString();
-                uj_jelszo = uj_jelszo_input.getText().toString();
+        password_ok_button.setOnClickListener(v -> {
+            regi_jelszo = regi_jelszo_input.getText().toString();
+            uj_jelszo = uj_jelszo_input.getText().toString();
 
-                changePassword(regi_jelszo, uj_jelszo);
-            }
+            changePassword(regi_jelszo, uj_jelszo);
         });
 
         popup_ok_icon.setOnClickListener(v -> ab.dismiss());
@@ -123,7 +118,7 @@ public class JelszoValtoztatasActivity extends AppCompatActivity {
                     finish();
                 }
                 else {
-                    Log.d("PASSWORD", "onResponse: " + response);
+                    Toast.makeText(JelszoValtoztatasActivity.this, "Sikeres jelszó változtatás.", Toast.LENGTH_SHORT).show();
                 }
             }
         };

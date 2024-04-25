@@ -1,14 +1,10 @@
 package com.example.pobatest.Webshopok;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,18 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pobatest.ApiCalls.AppPreferences;
 import com.example.pobatest.ApiCalls.HttpClient;
 import com.example.pobatest.FoActivity;
 import com.example.pobatest.R;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -68,9 +57,7 @@ public class WebshopAdapter extends RecyclerView.Adapter<WebshopAdapter.WebshopH
     public void onBindViewHolder(@NonNull WebshopAdapter.WebshopHolder holder, int position) {
         Webshop webshop = webshopok.get(position);
         holder.webshop_nev_textview.setText(webshop.getName());
-        holder.torles_icon.setOnClickListener(v -> {
-            showPopup(v, holder.getAdapterPosition());
-        });
+        holder.torles_icon.setOnClickListener(v -> showPopup(v, holder.getAdapterPosition()));
     }
 
     @Override
@@ -110,12 +97,11 @@ public class WebshopAdapter extends RecyclerView.Adapter<WebshopAdapter.WebshopH
         Callback cb = new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.d("DELWEBSHOP", "onResponse: " + e + ": " + call);
                 Toast.makeText(context, "Sikertelen webshop törlés.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
                 context.startActivity(new Intent(context, FoActivity.class));
             }
         };

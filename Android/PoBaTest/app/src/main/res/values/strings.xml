@@ -4,5 +4,5 @@
     <string name="nav_close">Close</string>
     <string name="webshop_torles_kerdes">Biztos szeretné törölni?</string>
     <string name="helytelen_jelszo_felirat">Helytelen jelszó formátum</string>
-    <string name="jelszo_regex_felszolitas"><![CDATA[A jelszónak legalább 1 nagybetűt [A-Z], 1 számot [0-9] és egy speciális karaktert [#?!@$ %^&*-] tartalmaznia kell.]]></string>
+    <string name="jelszo_regex_felszolitas">A jelszónak legalább 1 nagybetűt [A–Z], 1 számot [0–9] és egy speciális karaktert [#?!@$ %^&amp;*–] tartalmaznia kell.</string>
 </resources>

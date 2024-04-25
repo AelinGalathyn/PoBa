@@ -2,8 +2,6 @@ package com.example.pobatest.Termek;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pobatest.R;
 import com.koushikdutta.ion.Ion;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 public class TermekAdapter extends RecyclerView.Adapter<TermekAdapter.TermekHolder> {

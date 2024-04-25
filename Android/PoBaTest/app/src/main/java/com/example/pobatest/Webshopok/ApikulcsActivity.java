@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -43,12 +41,9 @@ public class ApikulcsActivity extends AppCompatActivity {
             finish();
         });
 
-        apikulcs_ok_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                api_key = apikulcs_input.getText().toString();
-                AddWebshop();
-            }
+        apikulcs_ok_button.setOnClickListener(v -> {
+            api_key = apikulcs_input.getText().toString();
+            AddWebshop();
         });
     }
 
@@ -62,7 +57,6 @@ public class ApikulcsActivity extends AppCompatActivity {
         Callback cb = new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.d("ADD_WEBSHOP", "onResponse: " + e + ": " + call);
                 Toast.makeText(ApikulcsActivity.this, "Sikertelen webshop hozzáadás.", Toast.LENGTH_SHORT).show();
             }
 

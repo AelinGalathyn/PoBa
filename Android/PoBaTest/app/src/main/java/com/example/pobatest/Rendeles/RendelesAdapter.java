@@ -2,7 +2,6 @@ package com.example.pobatest.Rendeles;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +48,6 @@ public class RendelesAdapter extends RecyclerView.Adapter<RendelesAdapter.Rendel
     @Override
     public void onBindViewHolder(@NonNull RendelesHolder holder, int position) {
         Rendeles rendeles = rendelesek.get(position);
-        Log.d("RENDELKEP", "onBindViewHolder: " + rendeles.image);
         holder.rendeles_szam_textView.setText(rendeles.orderid);
         holder.futar_logo_helye.setImageResource(rendeles.image);
 

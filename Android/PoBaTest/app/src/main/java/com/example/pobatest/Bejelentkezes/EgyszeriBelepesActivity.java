@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -84,7 +83,6 @@ public class EgyszeriBelepesActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
-                        Log.e("LOGIN", "Login failed: " + response);
                         Toast.makeText(EgyszeriBelepesActivity.this, "Sikertelen belépés, próbálja újra.", Toast.LENGTH_LONG).show();
                     }
                 });
