@@ -13,7 +13,7 @@ export const ModifyTermekQty = async(webshopId: number, item : FItem, modifiedQt
             stock: modifiedQty
         }
 
-    }).catch(e => {console.log(e); throw new Error(e)});
+    }).catch(e => {alert("A termék mennyiségének módosítása sikertelen - " + e.code)});
 }
 
 export const AddWebshop = async (apiKey : string) => {
@@ -25,9 +25,9 @@ export const AddWebshop = async (apiKey : string) => {
         params: {
             api_key : apiKey
         }
-    }).catch(e => {console.log(e); throw new Error(e)});
+    }).catch(e => {alert("A webshop hozzáadása sikertelen - " + e.code)});
 
-    return response.data;
+    return response?.data;
 }
 
 export const DeleteWebshop = async (webshopId : number) => {
@@ -39,5 +39,5 @@ export const DeleteWebshop = async (webshopId : number) => {
         params: {
             webshopid : webshopId
         }
-    }).catch(e => {console.log(e); throw new Error(e)});
+    }).catch(e => {alert("A webshop törlése sikertelen - " + e.code)});
 }

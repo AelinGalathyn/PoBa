@@ -28,7 +28,7 @@ export default function KifogyoTermekek() {
 
     }, []);
 
-    if (termekek.length === 0) {
+    if (termekek === undefined || termekek.length === 0) {
         return <div className="h-[45vh] w-[45vw] flex justify-center items-center">
             <p>Loading...</p>
         </div>

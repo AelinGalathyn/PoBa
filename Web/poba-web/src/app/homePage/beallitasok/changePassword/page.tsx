@@ -3,6 +3,7 @@
 import {useState} from "react";
 import {useRouter} from "next/navigation";
 import {ChangePassword, logOut} from "@/app/(ApiCalls)/calls";
+import {ConflictException} from "@nestjs/common";
 
 export default function PasswordBeallitasok() {
     const [oldPassword, setOldPassword] = useState<string>("");
@@ -13,16 +14,16 @@ export default function PasswordBeallitasok() {
     const handleOnclick = () => {
         let regex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$", "gm");
         if (oldPassword === newPassword) {
-            setNewPassword('')
-            setOldPassword('')
-            alert("Az új jelszó nem lehet egy a régiek közül.")
-            router.push("webshopok/changePassword");
+            alert("Az új jelszó nem lehet ugyan az, mint az aktuális.")
         }
         else if (!regex.test(newPassword)) {
             alert("A jelszónak legalább 1 nagybetűt [A-Z], 1 számot [0-9] és egy speciális karaktert [#?!@$ %^&*-] tartalmaznia kell.")
         }
+        else if (oldPassword === "" || newPassword === "") {
+            alert("A mezők kitöltése kötelező.")
+        }
         else {
-            ChangePassword(oldPassword, newPassword).then(() => logOut()).catch(e => {alert("A jelszó változtatása nem sikerült. " + e.code); router.push("/login")});
+            ChangePassword(oldPassword, newPassword).then(() => {logOut(); router.push("/login");}).catch(e => alert("A jelszó változtatása nem sikerült. " + e.code));
         }
     }
 

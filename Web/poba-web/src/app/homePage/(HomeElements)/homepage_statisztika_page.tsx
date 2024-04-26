@@ -27,7 +27,7 @@ export default function HomepageStatisztika() {
         }));
     };
 
-    if (rendelesek.length === 0) {
+    if (rendelesek === undefined || rendelesek.length === 0) {
         return <p className="h-full w-[45vw] flex justify-center items-center">Loading...</p>
     }
 

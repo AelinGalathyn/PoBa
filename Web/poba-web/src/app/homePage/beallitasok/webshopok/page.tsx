@@ -18,12 +18,11 @@ export default function WebshopokBeallitasok() {
     }, []);
 
     const handleOnclick = () => {
-        if (apiKey) {
+        if (apiKey !== "") {
             AddWebshop(apiKey).then((data) => {
                 console.log(data)
                 localStorage.setItem("webshopId", JSON.stringify(data));
-                fetch_webshopok().then(data => setWebshopok(data));
-                router.push("/");
+                fetch_webshopok().then(data => {setWebshopok(data); router.push("/");})
             })
         }
         else {

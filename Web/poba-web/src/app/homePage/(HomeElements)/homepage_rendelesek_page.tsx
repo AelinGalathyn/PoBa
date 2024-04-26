@@ -31,7 +31,7 @@ export default function JelenlegiRendelesek() {
                     (renderImage(`/${szallitoiCegek[2]}_logo.png`)) : ("")
     }
 
-    if (frissRendelesek.length === 0) {
+    if (frissRendelesek === undefined || frissRendelesek.length === 0) {
         return <p className="w-[25vw] h-full flex justify-center items-center">Loading...</p>
     }
 

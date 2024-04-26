@@ -43,7 +43,7 @@ export default function Termekek() {
         localStorage.setItem("fogyoTermekek", JSON.stringify(sortedListItems(feltoltFogyoTermekek(newTermekek, oldFogyoTermekek))));
     }
 
-    if (termekek.length === 0) {
+    if (termekek === undefined || termekek.length === 0) {
         return <div className="col-start-3 ps-10 w-[75vw] h-3/4 flex justify-center items-center">
             <p>Loading...</p>
         </div>

@@ -14,7 +14,12 @@ export default function Login() {
     const router = useRouter();
 
     const handleLoginClick = () => {
-        login(loginUser).then(data => {localStorage.setItem("webshopId", data.webshopid); router.push("/homePage");});
+        if (felNev === "" || password === "") {
+            alert("A mezők kitöltése kötelező.")
+        }
+        else {
+            login(loginUser).then(data => {localStorage.setItem("webshopId", data.webshopid); router.push("/homePage");});
+        }
     }
 
     return (

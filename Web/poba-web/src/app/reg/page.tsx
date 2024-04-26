@@ -5,6 +5,7 @@ import {useState} from "react";
 import RegisterUser from "@/app/(DTOs)/Users/RegisterUser";
 import {useRouter} from "next/navigation";
 import {reg} from "@/app/(ApiCalls)/calls";
+import {ConflictException} from "@nestjs/common";
 
 export default function Reg() {
 
@@ -20,8 +21,11 @@ export default function Reg() {
         if (!regex.test(password)) {
             alert("A jelszónak legalább 1 nagybetűt [A-Z], 1 számot [0-9] és egy speciális karaktert [#?!@$ %^&*-] tartalmaznia kell.")
         }
+        else if(felNev === "" || password === "" || apikey === "") {
+            alert("A mezők kitöltése kötelező.")
+        }
         else {
-            reg(newUser).then(() => router.push("/login"));
+            reg(newUser).then(() => router.push("/login"))
         }
     }
 
