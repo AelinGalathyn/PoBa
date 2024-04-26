@@ -25,9 +25,6 @@
             android:name=".Webshopok.WebShopokActivity"
             android:exported="false" />
         <activity
-            android:name=".Webshopok.WebshopAdapter"
-            android:exported="false" />
-        <activity
             android:name=".JelszoValtoztatasActivity"
             android:exported="false" />
         <activity

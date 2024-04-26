@@ -17,11 +17,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Cookie;
 import okhttp3.Response;
 
 public class BejelentkezesActivity extends AppCompatActivity {
@@ -96,6 +99,10 @@ public class BejelentkezesActivity extends AppCompatActivity {
     }
 
     public void Init() {
+        List<Cookie> cookies = AppPreferences.loadCookies(BejelentkezesActivity.this);
+        if (cookies == null) {
+            AppPreferences.saveCookies(BejelentkezesActivity.this, Collections.emptyList());
+        }
         bejelentkezes_gomb = findViewById(R.id.bejelentkezes_gomb);
     }
 }
