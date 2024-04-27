@@ -17,7 +17,7 @@ export default function BeallitasokLayout({children} : { children : React.ReactN
             if (typeof data === "string") {
                 setUsername(data);
             }
-        }).catch(e => {throw new Error(e)})
+        }).catch(e => alert("A felhasználónév lekérése sikertelen."))
     }, []);
 
     const buttonOnclick = (buttonName : string) => {

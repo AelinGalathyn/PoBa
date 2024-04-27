@@ -20,7 +20,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 public class HttpClient {
-    public String URL = "http://192.168.90.67:3000/";
+    public String URL = "http://10.0.2.2:3000/";
     public RequestBody emptyBody = RequestBody.create(new byte[0]);
     public OkHttpClient getHttpClient(Context context) {
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();

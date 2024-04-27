@@ -33,7 +33,11 @@ export default function Termekek() {
 
     const modify = async (modifiedTermek: FItem, modifiedQuantity: number) => {
         const webshopId: number = JSON.parse(localStorage.getItem("webshopId") ?? "0");
-        await ModifyTermekQty(webshopId, modifiedTermek, modifiedQuantity);
+        if (modifiedQuantity < 0) {
+            alert("A termék mennyisége minimum 0 lehet.")
+        } else {
+            await ModifyTermekQty(webshopId, modifiedTermek, modifiedQuantity);
+        }
 
         const newTermekek = await fetch_termekek(webshopId);
         setTermekek(newTermekek);
@@ -116,7 +120,7 @@ export default function Termekek() {
                                                 {termek.qty === -1 || termek.packaged ? ("") : (
                                                     <div className="flex flex-col col-span-12">
                                                         <p><b>{termek.unit.toUpperCase()}</b></p>
-                                                        <input className="p-1" type="number" id="qtyInput"
+                                                        <input className="p-1" min={0} type="number" id="qtyInput"
                                                                value={quantity} placeholder="Új mennyiség"
                                                                onChange={(e) => setQuantity(e.target.value)}/>
                                                         <Button

@@ -1,9 +1,9 @@
 import axios from "axios";
-import { cache } from "react";
 import {Orders} from "@/app/(DTOs)/Rendelesek/Rendeles";
 import {FItem} from "@/app/(DTOs)/Termekek/FTermek";
 import FWebshop from "@/app/(DTOs)/Webshopok/FetchWebshop";
 import {ConflictException} from "@nestjs/common";
+import { cache } from "react";
 
 export const fetch_rendelesek = cache( async(webshopId : number) => {
     const response = await axios.get(`http://localhost:3000/orders/${webshopId}`, {
@@ -42,7 +42,7 @@ export const fetch_termekek = cache(async(webshopId : number) => {
 export const fetch_webshopok = async() => {
     const response = await axios.get(`http://localhost:3000/webshop`, {
         withCredentials: true
-    }).catch(e => e instanceof ConflictException ? alert("Ilyen webshop már létezik.") : alert("A webshop hozzáadása sikertelen."));
+    })
 
     const webshopok : FWebshop[] = response?.data;
 

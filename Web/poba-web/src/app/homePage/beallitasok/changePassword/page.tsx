@@ -13,17 +13,18 @@ export default function PasswordBeallitasok() {
 
     const handleOnclick = () => {
         let regex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$", "gm");
-        if (oldPassword === newPassword) {
-            alert("Az új jelszó nem lehet ugyan az, mint az aktuális.")
+        if (oldPassword === "" || newPassword === "") {
+            alert("A mezők kitöltése kötelező.")
         }
         else if (!regex.test(newPassword)) {
             alert("A jelszónak legalább 1 nagybetűt [A-Z], 1 számot [0-9] és egy speciális karaktert [#?!@$ %^&*-] tartalmaznia kell.")
         }
-        else if (oldPassword === "" || newPassword === "") {
-            alert("A mezők kitöltése kötelező.")
+        else if (oldPassword === newPassword) {
+            alert("Az új jelszó nem lehet ugyan az, mint az aktuális jelszó.")
         }
         else {
-            ChangePassword(oldPassword, newPassword).then(() => {logOut(); router.push("/login");}).catch(e => alert("A jelszó változtatása nem sikerült. " + e.code));
+            ChangePassword(oldPassword, newPassword).then(() => {logOut(); router.push("/login");})
+                .catch(e => e.response === undefined ? alert("A jelszó változtatás hibába futott.") : e.response.status === 401 ? alert("A régi jelszó hibás.") : "")
         }
     }
 

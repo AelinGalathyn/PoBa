@@ -1,7 +1,6 @@
 import axios from "axios";
 import User from "@/app/(DTOs)/Users/User";
 import RegisterUser from "@/app/(DTOs)/Users/RegisterUser";
-import {ConflictException} from "@nestjs/common";
 
 export const logOut = async () => {
 
@@ -20,7 +19,7 @@ export const login = async (loginUser : User) => {
             username : loginUser.username,
             password : loginUser.password
         }
-    }).catch(e => {alert("A bejelentkezés hibába futott - " + e.code)});
+    })
 
     return response?.data;
 }
@@ -36,7 +35,7 @@ export const reg = async (regUser : RegisterUser) => {
             password: regUser.password,
             api_key: regUser.api_key
         }
-    }).catch(e => e instanceof ConflictException ? alert("Ilyen felhasználó már létezik.") : alert("A regisztráció hibába ütközött."));
+    })
 }
 
 export const ChangePassword = async (oldPassword : string, newPassword : string) => {
@@ -49,5 +48,5 @@ export const ChangePassword = async (oldPassword : string, newPassword : string)
             opw : oldPassword,
             npw : newPassword
         }
-    }).catch(e => alert("A jelszó változtatás hibába futott - " + e.code))
+    })
 }

@@ -17,6 +17,7 @@ import com.example.pobatest.R;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -42,8 +43,19 @@ public class ApikulcsActivity extends AppCompatActivity {
         });
 
         apikulcs_ok_button.setOnClickListener(v -> {
+            String regex = "^(?=.*?[a-z])(?=.*?[0-9]).{1,40}$";
+            Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
             api_key = apikulcs_input.getText().toString();
-            AddWebshop();
+
+            if (api_key.isEmpty()) {
+                Toast.makeText(this, "A mező kitöltése kötelező.", Toast.LENGTH_SHORT).show();
+            }
+            else if (!pattern.matcher(api_key).find()) {
+                Toast.makeText(this, "Az Api kulcs nem megfelelő formátumú.", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                AddWebshop();
+            }
         });
     }
 

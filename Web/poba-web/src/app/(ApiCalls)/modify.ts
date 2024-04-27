@@ -25,7 +25,7 @@ export const AddWebshop = async (apiKey : string) => {
         params: {
             api_key : apiKey
         }
-    }).catch(e => {alert("A webshop hozzáadása sikertelen - " + e.code)});
+    })
 
     return response?.data;
 }

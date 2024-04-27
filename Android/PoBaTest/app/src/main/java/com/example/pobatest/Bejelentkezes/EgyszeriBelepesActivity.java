@@ -1,25 +1,34 @@
 package com.example.pobatest.Bejelentkezes;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pobatest.ApiCalls.AppPreferences;
 import com.example.pobatest.ApiCalls.HttpClient;
 import com.example.pobatest.FoActivity;
+import com.example.pobatest.Functions.functions;
 import com.example.pobatest.R;
 import com.example.pobatest.Users.UsersInputDto;
+import com.example.pobatest.Webshopok.Webshop;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -42,7 +51,10 @@ public class EgyszeriBelepesActivity extends AppCompatActivity {
             username = felhasznalonev_input.getText().toString();
             String password = jelszo_input.getText().toString();
 
-            if (!username.isEmpty() || !password.isEmpty()) {
+            if (username.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Minden mező kitöltése kötelező.", Toast.LENGTH_SHORT).show();
+            }
+            else {
                 UsersInputDto user = new UsersInputDto(username, password);
                 login(user);
             }
@@ -59,7 +71,7 @@ public class EgyszeriBelepesActivity extends AppCompatActivity {
         Callback cb = new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                runOnUiThread(() -> Toast.makeText(EgyszeriBelepesActivity.this, "Ilyen fiók nem létezik.", Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> Toast.makeText(EgyszeriBelepesActivity.this, "Bejelentkezési hiba", Toast.LENGTH_SHORT).show());
             }
 
             @Override
@@ -83,7 +95,7 @@ public class EgyszeriBelepesActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
-                        Toast.makeText(EgyszeriBelepesActivity.this, "Sikertelen belépés, próbálja újra.", Toast.LENGTH_LONG).show();
+                        runOnUiThread(() -> Toast.makeText(EgyszeriBelepesActivity.this, "Sikertelen bejelentkezés, próbálja újra.", Toast.LENGTH_SHORT).show());
                     }
                 });
             }

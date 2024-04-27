@@ -54,22 +54,30 @@ public class JelszoValtoztatasActivity extends AppCompatActivity {
             regi_jelszo = regi_jelszo_input.getText().toString();
             uj_jelszo = uj_jelszo_input.getText().toString();
 
-            changePassword(regi_jelszo, uj_jelszo);
+            if (regi_jelszo.isEmpty() || uj_jelszo.isEmpty()) {
+                Toast.makeText(this, "Az összes mező kitöltése kötelező.", Toast.LENGTH_SHORT).show();
+            }
+            else if (regi_jelszo.equals(uj_jelszo)) {
+                Toast.makeText(this, "Az új jelszó nem lehet a régi.", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                changePassword( uj_jelszo);
+            }
         });
 
         popup_ok_icon.setOnClickListener(v -> ab.dismiss());
 
     }
 
-    private void changePassword(String regiJelszo, String ujJelszo) {
+    private void changePassword(String ujJelszo) {
         String regex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$";
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
 
-        if (pattern.matcher(ujJelszo).find() && !regiJelszo.isEmpty()) {
-            ChangePasswordBackend();
+        if (!pattern.matcher(ujJelszo).find()) {
+            ab.show();
         }
         else {
-            ab.show();
+            ChangePasswordBackend();
         }
     }
 
@@ -107,18 +115,19 @@ public class JelszoValtoztatasActivity extends AppCompatActivity {
         Callback cb = new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Toast.makeText(JelszoValtoztatasActivity.this, "Sikertelen jelszó változtatás.", Toast.LENGTH_SHORT).show();
+                runOnUiThread(() -> Toast.makeText(JelszoValtoztatasActivity.this, "Sikertelen jelszó változtatás.", Toast.LENGTH_SHORT).show());
             }
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) {
                 if (response.code() == 201) {
+                    runOnUiThread(() -> Toast.makeText(JelszoValtoztatasActivity.this, "Sikeres jelszó változtatás.", Toast.LENGTH_SHORT).show());
                     Intent intent = new Intent(JelszoValtoztatasActivity.this, EgyszeriBelepesActivity.class);
                     startActivity(intent);
                     finish();
                 }
                 else {
-                    Toast.makeText(JelszoValtoztatasActivity.this, "Sikeres jelszó változtatás.", Toast.LENGTH_SHORT).show();
+                    runOnUiThread(() -> Toast.makeText(JelszoValtoztatasActivity.this, "A régi jelszó helytelen.", Toast.LENGTH_SHORT).show());
                 }
             }
         };

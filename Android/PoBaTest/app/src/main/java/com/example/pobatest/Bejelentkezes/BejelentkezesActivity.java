@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.pobatest.ApiCalls.AppPreferences;
 import com.example.pobatest.ApiCalls.HttpClient;
 import com.example.pobatest.FoActivity;
+import com.example.pobatest.Functions.functions;
 import com.example.pobatest.R;
 
 import org.json.JSONException;
@@ -44,7 +45,7 @@ public class BejelentkezesActivity extends AppCompatActivity {
         Callback cb = new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                runOnUiThread(() -> Toast.makeText(BejelentkezesActivity.this, "Nem lehetett ellenőrizni a cookie állapotát.", Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> Toast.makeText(BejelentkezesActivity.this, "Az állapot lekérdezése sikertelen.", Toast.LENGTH_SHORT).show());
             }
 
             @Override
@@ -72,8 +73,6 @@ public class BejelentkezesActivity extends AppCompatActivity {
                                     Intent intent = new Intent(BejelentkezesActivity.this, EgyszeriBelepesActivity.class);
                                     startActivity(intent);
                                     finish();
-                                } else {
-                                    Toast.makeText(BejelentkezesActivity.this, "Invalid login attempt.", Toast.LENGTH_SHORT).show();
                                 }
                             }
                             if (jsonObject.has("username")) {
@@ -83,10 +82,8 @@ public class BejelentkezesActivity extends AppCompatActivity {
                                 finish();
                             }
                         } catch (JSONException e) {
-                            Toast.makeText(BejelentkezesActivity.this, "Error processing login response.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(BejelentkezesActivity.this, "Az állapot ellenőrzése hibába futott.", Toast.LENGTH_SHORT).show();
                         }
-                    } else {
-                        Toast.makeText(BejelentkezesActivity.this, "Login failed. Please try again.", Toast.LENGTH_LONG).show();
                     }
                 });
             }

@@ -153,7 +153,7 @@ public class FoActivity extends AppCompatActivity{
         Callback cb = new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Toast.makeText(FoActivity.this, "Sikertelen webshopok lekérés.", Toast.LENGTH_SHORT).show();
+                runOnUiThread(() -> Toast.makeText(FoActivity.this, "Sikertelen webshopok lekérés.", Toast.LENGTH_SHORT).show());
             }
 
             @Override
