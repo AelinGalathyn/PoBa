@@ -11,14 +11,12 @@ import android.widget.Toast;
 import com.example.pobatest.ApiCalls.AppPreferences;
 import com.example.pobatest.ApiCalls.HttpClient;
 import com.example.pobatest.FoActivity;
-import com.example.pobatest.Functions.functions;
 import com.example.pobatest.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;

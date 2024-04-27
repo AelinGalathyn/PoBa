@@ -1,34 +1,25 @@
 package com.example.pobatest.Bejelentkezes;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pobatest.ApiCalls.AppPreferences;
 import com.example.pobatest.ApiCalls.HttpClient;
 import com.example.pobatest.FoActivity;
-import com.example.pobatest.Functions.functions;
 import com.example.pobatest.R;
 import com.example.pobatest.Users.UsersInputDto;
-import com.example.pobatest.Webshopok.Webshop;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 import okhttp3.Call;
 import okhttp3.Callback;

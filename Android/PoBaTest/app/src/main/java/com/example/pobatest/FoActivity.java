@@ -22,7 +22,6 @@ import android.widget.Toast;
 import com.example.pobatest.ApiCalls.AppPreferences;
 import com.example.pobatest.ApiCalls.HttpClient;
 import com.example.pobatest.Bejelentkezes.BejelentkezesActivity;
-import com.example.pobatest.Bejelentkezes.EgyszeriBelepesActivity;
 import com.example.pobatest.Rendeles.RendelesActivity;
 import com.example.pobatest.Termek.TermekekActivity;
 import com.example.pobatest.Webshopok.Webshop;
