@@ -35,6 +35,7 @@ export class UsersService {
   async changePassword(user: Users, hashedPassword: string){
     user.password = hashedPassword;
     const newUser =  await this.usersRepository.update({userid: user.userid}, {password: hashedPassword});
+    console.log(hashedPassword);
     return newUser;
   }
 }

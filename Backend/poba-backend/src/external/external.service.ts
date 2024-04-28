@@ -83,6 +83,7 @@ export class ExternalService {
     </Products>`;
 
     const response = await this.unasRequest('setStock', headers, body, webshop);
+    console.log(response)
     return response.Products.Product.Status;
   }
 
@@ -104,6 +105,7 @@ export class ExternalService {
     <Params>
     </Params>`
     const response = await this.unasRequest('getOrderStatus', headers, body, webshop);
+    console.log(response);
     return response.OrderStatuses.OrderStatus;
   }
 
@@ -122,6 +124,7 @@ export class ExternalService {
     </Orders>`;
 
     const response = await this.unasRequest('setOrder', headers, body, webshop);
+    console.log(response);
     return response.status;
   }
 

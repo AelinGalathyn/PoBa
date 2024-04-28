@@ -19,9 +19,13 @@ export class StatusController {
   @ApiNotFoundResponse({description: 'Nincs ilyen azonosítójú webshop.'})
   @ApiUnauthorizedResponse({description: 'Nincs bejelentkezve.'})
   async getStatuses(@UserId() userid: number, @Param('webshopid') webshopid: number){
+    try {
       let ws = await this.webshopService.findAndValidate(userid, webshopid);
       ws = await this.webshopService.unasLogin(ws);
       const data = await this.externalService.getStatuses(ws);
       return await this.statusService.getStatuses(data);
+    } catch (err) {
+      throw new InternalServerErrorException('An unexpected error occurred');
+    }
   }
 }

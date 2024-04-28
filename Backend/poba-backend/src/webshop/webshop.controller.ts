@@ -24,6 +24,7 @@ export class WebshopController {
   @ApiUnauthorizedResponse({description: 'Nincs bejelentkezve.'})
   async newWebshop(@UserId() userid: number, @Query('api_key')apikey: string){
     const user = await this.usersService.findById(userid);
+    console.log(apikey);
     const newWebshop = await this.webshopService.newApiKey(user, apikey);
     return newWebshop.webshopid;
   }

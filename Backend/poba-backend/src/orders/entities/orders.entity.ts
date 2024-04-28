@@ -1,4 +1,3 @@
-import { Item } from '../../item/entities/item.entity';
 import { OrderItemEntity } from '../../item/entities/orderitem.entity';
 import { Customer } from '../../item/entities/customer.entity';
 
@@ -7,11 +6,9 @@ export class Orders {
 
   date: Date;
 
-  type: string;
-
   status_id: number;
 
-  sender: number;
+  sender: string;
 
   payment: string;
 

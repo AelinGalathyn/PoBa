@@ -52,6 +52,7 @@ export class AppController {
   })
   async checkCookie(@Req() req: Request, @Res() res: Response) {
     const token = req.cookies['Authentication'];
+    console.log('token : ' + token);
     if (token !== undefined) {
       const valid = await this.authService.validateToken(token);
       if (valid !== false) {
@@ -115,7 +116,7 @@ export class AppController {
       expires: new Date(0),
     });
 
-    return res.send({ message: 'Logout successful' }).sendStatus(202);
+    return res.send({ message: 'Logout successful' }).status(202);
   }
 
   @UseGuards(JwtAuthGuard)
