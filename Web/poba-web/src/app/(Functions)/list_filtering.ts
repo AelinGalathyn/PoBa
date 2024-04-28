@@ -98,7 +98,7 @@ export const sortedListItems = (list: Item[]) => {
     if (list && Array.isArray(list)) {
         newList = list.sort((a, b) => {
             return new Date(b.date).getTime() - new Date(a.date).getTime();
-        });
+        }).splice(0, 15);
     }
 
     return newList;
@@ -109,7 +109,7 @@ export const sortedListOrders = (list: Orders[]) => {
     if (list && Array.isArray(list)) {
         newList = list.sort((a, b) => {
             return new Date(b.date).getTime() - new Date(a.date).getTime();
-        });
+        }).splice(0, 15);
     }
 
     return newList;
