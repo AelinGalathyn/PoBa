@@ -14,7 +14,13 @@ export default function Login() {
     const router = useRouter();
 
     const handleLoginClick = () => {
-        login(loginUser).then(data => {localStorage.setItem("webshopId", data.webshopid); router.push("/homePage");});
+        if (felNev === "" || password === "") {
+            alert("A mezők kitöltése kötelező.")
+        }
+        else {
+            login(loginUser).then(data => {localStorage.setItem("webshopId", data.webshopid); router.push("/homePage");})
+                .catch(e => {e.response === undefined ? alert("A bejelentkezés hibába ütközött.") : alert("A bejelentkezés hibába futott, kérem ellenőrizze a felhasználónevet és jelszót.")});
+        }
     }
 
     return (

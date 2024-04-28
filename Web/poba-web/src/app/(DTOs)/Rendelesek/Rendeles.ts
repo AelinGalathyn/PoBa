@@ -7,7 +7,7 @@ export class Orders {
         public date: Date,
         public type: string,
         public status_id: number,
-        public sender: number,
+        public sender: string,
         public payment: string,
         public gross: number,
         public weight: number,

@@ -5,7 +5,7 @@ import {renderChart} from "@/app/(Functions)/charts";
 import {Spacer} from "@nextui-org/react";
 import {fetch_rendelesek} from "@/app/(ApiCalls)/fetch";
 import React, {useEffect, useState} from "react";
-import {homeStatisztikaPage, statisztikaPage} from "@/app/(FixData)/lists";
+import {homeStatisztikaPage} from "@/app/(FixData)/lists";
 
 
 export default function HomepageStatisztika() {
@@ -27,7 +27,7 @@ export default function HomepageStatisztika() {
         }));
     };
 
-    if (rendelesek.length === 0) {
+    if (rendelesek === undefined || rendelesek.length === 0) {
         return <p className="h-full w-[45vw] flex justify-center items-center">Loading...</p>
     }
 

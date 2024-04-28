@@ -1,20 +1,30 @@
 package com.example.pobatest.Webshopok;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pobatest.ApiCalls.HttpClient;
+import com.example.pobatest.FoActivity;
 import com.example.pobatest.R;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class WebshopAdapter extends RecyclerView.Adapter<WebshopAdapter.WebshopHolder> {
     private final Context context;
@@ -46,10 +56,8 @@ public class WebshopAdapter extends RecyclerView.Adapter<WebshopAdapter.WebshopH
     @Override
     public void onBindViewHolder(@NonNull WebshopAdapter.WebshopHolder holder, int position) {
         Webshop webshop = webshopok.get(position);
-        holder.webshop_nev_textview.setText(webshop.nev);
-        holder.torles_icon.setOnClickListener(v -> {
-            showPopup(v, holder.getAdapterPosition());
-        });
+        holder.webshop_nev_textview.setText(webshop.getName());
+        holder.torles_icon.setOnClickListener(v -> showPopup(v, holder.getAdapterPosition()));
     }
 
     @Override
@@ -63,7 +71,7 @@ public class WebshopAdapter extends RecyclerView.Adapter<WebshopAdapter.WebshopH
         View popupView = LayoutInflater.from(v.getContext()).inflate(R.layout.apikulcs_popup_activity, null);
         AlertDialog.Builder abBuilder = new AlertDialog.Builder(v.getContext());
         AlertDialog ab = abBuilder.setView(popupView).create();
-        ab.getWindow().setBackgroundDrawableResource(R.drawable.custom_popup);
+        Objects.requireNonNull(ab.getWindow()).setBackgroundDrawableResource(R.drawable.custom_popup);
 
         ImageButton popup_no_icon = (ImageButton) popupView.findViewById(R.id.popup_no_icon);
         ImageButton popup_yes_icon = (ImageButton) popupView.findViewById(R.id.popup_yes_icon);
@@ -71,17 +79,36 @@ public class WebshopAdapter extends RecyclerView.Adapter<WebshopAdapter.WebshopH
         TextView webshop_nev_helye = popupView.findViewById(R.id.webshop_nev_helye);
         TextView apikey_helye = popupView.findViewById(R.id.apikey_helye);
 
-        kerdes_helye.setText("Biztos szeretné törölni?");
-        webshop_nev_helye.setText(webshop.nev);
+        kerdes_helye.setText(R.string.webshop_torles_kerdes);
+        webshop_nev_helye.setText(webshop.getName());
         apikey_helye.setVisibility(View.INVISIBLE);
 
         popup_no_icon.setOnClickListener(view -> ab.dismiss());
         popup_yes_icon.setOnClickListener(view -> {
-            webshopok.remove(webshop);
-            this.notifyItemRemoved(position);
+            RemoveWebshop(webshop.webshopid.toString());
             ab.dismiss();
+            context.startActivity(new Intent(context, FoActivity.class));
         });
 
         ab.show();
+    }
+
+    private void RemoveWebshop(String webshopid) {
+        Callback cb = new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Toast.makeText(context, "Sikertelen webshop törlés.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
+                context.startActivity(new Intent(context, FoActivity.class));
+            }
+        };
+
+        HttpClient hc = new HttpClient();
+        String url = "webshop";
+        hc.getHttpClient(context);
+        hc.deleteWebshop(context, url, cb, webshopid);
     }
 }

@@ -67,7 +67,7 @@
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="75dp"
                         android:id="@+id/termek_kep_helye"
                         android:src="@drawable/ideiglenes_termek_kep"
                         android:layout_marginTop="25dp"
@@ -95,7 +95,6 @@
                     android:layout_height="380dp"
                     android:textSize="25sp"
                     android:textAlignment="center"
-                    android:fontFamily="@font/space_mono"
                     android:textColor="@color/text_color"
                     android:background="@color/cardview_light_background"
                     android:id="@+id/termek_reszletek_textview"

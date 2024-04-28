@@ -1,5 +1,6 @@
 package com.example.pobatest.Termek;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,19 +8,29 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.example.pobatest.ApiCalls.HttpClient;
 import com.example.pobatest.FoActivity;
 import com.example.pobatest.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class TermekekActivity extends AppCompatActivity {
-
     private ImageView nav_vissza_gomb;
     private RecyclerView recyclerview_termekek;
-    private List<Termek> termeklista;
+    public List<Termek> termeklista;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,26 +50,43 @@ public class TermekekActivity extends AppCompatActivity {
         nav_vissza_gomb = findViewById(R.id.nav_vissza_gomb);
         recyclerview_termekek = findViewById(R.id.recyclerview_termekek);
         termeklista = new ArrayList<>();
-
-        recyclerview_termekek.setLayoutManager(new LinearLayoutManager(this));
-        recyclerview_termekek.setAdapter(new TermekAdapter(getApplicationContext(), termeklista));
     }
 
     public void ListaFeltolt() {
-        ArrayList<String> adatok1 = new ArrayList<>(Arrays.asList("Alma", "Körte", "Zsepi"));
-        ArrayList<String> adatok2 = new ArrayList<>(Arrays.asList("Cica", "Kutya", "Süni", "Béka", "Póni", "Mountain Bike", "Pap ruha", "Kereszt", "Lánc", "Biblia"));
-        ArrayList<String> adatok3 = new ArrayList<>(Arrays.asList("Kréta", "Ceruza", "Vonalzó", "Drog", "Kenyér", "Samsung Galaxy Ultra Mega", "Tucsok"));
+        Callback cb = new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                runOnUiThread(() -> Toast.makeText(TermekekActivity.this, "Sikertelen termék lekérés.", Toast.LENGTH_SHORT).show());
+            }
 
-        Termek termek1 = new Termek("123123", "Kakaós csiga" , 5);
-        Termek termek2 = new Termek("456456", "Gyros", 0);
-        Termek termek3 = new Termek("789789", "Palacsinta", 10);
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
+                try {
+                    String responseData = Objects.requireNonNull(response.body()).string();
+                    JSONArray jsonArray = new JSONArray(responseData);
 
-        termek1.setAdatok(adatok1);
-        termek2.setAdatok(adatok2);
-        termek3.setAdatok(adatok3);
+                    response.close();
 
-        termeklista.add(termek1);
-        termeklista.add(termek2);
-        termeklista.add(termek3);
+                    for(int i = 0; i < jsonArray.length(); i++){
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        Termek termek = new Termek(jsonObject);
+                        termeklista.add(termek);
+                    }
+
+                    runOnUiThread(() -> {
+                        recyclerview_termekek.setLayoutManager(new LinearLayoutManager(TermekekActivity.this));
+                        recyclerview_termekek.setAdapter(new TermekAdapter(TermekekActivity.this, termeklista));
+                    });
+
+                } catch (IOException | JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+
+        HttpClient hc = new HttpClient();
+        String url = "item";
+        hc.getHttpClient(TermekekActivity.this);
+        hc.makeGetHttpRequest(this, url, cb);
     }
 }

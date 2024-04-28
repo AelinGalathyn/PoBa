@@ -1,77 +1,43 @@
 package com.example.pobatest.ApiCalls;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Log;
 
-import com.example.pobatest.Bejelentkezes.EgyszeriBelepesActivity;
+import androidx.annotation.NonNull;
+
 import com.example.pobatest.Users.UsersInputDto;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 
-import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Cookie;
 import okhttp3.CookieJar;
+import okhttp3.FormBody;
 import okhttp3.HttpUrl;
-import okhttp3.JavaNetCookieJar;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
-import retrofit2.http.Body;
 
 public class HttpClient {
-    private final String PREF_NAME = "Cookies";
-    private String URL = "http://192.168.11.62:3000/";
-
-    // Store cookies in SharedPreferences
-    public void saveCookies(Context context, List<Cookie> cookies) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        for (Cookie cookie : cookies) {
-            editor.putString(cookie.name(), cookie.toString());  // Consider storing individual attributes if necessary
-        }
-        editor.apply();
-    }
-
-    public List<Cookie> loadCookies(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        Map<String, ?> cookiesMap = sharedPreferences.getAll();
-        List<Cookie> storedCookies = new ArrayList<>();
-        for (Map.Entry<String, ?> entry : cookiesMap.entrySet()) {
-            // Here, ensure your Cookie.parse can handle the string format correctly
-            Cookie cookie = Cookie.parse(HttpUrl.get("http://192.168.11.62:3000/"), (String) entry.getValue());
-            if (cookie != null) {
-                storedCookies.add(cookie);
-            }
-        }
-        return storedCookies;
-    }
-
-
-    // Create and configure OkHttpClient with stored cookies
+    public String URL = "http://10.0.2.2:3000/";
+    public RequestBody emptyBody = RequestBody.create(new byte[0]);
     public OkHttpClient getHttpClient(Context context) {
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
-        final List<Cookie> storedCookies = loadCookies(context);
+        final List<Cookie> storedCookies = AppPreferences.loadCookies(context);
 
         httpClientBuilder.cookieJar(new CookieJar() {
             private final List<Cookie> cache = new ArrayList<>();
 
             @Override
-            public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
+            public void saveFromResponse(@NonNull HttpUrl url, @NonNull List<Cookie> cookies) {
                 cache.addAll(cookies);
-                saveCookies(context, cookies);
+                AppPreferences.saveCookies(context, cookies);
             }
 
+            @NonNull
             @Override
-            public List<Cookie> loadForRequest(HttpUrl url) {
-                // Optionally, filter cookies by url
+            public List<Cookie> loadForRequest(@NonNull HttpUrl url) {
                 return cache.isEmpty() ? storedCookies : cache;
             }
         });
@@ -80,17 +46,12 @@ public class HttpClient {
     }
 
 
-    // Make HTTP request
-    public void makeLoginHttpRequest(HttpClient hc, UsersInputDto user, Context context, Callback callback) {
-        HttpUrl.Builder urlBuilder = HttpUrl.parse("http://192.168.11.62:3000/login").newBuilder();
-        urlBuilder
-                .addQueryParameter("username", user.getUsername())
-                .addQueryParameter("password", user.getPassword());
+    public void makeLoginHttpRequest(UsersInputDto user, Context context, Callback callback) {
+        HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse(URL + "login")).newBuilder();
+        urlBuilder.addQueryParameter("username", user.getUsername());
+        urlBuilder.addQueryParameter("password", user.getPassword());
 
         String fullurl = urlBuilder.build().toString();
-
-
-        RequestBody emptyBody = RequestBody.create(new byte[0]);
 
         OkHttpClient httpClient = getHttpClient(context);
         Request request = new Request.Builder()
@@ -102,12 +63,115 @@ public class HttpClient {
 
     public void makeGetHttpRequest(Context context, String url, okhttp3.Callback callback) {
         OkHttpClient httpClient = getHttpClient(context);
+        String webshopId = AppPreferences.getWebshopId(context);
         Request request = new Request.Builder()
-                .url(url)
+                .url(URL + url + "/" + webshopId)
                 .get()
                 .build();
         httpClient.newCall(request).enqueue(callback);
     }
 
+    public void checkRequest(Context context, okhttp3.Callback callback) {
+        OkHttpClient httpClient = getHttpClient(context);
+        Request request = new Request.Builder()
+                .url(URL)
+                .get()
+                .build();
+        httpClient.newCall(request).enqueue(callback);
+    }
+
+    public void modifyTermekQty(Context context, String url, okhttp3.Callback callback, Double stock, String sku) {
+        OkHttpClient httpClient = getHttpClient(context);
+        String webshopId = AppPreferences.getWebshopId(context);
+
+        String finalUrl = Objects.requireNonNull(HttpUrl.parse(URL + url + "/" + webshopId + "/setStock"))
+                .newBuilder()
+                .addQueryParameter("sku", sku)
+                .addQueryParameter("stock", stock.toString())
+                .build()
+                .toString();
+
+
+
+        Request request = new Request.Builder()
+                .url(finalUrl)
+                .post(emptyBody)
+                .build();
+
+        httpClient.newCall(request).enqueue(callback);
+    }
+
+
+    public void getActions(Context context, String url, okhttp3.Callback callback) {
+        OkHttpClient httpClient = getHttpClient(context);
+        Request request = new Request.Builder()
+                .url(URL + url)
+                .get()
+                .build();
+        httpClient.newCall(request).enqueue(callback);
+    }
+
+    public void changePassword(Context context, String url, okhttp3.Callback callback, String opw, String npw) {
+        OkHttpClient httpClient = getHttpClient(context);
+
+        String finalUrl = Objects.requireNonNull(HttpUrl.parse(URL + url))
+                .newBuilder()
+                .addQueryParameter("opw", opw)
+                .addQueryParameter("npw", npw)
+                .build()
+                .toString();
+
+        Request request = new Request.Builder()
+                .url(finalUrl)
+                .build();
+        httpClient.newCall(request).enqueue(callback);
+    }
+
+    public void deleteWebshop(Context context, String url, okhttp3.Callback callback, String webshopid) {
+        OkHttpClient httpClient = getHttpClient(context);
+
+        String finalUrl = Objects.requireNonNull(HttpUrl.parse(URL + url))
+                .newBuilder()
+                .addQueryParameter("webshopid", webshopid)
+                .build()
+                .toString();
+
+        Request request = new Request.Builder()
+                .url(finalUrl)
+                .delete()
+                .build();
+
+        httpClient.newCall(request).enqueue(callback);
+    }
+
+    public void addWebshop(Context context, String url, okhttp3.Callback callback, String api_key) {
+        OkHttpClient httpClient = getHttpClient(context);
+
+        String finalUrl = Objects.requireNonNull(HttpUrl.parse(URL + url))
+                .newBuilder()
+                .addQueryParameter("api_key", api_key)
+                .build()
+                .toString();
+
+        RequestBody requestBody = new FormBody.Builder().build();
+
+        Request request = new Request.Builder()
+                .url(finalUrl)
+                .post(requestBody)
+                .build();
+
+        httpClient.newCall(request).enqueue(callback);
+    }
+
+    public void logOut(Context context, okhttp3.Callback callback) {
+        OkHttpClient httpClient = getHttpClient(context);
+
+        Request request = new Request.Builder()
+                .url(URL + "logout")
+                .post(emptyBody)
+                .build();
+
+        httpClient.newCall(request).enqueue(callback);
+    }
 }
 

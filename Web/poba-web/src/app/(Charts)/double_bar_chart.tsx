@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import Chart from "chart.js/auto";
-import {lab} from "d3-color";
 
 interface BarChartWeekProps {
     title: string;

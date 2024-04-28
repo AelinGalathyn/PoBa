@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/jelszo_textView"
-        android:text="Jelszó"
+        android:text="Régi jelszó"
         android:textSize="20sp"
         android:textAlignment="center"
         android:layout_marginTop="230dp"
@@ -50,8 +50,10 @@
                 android:layout_width="220dp"
                 android:layout_height="40dp"
                 android:background="@null"
-                android:id="@+id/felhasznalonev_input"
+                android:id="@+id/regi_jelszo_input"
                 android:inputType="text"
+                android:textAlignment="center"
+                android:padding="5dp"
                 />
 
         </androidx.cardview.widget.CardView>
@@ -62,7 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/jelszo_ujra_textView"
-        android:text="Jelszó újra"
+        android:text="Új jelszó"
         android:textSize="20sp"
         android:textAlignment="center"
         android:fontFamily="monospace"
@@ -94,7 +96,9 @@
                 android:layout_height="40dp"
                 android:background="@null"
                 android:inputType="textPassword"
-                android:id="@+id/jelszo_input"
+                android:id="@+id/uj_jelszo_input"
+                android:textAlignment="center"
+                android:padding="5dp"
                 />
 
         </androidx.cardview.widget.CardView>
@@ -108,6 +112,7 @@
         android:layout_below="@+id/jelszo_ujra_input_card"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
+        android:id="@+id/password_ok_button"
         />
 
 

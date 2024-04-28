@@ -31,6 +31,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="35dp"
             app:cardCornerRadius="10dp"
+            android:backgroundTint="@color/card_back"
             android:id="@+id/rendelesek_card"
             android:layout_below="@+id/nav_profil_gomb"
             >
@@ -40,7 +41,7 @@
                 android:layout_width="230dp"
                 android:layout_height="220dp"
                 android:layout_gravity="center_horizontal"
-                android:backgroundTint="@color/shadow"
+                android:background="@drawable/rendelesek_placeholder"
                 android:layout_marginTop="10dp"
                 android:contentDescription="rendelesek_preview"
                 />
@@ -76,6 +77,7 @@
             android:layout_marginTop="40dp"
             android:layout_below="@+id/rendelesek_card"
             app:cardCornerRadius="10dp"
+            android:backgroundTint="@color/card_back"
             android:id="@+id/termekek_card"
             >
 
@@ -84,7 +86,7 @@
                 android:layout_width="230dp"
                 android:layout_height="220dp"
                 android:layout_gravity="center_horizontal"
-                android:backgroundTint="@color/shadow"
+                android:background="@drawable/termekek_placeholder"
                 android:layout_marginTop="10dp"
                 android:contentDescription="termekek_preview"
                 />
@@ -121,7 +123,6 @@
         app:headerLayout="@layout/hamburger_header_layout"
         app:menu="@menu/hamburger_menu"
         app:itemTextColor="@color/text_color"
-        app:itemIconTint="@color/text_color"
         app:itemBackground="@color/background_yellow"
         />
 

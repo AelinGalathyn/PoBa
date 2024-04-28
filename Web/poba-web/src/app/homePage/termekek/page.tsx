@@ -33,7 +33,11 @@ export default function Termekek() {
 
     const modify = async (modifiedTermek: FItem, modifiedQuantity: number) => {
         const webshopId: number = JSON.parse(localStorage.getItem("webshopId") ?? "0");
-        await ModifyTermekQty(webshopId, modifiedTermek, modifiedQuantity);
+        if (modifiedQuantity < 0) {
+            alert("A termék mennyisége minimum 0 lehet.")
+        } else {
+            await ModifyTermekQty(webshopId, modifiedTermek, modifiedQuantity);
+        }
 
         const newTermekek = await fetch_termekek(webshopId);
         setTermekek(newTermekek);
@@ -43,7 +47,7 @@ export default function Termekek() {
         localStorage.setItem("fogyoTermekek", JSON.stringify(sortedListItems(feltoltFogyoTermekek(newTermekek, oldFogyoTermekek))));
     }
 
-    if (termekek.length === 0) {
+    if (termekek === undefined || termekek.length === 0) {
         return <div className="col-start-3 ps-10 w-[75vw] h-3/4 flex justify-center items-center">
             <p>Loading...</p>
         </div>
@@ -68,7 +72,7 @@ export default function Termekek() {
                         />
                     </div>
                 </div>
-                <div className="max-h-full md:max-h-[95vh] w-full mt-5 p-2 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto hover:overflow-x-auto scroll-smooth">
+                <div className="max-h-full md:max-h-[75vh] w-full mt-5 p-2 bg-gray-200 rounded-lg shadow-gray-400 shadow-inner overflow-hidden hover:overflow-auto hover:overflow-x-auto scroll-smooth">
                     <table className="w-full table-style">
                         <thead>
                         <tr>
@@ -116,7 +120,7 @@ export default function Termekek() {
                                                 {termek.qty === -1 || termek.packaged ? ("") : (
                                                     <div className="flex flex-col col-span-12">
                                                         <p><b>{termek.unit.toUpperCase()}</b></p>
-                                                        <input className="p-1" type="number" id="qtyInput"
+                                                        <input className="p-1" min={0} type="number" id="qtyInput"
                                                                value={quantity} placeholder="Új mennyiség"
                                                                onChange={(e) => setQuantity(e.target.value)}/>
                                                         <Button

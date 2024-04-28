@@ -6,6 +6,7 @@ import {fetch_webshopok} from "@/app/(ApiCalls)/fetch";
 import {AddWebshop, DeleteWebshop} from "@/app/(ApiCalls)/modify";
 import {useRouter} from "next/navigation";
 import {TrashIcon} from "@heroicons/react/20/solid";
+import {apiRegex} from "@/app/(FixData)/regex";
 
 export default function WebshopokBeallitasok() {
     const [webshopok, setWebshopok] = useState<FWebshop[]>([]);
@@ -18,24 +19,24 @@ export default function WebshopokBeallitasok() {
     }, []);
 
     const handleOnclick = () => {
-        if (apiKey) {
-            AddWebshop(apiKey).then((data) => {
-                console.log(data)
-                localStorage.setItem("webshopId", JSON.stringify(data));
-                fetch_webshopok().then(data => setWebshopok(data));
-                router.push("/");
-            })
+        if (apiKey === "") {
+            alert("Az Api kulcs nem lehet üres");
+        }
+        else if (!apiRegex[Symbol.match](apiKey)) {
+            alert("Az Api kulcs hibás formátumú.")
         }
         else {
-            alert("Az Api kulcs nem lehet üres");
-            fetch_webshopok().then(data => setWebshopok(data));
+            AddWebshop(apiKey).then((data) => {
+                localStorage.setItem("webshopId", JSON.stringify(data));
+                fetch_webshopok().then(data => {setWebshopok(data); router.push("/");})
+            }).catch(e => e.response.status === 401 ? alert("Ilyen webshop már létezik.") : alert("A webshop hozzáadása sikertelen."));
         }
     }
 
     const handleDelete = (webshopId : number) => {
         DeleteWebshop(webshopId).then(() => {
-            localStorage.setItem("webshopId", JSON.stringify(webshopok[0].webshopid));
             fetch_webshopok().then(data => setWebshopok(data));
+            localStorage.setItem("webshopId", JSON.stringify(webshopok[0].webshopid));
             router.push("/");
         })
     }

@@ -31,7 +31,7 @@ services:
     restart: always
     container_name: nest-pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: szandra.szabina9@gmail.com
+      PGADMIN_DEFAULT_EMAIL: poba@gmail.com
       PGADMIN_DEFAULT_PASSWORD: nojminoj01
     ports:
       - '5050:80'

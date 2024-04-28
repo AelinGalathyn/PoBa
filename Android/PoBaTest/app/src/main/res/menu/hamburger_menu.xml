@@ -4,24 +4,28 @@
 
         <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/hamburger_ertesitesek"
-                    android:icon="@drawable/ertesitesek_menu_icon"
-                    app:showAsAction="ifRoom"
-                    android:title="Értesítések" />
-                <item
-                    android:id="@+id/hamburger_beallitasok"
-                    android:icon="@drawable/beallitasok_menu_icon"
-                    app:showAsAction="ifRoom"
-                    android:title="Beállítások" />
-                <item
                     android:id="@+id/hamburger_termekek"
                     android:icon="@drawable/termekek_menu_icon"
                     app:showAsAction="ifRoom"
+                    android:iconTint="@color/text_color"
                     android:title="Termékek" />
                 <item
                     android:id="@+id/hamburger_rendelesek"
                     android:icon="@drawable/rendelesek_menu_icon"
                     app:showAsAction="ifRoom"
+                    android:iconTint="@color/text_color"
                     android:title="Rendelések" />
+                <item
+                    android:id="@+id/hamburger_beallitasok"
+                    android:icon="@drawable/beallitasok_menu_icon"
+                    app:showAsAction="ifRoom"
+                    android:iconTint="@color/text_color"
+                    android:title="Beállítások" />
+                <item
+                    android:id="@+id/hamburger_kijelentkezes"
+                    android:icon="@drawable/kijelentkezes_menu_icon"
+                    app:showAsAction="ifRoom"
+                    android:iconTint="@color/kijelentkezes_red"
+                    android:title="Kijelentkezés" />
         </group>
 </menu>

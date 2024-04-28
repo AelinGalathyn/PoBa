@@ -24,7 +24,7 @@ export default function Home() {
             if (path === "/") {
                 router.push("/homePage")
             }
-        })
+        }).catch(e => alert("A kapcsolat a szerverrel nem tudott létrejönni."))
 
     }, []);
 }

@@ -98,7 +98,7 @@ export const sortedListItems = (list: Item[]) => {
     if (list && Array.isArray(list)) {
         newList = list.sort((a, b) => {
             return new Date(b.date).getTime() - new Date(a.date).getTime();
-        });
+        }).splice(0, 15);
     }
 
     return newList;
@@ -109,7 +109,7 @@ export const sortedListOrders = (list: Orders[]) => {
     if (list && Array.isArray(list)) {
         newList = list.sort((a, b) => {
             return new Date(b.date).getTime() - new Date(a.date).getTime();
-        });
+        }).splice(0, 15);
     }
 
     return newList;
@@ -162,14 +162,16 @@ export const getRandomRgbColor = (): string => {
 }
 
 export const feltoltFogyoTermekek = (newTermekek : FItem[], oldFogyoTermekek : Item[]) => {
-    newTermekek.forEach(item => {
-        const existingItemIndex = oldFogyoTermekek.findIndex(termek => termek.fItem.id === item.id);
-        if (existingItemIndex === -1 && item.qty <= 10 && item.qty >= 0) {
-            oldFogyoTermekek.push(new Item(item, new Date()));
-        } else if (existingItemIndex !== -1 && item.qty !== oldFogyoTermekek[existingItemIndex].fItem.qty) {
-            oldFogyoTermekek[existingItemIndex] = new Item(item, new Date());
-        }
-    });
+    if (newTermekek && Array.isArray(newTermekek)) {
+        newTermekek.forEach(item => {
+            const existingItemIndex = oldFogyoTermekek.findIndex(termek => termek.fItem.id === item.id);
+            if (existingItemIndex === -1 && item.qty <= 10 && item.qty >= 0) {
+                oldFogyoTermekek.push(new Item(item, new Date()));
+            } else if (existingItemIndex !== -1 && item.qty !== oldFogyoTermekek[existingItemIndex].fItem.qty) {
+                oldFogyoTermekek[existingItemIndex] = new Item(item, new Date());
+            }
+        });
+    }
 
     return oldFogyoTermekek;
 }

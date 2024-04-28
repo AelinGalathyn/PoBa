@@ -30,7 +30,7 @@ export default function Statisztika() {
         }));
     };
 
-    if (rendelesek.length === 0) {
+    if (rendelesek === undefined || rendelesek.length === 0) {
         return <p className="h-[95vh] w-[90vw] flex justify-center items-center">Loading...</p>
     }
 

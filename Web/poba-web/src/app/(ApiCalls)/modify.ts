@@ -1,5 +1,4 @@
 import axios from "axios";
-import {cache} from "react";
 import {FItem} from "@/app/(DTOs)/Termekek/FTermek";
 
 export const ModifyTermekQty = async(webshopId: number, item : FItem, modifiedQty : number) => {
@@ -14,7 +13,7 @@ export const ModifyTermekQty = async(webshopId: number, item : FItem, modifiedQt
             stock: modifiedQty
         }
 
-    }).catch(e => {console.log(e); throw new Error(e)});
+    }).catch(e => {alert("A termék mennyiségének módosítása sikertelen - " + e.code)});
 }
 
 export const AddWebshop = async (apiKey : string) => {
@@ -26,9 +25,9 @@ export const AddWebshop = async (apiKey : string) => {
         params: {
             api_key : apiKey
         }
-    }).catch(e => {console.log(e); throw new Error(e)});
+    })
 
-    return response.data;
+    return response?.data;
 }
 
 export const DeleteWebshop = async (webshopId : number) => {
@@ -40,5 +39,5 @@ export const DeleteWebshop = async (webshopId : number) => {
         params: {
             webshopid : webshopId
         }
-    }).catch(e => {console.log(e); throw new Error(e)});
+    }).catch(e => {alert("A webshop törlése sikertelen - " + e.code)});
 }

@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pobatest.R;
+import com.koushikdutta.ion.Ion;
 
 import java.util.List;
 
@@ -49,9 +50,12 @@ public class TermekAdapter extends RecyclerView.Adapter<TermekAdapter.TermekHold
     @Override
     public void onBindViewHolder(@NonNull TermekHolder holder, int position) {
         Termek termek = termekek.get(position);
-        holder.termek_nev_textView.setText(termek.getTermekNeve());
-        holder.termek_kep_helye.setImageResource(termek.getImage());
-        holder.darab_icon_helye.setImageResource(termek.darab_imge);
+        holder.termek_nev_textView.setText(termek.name);
+
+        Ion.with(context)
+                .load(termek.pic_url)
+                .withBitmap().intoImageView(holder.termek_kep_helye);
+        holder.darab_icon_helye.setImageResource(termek.mennyiseg_img);
 
         holder.itemView.setOnClickListener(v -> IntentAdatAtadas(termek));
     }

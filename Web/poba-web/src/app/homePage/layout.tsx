@@ -29,18 +29,18 @@ export default function HomePageLayout({children} : { children : React.ReactNode
             if (typeof userData === "string") {
                 setUsername(userData);
             }
-        });
+        }).catch(e => alert("A felhasználónév lekérése sikertelen."));
         fetch_webshopok().then(webshopok => {
             setWebshopok(webshopok);
             setSelectedWebshop(webshopok.find(item => item.webshopid === webshopId) ?? webshopok[0]);
-        });
+        }).catch(e => alert("A webshopok lista lekérése sikertelen."));
     }, []);
 
     const toggleNavbar = () => {
         setIsNavbarOpen(!isNavbarOpen);
     };
 
-    if (webshopok.length === 0) {
+    if (webshopok === undefined || webshopok.length === 0) {
         return <p className="h-[100vh] w-[100vw] flex justify-center items-center">Loading...</p>
     }
 

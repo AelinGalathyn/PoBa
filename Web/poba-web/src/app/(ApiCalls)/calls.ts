@@ -6,7 +6,7 @@ export const logOut = async () => {
 
     await axios.post("http://localhost:3000/logout", {}, {
         withCredentials: true
-    });
+    }).catch(e => alert("A kijelentkezés hibába futott - " + e.code));
 }
 
 export const login = async (loginUser : User) => {
@@ -19,18 +19,23 @@ export const login = async (loginUser : User) => {
             username : loginUser.username,
             password : loginUser.password
         }
-    }).catch(e => {console.log(e);throw new Error(e)});
+    })
 
-    return response.data;
+    return response?.data;
 }
 
 export const reg = async (regUser : RegisterUser) => {
-    await axios.post("http://localhost:3000/reg", regUser, {
+    await axios.post("http://localhost:3000/reg", {}, {
         withCredentials: true,
         headers: {
             'Content-Type': 'application/json'
         },
-    });
+        params: {
+            username : regUser.username,
+            password: regUser.password,
+            api_key: regUser.api_key
+        }
+    })
 }
 
 export const ChangePassword = async (oldPassword : string, newPassword : string) => {

@@ -1,5 +1,6 @@
 package com.example.pobatest.Rendeles;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,26 +8,39 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.example.pobatest.ApiCalls.HttpClient;
 import com.example.pobatest.FoActivity;
 import com.example.pobatest.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class RendelesActivity extends AppCompatActivity {
 
     private ImageView nav_vissza_gomb;
     private RecyclerView recyclerview_rendelesek;
     private List<Rendeles> megrendelesLista;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rendelesek_activity);
 
         Init();
-        ListaFeltolt();
+        Rendelesek();
 
         nav_vissza_gomb.setOnClickListener(v -> {
             Intent intent = new Intent(RendelesActivity.this, FoActivity.class);
@@ -39,26 +53,46 @@ public class RendelesActivity extends AppCompatActivity {
         nav_vissza_gomb = findViewById(R.id.nav_vissza_gomb);
         recyclerview_rendelesek = findViewById(R.id.recyclerview_rendelesek);
         megrendelesLista = new ArrayList<>();
-
-        recyclerview_rendelesek.setLayoutManager(new LinearLayoutManager(this));
-        recyclerview_rendelesek.setAdapter(new RendelesAdapter(getApplicationContext(), megrendelesLista));
     }
 
-    public void ListaFeltolt() {
-        ArrayList<String> kosar1 = new ArrayList<>(Arrays.asList("Alma", "Körte", "Zsepi"));
-        ArrayList<String> kosar2 = new ArrayList<>(Arrays.asList("Cica", "Kutya", "Süni", "Béka", "Póni", "Mountain Bike", "Pap ruha", "Kereszt", "Lánc", "Biblia"));
-        ArrayList<String> kosar3 = new ArrayList<>(Arrays.asList("Kréta", "Ceruza", "Vonalzó", "Drog", "Kenyér", "Samsung Galaxy Ultra Mega", "Tucsok"));
+    public void Rendelesek(){
+        Callback cb = new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                runOnUiThread(() -> Toast.makeText(RendelesActivity.this, "Sikertelen rendelés lekérés.", Toast.LENGTH_SHORT).show());
+            }
 
-        Rendeles rendeles1 = new Rendeles("123123", R.drawable.foxpost_logo, "Mákos Guba");
-        Rendeles rendeles2 = new Rendeles("456456", R.drawable.gls_logo, "Hófehérke");
-        Rendeles rendeles3 = new Rendeles("789789", 0, "Nagy Henrik the Third Jr.");
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
+                try {
+                    String responseData = Objects.requireNonNull(response.body()).string();
+                    JSONArray jsonArray = new JSONArray(responseData);
 
-        rendeles1.setKosarTartalma(kosar1);
-        rendeles2.setKosarTartalma(kosar2);
-        rendeles3.setKosarTartalma(kosar3);
+                    response.close();
 
-        megrendelesLista.add(rendeles1);
-        megrendelesLista.add(rendeles2);
-        megrendelesLista.add(rendeles3);
+                    for(int i = 0; i < jsonArray.length(); i++){
+
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        Rendeles rendeles = new Rendeles(jsonObject);
+                        megrendelesLista.add(rendeles);
+                    }
+
+                    megrendelesLista.sort(Comparator.comparingLong(b -> b.date.getTime()));
+
+                    runOnUiThread(() -> {
+                        recyclerview_rendelesek.setLayoutManager(new LinearLayoutManager(RendelesActivity.this));
+                        recyclerview_rendelesek.setAdapter(new RendelesAdapter(RendelesActivity.this, megrendelesLista));
+                    });
+
+                } catch (IOException | JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+
+        HttpClient hc = new HttpClient();
+        String url = "orders";
+        hc.getHttpClient(RendelesActivity.this);
+        hc.makeGetHttpRequest(this, url, cb);
     }
 }

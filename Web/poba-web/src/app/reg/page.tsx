@@ -5,6 +5,8 @@ import {useState} from "react";
 import RegisterUser from "@/app/(DTOs)/Users/RegisterUser";
 import {useRouter} from "next/navigation";
 import {reg} from "@/app/(ApiCalls)/calls";
+import {ConflictException} from "@nestjs/common";
+import {apiRegex, regex} from "@/app/(FixData)/regex";
 
 export default function Reg() {
 
@@ -16,7 +18,19 @@ export default function Reg() {
     const router = useRouter();
 
     const handleReg = () => {
-        reg(newUser).then(() => router.push("/login"));
+
+        if (felNev === "" || password === "" || apikey === "") {
+            alert("A mezők kitöltése kötelező.")
+        }
+        else if(!regex[Symbol.match](password)) {
+            alert("A jelszónak legalább 1 nagybetűt [A-Z], 1 számot [0-9] és egy speciális karaktert [#?!@$ %^&*-] tartalmaznia kell.")
+        }
+        else if (!apiRegex[Symbol.match](apikey)) {
+            alert("Az Api kulcs hibás formátumú.")
+        }
+        else {
+            reg(newUser).then(() => router.push("/login")).catch(e => {e.response === undefined ? alert("A regisztráció hibába ütközött.") : e.response.status === 409 ? alert("Ilyen felhasználó már létezik.") : ""});
+        }
     }
 
     return (
