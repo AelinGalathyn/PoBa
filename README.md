@@ -146,7 +146,7 @@ npm run dev
 
 
 ### Android app indítása
-
+A fájlkezelőből húzzuk át az apk fájlt a futó emulátorunkra, majd nyissuk meg.
 
 
 ## Ismert problémák
