@@ -152,3 +152,5 @@ A fájlkezelőből húzzuk át az apk fájlt a futó emulátorunkra, majd nyissu
 ## Ismert problémák
 **Lejárt/megszünt webshop vagy API kulcs**
 * Ha teszt időszakban lévő webshopot használunk, ami lejár, utána errort kapunk a weboldalon a komponensek betöltésekor. A beállítások fülön töröljük a lejárt webshopot, vagy az adatbázisban a megfelelő rekordot.
+* Indításkor elsőre fehér képernyőt kapunk a webes kliensen. Ezt egy újratöltés megoldja.
+* A betöltési idők hosszúak elsőre mindenhol, mivel minden adatot élesben kapunk az UNAS-tól.
