@@ -8,10 +8,6 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 dotenv.config({path: `${__dirname}/../.env`});
 
-console.log(__dirname);
-console.log('DB_DATABASE', process.env['DB_DATABASE']);
-console.log('DB_PORT', process.env['DB_PORT']);
-
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
